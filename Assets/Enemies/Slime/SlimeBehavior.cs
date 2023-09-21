@@ -34,13 +34,29 @@ public class SlimeBehavior : MonoBehaviour
 
     void Jump()
     {
-        animator.SetBool("IsJumping", true);  // Set IsJumping to true to trigger jump animation
+        // Jump towards tag player
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Vector3 direction = player.transform.position - transform.position;
+        Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
 
-        Vector3 horizontalDirection = new Vector3(Random.Range(-0.05f, 0.05f), 0, Random.Range(-0.05f, 0.05f)).normalized;
+        // Always jump towards the player
         Vector3 jumpVector = horizontalDirection * jumpForce + Vector3.up * jumpHeight;
-
         rb.velocity = jumpVector;
+    }
 
-        animator.SetBool("IsJumping", false);  // Reset to idle after the jump
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            float damage = Attack();
+            // Apply damage to the player here. This is just a log for now.
+            Debug.Log("Damage to player: " + damage);
+        }
+    }
+
+    float Attack()
+    {
+        // Damage value
+        return 10;
     }
 }
