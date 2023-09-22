@@ -19,6 +19,10 @@ public class PlayerController : MonoBehaviour
 
     private float velocity;
 
+    //Things to pull from objects attached to main player
+    [SerializeField] private Animator animator;
+    [SerializeField] private GameObject playerVisual;
+
     //Player Parameters
     [SerializeField] private float rotationTime = 0.05f;
     [SerializeField] private float speed;
@@ -31,11 +35,25 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        FlipCheck();
+
         ApplyGravity();
         ApplyRotation();
         ApplyMovement();
     }
+    
+    private void FlipCheck()
+    {
+        //if the player is not inputting anything, do not update player's orientation
+        if (input.sqrMagnitude == 0 || direction.x == 0) return;
 
+        bool facingLeft = direction.x < 0;
+        float playerOrientation = playerVisual.transform.localScale.x;
+
+        if(facingLeft & playerOrientation < 0 || !facingLeft & playerOrientation > 0)
+            playerVisual.transform.localScale = new Vector3(-1.0f * playerOrientation, 1.0f, 1.0f);
+    }
+    
     private void ApplyGravity()
     {
         if (characterController.isGrounded && velocity < 0.0f)
@@ -62,7 +80,8 @@ public class PlayerController : MonoBehaviour
 
     private void ApplyMovement()
     {
-        //this line moves the player
+        //plays walking animation & moves player
+        animator.SetFloat("direction", Mathf.Abs(direction.x) + Mathf.Abs(direction.z));
         characterController.Move(direction * speed * Time.deltaTime);
     }
 
@@ -71,6 +90,7 @@ public class PlayerController : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         input = context.ReadValue<Vector2>();
+        UnityEngine.Debug.Log("input: " + input);
         direction = new Vector3(input.x, 0.0f, input.y);
     }
 }
