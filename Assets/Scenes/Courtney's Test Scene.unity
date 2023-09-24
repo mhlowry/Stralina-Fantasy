@@ -209,7 +209,7 @@ Transform:
   m_GameObject: {fileID: 2392869}
   serializedVersion: 2
   m_LocalRotation: {x: 0.21726535, y: -0, z: -0, w: 0.9761126}
-  m_LocalPosition: {x: -1.15, y: 4.91, z: -13.3}
+  m_LocalPosition: {x: -1.15, y: 6.05, z: -15.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -573,7 +573,7 @@ Transform:
   m_GameObject: {fileID: 508203596}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.36399996, z: 1.39}
+  m_LocalPosition: {x: 0, y: 0, z: 1.39}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1043,6 +1043,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1627299317}
   - component: {fileID: 1627299319}
+  - component: {fileID: 1627299320}
   - component: {fileID: 1627299318}
   m_Layer: 0
   m_Name: Player!!
@@ -1080,7 +1081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523d978568a9bea4491b2d90a7a1991f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 132807860}
+  anim: {fileID: 132807860}
   playerVisual: {fileID: 1020877403}
   rotationTime: 0.05
   speed: 10.5
@@ -1111,6 +1112,20 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1627299320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627299316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7a507c267dff794fac1a50fc23119f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 132807860}
+  uniAttackDelay: 0.5
 --- !u!1 &1948666276
 GameObject:
   m_ObjectHideFlags: 0
@@ -1169,6 +1184,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 0cc5c998-ce55-4625-992c-9abbac931b19
     m_ActionName: Gameplay/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1627299320}
+        m_TargetAssemblyTypeName: ComboController, Assembly-CSharp
+        m_MethodName: CallLightAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: abae1762-bd67-4d2b-b832-9dc709d78712
+    m_ActionName: Gameplay/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1627299320}
+        m_TargetAssemblyTypeName: ComboController, Assembly-CSharp
+        m_MethodName: CallHeavyAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3f1d4bde-1357-4c68-ac23-54c87440d2f3
+    m_ActionName: Gameplay/HeavyAttack[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
