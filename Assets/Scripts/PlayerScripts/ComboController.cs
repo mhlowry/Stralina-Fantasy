@@ -14,8 +14,21 @@ public class ComboController : MonoBehaviour
     private float lastAttackTime = 0f;
     private bool playerIsLocked = false;
 
+    static float attackImpact = 0;
+
+    private Vector3 attackDirection;
+
     static int comboIndex = 0;
     static int storedAttackIndex = 0;
+
+    private CharacterController characterController;
+    private PlayerController playerController;
+
+    private void Awake()
+    {
+        characterController = GetComponent<CharacterController>();
+        playerController = GetComponent<PlayerController>();
+    }
 
     // Update is called once per frame
     private void Update()
@@ -30,6 +43,13 @@ public class ComboController : MonoBehaviour
         {
             storedAttackIndex--;
             LightAttack();
+        }
+
+        //this scoots the player a little bit, giving attacks a degree of "oomph"
+        if (Time.time - lastAttackTime < attackDuration)
+        {
+            //uses the direction the player is imputting in playerController
+            characterController.Move(attackDirection * attackImpact * Time.deltaTime);
         }
     }
 
@@ -65,26 +85,27 @@ public class ComboController : MonoBehaviour
         lastAttackTime = Time.time;
         comboIndex++;
 
+        //performs an attack based on how many light attacks the player has performed
         switch (comboIndex)
         {
             case 1:
                 anim.SetBool("comboOver", false);
                 anim.SetTrigger("slash1Trigger");
-                SetAttackParameters(0.1f);
+                PerformAttack(0.1f, 0.5f);
 
                 //Debug.Log("attack 1");
                 break;
 
             case 2:
                 anim.SetTrigger("slash2Trigger");
-                SetAttackParameters(0.1f);
+                PerformAttack(0.1f, 0.5f);
 
                 //Debug.Log("attack 2");
                 break;
 
             case 3:
                 anim.SetTrigger("stab1Trigger");
-                SetAttackParameters(0.2f);
+                PerformAttack(0.2f, 1f);
 
                 playerIsLocked = true;
                 //Debug.Log("attack 3");
@@ -100,19 +121,20 @@ public class ComboController : MonoBehaviour
     {
         lastAttackTime = Time.time;
 
+        //performs a heavy attack based on the comboIndex, and then locks  the player out of attacking until it's done.
         switch (comboIndex)
         {
             case 0:
                 anim.SetBool("comboOver", false);
                 anim.SetTrigger("stab1Trigger");
-                SetAttackParameters(0.4f);
+                PerformAttack(0.4f, 2f);
 
                 //Debug.Log("Heavy Attack: Raw");
                 break;
 
             case 2:
                 anim.SetTrigger("rapidStabTrigger");
-                SetAttackParameters(0.8f);
+                PerformAttack(0.8f, 2f);
 
                 //Debug.Log("Heavy Attack: Combo finisher 1");
                 break;
@@ -125,9 +147,12 @@ public class ComboController : MonoBehaviour
         playerIsLocked = true;
     }
 
-    private void SetAttackParameters(float duration)
+    private void PerformAttack(float duration, float impact)
     {
+        attackDirection = playerController.direction;
+
         attackDuration = duration;
+        attackImpact = impact;
     }
 
     private void EndCombo()

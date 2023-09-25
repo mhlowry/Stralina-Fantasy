@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 {
     private Vector2 input;
 
-    private Vector3 direction;
+    [HideInInspector] public Vector3 direction;
 
     private CharacterController characterController;
 
