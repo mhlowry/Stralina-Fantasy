@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
 
     private CharacterController characterController;
 
-
     private float horizontalVelocity;
     private float gravity = -9.81f;
 

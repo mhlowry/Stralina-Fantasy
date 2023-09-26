@@ -1,7 +1,9 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static VFXController;
 
 public class ComboController : MonoBehaviour
 {
@@ -22,12 +24,17 @@ public class ComboController : MonoBehaviour
     static int storedAttackIndex = 0;
 
     private CharacterController characterController;
+    private VFXController vfxController;
     private PlayerController playerController;
+
+    [SerializeField] private List<PlayerAttack> lightAttacks;
+    [SerializeField] private List<PlayerAttack> heavyAttacks;
 
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
         playerController = GetComponent<PlayerController>();
+        vfxController = GetComponent<VFXController>();
     }
 
     // Update is called once per frame
@@ -85,35 +92,42 @@ public class ComboController : MonoBehaviour
         lastAttackTime = Time.time;
         comboIndex++;
 
-        //performs an attack based on how many light attacks the player has performed
-        switch (comboIndex)
+        vfxController.DisableAttackVFX();
+
+        try
         {
-            case 1:
-                anim.SetBool("comboOver", false);
-                anim.SetTrigger("slash1Trigger");
-                PerformAttack(0.1f, 0.5f);
+            //performs an attack based on how many light attacks the player has performed
+            switch (comboIndex)
+            {
+                case 1:
+                    anim.SetBool("comboOver", false);
+                    PerformAttack(lightAttacks[0]);
 
-                //Debug.Log("attack 1");
-                break;
+                    //Debug.Log("attack 1");
+                    break;
 
-            case 2:
-                anim.SetTrigger("slash2Trigger");
-                PerformAttack(0.1f, 0.5f);
+                case 2:
+                    PerformAttack(lightAttacks[1]);
 
-                //Debug.Log("attack 2");
-                break;
+                    //Debug.Log("attack 2");
+                    break;
 
-            case 3:
-                anim.SetTrigger("stab1Trigger");
-                PerformAttack(0.2f, 1f);
+                case 3:
+                    PerformAttack(lightAttacks[2]);
 
-                playerIsLocked = true;
-                //Debug.Log("attack 3");
-                break;
+                    playerIsLocked = true;
+                    //Debug.Log("attack 3");
+                    break;
 
-            default:
-                Debug.Log("LightAttack: Invalid Combo Index");
-                break;
+                default:
+                    Debug.Log("LightAttack: Invalid Combo Index");
+                    break;
+            }
+        }
+        catch (ArgumentOutOfRangeException aRef)
+        {
+            Debug.Log(aRef);
+            Debug.Log("PlayerAttack does not exist in the array: LightAttacks");
         }
     }
 
@@ -121,38 +135,54 @@ public class ComboController : MonoBehaviour
     {
         lastAttackTime = Time.time;
 
-        //performs a heavy attack based on the comboIndex, and then locks  the player out of attacking until it's done.
-        switch (comboIndex)
+        vfxController.DisableAttackVFX();
+
+        try
         {
-            case 0:
-                anim.SetBool("comboOver", false);
-                anim.SetTrigger("stab1Trigger");
-                PerformAttack(0.4f, 2f);
+            //performs a heavy attack based on the comboIndex, and then locks  the player out of attacking until it's done.
+            switch (comboIndex)
+            {
+                case 0:
+                    anim.SetBool("comboOver", false);
+                    PerformAttack(heavyAttacks[0]);
 
-                //Debug.Log("Heavy Attack: Raw");
-                break;
+                    //Debug.Log("Heavy Attack: Raw");
+                    break;
 
-            case 2:
-                anim.SetTrigger("rapidStabTrigger");
-                PerformAttack(0.8f, 2f);
+                case 2:
+                    PerformAttack(heavyAttacks[1]);
 
-                //Debug.Log("Heavy Attack: Combo finisher 1");
-                break;
+                    //Debug.Log("Heavy Attack: Combo finisher 1");
+                    break;
 
-            default:
-                Debug.Log("No Heavy Attack for this combo");
-                break;
+                default:
+                    Debug.Log("No Heavy Attack for this combo");
+                    break;
+            }
+
+            playerIsLocked = true;
         }
-
-        playerIsLocked = true;
+        catch (ArgumentOutOfRangeException aRef)
+        {
+            Debug.Log(aRef);
+            Debug.Log("PlayerAttack does not exist in the array: HeavyAttacks");
+        }
     }
 
-    private void PerformAttack(float duration, float impact)
+    /* duration is how long the attack will last
+     * impact is the momentum the attack carries
+     * vfxIndex corresponds to the VFX animation that will get called by VFX controller
+     */
+    private void PerformAttack(PlayerAttack currentAttack)
     {
+        anim.SetTrigger(currentAttack.animTrigger);
+
         attackDirection = playerController.direction;
 
-        attackDuration = duration;
-        attackImpact = impact;
+        attackDuration = currentAttack.duration;
+        attackImpact = currentAttack.impact;
+
+        vfxController.playAttackVFX(currentAttack.vfxIndex);
     }
 
     private void EndCombo()
@@ -160,6 +190,18 @@ public class ComboController : MonoBehaviour
         comboIndex = 0;
         storedAttackIndex = 0;
         playerIsLocked = false;
-        anim.SetBool("comboOver", true);
+        anim.SetBool("comboOver", true);    
+        vfxController.DisableAttackVFX();
+    }
+
+    //This has the information a given attack needs
+    [System.Serializable]
+    public class PlayerAttack
+    {
+        public string animTrigger;
+
+        public float duration;
+        public float impact;
+        public int vfxIndex;
     }
 }
