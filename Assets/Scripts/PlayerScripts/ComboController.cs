@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static VFXController;
 
 public class ComboController : MonoBehaviour
 {
@@ -24,8 +23,9 @@ public class ComboController : MonoBehaviour
     static int storedAttackIndex = 0;
 
     private CharacterController characterController;
-    private VFXController vfxController;
     private PlayerController playerController;
+
+    [SerializeField] private LayerMask enemyLayers;
 
     [SerializeField] private List<PlayerAttack> lightAttacks;
     [SerializeField] private List<PlayerAttack> heavyAttacks;
@@ -34,7 +34,6 @@ public class ComboController : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         playerController = GetComponent<PlayerController>();
-        vfxController = GetComponent<VFXController>();
     }
 
     // Update is called once per frame
@@ -43,10 +42,10 @@ public class ComboController : MonoBehaviour
         //end the combo if too much time has passed since the last button press
         if (Time.time - lastAttackTime > uniAttackDelay + attackDuration)
             EndCombo();
-        
+
 
         //If an attack is stored, attack at the earliest possible moment
-        if(Time.time - lastAttackTime > attackDuration && storedAttackIndex > 0)
+        if (Time.time - lastAttackTime > attackDuration && storedAttackIndex > 0)
         {
             storedAttackIndex--;
             LightAttack();
@@ -92,8 +91,6 @@ public class ComboController : MonoBehaviour
         lastAttackTime = Time.time;
         comboIndex++;
 
-        vfxController.DisableAttackVFX();
-
         try
         {
             //performs an attack based on how many light attacks the player has performed
@@ -135,24 +132,20 @@ public class ComboController : MonoBehaviour
     {
         lastAttackTime = Time.time;
 
-        vfxController.DisableAttackVFX();
-
         try
         {
             //performs a heavy attack based on the comboIndex, and then locks  the player out of attacking until it's done.
             switch (comboIndex)
             {
                 case 0:
+                    //Raw Heavy Attack
                     anim.SetBool("comboOver", false);
                     PerformAttack(heavyAttacks[0]);
-
-                    //Debug.Log("Heavy Attack: Raw");
                     break;
 
                 case 2:
+                    //Heavy Attack Rapid Stab
                     PerformAttack(heavyAttacks[1]);
-
-                    //Debug.Log("Heavy Attack: Combo finisher 1");
                     break;
 
                 default:
@@ -168,6 +161,13 @@ public class ComboController : MonoBehaviour
             Debug.Log("PlayerAttack does not exist in the array: HeavyAttacks");
         }
     }
+    private void EndCombo()
+    {
+        comboIndex = 0;
+        storedAttackIndex = 0;
+        playerIsLocked = false;
+        anim.SetBool("comboOver", true);
+    }
 
     /* duration is how long the attack will last
      * impact is the momentum the attack carries
@@ -175,33 +175,67 @@ public class ComboController : MonoBehaviour
      */
     private void PerformAttack(PlayerAttack currentAttack)
     {
-        anim.SetTrigger(currentAttack.animTrigger);
+        anim.SetTrigger(currentAttack.getAnim());
 
         attackDirection = playerController.direction;
 
-        attackDuration = currentAttack.duration;
-        attackImpact = currentAttack.impact;
+        attackDuration = currentAttack.getDuration();
+        attackImpact = currentAttack.getImpact();
 
-        vfxController.playAttackVFX(currentAttack.vfxIndex);
+        DisableAttackVFX(currentAttack.getVfxObj());
+        StartCoroutine(playAttackVFX(currentAttack.getVfxObj(), currentAttack.getDelay()));
+
+        List<Collider[]> hitEnemies = new List<Collider[]>();
+
+        foreach (HitBox hitBox in currentAttack.getHitBoxes())
+        {
+            hitEnemies.Add(Physics.OverlapSphere(hitBox.getPosition(), hitBox.getSize(), enemyLayers));
+        }
+
+        foreach (Collider[] hitBoxes in hitEnemies)
+        {
+            foreach (Collider enemy in hitBoxes)
+            {
+                Debug.Log("We hit " + enemy.name);
+            }
+        }
     }
-
-    private void EndCombo()
-    {        
-        comboIndex = 0;
-        storedAttackIndex = 0;
-        playerIsLocked = false;
-        anim.SetBool("comboOver", true);    
-        vfxController.DisableAttackVFX();
-    }
-
-    //This has the information a given attack needs
-    [System.Serializable]
-    public class PlayerAttack
+    private IEnumerator playAttackVFX(GameObject vfxObj, float delay)
     {
-        public string animTrigger;
+        yield return new WaitForSeconds(delay);
+        vfxObj.transform.rotation = transform.rotation;
+        vfxObj.SetActive(true);
 
-        public float duration;
-        public float impact;
-        public int vfxIndex;
+        yield return new WaitForSeconds(0.8f);
+        DisableAttackVFX(vfxObj);
+    }
+
+    private void DisableAttackVFX(GameObject vfxObj)
+    {
+        vfxObj.SetActive(false);
+    }
+
+    //This lets us see selected hitboxes in the editor
+    private void OnDrawGizmosSelected()
+    {
+        foreach (PlayerAttack lightAttack in lightAttacks)
+        {
+            foreach (HitBox hitBox in lightAttack.getHitBoxes())
+            {
+                if (hitBox == null)
+                    continue;
+                Gizmos.DrawWireSphere(hitBox.getPosition(), hitBox.getSize());
+            }
+        }
+
+        foreach (PlayerAttack heavyAttack in heavyAttacks)
+        {
+            foreach (HitBox hitBox in heavyAttack.getHitBoxes())
+            {
+                if (hitBox == null)
+                    continue;
+                Gizmos.DrawWireSphere(hitBox.getPosition(), hitBox.getSize());
+            }
+        }
     }
 }
