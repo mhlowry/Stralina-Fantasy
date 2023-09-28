@@ -154,7 +154,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 50
+        width: 60
         height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -173,9 +173,9 @@ TextureImporter:
       name: SwordManStab1Spritesheet_1
       rect:
         serializedVersion: 2
-        x: 50
+        x: 60
         y: 0
-        width: 50
+        width: 60
         height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -194,9 +194,9 @@ TextureImporter:
       name: SwordManStab1Spritesheet_2
       rect:
         serializedVersion: 2
-        x: 100
+        x: 120
         y: 0
-        width: 50
+        width: 60
         height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -215,9 +215,9 @@ TextureImporter:
       name: SwordManStab1Spritesheet_3
       rect:
         serializedVersion: 2
-        x: 150
+        x: 180
         y: 0
-        width: 50
+        width: 60
         height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -226,8 +226,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 795ab768861713d479e97b7478f30326
-      internalID: 225179447
+      spriteID: 7759b058537602740ae221036fdf57af
+      internalID: 477063532
       vertices: []
       indices: 
       edges: []
@@ -246,7 +246,7 @@ TextureImporter:
       SwordManStab1Spritesheet_0: -766365699
       SwordManStab1Spritesheet_1: 1792229500
       SwordManStab1Spritesheet_2: 233532844
-      SwordManStab1Spritesheet_3: 225179447
+      SwordManStab1Spritesheet_3: 477063532
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
