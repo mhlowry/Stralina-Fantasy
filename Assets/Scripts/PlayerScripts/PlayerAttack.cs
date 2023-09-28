@@ -41,6 +41,8 @@ public class HitBox
     [SerializeField] private Transform center;
     [SerializeField] private float size;
 
+    public Transform getTransform() { return center; }
+
     public Vector3 getPosition() { return center.position; }
     public float getSize() { return size; }
 }

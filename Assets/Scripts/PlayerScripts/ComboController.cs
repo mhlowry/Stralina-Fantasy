@@ -36,7 +36,6 @@ public class ComboController : MonoBehaviour
         playerController = GetComponent<PlayerController>();
     }
 
-    // Update is called once per frame
     private void Update()
     {
         //end the combo if too much time has passed since the last button press
@@ -99,21 +98,15 @@ public class ComboController : MonoBehaviour
                 case 1:
                     anim.SetBool("comboOver", false);
                     PerformAttack(lightAttacks[0]);
-
-                    //Debug.Log("attack 1");
                     break;
 
                 case 2:
                     PerformAttack(lightAttacks[1]);
-
-                    //Debug.Log("attack 2");
                     break;
 
                 case 3:
                     PerformAttack(lightAttacks[2]);
-
                     playerIsLocked = true;
-                    //Debug.Log("attack 3");
                     break;
 
                 default:
@@ -144,7 +137,6 @@ public class ComboController : MonoBehaviour
                     break;
 
                 case 2:
-                    //Heavy Attack Rapid Stab
                     PerformAttack(heavyAttacks[1]);
                     break;
 
@@ -163,49 +155,86 @@ public class ComboController : MonoBehaviour
     }
     private void EndCombo()
     {
+        //reset all the important combo values to the necessary state
         comboIndex = 0;
         storedAttackIndex = 0;
         playerIsLocked = false;
+
+        //End animation
         anim.SetBool("comboOver", true);
     }
 
-    /* duration is how long the attack will last
-     * impact is the momentum the attack carries
-     * vfxIndex corresponds to the VFX animation that will get called by VFX controller
-     */
     private void PerformAttack(PlayerAttack currentAttack)
     {
+        //animate attack
         anim.SetTrigger(currentAttack.getAnim());
-
+        
+        //set the attack's direction to the player's direction (notably used for VFX)
         attackDirection = playerController.direction;
 
+        //Get duration of the attack (endlag) and the impact (momentum)
         attackDuration = currentAttack.getDuration();
         attackImpact = currentAttack.getImpact();
 
+        if (currentAttack.getVfxObj() == null)
+        {
+            Debug.Log("Attack's vfxObj is null");
+            return;
+        }
+
+        //play vfx
         DisableAttackVFX(currentAttack.getVfxObj());
-        StartCoroutine(playAttackVFX(currentAttack.getVfxObj(), currentAttack.getDelay()));
+        StartCoroutine(PlayAttackVFX(currentAttack.getVfxObj(), currentAttack.getDelay()));
+        
+        if (currentAttack.getHitBoxes() == null)
+        {
+            Debug.Log("Attack's hitBox transform is null");
+            return;
+        }
+
+        //hurt enemies
+        StartCoroutine(DealDamage(currentAttack.getHitBoxes(), currentAttack.getDelay()));
+    }
+
+    private IEnumerator DealDamage(List<HitBox> hitBoxes, float delay)
+    {
+        yield return new WaitForSeconds(delay);
 
         List<Collider[]> hitEnemies = new List<Collider[]>();
 
-        foreach (HitBox hitBox in currentAttack.getHitBoxes())
+        foreach (HitBox hitBox in hitBoxes)
         {
             hitEnemies.Add(Physics.OverlapSphere(hitBox.getPosition(), hitBox.getSize(), enemyLayers));
         }
 
-        foreach (Collider[] hitBoxes in hitEnemies)
+        //This is to prevent enemies from getting hit twice if they're in range of 2 hitboxes
+        HashSet<Collider> loggedEnemies = new HashSet<Collider>();
+
+        foreach (Collider[] enemyList in hitEnemies)
         {
-            foreach (Collider enemy in hitBoxes)
+            foreach (Collider enemy in enemyList)
             {
-                Debug.Log("We hit " + enemy.name);
+                if (!loggedEnemies.Contains(enemy))
+                {
+                    enemy.GetComponent<Enemy>().TakeDamage(1);
+
+                    loggedEnemies.Add(enemy);
+                }
             }
         }
     }
-    private IEnumerator playAttackVFX(GameObject vfxObj, float delay)
+
+    //This function 
+    private IEnumerator PlayAttackVFX(GameObject vfxObj, float delay)
     {
+        //Wait some time before spawning vfx
         yield return new WaitForSeconds(delay);
+
+        //make sure the vfx is rotated in the right direction
         vfxObj.transform.rotation = transform.rotation;
         vfxObj.SetActive(true);
 
+        //wait some time before diabling the vfx (needs fix)
         yield return new WaitForSeconds(0.8f);
         DisableAttackVFX(vfxObj);
     }
@@ -215,24 +244,26 @@ public class ComboController : MonoBehaviour
         vfxObj.SetActive(false);
     }
 
-    //This lets us see selected hitboxes in the editor
+    //This lets us see the hitboxes in the editor
     private void OnDrawGizmosSelected()
     {
+        //Look at the hitboxes for light attacks
         foreach (PlayerAttack lightAttack in lightAttacks)
         {
             foreach (HitBox hitBox in lightAttack.getHitBoxes())
             {
-                if (hitBox == null)
+                if (hitBox.getTransform() == null)
                     continue;
                 Gizmos.DrawWireSphere(hitBox.getPosition(), hitBox.getSize());
             }
         }
 
+        //Look at the hitboxes for heavy attacks
         foreach (PlayerAttack heavyAttack in heavyAttacks)
         {
             foreach (HitBox hitBox in heavyAttack.getHitBoxes())
             {
-                if (hitBox == null)
+                if (hitBox.getTransform() == null)
                     continue;
                 Gizmos.DrawWireSphere(hitBox.getPosition(), hitBox.getSize());
             }
