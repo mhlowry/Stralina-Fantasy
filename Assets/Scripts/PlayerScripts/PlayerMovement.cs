@@ -5,8 +5,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Player))]
 
-public class PlayerController : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     private Vector2 input;
 
@@ -29,9 +30,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float gravityMultiplier = 3.0f;
 
+    private Player player;
+
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        player = GetComponent<Player>();
     }
 
     private void Update()
@@ -40,8 +44,8 @@ public class PlayerController : MonoBehaviour
         ApplyRotation();
         FlipCheck();
 
-        //Do not move player if attacking
-        if (anim.GetBool("comboOver"))
+        //Do not move player if attacking or stunned
+        if (anim.GetBool("comboOver") && !player.IsStunned())
         {
             ApplyMovement();
         }
