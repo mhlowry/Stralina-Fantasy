@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ComboController : MonoBehaviour
+[RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(Player))]
+
+public class PlayerCombat : MonoBehaviour
 {
 
     //REMEMBERR TO DRAG GFX INTO ANIM IN UNITY EDITOR
@@ -23,7 +26,8 @@ public class ComboController : MonoBehaviour
     static int storedAttackIndex = 0;
 
     private CharacterController characterController;
-    private PlayerController playerController;
+    private PlayerMovement playerMovement;
+    private Player player;
 
     [SerializeField] private LayerMask enemyLayers;
 
@@ -33,7 +37,8 @@ public class ComboController : MonoBehaviour
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
-        playerController = GetComponent<PlayerController>();
+        playerMovement = GetComponent<PlayerMovement>();
+        player = GetComponent<Player>();
     }
 
     private void Update()
@@ -53,7 +58,7 @@ public class ComboController : MonoBehaviour
         //this scoots the player a little bit, giving attacks a degree of "oomph"
         if (Time.time - lastAttackTime < attackDuration)
         {
-            //uses the direction the player is imputting in playerController
+            //uses the direction the player is imputting in playerMovement
             characterController.Move(attackDirection * attackImpact * Time.deltaTime);
         }
     }
@@ -61,8 +66,8 @@ public class ComboController : MonoBehaviour
     //This gets called by the unity input manager.  Cool!
     public void CallLightAttack(InputAction.CallbackContext context)
     {
-        //ensures that lightattack is only called once per button
-        if (!context.started | playerIsLocked)
+        //ensures that lightattack is only called once per button, and only if the player is actionable
+        if (!context.started | playerIsLocked | player.IsStunned())
             return;
 
         //When the player is still in an attacking animation but 
@@ -78,8 +83,8 @@ public class ComboController : MonoBehaviour
     //You'll never guess what calls this function!  (The Unity Input Manager)
     public void CallHeavyAttack(InputAction.CallbackContext context)
     {
-        //ensures that lightattack is only called once per button
-        if (!context.started | playerIsLocked)
+        //ensures that heavyattack is only called once per button, and only if the player is actionable
+        if (!context.started | playerIsLocked | player.IsStunned())
             return;
 
         HeavyAttack();
@@ -153,7 +158,7 @@ public class ComboController : MonoBehaviour
             Debug.Log("PlayerAttack does not exist in the array: HeavyAttacks");
         }
     }
-    private void EndCombo()
+    public void EndCombo()
     {
         //reset all the important combo values to the necessary state
         comboIndex = 0;
@@ -170,7 +175,7 @@ public class ComboController : MonoBehaviour
         anim.SetTrigger(currentAttack.getAnim());
         
         //set the attack's direction to the player's direction (notably used for VFX)
-        attackDirection = playerController.direction;
+        attackDirection = playerMovement.direction;
 
         //Get duration of the attack (endlag) and the impact (momentum)
         attackDuration = currentAttack.getDuration();
