@@ -18,8 +18,13 @@ public class PlayerCombat : MonoBehaviour
     private float lastAttackTime = 0f;
     private bool playerIsLocked = false;
 
+    [SerializeField] private float decelerationRate = 1.0f;
     static float attackImpact = 0;
 
+    static float attackDamage = 0;
+    static float attackTypeDmg = 0;
+    static float attackKnockback = 0;
+    
     private Vector3 attackDirection;
 
     static int comboIndex = 0;
@@ -43,6 +48,9 @@ public class PlayerCombat : MonoBehaviour
 
     private void Update()
     {
+        //ajusts the lag of an attack depending on the player's attack speed scale
+        attackDuration = attackDuration * player.GetAtkSpeedScale();
+
         //end the combo if too much time has passed since the last button press
         if (Time.time - lastAttackTime > uniAttackDelay + attackDuration)
             EndCombo();
@@ -58,12 +66,16 @@ public class PlayerCombat : MonoBehaviour
         //this scoots the player a little bit, giving attacks a degree of "oomph"
         if (Time.time - lastAttackTime < attackDuration)
         {
+            //adds deceleration to the impact of certain attacks
+            float deceleration = decelerationRate * Time.deltaTime;
+            attackImpact = Mathf.Max(0.0f, attackImpact - deceleration);
+
             //uses the direction the player is imputting in playerMovement
             characterController.Move(attackDirection * attackImpact * Time.deltaTime);
         }
     }
 
-    //This gets called by the unity input manager.  Cool!
+    //This Gets called by the unity input manager.  Cool!
     public void CallLightAttack(InputAction.CallbackContext context)
     {
         //ensures that lightattack is only called once per button, and only if the player is actionable
@@ -93,6 +105,7 @@ public class PlayerCombat : MonoBehaviour
     private void LightAttack()
     {
         lastAttackTime = Time.time;
+        attackTypeDmg = player.GetLightDmgScale();
         comboIndex++;
 
         try
@@ -129,6 +142,7 @@ public class PlayerCombat : MonoBehaviour
     private void HeavyAttack()
     {
         lastAttackTime = Time.time;
+        attackTypeDmg = player.GetHeavyDmgScale();
 
         try
         {
@@ -142,6 +156,9 @@ public class PlayerCombat : MonoBehaviour
                     break;
 
                 case 2:
+                    //This denies the player access to this combo tree if they are below a certain level.
+                    if (player.GetPlayerLevel() < 2)
+                        return;
                     PerformAttack(heavyAttacks[1]);
                     break;
 
@@ -172,33 +189,37 @@ public class PlayerCombat : MonoBehaviour
     private void PerformAttack(PlayerAttack currentAttack)
     {
         //animate attack
-        anim.SetTrigger(currentAttack.getAnim());
+        anim.SetTrigger(currentAttack.GetAnim());
         
-        //set the attack's direction to the player's direction (notably used for VFX)
+        //set the attack's direction to the player's direction (notably used for VFX and Knockback)
         attackDirection = playerMovement.direction;
+        attackKnockback = currentAttack.GetKnockBack();
 
         //Get duration of the attack (endlag) and the impact (momentum)
-        attackDuration = currentAttack.getDuration();
-        attackImpact = currentAttack.getImpact();
+        attackDuration = currentAttack.GetDuration();
+        attackImpact = currentAttack.GetImpact();
 
-        if (currentAttack.getVfxObj() == null)
+        //get attack's damage
+        attackDamage = currentAttack.GetDamage();
+
+        if (currentAttack.GetVfxObj() == null)
         {
             Debug.Log("Attack's vfxObj is null");
             return;
         }
 
         //play vfx
-        DisableAttackVFX(currentAttack.getVfxObj());
-        StartCoroutine(PlayAttackVFX(currentAttack.getVfxObj(), currentAttack.getDelay()));
+        DisableAttackVFX(currentAttack.GetVfxObj());
+        StartCoroutine(PlayAttackVFX(currentAttack.GetVfxObj(), currentAttack.GetDelay()));
         
-        if (currentAttack.getHitBoxes() == null)
+        if (currentAttack.GetHitBoxes() == null)
         {
             Debug.Log("Attack's hitBox transform is null");
             return;
         }
 
         //hurt enemies
-        StartCoroutine(DealDamage(currentAttack.getHitBoxes(), currentAttack.getDelay()));
+        StartCoroutine(DealDamage(currentAttack.GetHitBoxes(), currentAttack.GetDelay()));
     }
 
     private IEnumerator DealDamage(List<HitBox> hitBoxes, float delay)
@@ -209,10 +230,10 @@ public class PlayerCombat : MonoBehaviour
 
         foreach (HitBox hitBox in hitBoxes)
         {
-            hitEnemies.Add(Physics.OverlapSphere(hitBox.getPosition(), hitBox.getSize(), enemyLayers));
+            hitEnemies.Add(Physics.OverlapSphere(hitBox.GetPosition(), hitBox.GetSize(), enemyLayers));
         }
 
-        //This is to prevent enemies from getting hit twice if they're in range of 2 hitboxes
+        //This is to prevent enemies from Getting hit twice if they're in range of 2 or more hitboxes
         HashSet<Collider> loggedEnemies = new HashSet<Collider>();
 
         foreach (Collider[] enemyList in hitEnemies)
@@ -221,7 +242,13 @@ public class PlayerCombat : MonoBehaviour
             {
                 if (!loggedEnemies.Contains(enemy))
                 {
-                    enemy.GetComponent<Enemy>().TakeDamage(1);
+                    Enemy thisEnemy = enemy.GetComponent<Enemy>();
+
+                    //this is the main attack shit
+                    thisEnemy.TakeDamage((int)(attackDamage * player.GetAttackScale() * attackTypeDmg), attackKnockback * player.GetKnockBScale(), attackDirection);
+
+                    if (thisEnemy.GetIsDead())
+                        player.GainExp(thisEnemy.GetExpWorth());
 
                     loggedEnemies.Add(enemy);
                 }
@@ -255,22 +282,22 @@ public class PlayerCombat : MonoBehaviour
         //Look at the hitboxes for light attacks
         foreach (PlayerAttack lightAttack in lightAttacks)
         {
-            foreach (HitBox hitBox in lightAttack.getHitBoxes())
+            foreach (HitBox hitBox in lightAttack.GetHitBoxes())
             {
-                if (hitBox.getTransform() == null)
+                if (hitBox.GetTransform() == null)
                     continue;
-                Gizmos.DrawWireSphere(hitBox.getPosition(), hitBox.getSize());
+                Gizmos.DrawWireSphere(hitBox.GetPosition(), hitBox.GetSize());
             }
         }
 
         //Look at the hitboxes for heavy attacks
         foreach (PlayerAttack heavyAttack in heavyAttacks)
         {
-            foreach (HitBox hitBox in heavyAttack.getHitBoxes())
+            foreach (HitBox hitBox in heavyAttack.GetHitBoxes())
             {
-                if (hitBox.getTransform() == null)
+                if (hitBox.GetTransform() == null)
                     continue;
-                Gizmos.DrawWireSphere(hitBox.getPosition(), hitBox.getSize());
+                Gizmos.DrawWireSphere(hitBox.GetPosition(), hitBox.GetSize());
             }
         }
     }

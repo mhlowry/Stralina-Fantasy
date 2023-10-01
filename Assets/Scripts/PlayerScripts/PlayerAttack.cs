@@ -20,19 +20,23 @@ public class PlayerAttack
     [SerializeField] private float duration;
     [SerializeField] private float impact;
     [SerializeField] private float delay;
+    [SerializeField] private float damage;
+    [SerializeField] private float knockBack;
 
     [SerializeField] private List<HitBox> hitBoxes;
     [SerializeField] private GameObject vfxObj;
 
     //collection of getter methods
-    public string getAnim() {  return animTrigger; }
-    public float getDuration() { return duration; }
-    public float getImpact() { return impact; }
-    public float getDelay() { return delay; }
+    public string GetAnim() {  return animTrigger; }
+    public float GetDuration() { return duration; }
+    public float GetImpact() { return impact; }
+    public float GetDelay() { return delay; }
+    public float GetDamage() { return damage; }
+    public float GetKnockBack() {  return knockBack; }
 
-    public GameObject getVfxObj() {  return vfxObj; }
+    public GameObject GetVfxObj() {  return vfxObj; }
 
-    public List<HitBox> getHitBoxes() {  return hitBoxes; }
+    public List<HitBox> GetHitBoxes() {  return hitBoxes; }
 }
 
 [System.Serializable]
@@ -41,8 +45,8 @@ public class HitBox
     [SerializeField] private Transform center;
     [SerializeField] private float size;
 
-    public Transform getTransform() { return center; }
+    public Transform GetTransform() { return center; }
 
-    public Vector3 getPosition() { return center.position; }
-    public float getSize() { return size; }
+    public Vector3 GetPosition() { return center.position; }
+    public float GetSize() { return size; }
 }

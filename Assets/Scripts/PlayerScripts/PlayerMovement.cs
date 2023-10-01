@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     private float velocity;
 
     //Things to pull from objects attached to main player
-    //REMEMBERR TO DRAG GFX INTO ANIM AND PLAYERVISUAL INTO playerVISUAL IN UNITY EDITOR
+    //REMEMBER TO DRAG GFX INTO ANIM AND PLAYERVISUAL INTO playerVISUAL IN UNITY EDITOR
     [SerializeField] private Animator anim;
     [SerializeField] private GameObject playerVisual;
 
@@ -94,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //plays walking animation & moves player
         anim.SetFloat("direction", Mathf.Abs(direction.x) + Mathf.Abs(direction.z));
-        characterController.Move(direction * speed * Time.deltaTime);
+        characterController.Move(direction * (speed * player.GetMoveSpeedScale()) * Time.deltaTime);
     }
 
     /*This function is called by the "PlayerInput" Object to move the player
