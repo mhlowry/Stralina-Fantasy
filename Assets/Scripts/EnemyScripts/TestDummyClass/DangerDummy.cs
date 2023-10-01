@@ -3,24 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DangerDummy : TestDummy
-{
-
+{ 
     [SerializeField] private float attackSize = 3.0f;
     [SerializeField] private LayerMask playerLayer;
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         maxHealthPoints = 100;
         curHealthPoints = maxHealthPoints;
         regularColor = Color.blue;
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(int damage, float knockback, Vector3 direction)
     {
         //there is most certainly a better way to do this but whatever it's a test dummy for a reason
         Collider hitPlayer = Physics.OverlapSphere(transform.position, attackSize, playerLayer)[0];
-        hitPlayer.GetComponent<Player>().TakeDamage(damage * 10);
+        hitPlayer.GetComponent<Player>().TakeDamage(1);
         Debug.Log("COUNTER!!!");
-        base.TakeDamage(damage);
+        base.TakeDamage(damage, knockback, direction);
     }
 
     private void OnDrawGizmosSelected()
