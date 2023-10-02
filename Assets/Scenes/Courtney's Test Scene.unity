@@ -3028,7 +3028,7 @@ MonoBehaviour:
     vfxObj: {fileID: 8500427985506744927}
   - animTrigger: stab1Trigger
     duration: 0.25
-    impact: 10
+    impact: 5
     delay: 0.23
     damage: 3
     knockBack: 6
