@@ -79,11 +79,11 @@ public class PlayerCombat : MonoBehaviour
     public void CallLightAttack(InputAction.CallbackContext context)
     {
         //ensures that lightattack is only called once per button, and only if the player is actionable
-        if (!context.started | playerIsLocked | player.IsStunned())
+        if (!context.started || playerIsLocked || player.IsStunned())
             return;
 
         //When the player is still in an attacking animation but 
-        if (Time.time - lastAttackTime < attackDuration)
+        if (Time.time - lastAttackTime < attackDuration || anim.GetBool("isRolling"))
         {
             storedAttackIndex++;
             return;
@@ -96,7 +96,7 @@ public class PlayerCombat : MonoBehaviour
     public void CallHeavyAttack(InputAction.CallbackContext context)
     {
         //ensures that heavyattack is only called once per button, and only if the player is actionable
-        if (!context.started | playerIsLocked | player.IsStunned())
+        if (!context.started || playerIsLocked || player.IsStunned() || anim.GetBool("isRolling"))
             return;
 
         HeavyAttack();
@@ -192,7 +192,7 @@ public class PlayerCombat : MonoBehaviour
         anim.SetTrigger(currentAttack.GetAnim());
         
         //set the attack's direction to the player's direction (notably used for VFX and Knockback)
-        attackDirection = playerMovement.direction;
+        attackDirection = transform.forward;
         attackKnockback = currentAttack.GetKnockBack();
 
         //Get duration of the attack (endlag) and the impact (momentum)

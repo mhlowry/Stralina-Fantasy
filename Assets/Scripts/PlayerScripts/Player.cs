@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     float timeofHit;
     bool isStunned = false;
     bool isInvul = false;
+    bool invulOverride = false;
 
     //REMEMBERR TO DRAG GFX INTO ANIM
     [SerializeField] private GameObject gfxObj;
@@ -65,7 +66,8 @@ public class Player : MonoBehaviour
             animGFX.SetBool("inPain", false);
             isStunned = false;
         }
-        if (Time.time - timeofHit > hitInvulTime)
+
+        if (Time.time - timeofHit > hitInvulTime && !invulOverride)
         {
             isInvul = false;
         }
@@ -105,6 +107,7 @@ public class Player : MonoBehaviour
     public void HealPlayer(int healthGain)
     {
         curHealth = Mathf.Clamp(curHealth + healthGain, 1, maxHealth);
+        healthBar.SetResource(curHealth);
     }
 
     IEnumerator BlinkEffect()
@@ -119,6 +122,19 @@ public class Player : MonoBehaviour
 
             yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    //Invulnerability related functions
+    public void ToggleInvul() { isInvul = !isInvul; }
+    public void SetInvulTrue()
+    {
+        invulOverride = true;
+        isInvul = true;
+    }
+    public void SetInvulFalse()
+    {
+        invulOverride = false;
+        isInvul = false;
     }
 
     void GameOver()
@@ -168,7 +184,12 @@ public class Player : MonoBehaviour
 
     public void GainMeter(float meterGained)
     {
-        healthBar.SetResource((int)curAbilityMeter);
+        meterBar.SetResource((int)curAbilityMeter);
         curAbilityMeter = Mathf.Clamp(curAbilityMeter + meterGained, 0, maxAbilityMeter);
+    }
+    public void UseMeter(float meterUsed)
+    {
+        meterBar.SetResource((int)curAbilityMeter);
+        curAbilityMeter = Mathf.Clamp(curAbilityMeter + meterUsed, 0, maxAbilityMeter);
     }
 }

@@ -1502,6 +1502,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3f1d4bde-1357-4c68-ac23-54c87440d2f3
     m_ActionName: Gameplay/HeavyAttack[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2938387715109252358}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: CallRoll
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2719711b-71a8-4f1c-abc4-d95a57ecc89f
+    m_ActionName: Gameplay/Roll[/Keyboard/shift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -2501,6 +2517,11 @@ MonoBehaviour:
   rotationTime: 0.05
   speed: 10.5
   gravityMultiplier: 3
+  numOfRolls: 1
+  rollSpeed: 15
+  rollCooldown: 3
+  rollDeceleration: 20
+  rollDuration: 0.5
 --- !u!1 &2942630610124791057
 GameObject:
   m_ObjectHideFlags: 0
@@ -3011,7 +3032,7 @@ MonoBehaviour:
     impact: 5
     delay: 0.1
     damage: 3
-    knockBack: 3
+    knockBack: 1
     hitBoxes:
     - center: {fileID: 7603146812616118418}
       size: 1.1
@@ -3021,7 +3042,7 @@ MonoBehaviour:
     impact: 5
     delay: 0
     damage: 3
-    knockBack: 3
+    knockBack: 1
     hitBoxes:
     - center: {fileID: 7603146812616118418}
       size: 1.1
@@ -3031,12 +3052,12 @@ MonoBehaviour:
     impact: 5
     delay: 0.23
     damage: 3
-    knockBack: 6
+    knockBack: 1
     hitBoxes:
     - center: {fileID: 7603146812616118418}
-      size: 0.5
+      size: 0.7
     - center: {fileID: 2795667437775321423}
-      size: 0.45
+      size: 0.5
     vfxObj: {fileID: 7432540655642099183}
   heavyAttacks:
   - animTrigger: stab1Trigger
@@ -3047,9 +3068,9 @@ MonoBehaviour:
     knockBack: 10
     hitBoxes:
     - center: {fileID: 7603146812616118418}
-      size: 0.5
+      size: 0.75
     - center: {fileID: 2795667437775321423}
-      size: 0.4
+      size: 0.6
     - center: {fileID: 6424671371176153157}
       size: 0.3
     vfxObj: {fileID: 3024714735875950818}
