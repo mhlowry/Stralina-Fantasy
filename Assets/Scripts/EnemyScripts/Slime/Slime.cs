@@ -4,14 +4,11 @@ public class Slime : Enemy
 {
     public float moveSpeed = 5f;
     public LayerMask groundLayer;  // LayerMask to identify ground objects
-    private GameObject player;
     private Camera mainCamera;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        player = GameObject.FindGameObjectWithTag("Player");
-        mainCamera = Camera.main;
+        Awake();
     }
 
     void FixedUpdate()
@@ -26,10 +23,11 @@ public class Slime : Enemy
 
     private void SlideTowardsPlayer()
     {
+        Debug.Log("Player is equal to null? " + (playerObject == null));
         // Move towards the player only if the player exists and the slime is grounded
-        if (player != null && IsGrounded())
+        if (playerObject != null && aggroRange(5))
         {
-            Vector3 direction = player.transform.position - transform.position;
+            Vector3 direction = playerObject.transform.position - transform.position;
             Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
             rb.velocity = horizontalDirection * moveSpeed;
         }
