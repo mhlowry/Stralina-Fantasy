@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerCombat))]
 public class Player : MonoBehaviour
 {
     //STATS
-    [SerializeField] int maxHealth = 100;
+    [SerializeField] int maxHealth = 10;
     [SerializeField] int curHealth;
 
     const int maxLevel = 7;
@@ -21,7 +22,7 @@ public class Player : MonoBehaviour
     //Stats that are adjustable, mostly through gear
     float attackScale = 1f;
     float defenseScale = 1f;
-    float moveSpeedScale = 1f;
+    protected float moveSpeedScale = 1f;
     
     float lightDmgScale = 1f;
     float heavyDmgScale = 1f;
@@ -42,22 +43,29 @@ public class Player : MonoBehaviour
     [SerializeField] private ResourceBar meterBar;
 
     private SpriteRenderer spriteRendererGFX;
-    private Animator animGFX;
-    private PlayerCombat playerCombat;
+    protected Animator animGFX;
+    protected PlayerCombat playerCombat;
 
+    //Doing certain things in awake and some things in start is really important apparently
     private void Awake()
     {
-        curHealth = maxHealth;
         playerCombat = GetComponent<PlayerCombat>();
 
         spriteRendererGFX = gfxObj.GetComponent<SpriteRenderer>();
         animGFX = gfxObj.GetComponent<Animator>();
-
-        meterBar.SetMaxResource((int)maxAbilityMeter);
-        healthBar.SetMaxResource(maxHealth);
     }
 
-    private void Update()
+    private void Start()
+    {
+        meterBar.SetMaxResource((int)maxAbilityMeter);
+        curAbilityMeter = 0.0f;
+        meterBar.SetResource((int)curAbilityMeter);
+
+        healthBar.SetMaxResource(maxHealth);
+        curHealth = maxHealth;
+    }
+
+    protected virtual void Update()
     {
         //either un-stun the player or 
         if (Time.time - timeofHit > hitStunTime)
@@ -78,7 +86,7 @@ public class Player : MonoBehaviour
     public int GetCurHealth() {  return curHealth; }
     public bool IsStunned() {  return isStunned; }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         //do not take damage if invulnerable
         if (isInvul)
@@ -184,12 +192,12 @@ public class Player : MonoBehaviour
 
     public void GainMeter(float meterGained)
     {
-        meterBar.SetResource((int)curAbilityMeter);
         curAbilityMeter = Mathf.Clamp(curAbilityMeter + meterGained, 0, maxAbilityMeter);
+        meterBar.SetResource((int)curAbilityMeter);
     }
     public void UseMeter(float meterUsed)
     {
+        curAbilityMeter = Mathf.Clamp(curAbilityMeter - meterUsed, 0, maxAbilityMeter);
         meterBar.SetResource((int)curAbilityMeter);
-        curAbilityMeter = Mathf.Clamp(curAbilityMeter + meterUsed, 0, maxAbilityMeter);
     }
 }

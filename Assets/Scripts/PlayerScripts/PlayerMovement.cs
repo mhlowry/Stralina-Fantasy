@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
         FlipCheck();
 
         //Do not move player if attacking or stunned
-        if (anim.GetBool("comboOver") && !player.IsStunned() && !isRolling)
+        if (anim.GetBool("comboOver") && !anim.GetBool("isBlocking") && !player.IsStunned() && !isRolling)
         {
             ApplyMovement();
         }
@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
         //stop rolling if rolling
         anim.SetBool("isRolling", isRolling);
 
-        if (Time.time - lastRollTime > rollDuration)
+        if (Time.time - lastRollTime > rollDuration && isRolling == true)
         {
             isRolling = false;
             player.SetInvulFalse();

@@ -1518,6 +1518,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 2719711b-71a8-4f1c-abc4-d95a57ecc89f
     m_ActionName: Gameplay/Roll[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7775920609703265756}
+        m_TargetAssemblyTypeName: SwordMan, Assembly-CSharp
+        m_MethodName: CallBlocking
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: dc4b1d82-d972-473a-87ac-d70491fc388e
+    m_ActionName: Gameplay/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -2028,6 +2044,63 @@ Transform:
   - {fileID: 6424671371176153157}
   m_Father: {fileID: 3316846965416732353}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &437148121772032943
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4191297001965025403, guid: 0f5095b9ed10edb4b9e5436a40bfd71c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 4191297001965025403, guid: 0f5095b9ed10edb4b9e5436a40bfd71c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.73716164
+      objectReference: {fileID: 0}
+    - target: {fileID: 4191297001965025403, guid: 0f5095b9ed10edb4b9e5436a40bfd71c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 4191297001965025403, guid: 0f5095b9ed10edb4b9e5436a40bfd71c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4191297001965025403, guid: 0f5095b9ed10edb4b9e5436a40bfd71c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4191297001965025403, guid: 0f5095b9ed10edb4b9e5436a40bfd71c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4191297001965025403, guid: 0f5095b9ed10edb4b9e5436a40bfd71c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4191297001965025403, guid: 0f5095b9ed10edb4b9e5436a40bfd71c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4191297001965025403, guid: 0f5095b9ed10edb4b9e5436a40bfd71c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4191297001965025403, guid: 0f5095b9ed10edb4b9e5436a40bfd71c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6594247198778211642, guid: 0f5095b9ed10edb4b9e5436a40bfd71c, type: 3}
+      propertyPath: m_Name
+      value: Weeble
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0f5095b9ed10edb4b9e5436a40bfd71c, type: 3}
 --- !u!4 &803386393872724920
 Transform:
   m_ObjectHideFlags: 0
@@ -2076,27 +2149,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3316846965416732353}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1331582329137246990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7775920609703265755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f527720f5b1e8004d9971020e57c4895, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 10
-  curHealth: 0
-  playerLevel: 1
-  expToLevelUp: 64000000f4010000e8030000d0070000b80b00008813000010270000
-  hitInvulTime: 1.2
-  hitStunTime: 0.6
-  gfxObj: {fileID: 1363474642028427699}
-  healthBar: {fileID: 1026698014}
-  meterBar: {fileID: 1657000558}
 --- !u!1 &1363474642028427699
 GameObject:
   m_ObjectHideFlags: 0
@@ -2519,7 +2571,7 @@ MonoBehaviour:
   gravityMultiplier: 3
   numOfRolls: 1
   rollSpeed: 15
-  rollCooldown: 3
+  rollCooldown: 1.5
   rollDeceleration: 20
   rollDuration: 0.5
 --- !u!1 &2942630610124791057
@@ -3023,6 +3075,7 @@ MonoBehaviour:
   anim: {fileID: 6988698566307669943}
   uniAttackDelay: 0.5
   decelerationRate: 32
+  meterPerHit: 5
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
@@ -3032,7 +3085,7 @@ MonoBehaviour:
     impact: 5
     delay: 0.1
     damage: 3
-    knockBack: 1
+    knockBack: 2
     hitBoxes:
     - center: {fileID: 7603146812616118418}
       size: 1.1
@@ -3042,7 +3095,7 @@ MonoBehaviour:
     impact: 5
     delay: 0
     damage: 3
-    knockBack: 1
+    knockBack: 2
     hitBoxes:
     - center: {fileID: 7603146812616118418}
       size: 1.1
@@ -3052,7 +3105,7 @@ MonoBehaviour:
     impact: 5
     delay: 0.23
     damage: 3
-    knockBack: 1
+    knockBack: 2
     hitBoxes:
     - center: {fileID: 7603146812616118418}
       size: 0.7
@@ -3065,7 +3118,7 @@ MonoBehaviour:
     impact: 20
     delay: 0.23
     damage: 6
-    knockBack: 10
+    knockBack: 5
     hitBoxes:
     - center: {fileID: 7603146812616118418}
       size: 0.75
@@ -3232,7 +3285,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3316846965416732353}
   - component: {fileID: 6719974270067253612}
-  - component: {fileID: 1331582329137246990}
+  - component: {fileID: 7775920609703265756}
   - component: {fileID: 2938387715109252358}
   - component: {fileID: 7284500753334824196}
   m_Layer: 6
@@ -3242,6 +3295,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7775920609703265756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7775920609703265755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d695b091f746aa848b40352e53218fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  curHealth: 0
+  playerLevel: 1
+  expToLevelUp: 64000000f4010000e8030000d0070000b80b00008813000010270000
+  hitInvulTime: 1.2
+  hitStunTime: 0.6
+  gfxObj: {fileID: 1363474642028427699}
+  healthBar: {fileID: 1026698014}
+  meterBar: {fileID: 1657000558}
 --- !u!1001 &7859150670363319917
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3472,5 +3546,6 @@ SceneRoots:
   - {fileID: 7859150670363319917}
   - {fileID: 1851107685631360566}
   - {fileID: 1684569655}
+  - {fileID: 437148121772032943}
   - {fileID: 1703362763}
   - {fileID: 1976881577}
