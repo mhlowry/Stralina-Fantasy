@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int expWorth;
     [SerializeField] protected float knockbackMultiplier = 1f;
     protected int curHealthPoints;
+    protected bool isChase = true;
     bool isDead = false;
 
     //Game components that will be generally needed

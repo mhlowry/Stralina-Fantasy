@@ -1,54 +1,80 @@
+using System.Collections;
 using UnityEngine;
 
 public class Slime : Enemy
 {
     public float moveSpeed = 5f;
-    public LayerMask groundLayer;  // LayerMask to identify ground objects
-    private Camera mainCamera;
+    public float colorSpeed = 0.5f;
+    public Color regularColor = Color.white;
+    public Color hurtColor = Color.red;
+    private Material material;
+    private Coroutine colorChangeCoroutine;
+    [SerializeField] public float aggroDistance = 10f;
+    private bool canMove = true;
 
-    void Start()
+    protected override void Awake()
     {
-        Awake();
+        base.Awake();
+        material = GetComponent<Renderer>().material;
     }
 
     void FixedUpdate()
     {
-        SlideTowardsPlayer();
-    }
-
-    void Update()
-    {
-        FaceCamera();
+        if (isChase) SlideTowardsPlayer();
+        else Debug.Log("Not chasing player");
     }
 
     private void SlideTowardsPlayer()
     {
-        Debug.Log("Player is equal to null? " + (playerObject == null));
-        // Move towards the player only if the player exists and the slime is grounded
-        if (playerObject != null && aggroRange(5))
+        if (playerObject != null && aggroRange(aggroDistance) && canMove)
         {
             Vector3 direction = playerObject.transform.position - transform.position;
             Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
-            rb.velocity = horizontalDirection * moveSpeed;
+            rb.velocity = new Vector3(horizontalDirection.x * moveSpeed, rb.velocity.y, horizontalDirection.z * moveSpeed);
         }
     }
 
-    private void FaceCamera()
+     public override void TakeDamage(int damage, float knockback, Vector3 direction)
     {
-        // Ensure the slime always faces the camera
-        if (mainCamera != null)
+        //change color
+        material.color = hurtColor;
+
+        //start the color change coroutine to return to base color
+        if (colorChangeCoroutine != null)
+            StopCoroutine(colorChangeCoroutine);
+
+        colorChangeCoroutine = StartCoroutine(ChangeColor());
+
+        //inflict damage
+        base.TakeDamage(damage, knockback, direction);
+        Debug.Log(gameObject.name + ": \"Ouch!  My current Hp is only " + curHealthPoints + "!\"");
+
+        StartCoroutine(DisableMovementForSeconds(0.5f));
+
+        //die if dead
+        if(curHealthPoints <= 0)
         {
-            Vector3 lookDirection = mainCamera.transform.position - transform.position;
-            lookDirection.y = 0;  // Maintain upright orientation
-            Quaternion rotation = Quaternion.LookRotation(lookDirection);
-            transform.rotation = rotation;
+            Debug.Log(gameObject.name + " Fucking Died");
+            base.Die();
         }
     }
 
-    private bool IsGrounded()
+    private IEnumerator ChangeColor()
     {
-        Debug.Log(Physics.Raycast(transform.position, Vector3.down, 0.1f, groundLayer));
-        // Check if the slime is grounded using raycasting
-        return Physics.Raycast(transform.position, Vector3.down, 0.1f, groundLayer);
+        //this changes the color, duh
+        float tick = 0f;
+        while (material.color != regularColor)
+        {
+            tick += Time.deltaTime * colorSpeed;
+            material.color = Color.Lerp(hurtColor, regularColor, tick);
+            yield return null;
+        }
+    }
+
+    private IEnumerator DisableMovementForSeconds(float seconds)
+    {
+        canMove = false;
+        yield return new WaitForSeconds(seconds);
+        canMove = true;
     }
 }
