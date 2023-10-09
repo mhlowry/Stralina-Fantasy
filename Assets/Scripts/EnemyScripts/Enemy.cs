@@ -9,11 +9,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int expWorth;
     [SerializeField] protected float knockbackMultiplier = 1f;
     protected int curHealthPoints;
+    protected bool isChase = true;
     bool isDead = false;
+    protected Animator animator;
 
     //Game components that will be generally needed
     [SerializeField] protected Rigidbody rb;
-    GameObject playerObject;
+    protected GameObject playerObject;
 
     protected virtual void Awake()
     {
@@ -26,6 +28,9 @@ public class Enemy : MonoBehaviour
 
         //Gets rigidbody
         rb = GetComponent<Rigidbody>();
+
+        //if animator exists, gets animator
+        animator = GetComponent<Animator>();
 
         //Find Player
         playerObject = GameObject.FindGameObjectWithTag("Player");
@@ -66,5 +71,18 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         Destroy(gameObject);
+    }
+
+    public bool aggroRange(float range)
+    {
+        //if the player is within the range, return true
+        if (Vector3.Distance(playerObject.transform.position, transform.position) < range)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
