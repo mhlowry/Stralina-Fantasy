@@ -18,8 +18,12 @@ public class DangerDummy : TestDummy
     public override void TakeDamage(int damage, float knockback, Vector3 direction)
     {
         //there is most certainly a better way to do this but whatever it's a test dummy for a reason
-        Collider hitPlayer = Physics.OverlapSphere(transform.position, attackSize, playerLayer)[0];
-        hitPlayer.GetComponent<Player>().TakeDamage(1);
+        Collider[] hitPlayer;
+        hitPlayer = Physics.OverlapSphere(transform.position, attackSize, playerLayer);
+
+        foreach (Collider collider in hitPlayer)
+            collider.GetComponent<Player>().TakeDamage(1);
+
         Debug.Log("COUNTER!!!");
         base.TakeDamage(damage, knockback, direction);
     }

@@ -21,9 +21,8 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float decelerationRate = 1.0f;
     static float attackImpact = 0;
 
-    static float attackDamage = 0;
+    [SerializeField] private float meterPerHit;
     static float attackTypeDmg = 0;
-    static float attackKnockback = 0;
     
     private Vector3 attackDirection;
 
@@ -38,12 +37,23 @@ public class PlayerCombat : MonoBehaviour
 
     [SerializeField] private List<PlayerAttack> lightAttacks;
     [SerializeField] private List<PlayerAttack> heavyAttacks;
+    [SerializeField] private List<RepeatingAttack> repeatingAttacks;
+    [SerializeField] private List<ProjectileAttack> projectileAttacks;
 
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
         playerMovement = GetComponent<PlayerMovement>();
         player = GetComponent<Player>();
+    }
+
+    private void Start()
+    {
+        //apparently unity serialization does not support inheritence in arrays so we have to do this wack ass roundabout shit
+        foreach (RepeatingAttack attack in repeatingAttacks)
+            heavyAttacks[attack.GetIndex()] = attack;
+        foreach (ProjectileAttack attack in projectileAttacks)
+            heavyAttacks[attack.GetIndex()] = attack;
     }
 
     private void Update()
@@ -79,11 +89,11 @@ public class PlayerCombat : MonoBehaviour
     public void CallLightAttack(InputAction.CallbackContext context)
     {
         //ensures that lightattack is only called once per button, and only if the player is actionable
-        if (!context.started | playerIsLocked | player.IsStunned())
+        if (!context.started || !canAttack())
             return;
 
-        //When the player is still in an attacking animation but 
-        if (Time.time - lastAttackTime < attackDuration)
+        //When the player is still in an attacking animation, but the attack has not finished, store the attack to play at next possible moment
+        if (Time.time - lastAttackTime < attackDuration || anim.GetBool("isRolling"))
         {
             storedAttackIndex++;
             return;
@@ -96,7 +106,7 @@ public class PlayerCombat : MonoBehaviour
     public void CallHeavyAttack(InputAction.CallbackContext context)
     {
         //ensures that heavyattack is only called once per button, and only if the player is actionable
-        if (!context.started | playerIsLocked | player.IsStunned())
+        if (!context.started || !canAttack() || anim.GetBool("isRolling"))
             return;
 
         HeavyAttack();
@@ -104,7 +114,8 @@ public class PlayerCombat : MonoBehaviour
 
     private void LightAttack()
     {
-        lastAttackTime = Time.time;
+        if (!canAttack()) return;
+
         attackTypeDmg = player.GetLightDmgScale();
         comboIndex++;
 
@@ -128,7 +139,7 @@ public class PlayerCombat : MonoBehaviour
                     break;
 
                 default:
-                    Debug.Log("LightAttack: Invalid Combo Index");
+                    Debug.Log("LightAttack: Invalid Combo Index (how the fuck did you get here?)");
                     break;
             }
         }
@@ -141,7 +152,8 @@ public class PlayerCombat : MonoBehaviour
 
     private void HeavyAttack()
     {
-        lastAttackTime = Time.time;
+        if (!canAttack()) return;
+
         attackTypeDmg = player.GetHeavyDmgScale();
 
         try
@@ -155,6 +167,10 @@ public class PlayerCombat : MonoBehaviour
                     PerformAttack(heavyAttacks[0]);
                     break;
 
+                case 1:
+                    //PROJECTILE HEAVY FOR SAKE OF TESTING.  DO NOT KEEP
+                    PerformAttack(heavyAttacks[2]);
+                    break;
                 case 2:
                     //This denies the player access to this combo tree if they are below a certain level.
                     if (player.GetPlayerLevel() < 2)
@@ -175,6 +191,7 @@ public class PlayerCombat : MonoBehaviour
             Debug.Log("PlayerAttack does not exist in the array: HeavyAttacks");
         }
     }
+
     public void EndCombo()
     {
         //reset all the important combo values to the necessary state
@@ -184,33 +201,29 @@ public class PlayerCombat : MonoBehaviour
 
         //End animation
         anim.SetBool("comboOver", true);
+        DisableAllAttackVFX();
     }
 
     private void PerformAttack(PlayerAttack currentAttack)
     {
         //animate attack
         anim.SetTrigger(currentAttack.GetAnim());
-        
-        //set the attack's direction to the player's direction (notably used for VFX and Knockback)
-        attackDirection = playerMovement.direction;
-        attackKnockback = currentAttack.GetKnockBack();
+        DisableAllAttackVFX();
 
-        //Get duration of the attack (endlag) and the impact (momentum)
-        attackDuration = currentAttack.GetDuration();
+        /*  these four lines below are needed because PlayerAttack is not a subclass of monobehaviour
+        *   therefore we can't call update in the class and therefore cannot move the character controller
+        *   but, we can move it here in combo controller
+        */
+        lastAttackTime = Time.time;
         attackImpact = currentAttack.GetImpact();
-
-        //get attack's damage
-        attackDamage = currentAttack.GetDamage();
+        attackDuration = currentAttack.GetDuration();
+        attackDirection = transform.forward;
 
         if (currentAttack.GetVfxObj() == null)
         {
             Debug.Log("Attack's vfxObj is null");
             return;
         }
-
-        //play vfx
-        DisableAttackVFX(currentAttack.GetVfxObj());
-        StartCoroutine(PlayAttackVFX(currentAttack.GetVfxObj(), currentAttack.GetDelay()));
         
         if (currentAttack.GetHitBoxes() == null)
         {
@@ -219,61 +232,22 @@ public class PlayerCombat : MonoBehaviour
         }
 
         //hurt enemies
-        StartCoroutine(DealDamage(currentAttack.GetHitBoxes(), currentAttack.GetDelay()));
+        StartCoroutine(currentAttack.ActivateAttack(player, attackTypeDmg, meterPerHit, enemyLayers, attackDirection));
     }
 
-    private IEnumerator DealDamage(List<HitBox> hitBoxes, float delay)
+    private void DisableAllAttackVFX()
     {
-        yield return new WaitForSeconds(delay);
-
-        List<Collider[]> hitEnemies = new List<Collider[]>();
-
-        foreach (HitBox hitBox in hitBoxes)
-        {
-            hitEnemies.Add(Physics.OverlapSphere(hitBox.GetPosition(), hitBox.GetSize(), enemyLayers));
-        }
-
-        //This is to prevent enemies from Getting hit twice if they're in range of 2 or more hitboxes
-        HashSet<Collider> loggedEnemies = new HashSet<Collider>();
-
-        foreach (Collider[] enemyList in hitEnemies)
-        {
-            foreach (Collider enemy in enemyList)
-            {
-                if (!loggedEnemies.Contains(enemy))
-                {
-                    Enemy thisEnemy = enemy.GetComponent<Enemy>();
-
-                    //this is the main attack shit
-                    thisEnemy.TakeDamage((int)(attackDamage * player.GetAttackScale() * attackTypeDmg), attackKnockback * player.GetKnockBScale(), attackDirection);
-
-                    if (thisEnemy.GetIsDead())
-                        player.GainExp(thisEnemy.GetExpWorth());
-
-                    loggedEnemies.Add(enemy);
-                }
-            }
-        }
+        foreach (PlayerAttack lightAttack in lightAttacks)
+            lightAttack.DisableAttackVFX();
+        foreach(PlayerAttack heavyAttack in heavyAttacks)
+            heavyAttack.DisableAttackVFX();
     }
 
-    //This function 
-    private IEnumerator PlayAttackVFX(GameObject vfxObj, float delay)
+    private bool canAttack()
     {
-        //Wait some time before spawning vfx
-        yield return new WaitForSeconds(delay);
-
-        //make sure the vfx is rotated in the right direction
-        vfxObj.transform.rotation = transform.rotation;
-        vfxObj.SetActive(true);
-
-        //wait some time before diabling the vfx (needs fix)
-        yield return new WaitForSeconds(0.8f);
-        DisableAttackVFX(vfxObj);
-    }
-
-    private void DisableAttackVFX(GameObject vfxObj)
-    {
-        vfxObj.SetActive(false);
+        return
+            !playerIsLocked         //is not locked of continuing combo
+            && !player.IsStunned(); //is not stunned
     }
 
     //This lets us see the hitboxes in the editor

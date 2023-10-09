@@ -30,6 +30,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float gravityMultiplier = 3.0f;
 
+    [SerializeField] private int numOfRolls = 1;
+    [SerializeField] private float rollSpeed = 15f;
+    [SerializeField] private float rollCooldown = 2f;
+    [SerializeField] private float rollDeceleration = 20f;
+    [SerializeField] private float rollDuration = 0.5f;
+    private float curRollSpeed;
+    private int usedRolls = 0;
+    private int storedRolls = 0;
+    private float initialRollTime;
+    private float lastRollTime;
+    private bool isRolling = false;
+    private bool canRoll = true;
+
     private Player player;
 
     private void Awake()
@@ -45,10 +58,81 @@ public class PlayerMovement : MonoBehaviour
         FlipCheck();
 
         //Do not move player if attacking or stunned
-        if (anim.GetBool("comboOver") && !player.IsStunned())
+        if (anim.GetBool("comboOver") && !anim.GetBool("isBlocking") && !player.IsStunned() && !isRolling)
         {
             ApplyMovement();
         }
+
+        //STUFF TO DO WITH ROLLING VVVVVVVVVV I DONT KNOW WHY THERES SO MUCH BUT THERE IS
+        //stop rolling if rolling
+        anim.SetBool("isRolling", isRolling);
+
+        if (Time.time - lastRollTime > rollDuration && isRolling == true)
+        {
+            isRolling = false;
+            player.SetInvulFalse();
+        }
+
+        if (usedRolls + storedRolls >= numOfRolls)
+            canRoll = false;
+
+        if (Time.time - initialRollTime > rollCooldown)
+        {
+            canRoll = true;
+            usedRolls = 0;
+            storedRolls = 0;
+        }
+
+        //If a roll is stored, roll at the earliest possible moment
+        if (Time.time - lastRollTime > rollDuration && storedRolls > 0)
+        {
+            storedRolls--;
+            CharacterRoll();
+        }
+
+        //add rolling momentum
+        if (isRolling)
+        {
+            //adds deceleration to the impact of certain attacks
+            float deceleration = rollDeceleration * Time.deltaTime;
+            curRollSpeed = Mathf.Max(0.0f, curRollSpeed - deceleration);
+
+            //uses the direction the player is imputting in playerMovement
+            characterController.Move(transform.forward * curRollSpeed * Time.deltaTime);
+        }
+    }
+
+    public void CallRoll(InputAction.CallbackContext context)
+    {
+        //ensures that roll is only called once per button, and only if the player is actionable and can roll
+        if (!context.started || !anim.GetBool("comboOver") || player.IsStunned() || !canRoll)
+            return;
+
+        //When the player is still rolling but the roll button was just pressed.
+        if (isRolling)
+        {
+            storedRolls++;
+            return;
+        }
+
+        CharacterRoll();
+    }
+
+    private void CharacterRoll()
+    {
+        //make player invulnerable
+        player.SetInvulTrue();
+        isRolling = true;
+
+        anim.SetTrigger("startRoll");
+
+        curRollSpeed = rollSpeed;
+
+        if(usedRolls == 0)
+            initialRollTime = Time.time;
+
+        usedRolls++;
+        lastRollTime = Time.time;
     }
 
     private void FlipCheck()

@@ -1,0 +1,271 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PlayerCombatTestV1
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: e7a507c267dff794fac1a50fc23119f0, type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: anim
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: uniAttackDelay
+    value: 0.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: decelerationRate
+    value: 32
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: meterPerHit
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: enemyLayers.m_Bits
+    value: 128
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.size
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[0].animTrigger
+    value: slash1Trigger
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[0].duration
+    value: 0.25
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[0].impact
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[0].delay
+    value: 0.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[0].damage
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[0].knockBack
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[0].hitBoxes.Array.size
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[0].hitBoxes.Array.data[0].center
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[0].hitBoxes.Array.data[0].size
+    value: 1.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[0].vfxObj
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[1].animTrigger
+    value: slash2Trigger
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[1].duration
+    value: 0.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[1].impact
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[1].delay
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[1].damage
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[1].knockBack
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[1].hitBoxes.Array.size
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[1].hitBoxes.Array.data[0].center
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[1].hitBoxes.Array.data[0].size
+    value: 1.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[1].vfxObj
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[2].animTrigger
+    value: stab1Trigger
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[2].duration
+    value: 0.25
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[2].impact
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[2].delay
+    value: 0.23
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[2].damage
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[2].knockBack
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[2].hitBoxes.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[2].hitBoxes.Array.data[0].center
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[2].hitBoxes.Array.data[0].size
+    value: 0.7
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[2].hitBoxes.Array.data[1].center
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[2].hitBoxes.Array.data[1].size
+    value: 0.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lightAttacks.Array.data[2].vfxObj
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: heavyAttacks.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: heavyAttacks.Array.data[0].animTrigger
+    value: stab1Trigger
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: heavyAttacks.Array.data[0].duration
+    value: 0.4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: heavyAttacks.Array.data[0].impact
+    value: 20
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: heavyAttacks.Array.data[0].delay
+    value: 0.23
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: heavyAttacks.Array.data[0].damage
+    value: 6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: heavyAttacks.Array.data[0].knockBack
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: heavyAttacks.Array.data[0].hitBoxes.Array.size
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: heavyAttacks.Array.data[0].hitBoxes.Array.data[0].center
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: heavyAttacks.Array.data[0].hitBoxes.Array.data[0].size
+    value: 0.75
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: heavyAttacks.Array.data[0].hitBoxes.Array.data[1].center
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: heavyAttacks.Array.data[0].hitBoxes.Array.data[1].size
+    value: 0.6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: heavyAttacks.Array.data[0].hitBoxes.Array.data[2].center
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: heavyAttacks.Array.data[0].hitBoxes.Array.data[2].size
+    value: 0.3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: heavyAttacks.Array.data[0].vfxObj
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: heavyAttacks.Array.data[1].animTrigger
+    value: rapidStabTrigger
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: heavyAttacks.Array.data[1].duration
+    value: 0.8
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: heavyAttacks.Array.data[1].impact
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: heavyAttacks.Array.data[1].delay
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: heavyAttacks.Array.data[1].damage
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: heavyAttacks.Array.data[1].knockBack
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: heavyAttacks.Array.data[1].hitBoxes.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: heavyAttacks.Array.data[1].vfxObj
+    value: 
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []
