@@ -20,14 +20,14 @@ public class Slime : Enemy
 
     void FixedUpdate()
     {
-        if (isChase) SlideTowardsPlayer();
-        else Debug.Log("Not chasing player");
+        SlideTowardsPlayer();
     }
 
     private void SlideTowardsPlayer()
     {
         if (playerObject != null && aggroRange(aggroDistance) && canMove)
         {
+            // Change animator to walk01
             Vector3 direction = playerObject.transform.position - transform.position;
             Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
             rb.velocity = new Vector3(horizontalDirection.x * moveSpeed, rb.velocity.y, horizontalDirection.z * moveSpeed);

@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     protected int curHealthPoints;
     protected bool isChase = true;
     bool isDead = false;
+    protected Animator animator;
 
     //Game components that will be generally needed
     [SerializeField] protected Rigidbody rb;
@@ -27,6 +28,9 @@ public class Enemy : MonoBehaviour
 
         //Gets rigidbody
         rb = GetComponent<Rigidbody>();
+
+        //if animator exists, gets animator
+        animator = GetComponent<Animator>();
 
         //Find Player
         playerObject = GameObject.FindGameObjectWithTag("Player");
