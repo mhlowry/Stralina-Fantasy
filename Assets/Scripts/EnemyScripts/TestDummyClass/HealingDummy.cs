@@ -5,6 +5,7 @@ using UnityEngine;
 public class HealingDummy : TestDummy
 {
     [SerializeField] private float attackSize = 3.0f;
+    [SerializeField] private int heal = 3;
     [SerializeField] private LayerMask playerLayer;
     protected override void Awake()
     {
@@ -20,7 +21,7 @@ public class HealingDummy : TestDummy
     {
         //there is most certainly a better way to do this but whatever it's a test dummy for a reason
         Collider hitPlayer = Physics.OverlapSphere(transform.position, attackSize, playerLayer)[0];
-        hitPlayer.GetComponent<Player>().HealPlayer(damage * 10);
+        hitPlayer.GetComponent<Player>().HealPlayer(heal);
         Debug.Log("UwU");
         base.TakeDamage(damage, knockback, direction);
     }

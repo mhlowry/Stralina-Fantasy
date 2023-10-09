@@ -15,6 +15,7 @@ using UnityEngine.UIElements;
 public class PlayerAttack
 {
     //This is the visual stuff
+    public string attackName;
     [SerializeField] private string animTrigger;
 
     //This is stuff that affects game states
@@ -39,9 +40,10 @@ public class PlayerAttack
 
     public List<HitBox> GetHitBoxes() { return hitBoxes; }
 
-    public IEnumerator ActivateAttack(Player player, float dmgMultiplier, float meterGain, LayerMask enemyLayers, UnityEngine.Vector3 direction)
+    public virtual IEnumerator ActivateAttack(Player player, float dmgMultiplier, float meterGain, LayerMask enemyLayers, UnityEngine.Vector3 direction)
     {
         yield return new WaitForSeconds(delay);
+        DisableAttackVFX();
         PlayAttackVFX(direction);
 
         List<Collider[]> hitEnemies = new List<Collider[]>();
@@ -75,13 +77,13 @@ public class PlayerAttack
         }
     }
 
-    private void PlayAttackVFX(UnityEngine.Vector3 direction)
+    protected void PlayAttackVFX(UnityEngine.Vector3 direction)
     {
         vfxObj.transform.rotation = UnityEngine.Quaternion.LookRotation(direction);
         vfxObj.SetActive(true);
     }
 
-    private void DisableAttackVFX()
+    public void DisableAttackVFX()
     {
         vfxObj.SetActive(false);
     }

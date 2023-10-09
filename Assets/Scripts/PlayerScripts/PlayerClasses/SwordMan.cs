@@ -14,7 +14,6 @@ public class SwordMan : Player
         if(tryingToBlock && CanBlock())
         {
             isBlocking = true;
-            tryingToBlock = false;
         }
 
         if(!CanBlock())

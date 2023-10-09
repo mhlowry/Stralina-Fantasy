@@ -37,12 +37,23 @@ public class PlayerCombat : MonoBehaviour
 
     [SerializeField] private List<PlayerAttack> lightAttacks;
     [SerializeField] private List<PlayerAttack> heavyAttacks;
+    [SerializeField] private List<RepeatingAttack> repeatingAttacks;
+    [SerializeField] private List<ProjectileAttack> projectileAttacks;
 
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
         playerMovement = GetComponent<PlayerMovement>();
         player = GetComponent<Player>();
+    }
+
+    private void Start()
+    {
+        //apparently unity serialization does not support inheritence in arrays so we have to do this wack ass roundabout shit
+        foreach (RepeatingAttack attack in repeatingAttacks)
+            heavyAttacks[attack.GetIndex()] = attack;
+        foreach (ProjectileAttack attack in projectileAttacks)
+            heavyAttacks[attack.GetIndex()] = attack;
     }
 
     private void Update()
@@ -103,6 +114,8 @@ public class PlayerCombat : MonoBehaviour
 
     private void LightAttack()
     {
+        if (!canAttack()) return;
+
         attackTypeDmg = player.GetLightDmgScale();
         comboIndex++;
 
@@ -139,6 +152,8 @@ public class PlayerCombat : MonoBehaviour
 
     private void HeavyAttack()
     {
+        if (!canAttack()) return;
+
         attackTypeDmg = player.GetHeavyDmgScale();
 
         try
@@ -152,6 +167,10 @@ public class PlayerCombat : MonoBehaviour
                     PerformAttack(heavyAttacks[0]);
                     break;
 
+                case 1:
+                    //PROJECTILE HEAVY FOR SAKE OF TESTING.  DO NOT KEEP
+                    PerformAttack(heavyAttacks[2]);
+                    break;
                 case 2:
                     //This denies the player access to this combo tree if they are below a certain level.
                     if (player.GetPlayerLevel() < 2)
@@ -218,10 +237,10 @@ public class PlayerCombat : MonoBehaviour
 
     private void DisableAllAttackVFX()
     {
-        foreach(PlayerAttack lightAttack in lightAttacks)
-            lightAttack.GetVfxObj().SetActive(false);
+        foreach (PlayerAttack lightAttack in lightAttacks)
+            lightAttack.DisableAttackVFX();
         foreach(PlayerAttack heavyAttack in heavyAttacks)
-            heavyAttack.GetVfxObj().SetActive(false);
+            heavyAttack.DisableAttackVFX();
     }
 
     private bool canAttack()
