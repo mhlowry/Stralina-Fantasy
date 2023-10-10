@@ -37,6 +37,7 @@ public class Slime : Enemy
         // if player exists, is within aggro distance, and move isn't on cooldown
         if (playerObject != null && distanceFromPlayer <= aggroDistance && canMove)
         {
+            animator.SetBool("isAggro", true);
             Vector3 direction = playerObject.transform.position - transform.position;
             Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
 
@@ -50,6 +51,7 @@ public class Slime : Enemy
             else 
                 rb.velocity = new Vector3(horizontalDirection.x * moveSpeed, rb.velocity.y, horizontalDirection.z * moveSpeed);
         }
+        else animator.SetBool("isAggro", false);
     }
 
      public override void TakeDamage(int damage, float knockback, Vector3 direction)
