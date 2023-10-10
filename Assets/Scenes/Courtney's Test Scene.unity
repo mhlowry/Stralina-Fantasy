@@ -210,8 +210,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2392869}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.15630634, y: -0.0020726686, z: -0.0035251016, w: -0.9877002}
-  m_LocalPosition: {x: 3.5290184, y: 3.403765, z: -15.01564}
+  m_LocalRotation: {x: 0.22495908, y: 0.0017603905, z: 0.0032884122, w: 0.97436106}
+  m_LocalPosition: {x: 3.5210776, y: 5.2042747, z: -15.304391}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -644,14 +644,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 487604540}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.15630634, y: -0.0020726686, z: -0.0035251016, w: -0.9877002}
-  m_LocalPosition: {x: 3.5290184, y: 3.403765, z: -15.01564}
+  m_LocalRotation: {x: 0.22495908, y: 0.0017603905, z: 0.0032884122, w: 0.97436106}
+  m_LocalPosition: {x: 3.5210776, y: 5.2042747, z: -15.304391}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1338478563}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 17.984, y: 0.313, z: 0.459}
+  m_LocalEulerAnglesHint: {x: 26, y: 0.313, z: 0.459}
 --- !u!1 &490051484
 GameObject:
   m_ObjectHideFlags: 0
@@ -1037,10 +1037,10 @@ MonoBehaviour:
   m_ZDamping: 1
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
-  m_ScreenY: 0.5
-  m_CameraDistance: 5
-  m_DeadZoneWidth: 0
-  m_DeadZoneHeight: 0
+  m_ScreenY: 0.6
+  m_CameraDistance: 6
+  m_DeadZoneWidth: 0.07
+  m_DeadZoneHeight: 0.05
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
   m_SoftZoneWidth: 0.8
@@ -3857,4 +3857,4 @@ SceneRoots:
   - {fileID: 1703362763}
   - {fileID: 1976881577}
   - {fileID: 487604542}
-
+  - {fileID: 8139891467859881780}
