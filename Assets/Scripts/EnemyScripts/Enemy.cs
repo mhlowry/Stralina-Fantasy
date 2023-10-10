@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
 
     //Game components that will be generally needed
     [SerializeField] protected Rigidbody rb;
+    private Player playerScript;
+    private Rigidbody playerRb;
     protected GameObject playerObject;
 
     protected virtual void Awake()
@@ -34,6 +36,12 @@ public class Enemy : MonoBehaviour
 
         //Find Player
         playerObject = GameObject.FindGameObjectWithTag("Player");
+
+        if (playerObject != null)
+        {
+            playerScript = playerObject.GetComponent<SwordMan>();
+            //playerRb = playerObject.GetComponent<Rigidbody>();
+        }
     }
 
     public virtual void TakeDamage(int damage, float knockBack, Vector3 direction)
@@ -57,6 +65,28 @@ public class Enemy : MonoBehaviour
         rb.AddForce(knockBack * knockbackMultiplier * knockbackDir.normalized, ForceMode.Impulse);
     }
 
+    // Deal damage to player
+    public void DealDamage(float damage, float knockback, Vector3 direction)
+    {
+        if (playerObject != null)
+        {
+            if (playerScript != null)
+            {
+                playerScript.TakeDamage(1);
+            }
+            else
+            {
+                Debug.LogError("PlayerScript is not found on the player object!");
+            }
+        }
+        else
+        {
+            Debug.LogError("Player object is not set!");
+        }
+
+        // will maybe add knockback later
+    }
+
     //disables their collider and destroys the object after some time has passed
     protected virtual void Die()
     {
@@ -73,16 +103,8 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public bool aggroRange(float range)
+    public float playerDistance()
     {
-        //if the player is within the range, return true
-        if (Vector3.Distance(playerObject.transform.position, transform.position) < range)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return Vector3.Distance(playerObject.transform.position, transform.position);
     }
 }

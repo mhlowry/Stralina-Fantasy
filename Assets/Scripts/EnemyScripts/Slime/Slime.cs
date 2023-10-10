@@ -10,7 +10,16 @@ public class Slime : Enemy
     private Material material;
     private Coroutine colorChangeCoroutine;
     [SerializeField] public float aggroDistance = 10f;
+    [SerializeField] public float attackDistance = 2f;
+    [SerializeField] public float colliderCheck = 2f;
+    [SerializeField] public float attackPower = 1f;
+    [SerializeField] public float knockback = 1f;
     private bool canMove = true;
+    private float distanceFromPlayer = 999f;
+    private float nextDamageTime = 0;
+    private float damageInterval = 1f; // in seconds
+    private bool canAttack = true;
+
 
     protected override void Awake()
     {
@@ -21,16 +30,30 @@ public class Slime : Enemy
     void FixedUpdate()
     {
         SlideTowardsPlayer();
+
+        if (nextDamageTime <= Time.time)
+            canAttack = true;
     }
 
     private void SlideTowardsPlayer()
     {
-        if (playerObject != null && aggroRange(aggroDistance) && canMove)
+        distanceFromPlayer = playerDistance();
+        
+        // if player exists, is within aggro distance, and move isn't on cooldown
+        if (playerObject != null && distanceFromPlayer <= aggroDistance && canMove)
         {
-            // Change animator to walk01
             Vector3 direction = playerObject.transform.position - transform.position;
             Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
-            rb.velocity = new Vector3(horizontalDirection.x * moveSpeed, rb.velocity.y, horizontalDirection.z * moveSpeed);
+
+            // if within attack distance, attack
+            if (distanceFromPlayer <= attackDistance && canAttack)
+            {
+                DealDamage(attackPower, knockback, direction);
+                nextDamageTime = Time.time + damageInterval;
+            }
+            // else, move towards player
+            else 
+                rb.velocity = new Vector3(horizontalDirection.x * moveSpeed, rb.velocity.y, horizontalDirection.z * moveSpeed);
         }
     }
 
