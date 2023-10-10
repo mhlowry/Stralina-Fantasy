@@ -91,8 +91,8 @@ public class Enemy : MonoBehaviour
     protected virtual void Die()
     {
         isDead = true;
-        gameObject.GetComponent<Collider>().enabled = false;
-        StartCoroutine(DestroyEnemy());
+        animator.SetTrigger("isDead");
+        Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
     }
 
     public bool GetIsDead() { return isDead; }
