@@ -105,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
     public void CallRoll(InputAction.CallbackContext context)
     {
         //ensures that roll is only called once per button, and only if the player is actionable and can roll
-        if (!context.started || !anim.GetBool("comboOver") || player.IsStunned() || !canRoll)
+        if (!context.started || player.IsStunned() || !canRoll) // || !anim.GetBool("comboOver")
             return;
 
         //When the player is still rolling but the roll button was just pressed.

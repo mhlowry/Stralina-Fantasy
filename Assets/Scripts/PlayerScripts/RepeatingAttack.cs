@@ -14,7 +14,10 @@ public class RepeatingAttack : PlayerAttack
     [SerializeField] private List<HitBox> finalHitBoxes;
     [SerializeField] private GameObject finalVfxObj;
 
+    [SerializeField] private bool isHeavy = true;
+
     public int GetIndex() {  return comboIndex; }
+    public bool IsHeavy() { return isHeavy; }
 
     //I beseech you not to cringe at this terrible, terrible spghetti code
     public override IEnumerator ActivateAttack(Player player, float dmgMultiplier, float meterGain, LayerMask enemyLayers, UnityEngine.Vector3 direction)
@@ -22,6 +25,14 @@ public class RepeatingAttack : PlayerAttack
         yield return new WaitForSeconds(GetDelay());
         DisableAttackVFX();
         PlayAttackVFX(direction);
+
+        //this is mostly for any attack that surrounds the player, so that when takedamage is called,
+        //the knockback is exclusively in the direction away from the player
+        UnityEngine.Vector3 knockbackDirection;
+        if (independentKnockback)
+            knockbackDirection = UnityEngine.Vector3.zero;
+        else
+            knockbackDirection = direction;
 
         //Do the takeDamage scan multiple times
         for (int i = 0; i < numStrikes; ++i)
@@ -52,7 +63,7 @@ public class RepeatingAttack : PlayerAttack
                         Enemy thisEnemy = enemy.GetComponent<Enemy>();
 
                         //this is the main attack shit
-                        thisEnemy.TakeDamage((int)(GetDamage() * player.GetAttackScale() * dmgMultiplier), GetKnockBack() * player.GetKnockBScale(), direction);
+                        thisEnemy.TakeDamage((int)(GetDamage() * player.GetAttackScale() * dmgMultiplier), GetKnockBack() * player.GetKnockBScale(), knockbackDirection);
                         if (thisEnemy.GetIsDead())
                             player.GainExp(thisEnemy.GetExpWorth());
 
@@ -94,7 +105,7 @@ public class RepeatingAttack : PlayerAttack
                     Enemy thisEnemy = enemy.GetComponent<Enemy>();
 
                     //this is the main attack shit
-                    thisEnemy.TakeDamage((int)(finalDamage * player.GetAttackScale() * dmgMultiplier), finalKnockBack * player.GetKnockBScale(), direction);
+                    thisEnemy.TakeDamage((int)(finalDamage * player.GetAttackScale() * dmgMultiplier), finalKnockBack * player.GetKnockBScale(), knockbackDirection);
                     if (thisEnemy.GetIsDead())
                         player.GainExp(thisEnemy.GetExpWorth());
 
