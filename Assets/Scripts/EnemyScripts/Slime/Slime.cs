@@ -15,6 +15,8 @@ public class Slime : Enemy
     private float nextDamageTime = 0;
     private float damageInterval = 1f; // in seconds
     private bool canAttack = true;
+    private bool inAttackRange = false;
+    private bool inAggroRange = false;
 
 
     protected override void Awake()
@@ -33,25 +35,38 @@ public class Slime : Enemy
     private void SlideTowardsPlayer()
     {
         distanceFromPlayer = playerDistance();
+        inAggroRange = distanceFromPlayer <= aggroDistance;
+        inAttackRange = distanceFromPlayer <= attackDistance;
         
         // if player exists, is within aggro distance, and move isn't on cooldown
-        if (playerObject != null && distanceFromPlayer <= aggroDistance && canMove)
+        if (playerObject != null && inAggroRange && canMove)
         {
             animator.SetBool("isAggro", true);
             Vector3 direction = playerObject.transform.position - transform.position;
             Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
 
             // if within attack distance, attack
-            if (distanceFromPlayer <= attackDistance && canAttack)
+            if (inAttackRange)
             {
-                DealDamage(attackPower, knockback, direction);
-                nextDamageTime = Time.time + damageInterval;
+                animator.SetBool("isAttack", true);
+                if (canAttack)
+                {
+                    DealDamage(attackPower, knockback, direction);
+                    nextDamageTime = Time.time + damageInterval;
+                }
             }
             // else, move towards player
-            else 
+            else
+            {
+                animator.SetBool("isAttack", false);
                 rb.velocity = new Vector3(horizontalDirection.x * moveSpeed, rb.velocity.y, horizontalDirection.z * moveSpeed);
+            }
         }
-        else animator.SetBool("isAggro", false);
+        else
+        {
+            animator.SetBool("isAggro", false);
+            animator.SetBool("isAttack", false);
+        }
     }
 
      public override void TakeDamage(int damage, float knockback, Vector3 direction)
