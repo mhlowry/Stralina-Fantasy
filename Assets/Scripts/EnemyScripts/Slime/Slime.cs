@@ -5,13 +5,9 @@ public class Slime : Enemy
 {
     public float moveSpeed = 5f;
     public float colorSpeed = 0.5f;
-    public Color regularColor = Color.white;
-    public Color hurtColor = Color.red;
-    private Material material;
     private Coroutine colorChangeCoroutine;
     [SerializeField] public float aggroDistance = 10f;
-    [SerializeField] public float attackDistance = 2f;
-    [SerializeField] public float colliderCheck = 2f;
+    [SerializeField] public float attackDistance = 1f;
     [SerializeField] public float attackPower = 1f;
     [SerializeField] public float knockback = 1f;
     private bool canMove = true;
@@ -24,7 +20,6 @@ public class Slime : Enemy
     protected override void Awake()
     {
         base.Awake();
-        material = GetComponent<Renderer>().material;
     }
 
     void FixedUpdate()
@@ -59,14 +54,9 @@ public class Slime : Enemy
 
      public override void TakeDamage(int damage, float knockback, Vector3 direction)
     {
-        //change color
-        material.color = hurtColor;
-
         //start the color change coroutine to return to base color
         if (colorChangeCoroutine != null)
             StopCoroutine(colorChangeCoroutine);
-
-        colorChangeCoroutine = StartCoroutine(ChangeColor());
 
         //inflict damage
         base.TakeDamage(damage, knockback, direction);
@@ -80,18 +70,7 @@ public class Slime : Enemy
             Debug.Log(gameObject.name + " Fucking Died");
             base.Die();
         }
-    }
-
-    private IEnumerator ChangeColor()
-    {
-        //this changes the color, duh
-        float tick = 0f;
-        while (material.color != regularColor)
-        {
-            tick += Time.deltaTime * colorSpeed;
-            material.color = Color.Lerp(hurtColor, regularColor, tick);
-            yield return null;
-        }
+        else animator.SetTrigger("isHit");
     }
 
     private IEnumerator DisableMovementForSeconds(float seconds)
