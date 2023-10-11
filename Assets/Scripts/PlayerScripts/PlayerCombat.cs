@@ -236,6 +236,7 @@ public class PlayerCombat : MonoBehaviour
                         PerformAttack(heavyAttacks[3]);
                     break;
 
+                case 6:
                 case 7:
                     if (LevelCheck(7))
                         PerformAttack(heavyAttacks[4]);
