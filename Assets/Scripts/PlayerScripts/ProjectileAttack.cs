@@ -11,8 +11,10 @@ public class ProjectileAttack : PlayerAttack
 
     [SerializeField] private int comboIndex;
     [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private bool isHeavy = true;
 
     public int GetIndex() { return comboIndex; }
+    public bool IsHeavy() { return isHeavy; }
 
     public override IEnumerator ActivateAttack(Player player, float dmgMultiplier, float meterGain, LayerMask enemyLayers, UnityEngine.Vector3 direction)
     {
