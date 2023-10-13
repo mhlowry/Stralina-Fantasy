@@ -6,7 +6,7 @@ using System.Collections;
 
 public class TextAndButtonsFadeIn : MonoBehaviour
 {
-    public TextMeshProUGUI textToFade; // Your title text
+    public TextMeshProUGUI textToFade; 
     public GameObject buttonsContainer; // Reference to the container with all buttons
     public float fadeInDuration = 3.0f;
     public Color normalColor = Color.white; // Default color
