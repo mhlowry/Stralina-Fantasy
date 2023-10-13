@@ -28,6 +28,7 @@ public class PlayerCombat : MonoBehaviour
 
     static int comboIndex = 0;
     static int storedAttackIndex = 0;
+    static bool storedHeavy = false;
 
     private CharacterController characterController;
     private PlayerMovement playerMovement;
@@ -50,10 +51,28 @@ public class PlayerCombat : MonoBehaviour
     private void Start()
     {
         //apparently unity serialization does not support inheritence in arrays so we have to do this wack ass roundabout shit
-        foreach (RepeatingAttack attack in repeatingAttacks)
-            heavyAttacks[attack.GetIndex()] = attack;
-        foreach (ProjectileAttack attack in projectileAttacks)
-            heavyAttacks[attack.GetIndex()] = attack;
+        try
+        {
+            foreach (RepeatingAttack attack in repeatingAttacks)
+            {
+                if (attack.IsHeavy())
+                    heavyAttacks[attack.GetIndex()] = attack;
+                else
+                    lightAttacks[attack.GetIndex()] = attack;
+            }
+            foreach (ProjectileAttack attack in projectileAttacks)
+            {
+                if (attack.IsHeavy())
+                    heavyAttacks[attack.GetIndex()] = attack;
+                else
+                    lightAttacks[attack.GetIndex()] = attack;
+            }
+        }
+        catch (ArgumentOutOfRangeException aRef)
+        {
+            Debug.Log(aRef);
+            Debug.Log("No player attack exists at projectile/repeatingattack index");
+        }
     }
 
     private void Update()
@@ -65,6 +84,11 @@ public class PlayerCombat : MonoBehaviour
         if (Time.time - lastAttackTime > uniAttackDelay + attackDuration)
             EndCombo();
 
+        if (Time.time - lastAttackTime > attackDuration && storedHeavy)
+        {
+            storedHeavy = false;
+            HeavyAttack();
+        }
 
         //If an attack is stored, attack at the earliest possible moment
         if (Time.time - lastAttackTime > attackDuration && storedAttackIndex > 0)
@@ -93,6 +117,7 @@ public class PlayerCombat : MonoBehaviour
             return;
 
         //When the player is still in an attacking animation, but the attack has not finished, store the attack to play at next possible moment
+        //anim.GetBool isn't in "canAttack" because I think it would be neat if roll canceling and continuing a combo was possible but if it's not, whatever
         if (Time.time - lastAttackTime < attackDuration || anim.GetBool("isRolling"))
         {
             storedAttackIndex++;
@@ -108,6 +133,12 @@ public class PlayerCombat : MonoBehaviour
         //ensures that heavyattack is only called once per button, and only if the player is actionable
         if (!context.started || !canAttack() || anim.GetBool("isRolling"))
             return;
+
+        if (Time.time - lastAttackTime < attackDuration)
+        {
+            storedHeavy = true;
+            return;
+        }
 
         HeavyAttack();
     }
@@ -135,6 +166,29 @@ public class PlayerCombat : MonoBehaviour
 
                 case 3:
                     PerformAttack(lightAttacks[2]);
+                    break;
+
+                case 4:
+                    if(LevelCheck(3))
+                        PerformAttack(lightAttacks[3]);
+                    break;
+
+                case 5:
+                    PerformAttack(lightAttacks[4]);
+                    break;
+
+                case 6:
+                    if (LevelCheck(6))
+                        PerformAttack(lightAttacks[5]);
+                    break;
+
+                case 7:
+                    PerformAttack(lightAttacks[6]);
+                    break;
+
+                case 8:
+                    if (LevelCheck(7))
+                        PerformAttack(lightAttacks[7]);
                     playerIsLocked = true;
                     break;
 
@@ -167,15 +221,25 @@ public class PlayerCombat : MonoBehaviour
                     PerformAttack(heavyAttacks[0]);
                     break;
 
-                case 1:
-                    //PROJECTILE HEAVY FOR SAKE OF TESTING.  DO NOT KEEP
-                    PerformAttack(heavyAttacks[2]);
-                    break;
                 case 2:
-                    //This denies the player access to this combo tree if they are below a certain level.
-                    if (player.GetPlayerLevel() < 2)
-                        return;
-                    PerformAttack(heavyAttacks[1]);
+                    if (LevelCheck(2))
+                        PerformAttack(heavyAttacks[1]);
+                    break;
+
+                case 4:
+                    if (LevelCheck(4))
+                        PerformAttack(heavyAttacks[2]);
+                    break;
+
+                case 5:
+                    if (LevelCheck(5))
+                        PerformAttack(heavyAttacks[3]);
+                    break;
+
+                case 6:
+                case 7:
+                    if (LevelCheck(7))
+                        PerformAttack(heavyAttacks[4]);
                     break;
 
                 default:
@@ -190,6 +254,21 @@ public class PlayerCombat : MonoBehaviour
             Debug.Log(aRef);
             Debug.Log("PlayerAttack does not exist in the array: HeavyAttacks");
         }
+    }
+
+    //This denies the player access to the rest of the combo tree if they are below a certain level.
+    private bool LevelCheck(int levelBarrier)
+    {
+        if (player.GetPlayerLevel() >= levelBarrier)
+        {
+            return true;
+        }
+        else
+        {
+            playerIsLocked = true;
+            return false;
+        }
+
     }
 
     public void EndCombo()
@@ -210,10 +289,6 @@ public class PlayerCombat : MonoBehaviour
         anim.SetTrigger(currentAttack.GetAnim());
         DisableAllAttackVFX();
 
-        /*  these four lines below are needed because PlayerAttack is not a subclass of monobehaviour
-        *   therefore we can't call update in the class and therefore cannot move the character controller
-        *   but, we can move it here in combo controller
-        */
         lastAttackTime = Time.time;
         attackImpact = currentAttack.GetImpact();
         attackDuration = currentAttack.GetDuration();
@@ -221,14 +296,12 @@ public class PlayerCombat : MonoBehaviour
 
         if (currentAttack.GetVfxObj() == null)
         {
-            Debug.Log("Attack's vfxObj is null");
-            return;
+            Debug.Log(currentAttack.GetName() + "'s vfxObj is null");
         }
         
         if (currentAttack.GetHitBoxes() == null)
         {
-            Debug.Log("Attack's hitBox transform is null");
-            return;
+            Debug.Log(currentAttack.GetName() + "'s hitBoxes are null");
         }
 
         //hurt enemies
@@ -247,6 +320,7 @@ public class PlayerCombat : MonoBehaviour
     {
         return
             !playerIsLocked         //is not locked of continuing combo
+            && !storedHeavy         //does not have a heavy stored
             && !player.IsStunned(); //is not stunned
     }
 
@@ -268,6 +342,27 @@ public class PlayerCombat : MonoBehaviour
         foreach (PlayerAttack heavyAttack in heavyAttacks)
         {
             foreach (HitBox hitBox in heavyAttack.GetHitBoxes())
+            {
+                if (hitBox.GetTransform() == null)
+                    continue;
+                Gizmos.DrawWireSphere(hitBox.GetPosition(), hitBox.GetSize());
+            }
+        }
+
+        foreach (PlayerAttack projectile in projectileAttacks)
+        {
+            foreach (HitBox hitBox in projectile.GetHitBoxes())
+            {
+                if (hitBox.GetTransform() == null)
+                    continue;
+                Gizmos.DrawWireSphere(hitBox.GetPosition(), hitBox.GetSize());
+            }
+        }
+
+        //Look at the hitboxes for heavy attacks
+        foreach (PlayerAttack rapidfire in repeatingAttacks)
+        {
+            foreach (HitBox hitBox in rapidfire.GetHitBoxes())
             {
                 if (hitBox.GetTransform() == null)
                     continue;
