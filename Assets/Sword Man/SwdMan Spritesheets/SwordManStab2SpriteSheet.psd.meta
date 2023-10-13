@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c0e9b7178ef869642b69b3a01c895885
+guid: 0a2f3f144533c4c4a8391969a48d0249
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -149,70 +149,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PROTOTYPE_SwordManGroundSlashSpritesheet_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 50
-        width: 72
-        height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 95119bd7248937d43b55bef27f900a1c
-      internalID: -495738497
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PROTOTYPE_SwordManGroundSlashSpritesheet_1
-      rect:
-        serializedVersion: 2
-        x: 72
-        y: 50
-        width: 72
-        height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 58b23ca085ba7ea4fb53796260d1880a
-      internalID: 1905174324
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PROTOTYPE_SwordManGroundSlashSpritesheet_2
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 50
-        width: 72
-        height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7aac6f7b66ba64647bf5ceec67122e58
-      internalID: -1676946176
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PROTOTYPE_SwordManGroundSlashSpritesheet_3
+      name: SwordManStab2SpriteSheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -226,14 +163,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84be2b093e12e344d93fe8a1ea35a232
-      internalID: -99411452
+      spriteID: 452dc53586b4a9a4baf91edf98adaa91
+      internalID: -800517982
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PROTOTYPE_SwordManGroundSlashSpritesheet_4
+      name: SwordManStab2SpriteSheet_1
       rect:
         serializedVersion: 2
         x: 72
@@ -247,14 +184,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4541c9b40b2804945890fa8c4021c049
-      internalID: 321209833
+      spriteID: 106910b7ade53a644b244af3ebb9cad5
+      internalID: 1703341037
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PROTOTYPE_SwordManGroundSlashSpritesheet_5
+      name: SwordManStab2SpriteSheet_2
       rect:
         serializedVersion: 2
         x: 144
@@ -268,8 +205,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c4900548262218f48b9166ec3282ec9b
-      internalID: -937381467
+      spriteID: d5f3a77ba08f2a447a51c662abdd0b59
+      internalID: -501550518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordManStab2SpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 0
+        width: 72
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec01e3e8068e3e84594eec2e9fcafd77
+      internalID: -1191636874
       vertices: []
       indices: 
       edges: []
@@ -277,7 +235,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: fcfcc2dcafc11e44aa887d11f3c80dd5
+    spriteID: 7f7d4dc22e9a3a74098fa90dc617e880
     internalID: 0
     vertices: []
     indices: 
@@ -285,12 +243,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PROTOTYPE_SwordManGroundSlashSpritesheet_0: -495738497
-      PROTOTYPE_SwordManGroundSlashSpritesheet_1: 1905174324
-      PROTOTYPE_SwordManGroundSlashSpritesheet_2: -1676946176
-      PROTOTYPE_SwordManGroundSlashSpritesheet_3: -99411452
-      PROTOTYPE_SwordManGroundSlashSpritesheet_4: 321209833
-      PROTOTYPE_SwordManGroundSlashSpritesheet_5: -937381467
+      SwordManStab2SpriteSheet_0: -800517982
+      SwordManStab2SpriteSheet_1: 1703341037
+      SwordManStab2SpriteSheet_2: -501550518
+      SwordManStab2SpriteSheet_3: -1191636874
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
