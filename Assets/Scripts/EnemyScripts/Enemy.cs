@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -87,20 +88,28 @@ public class Enemy : MonoBehaviour
         // will maybe add knockback later
     }
 
-    //disables their collider and destroys the object after some time has passed
+
     protected virtual void Die()
     {
         isDead = true;
-        animator.SetTrigger("isDead");
-        Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
+        if (animator != null)
+        {
+            animator.SetTrigger("isDead");
+            Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
+        }
+
+        StartCoroutine(DestroyEnemy());
     }
 
     public bool GetIsDead() { return isDead; }
     public int GetExpWorth() { return expWorth; }
+
+    //destroys the object after some time has passed
     IEnumerator DestroyEnemy()
     {
         yield return new WaitForSeconds(2f);
         Destroy(gameObject);
+
     }
 
     public float playerDistance()
