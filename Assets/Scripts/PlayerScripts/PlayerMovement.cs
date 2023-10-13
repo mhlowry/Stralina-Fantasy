@@ -53,6 +53,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        //Prevents user from doing jack shit if they're not allowed to do jack shit
+        if (!player.CanInput())
+            return;
+
         ApplyGravity();
         ApplyRotation();
         FlipCheck();
@@ -105,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
     public void CallRoll(InputAction.CallbackContext context)
     {
         //ensures that roll is only called once per button, and only if the player is actionable and can roll
-        if (!context.started || player.IsStunned() || !canRoll) // || !anim.GetBool("comboOver")
+        if (!context.started || player.IsStunned() || !canRoll || !player.CanInput()) // || !anim.GetBool("comboOver")
             return;
 
         //When the player is still rolling but the roll button was just pressed.

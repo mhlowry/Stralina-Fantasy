@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     //STATS
+    bool disableInput = false;
 
     const int maxLevel = 7;
     [SerializeField, Range(1, maxLevel)] int playerLevel = 1;
@@ -81,6 +82,11 @@ public class Player : MonoBehaviour
             isInvul = false;
         }
     }
+
+    //Disable/Enable player's ability to do anything
+    public bool CanInput() {  return !disableInput; }
+    public void DisableInput() { disableInput = true; }
+    public void EnableInput() { disableInput = false; }
 
     //Health-related functions
     public int GetMaxHealth() { return maxHealth; }

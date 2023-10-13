@@ -77,6 +77,9 @@ public class PlayerCombat : MonoBehaviour
 
     private void Update()
     {
+        if (!player.CanInput())
+            return;
+
         //ajusts the lag of an attack depending on the player's attack speed scale
         attackDuration = attackDuration * player.GetAtkSpeedScale();
 
@@ -226,14 +229,15 @@ public class PlayerCombat : MonoBehaviour
                         PerformAttack(heavyAttacks[1]);
                     break;
 
-                case 4:
+                case 3:
                     if (LevelCheck(4))
-                        PerformAttack(heavyAttacks[2]);
+                        PerformAttack(heavyAttacks[3]);
                     break;
 
+                case 4:
                 case 5:
                     if (LevelCheck(5))
-                        PerformAttack(heavyAttacks[3]);
+                        PerformAttack(heavyAttacks[2]);
                     break;
 
                 case 6:
@@ -321,6 +325,7 @@ public class PlayerCombat : MonoBehaviour
         return
             !playerIsLocked         //is not locked of continuing combo
             && !storedHeavy         //does not have a heavy stored
+            && player.CanInput()    //can input
             && !player.IsStunned(); //is not stunned
     }
 
