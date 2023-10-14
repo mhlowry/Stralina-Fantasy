@@ -1,8 +1,10 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent(typeof(CinemachineImpulseSource))]
 [RequireComponent(typeof(Rigidbody))]
 public class Enemy : MonoBehaviour
 {
@@ -19,6 +21,8 @@ public class Enemy : MonoBehaviour
     private Player playerScript;
     private Rigidbody playerRb;
     protected GameObject playerObject;
+
+    private CinemachineImpulseSource impulseSource;
 
     protected virtual void Awake()
     {
@@ -43,10 +47,15 @@ public class Enemy : MonoBehaviour
             playerScript = playerObject.GetComponent<SwordMan>();
             //playerRb = playerObject.GetComponent<Rigidbody>();
         }
+
+        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     public virtual void TakeDamage(int damage, float knockBack, Vector3 direction)
     {
+        //add screenshake
+        CameraShake.instance.ShakeCamera(impulseSource);
+
         curHealthPoints -= damage;
 
         //calculate vector of position relative from the player's position to the enemy's position
