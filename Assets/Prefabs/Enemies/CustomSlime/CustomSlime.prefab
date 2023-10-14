@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 5377970994857704979}
   - component: {fileID: 3748759384311625483}
   - component: {fileID: 258001531091277057}
-  - component: {fileID: 762727295475128345}
+  - component: {fileID: 2803015510727932998}
+  - component: {fileID: 7334234861351288120}
   m_Layer: 7
   m_Name: CustomSlime
   m_TagString: Untagged
@@ -146,11 +147,12 @@ MonoBehaviour:
   rb: {fileID: 0}
   moveSpeed: 5
   colorSpeed: 0.5
-  regularColor: {r: 1, g: 1, b: 1, a: 1}
-  hurtColor: {r: 1, g: 0, b: 0, a: 1}
   aggroDistance: 10
---- !u!65 &762727295475128345
-BoxCollider:
+  attackDistance: 1
+  attackPower: 1
+  knockback: 1
+--- !u!136 &2803015510727932998
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -167,6 +169,61 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.91203976, y: 0.78295577, z: 0.040257454}
-  m_Center: {x: 0.0010085106, y: -0.05868882, z: -0.003225565}
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.9460385
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.47301924, z: 0}
+--- !u!114 &7334234861351288120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6582013039348642663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 2
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0, y: -1, z: 0}

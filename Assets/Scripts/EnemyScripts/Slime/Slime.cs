@@ -5,7 +5,7 @@ public class Slime : Enemy
 {
     public float moveSpeed = 5f;
     public float colorSpeed = 0.5f;
-    private Coroutine colorChangeCoroutine;
+    private Coroutine disableMoveCoroutine;
     [SerializeField] public float aggroDistance = 10f;
     [SerializeField] public float attackDistance = 1f;
     [SerializeField] public float attackPower = 1f;
@@ -17,7 +17,6 @@ public class Slime : Enemy
     private bool canAttack = true;
     private bool inAttackRange = false;
     private bool inAggroRange = false;
-
 
     protected override void Awake()
     {
@@ -72,19 +71,20 @@ public class Slime : Enemy
      public override void TakeDamage(int damage, float knockback, Vector3 direction)
     {
         //start the color change coroutine to return to base color
-        if (colorChangeCoroutine != null)
-            StopCoroutine(colorChangeCoroutine);
+        if (disableMoveCoroutine != null)
+            StopCoroutine(disableMoveCoroutine);
+
+        disableMoveCoroutine = StartCoroutine(DisableMovementForSeconds(0.5f));
 
         //inflict damage
         base.TakeDamage(damage, knockback, direction);
         Debug.Log(gameObject.name + ": \"Ouch!  My current Hp is only " + curHealthPoints + "!\"");
 
-        StartCoroutine(DisableMovementForSeconds(0.5f));
-
         //die if dead
         if(curHealthPoints <= 0)
         {
             Debug.Log(gameObject.name + " Fucking Died");
+            canMove = false;
             base.Die();
         }
         else animator.SetTrigger("isHit");
