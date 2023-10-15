@@ -665,8 +665,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 436873784}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-<<<<<<< HEAD
-=======
 --- !u!1 &487604540
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,7 +737,6 @@ Transform:
   - {fileID: 1338478563}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 26, y: 0.313, z: 0.459}
->>>>>>> 776fbf4a111edca6888a199034f4dd5f8e8a2969
 --- !u!1 &490051484
 GameObject:
   m_ObjectHideFlags: 0
@@ -1136,8 +1133,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9df5c9be58d2b349bd263c0e5959711, type: 3}
-<<<<<<< HEAD
-=======
 --- !u!1 &1338478562
 GameObject:
   m_ObjectHideFlags: 3
@@ -1230,7 +1225,6 @@ MonoBehaviour:
   m_MaximumFOV: 60
   m_MinimumOrthoSize: 1
   m_MaximumOrthoSize: 5000
->>>>>>> 776fbf4a111edca6888a199034f4dd5f8e8a2969
 --- !u!1001 &1429232635
 PrefabInstance:
   m_ObjectHideFlags: 0
