@@ -41,14 +41,14 @@ public class Slime : Enemy
         // if player exists, is within aggro distance, and move isn't on cooldown
         if (playerObject != null && inAggroRange && canMove)
         {
-            animator.SetBool("isAggro", true);
+            animator?.SetBool("isAggro", true);
             Vector3 direction = playerObject.transform.position - transform.position;
             Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
 
             // if within attack distance, attack
             if (inAttackRange)
             {
-                animator.SetBool("isAttack", true);
+                animator?.SetBool("isAttack", true);
                 if (canAttack)
                 {
                     DealDamage(attackPower, knockback, direction);
@@ -58,14 +58,14 @@ public class Slime : Enemy
             // else, move towards player
             else
             {
-                animator.SetBool("isAttack", false);
+                animator?.SetBool("isAttack", false);
                 rb.velocity = new Vector3(horizontalDirection.x * moveSpeed, rb.velocity.y, horizontalDirection.z * moveSpeed);
             }
         }
         else
         {
-            animator.SetBool("isAggro", false);
-            animator.SetBool("isAttack", false);
+            animator?.SetBool("isAggro", false);
+            animator?.SetBool("isAttack", false);
         }
     }
 
@@ -87,7 +87,7 @@ public class Slime : Enemy
             Debug.Log(gameObject.name + " Fucking Died");
             base.Die();
         }
-        else animator.SetTrigger("isHit");
+        else animator?.SetTrigger("isHit");
     }
 
     private IEnumerator DisableMovementForSeconds(float seconds)
