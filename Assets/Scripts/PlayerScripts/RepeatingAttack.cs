@@ -14,6 +14,8 @@ public class RepeatingAttack : PlayerAttack
     [SerializeField] private List<HitBox> finalHitBoxes;
     [SerializeField] private GameObject finalVfxObj;
 
+    [SerializeField] private string finalAudioName;
+
     [SerializeField] private bool isHeavy = true;
 
     public int GetIndex() {  return comboIndex; }
@@ -25,6 +27,8 @@ public class RepeatingAttack : PlayerAttack
         yield return new WaitForSeconds(GetDelay());
         DisableAttackVFX();
         PlayAttackVFX(direction);
+
+        AudioManager.instance.Play(audioName);
 
         //this is mostly for any attack that surrounds the player, so that when takedamage is called,
         //the knockback is exclusively in the direction away from the player
@@ -58,6 +62,7 @@ public class RepeatingAttack : PlayerAttack
                 {
                     if (!loggedEnemies.Contains(enemy))
                     {
+                        AudioManager.instance.PlayRandom(contactAudioNames);
                         //Main meter per enemy hit
                         player.GainMeter(meterGain/5);
                         Enemy thisEnemy = enemy.GetComponent<Enemy>();
@@ -86,6 +91,8 @@ public class RepeatingAttack : PlayerAttack
         FinalPlayAttackVFX(direction);
         List<Collider[]> finalHitEnemies = new List<Collider[]>();
 
+        AudioManager.instance.Play(finalAudioName);
+
         foreach (HitBox hitBox in finalHitBoxes)
         {
             finalHitEnemies.Add(Physics.OverlapSphere(hitBox.GetPosition(), hitBox.GetSize(), enemyLayers));
@@ -100,6 +107,7 @@ public class RepeatingAttack : PlayerAttack
             {
                 if (!finalLoggedEnemies.Contains(enemy))
                 {
+                    AudioManager.instance.PlayRandom(contactAudioNames);
                     //Main meter per enemy hit
                     player.GainMeter(meterGain);
                     Enemy thisEnemy = enemy.GetComponent<Enemy>();
@@ -119,5 +127,11 @@ public class RepeatingAttack : PlayerAttack
     {
         finalVfxObj.transform.rotation = UnityEngine.Quaternion.LookRotation(direction);
         finalVfxObj.SetActive(true);
+    }
+
+    public override void DisableAttackVFX()
+    {
+        base.DisableAttackVFX();
+        finalVfxObj.SetActive(false);
     }
 }

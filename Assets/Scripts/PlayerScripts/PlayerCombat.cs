@@ -46,6 +46,8 @@ public class PlayerCombat : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         playerMovement = GetComponent<PlayerMovement>();
         player = GetComponent<Player>();
+
+        lightAttacks[0].combatSounds = new string[] { "sword_1", "sword_2", "sword_3" };
     }
 
     private void Start()

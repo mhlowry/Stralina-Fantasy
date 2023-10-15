@@ -70,11 +70,11 @@ public class Slime : Enemy
 
      public override void TakeDamage(int damage, float knockback, Vector3 direction)
     {
-        //start the color change coroutine to return to base color
+        //start the disablemovement so it doesn't start mid combo
         if (disableMoveCoroutine != null)
             StopCoroutine(disableMoveCoroutine);
 
-        disableMoveCoroutine = StartCoroutine(DisableMovementForSeconds(0.5f));
+        disableMoveCoroutine = StartCoroutine(DisableMovementForSeconds(0.8f));
 
         //inflict damage
         base.TakeDamage(damage, knockback, direction);
@@ -86,6 +86,7 @@ public class Slime : Enemy
             Debug.Log(gameObject.name + " Fucking Died");
             canMove = false;
             base.Die();
+            StopCoroutine(disableMoveCoroutine);
         }
         else animator.SetTrigger("isHit");
     }

@@ -275,7 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShowDebugText: 0
   m_ShowCameraFrustum: 1
-  m_IgnoreTimeScale: 0
+  m_IgnoreTimeScale: 1
   m_WorldUpOverride: {fileID: 0}
   m_UpdateMethod: 2
   m_BlendUpdateMethod: 1
@@ -921,12 +921,165 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   freezeXYAxis: 0
+--- !u!1 &259132023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 259132024}
+  - component: {fileID: 259132025}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &259132024
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259132023}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.02, y: 1.06, z: -1.5600002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &259132025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259132023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4371533e9a38c341b4549dec8b58f4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: swoosh_1
+    clip: {fileID: 8300000, guid: 3a9e96162f06b84419e523ff18c5ebac, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: swoosh_2
+    clip: {fileID: 8300000, guid: c113918200c401647b574b084f09a9b2, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: swoosh_2_deep
+    clip: {fileID: 8300000, guid: c113918200c401647b574b084f09a9b2, type: 3}
+    volume: 1
+    pitch: 0.55
+    loop: 0
+    source: {fileID: 0}
+  - name: swoosh_3
+    clip: {fileID: 8300000, guid: 9a4091cb106c1df4bb742405ab0689ef, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: swish_1
+    clip: {fileID: 8300000, guid: 3893c25dd030510489bfbd88dd72038f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: swish_1_deep
+    clip: {fileID: 8300000, guid: 3893c25dd030510489bfbd88dd72038f, type: 3}
+    volume: 1
+    pitch: 0.55
+    loop: 0
+    source: {fileID: 0}
+  - name: swishmulti_1
+    clip: {fileID: 8300000, guid: 19480321a7d66bb4ca6fe3a9ab70aabf, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: projectile_woosh_1
+    clip: {fileID: 8300000, guid: db76ea945b2f2d0458310d7cd5fefa43, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: fireball_ambience_1
+    clip: {fileID: 8300000, guid: cfee75755fab4444392a7b81c9ebb296, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: impact_1
+    clip: {fileID: 8300000, guid: fb6ab60ae1cc1884ab4cc0f15c056a40, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: impact_2
+    clip: {fileID: 8300000, guid: 3b276de583d048844a9208a700f2ba5e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: impact_3
+    clip: {fileID: 8300000, guid: 775c3ba6cfde51444835e0c3db9c7425, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: impact_4
+    clip: {fileID: 8300000, guid: 3d8535a20267baa418c956598dc8a8a9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: impact_5
+    clip: {fileID: 8300000, guid: d116bce01f5a09d4786192aae0cf1b43, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: impact_6
+    clip: {fileID: 8300000, guid: 1fdd826bfa1ee5a489b0a634489ced29, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: sword_1
+    clip: {fileID: 8300000, guid: 6aa919452e4daa94293011d82e44589d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: sword_2
+    clip: {fileID: 8300000, guid: 657956f742b9477459064976e36f0941, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: sword_3
+    clip: {fileID: 8300000, guid: 8b249e942fc617449b656b8ff3c1fd4e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!1 &296541841 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6582013039348642663, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
   m_PrefabInstance: {fileID: 545884085}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &296541848
+--- !u!95 &296541856
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -1465,8 +1618,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 258001531091277057, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 258001531091277057, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
       propertyPath: moveSpeed
       value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5377970994857704979, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
+      propertyPath: freezeXYAxis
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6582013039348642663, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
       propertyPath: m_Name
@@ -1522,7 +1683,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6582013039348642663, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 296541848}
+      addedObject: {fileID: 296541856}
   m_SourcePrefab: {fileID: 100100000, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
 --- !u!1 &556077244
 GameObject:
@@ -2493,6 +2654,50 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f69cd4602c2886541b73ed733662612c, type: 3}
+--- !u!1 &1278209874
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1278209875}
+  - component: {fileID: 1278209876}
+  m_Layer: 0
+  m_Name: HitStopManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1278209875
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278209874}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.274231, y: 1.3358642, z: -0.8010766}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1278209876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278209874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32c74645f1620ff449158c974c3dcc36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1295925325
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4065,7 +4270,7 @@ CharacterController:
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.5
-  m_SlopeLimit: 45
+  m_SlopeLimit: 60
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -4760,7 +4965,7 @@ Transform:
   m_GameObject: {fileID: 3980607637164109780}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.860001, y: 2.87, z: 8.035399}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5253,6 +5458,7 @@ MonoBehaviour:
   lightAttacks:
   - attackName: Light Slash 1
     animTrigger: slash1Trigger
+    audioName: swoosh_1
     duration: 0.25
     impact: 5
     delay: 0.1
@@ -5265,9 +5471,10 @@ MonoBehaviour:
     vfxObj: {fileID: 3424138665135843237}
   - attackName: Light Slash 2
     animTrigger: slash2Trigger
+    audioName: swoosh_2
     duration: 0.15
     impact: 5
-    delay: 0
+    delay: 0.05
     damage: 3
     knockBack: 2
     independentKnockback: 0
@@ -5277,9 +5484,10 @@ MonoBehaviour:
     vfxObj: {fileID: 3424138665135843237}
   - attackName: Light Stab 1
     animTrigger: stab1Trigger
-    duration: 0.25
+    audioName: swish_1
+    duration: 0.35
     impact: 5
-    delay: 0.23
+    delay: 0.25
     damage: 3
     knockBack: 2
     independentKnockback: 0
@@ -5291,6 +5499,7 @@ MonoBehaviour:
     vfxObj: {fileID: 5178817905107118007}
   - attackName: Light Ground Slash 1
     animTrigger: groundSlashTrigger
+    audioName: swoosh_3
     duration: 0.4
     impact: 7
     delay: 0.2
@@ -5305,9 +5514,10 @@ MonoBehaviour:
     vfxObj: {fileID: 7151037118339796375}
   - attackName: Light Stab 2
     animTrigger: stab2Trigger
+    audioName: swish_1
     duration: 0.4
     impact: 7
-    delay: 0.2
+    delay: 0.24
     damage: 4
     knockBack: 3
     independentKnockback: 0
@@ -5319,9 +5529,10 @@ MonoBehaviour:
     vfxObj: {fileID: 7794921033610349498}
   - attackName: Light Slash 3
     animTrigger: slash2Trigger
+    audioName: swoosh_2
     duration: 0.2
     impact: 5
-    delay: 0
+    delay: 0.05
     damage: 4
     knockBack: 3
     independentKnockback: 0
@@ -5331,6 +5542,7 @@ MonoBehaviour:
     vfxObj: {fileID: 3424138665135843237}
   - attackName: Light Slash 4
     animTrigger: slash1Trigger
+    audioName: swoosh_1
     duration: 0.25
     impact: 5
     delay: 0.1
@@ -5343,6 +5555,7 @@ MonoBehaviour:
     vfxObj: {fileID: 3424138665135843237}
   - attackName: RapidSpin_PLACEHOLDER
     animTrigger: groundSlashTrigger
+    audioName: 
     duration: 0.3
     impact: 7
     delay: 0.2
@@ -5358,7 +5571,8 @@ MonoBehaviour:
   heavyAttacks:
   - attackName: Heavy Stab
     animTrigger: stab1Trigger
-    duration: 0.35
+    audioName: swish_1_deep
+    duration: 0.2
     impact: 20
     delay: 0.23
     damage: 6
@@ -5374,6 +5588,7 @@ MonoBehaviour:
     vfxObj: {fileID: 7873739376490989206}
   - attackName: RepeatingStab_PLACEHOLDER
     animTrigger: rapidStabTrigger
+    audioName: 
     duration: 0.8
     impact: 2
     delay: 0
@@ -5384,8 +5599,9 @@ MonoBehaviour:
     vfxObj: {fileID: 4790179611732338758}
   - attackName: Spin Slash
     animTrigger: spinSlashTrigger
+    audioName: swoosh_2_deep
     duration: 0.4
-    impact: 12
+    impact: 17
     delay: 0.2
     damage: 6
     knockBack: 3
@@ -5396,6 +5612,7 @@ MonoBehaviour:
     vfxObj: {fileID: 398906811268219478}
   - attackName: Projectile_PLACEHOLDER
     animTrigger: spinSlashTrigger
+    audioName: 
     duration: 0.4
     impact: 0
     delay: 0.2
@@ -5408,6 +5625,7 @@ MonoBehaviour:
     vfxObj: {fileID: 3424138665135843237}
   - attackName: HeavyProjectile_PLACEHOLDER
     animTrigger: spinSlashTrigger
+    audioName: 
     duration: 0.4
     impact: 0
     delay: 0.2
@@ -5421,6 +5639,7 @@ MonoBehaviour:
   repeatingAttacks:
   - attackName: RepeatingStab
     animTrigger: rapidStabTrigger
+    audioName: swishmulti_1
     duration: 0.8
     impact: 2
     delay: 0
@@ -5444,9 +5663,11 @@ MonoBehaviour:
     - center: {fileID: 908585302778377191}
       size: 0.7
     finalVfxObj: {fileID: 8980921603793520866}
+    finalAudioName: swish_1
     isHeavy: 1
   - attackName: RapidSpin
     animTrigger: rapidSpinTrigger
+    audioName: swishmulti_1
     duration: 0.8
     impact: 25
     delay: 0
@@ -5466,10 +5687,12 @@ MonoBehaviour:
     - center: {fileID: 4687354221890237921}
       size: 1.6
     finalVfxObj: {fileID: 398906811268219478}
+    finalAudioName: swoosh_2_deep
     isHeavy: 0
   projectileAttacks:
   - attackName: Projectile
     animTrigger: slash1Trigger
+    audioName: swoosh_2
     duration: 0.5
     impact: 5
     delay: 0.1
@@ -5487,6 +5710,7 @@ MonoBehaviour:
     isHeavy: 1
   - attackName: HeavyProjectile
     animTrigger: groundSlashTrigger
+    audioName: swoosh_3
     duration: 0.7
     impact: 5
     delay: 0.1
@@ -6228,6 +6452,7 @@ GameObject:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 259132024}
   - {fileID: 81630872}
   - {fileID: 2071507029}
   - {fileID: 6998094300658664439}
@@ -6239,3 +6464,4 @@ SceneRoots:
   - {fileID: 1785060059}
   - {fileID: 1551131127}
   - {fileID: 545884085}
+  - {fileID: 1278209875}

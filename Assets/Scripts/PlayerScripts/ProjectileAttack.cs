@@ -19,7 +19,7 @@ public class ProjectileAttack : PlayerAttack
     public override IEnumerator ActivateAttack(Player player, float dmgMultiplier, float meterGain, LayerMask enemyLayers, UnityEngine.Vector3 direction)
     {
         base.ActivateAttack(player, dmgMultiplier, meterGain, enemyLayers, direction);
-
+        AudioManager.instance.Play(audioName);
         // Create a new instance of the projectile using Instantiate
         GameObject newProjectile = GameObject.Instantiate(projectilePrefab, GetHitBoxes()[0].GetPosition(), UnityEngine.Quaternion.LookRotation(direction));
 

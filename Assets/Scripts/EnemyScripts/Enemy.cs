@@ -53,8 +53,11 @@ public class Enemy : MonoBehaviour
 
     public virtual void TakeDamage(int damage, float knockBack, Vector3 direction)
     {
-        //add screenshake
+        //add screenshake on impact
         CameraShake.instance.ShakeCamera(impulseSource);
+
+        AudioManager.instance.PlayRandom(new string[] { "impact_1", "impact_2", "impact_3", "impact_4", "impact_5", "impact_6" });
+        HitStop.instance.Stop(0.03f); //0.03f
 
         curHealthPoints -= damage;
 
