@@ -7,19 +7,19 @@ public class ProjectileProperties : MonoBehaviour
 {
     private float speed = 20f;
     private float duration = 10f;
-    private int damage;
-    private float knockback;
-    private UnityEngine.Vector3 direction;
+    protected int damage;
+    protected float knockback;
+    protected UnityEngine.Vector3 direction;
 
     private float initialTime;
 
-    [SerializeField] private LayerMask targetMask;
+    [SerializeField] protected LayerMask targetMask;
 
-    private HashSet<Collider> loggedEnemies = new HashSet<Collider>();
+    protected HashSet<Collider> loggedEnemies = new HashSet<Collider>();
 
     private Rigidbody rb;
 
-    public void InitializeProjectile(float speed, float duration, int damage, float knockback, UnityEngine.Vector3 direction)
+    public virtual void InitializeProjectile(float speed, float duration, int damage, float knockback, UnityEngine.Vector3 direction)
     {
         this.speed = speed;
         this.duration = duration;
@@ -33,7 +33,7 @@ public class ProjectileProperties : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         initialTime = Time.time;
         rb.velocity = transform.forward * speed;

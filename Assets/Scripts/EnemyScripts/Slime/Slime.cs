@@ -5,45 +5,75 @@ public class Slime : Enemy
 {
     public float moveSpeed = 5f;
     public float colorSpeed = 0.5f;
-    public Color regularColor = Color.white;
-    public Color hurtColor = Color.red;
-    private Material material;
     private Coroutine colorChangeCoroutine;
     [SerializeField] public float aggroDistance = 10f;
+    [SerializeField] public float attackDistance = 1f;
+    [SerializeField] public float attackPower = 1f;
+    [SerializeField] public float knockback = 1f;
     private bool canMove = true;
+    private float distanceFromPlayer = 999f;
+    private float nextDamageTime = 0;
+    private float damageInterval = 1f; // in seconds
+    private bool canAttack = true;
+    private bool inAttackRange = false;
+    private bool inAggroRange = false;
+
 
     protected override void Awake()
     {
         base.Awake();
-        material = GetComponent<Renderer>().material;
     }
 
     void FixedUpdate()
     {
         SlideTowardsPlayer();
+
+        if (nextDamageTime <= Time.time)
+            canAttack = true;
     }
 
     private void SlideTowardsPlayer()
     {
-        if (playerObject != null && aggroRange(aggroDistance) && canMove)
+        distanceFromPlayer = playerDistance();
+        inAggroRange = distanceFromPlayer <= aggroDistance;
+        inAttackRange = distanceFromPlayer <= attackDistance;
+        
+        // if player exists, is within aggro distance, and move isn't on cooldown
+        if (playerObject != null && inAggroRange && canMove)
         {
-            // Change animator to walk01
+            animator.SetBool("isAggro", true);
             Vector3 direction = playerObject.transform.position - transform.position;
             Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
-            rb.velocity = new Vector3(horizontalDirection.x * moveSpeed, rb.velocity.y, horizontalDirection.z * moveSpeed);
+
+            // if within attack distance, attack
+            if (inAttackRange)
+            {
+                animator.SetBool("isAttack", true);
+                if (canAttack)
+                {
+                    DealDamage(attackPower, knockback, direction);
+                    nextDamageTime = Time.time + damageInterval;
+                }
+            }
+            // else, move towards player
+            else
+            {
+                animator.SetBool("isAttack", false);
+                rb.velocity = new Vector3(horizontalDirection.x * moveSpeed, rb.velocity.y, horizontalDirection.z * moveSpeed);
+            }
+        }
+        else
+        {
+            animator.SetBool("isAggro", false);
+            animator.SetBool("isAttack", false);
         }
     }
 
      public override void TakeDamage(int damage, float knockback, Vector3 direction)
     {
-        //change color
-        material.color = hurtColor;
-
         //start the color change coroutine to return to base color
         if (colorChangeCoroutine != null)
             StopCoroutine(colorChangeCoroutine);
-
-        colorChangeCoroutine = StartCoroutine(ChangeColor());
 
         //inflict damage
         base.TakeDamage(damage, knockback, direction);
@@ -57,18 +87,7 @@ public class Slime : Enemy
             Debug.Log(gameObject.name + " Fucking Died");
             base.Die();
         }
-    }
-
-    private IEnumerator ChangeColor()
-    {
-        //this changes the color, duh
-        float tick = 0f;
-        while (material.color != regularColor)
-        {
-            tick += Time.deltaTime * colorSpeed;
-            material.color = Color.Lerp(hurtColor, regularColor, tick);
-            yield return null;
-        }
+        else animator.SetTrigger("isHit");
     }
 
     private IEnumerator DisableMovementForSeconds(float seconds)

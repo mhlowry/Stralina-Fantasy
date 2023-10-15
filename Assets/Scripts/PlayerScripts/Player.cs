@@ -8,13 +8,15 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     //STATS
-    [SerializeField] int maxHealth = 10;
-    [SerializeField] int curHealth;
+    bool disableInput = false;
 
     const int maxLevel = 7;
-    [SerializeField] int playerLevel = 1;
+    [SerializeField, Range(1, maxLevel)] int playerLevel = 1;
     [SerializeField] int[] expToLevelUp = { 100, 500, 1000, 2000, 3000, 5000, 10000 };
     int curExp = 0;
+
+    [SerializeField] int maxHealth = 10;
+    [SerializeField] int curHealth;
 
     float maxAbilityMeter = 100f;
     float curAbilityMeter = 0f;
@@ -80,6 +82,11 @@ public class Player : MonoBehaviour
             isInvul = false;
         }
     }
+
+    //Disable/Enable player's ability to do anything
+    public bool CanInput() {  return !disableInput; }
+    public void DisableInput() { disableInput = true; }
+    public void EnableInput() { disableInput = false; }
 
     //Health-related functions
     public int GetMaxHealth() { return maxHealth; }

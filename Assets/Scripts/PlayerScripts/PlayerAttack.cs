@@ -15,7 +15,7 @@ using UnityEngine.UIElements;
 public class PlayerAttack
 {
     //This is the visual stuff
-    public string attackName;
+    [SerializeField] private string attackName;
     [SerializeField] private string animTrigger;
 
     //This is stuff that affects game states
@@ -25,10 +25,13 @@ public class PlayerAttack
     [SerializeField] private float damage;
     [SerializeField] private float knockBack;
 
+    [SerializeField] protected bool independentKnockback = false;
+
     [SerializeField] private List<HitBox> hitBoxes;
     [SerializeField] private GameObject vfxObj;
 
     //collection of getter methods
+    public string GetName() { return attackName; }
     public string GetAnim() { return animTrigger; }
     public float GetDuration() { return duration; }
     public float GetImpact() { return impact; }
@@ -53,6 +56,14 @@ public class PlayerAttack
             hitEnemies.Add(Physics.OverlapSphere(hitBox.GetPosition(), hitBox.GetSize(), enemyLayers));
         }
 
+        //this is mostly for any attack that surrounds the player, so that when takedamage is called,
+        //the knockback is exclusively in the direction away from the player
+        UnityEngine.Vector3 knockbackDirection;
+        if (independentKnockback)
+            knockbackDirection = UnityEngine.Vector3.zero;
+        else
+            knockbackDirection = direction;
+
         //This is to prevent enemies from Getting hit twice if they're in range of 2 or more hitboxes
         HashSet<Collider> loggedEnemies = new HashSet<Collider>();
 
@@ -67,7 +78,7 @@ public class PlayerAttack
                     Enemy thisEnemy = enemy.GetComponent<Enemy>();
 
                     //this is the main attack shit
-                    thisEnemy.TakeDamage((int)(damage * player.GetAttackScale() * dmgMultiplier), knockBack * player.GetKnockBScale(), direction);
+                    thisEnemy.TakeDamage((int)(damage * player.GetAttackScale() * dmgMultiplier), knockBack * player.GetKnockBScale(), knockbackDirection);
                     if (thisEnemy.GetIsDead())
                         player.GainExp(thisEnemy.GetExpWorth());
 
