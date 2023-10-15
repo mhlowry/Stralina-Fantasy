@@ -91,7 +91,7 @@ public class Enemy : MonoBehaviour
     protected virtual void Die()
     {
         isDead = true;
-        animator.SetTrigger("isDead");
+        animator?.SetTrigger("isDead");
         Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
     }
 
