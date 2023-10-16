@@ -180,7 +180,7 @@ public class Player : MonoBehaviour
         playerLevel += 1;
 
         if (playerLevel == maxLevel)
-            curExp = expToLevelUp[maxHealth - 1];
+            curExp = expToLevelUp[maxLevel - 1];
     }
 
     //Stats-related functions

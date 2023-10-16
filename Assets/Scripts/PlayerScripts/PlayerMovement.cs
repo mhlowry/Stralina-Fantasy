@@ -169,8 +169,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyRotation()
     {
-        //if the player is not inputting anything, do not update player's rotation
-        if (input.sqrMagnitude == 0) return;
+        //if the player is not inputting anything (or weird hitstop interaction?), do not update player's rotation
+        if (input.sqrMagnitude == 0 || Time.timeScale == 0) return;
 
         //this chunk of code rotates the direction the player is facing
         var targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
