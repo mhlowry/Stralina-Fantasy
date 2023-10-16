@@ -1625,6 +1625,10 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 258001531091277057, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
+      propertyPath: maxHealthPoints
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 5377970994857704979, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
       propertyPath: freezeXYAxis
       value: 1
@@ -4554,7 +4558,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2942372929007251286
 Transform:
   m_ObjectHideFlags: 0

@@ -57,7 +57,7 @@ public class Enemy : MonoBehaviour
         CameraShake.instance.ShakeCamera(impulseSource);
 
         AudioManager.instance.PlayRandom(new string[] { "impact_1", "impact_2", "impact_3", "impact_4", "impact_5", "impact_6" });
-        HitStop.instance.Stop(0.03f); //0.03f
+        HitStop.instance.Stop(0.04f); //0.03f
 
         curHealthPoints -= damage;
 
@@ -106,7 +106,8 @@ public class Enemy : MonoBehaviour
         isDead = true;
         if (animator != null)
         {
-            animator.SetTrigger("isDead");
+            animator.SetTrigger("died");
+            animator.SetBool("isDead", true);
             Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
         }
 

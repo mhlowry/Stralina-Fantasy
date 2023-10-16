@@ -80,8 +80,11 @@ public class Slime : Enemy
         base.TakeDamage(damage, knockback, direction);
         Debug.Log(gameObject.name + ": \"Ouch!  My current Hp is only " + curHealthPoints + "!\"");
 
+        animator.SetTrigger("pain");
+
         //die if dead
-        if(curHealthPoints <= 0)
+        //make sure they're not already dying, prevent from calling "die" twice
+        if(curHealthPoints <= 0 && !animator.GetBool("isDead"))
         {
             Debug.Log(gameObject.name + " Fucking Died");
             canMove = false;
