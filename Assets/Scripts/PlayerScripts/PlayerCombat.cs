@@ -325,11 +325,12 @@ public class PlayerCombat : MonoBehaviour
     private bool canAttack()
     {
         return
-            !playerIsLocked         //is not locked of continuing combo
-            && !storedHeavy         //does not have a heavy stored
-            &&  player.CanInput()    //can input
-            && !anim.GetBool("isRolling") //is not currently rolling
-            && !player.IsStunned(); //is not stunned
+            !playerIsLocked                 //is not locked out of continuing combo
+            && !storedHeavy                 //does not have a heavy stored
+            && player.CanInput()            //can input
+            && !anim.GetBool("isRolling")   //is not currently rolling
+            && !player.IsStunned()          //is not stunned
+            && !PauseMenu.isPaused;         //is not paused
     }
 
     //This lets us see the hitboxes in the editor
