@@ -965,6 +965,246 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   freezeXYAxis: 0
+<<<<<<< Updated upstream
+=======
+--- !u!1 &259132023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 259132024}
+  - component: {fileID: 259132025}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &259132024
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259132023}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.02, y: 1.06, z: -1.5600002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &259132025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259132023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4371533e9a38c341b4549dec8b58f4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: swoosh_1
+    clip: {fileID: 8300000, guid: 3a9e96162f06b84419e523ff18c5ebac, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: swoosh_2
+    clip: {fileID: 8300000, guid: c113918200c401647b574b084f09a9b2, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: swoosh_2_deep
+    clip: {fileID: 8300000, guid: c113918200c401647b574b084f09a9b2, type: 3}
+    volume: 1
+    pitch: 0.55
+    loop: 0
+    source: {fileID: 0}
+  - name: swoosh_3
+    clip: {fileID: 8300000, guid: 9a4091cb106c1df4bb742405ab0689ef, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: swish_1
+    clip: {fileID: 8300000, guid: 3893c25dd030510489bfbd88dd72038f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: swish_1_deep
+    clip: {fileID: 8300000, guid: 3893c25dd030510489bfbd88dd72038f, type: 3}
+    volume: 1
+    pitch: 0.55
+    loop: 0
+    source: {fileID: 0}
+  - name: swishmulti_1
+    clip: {fileID: 8300000, guid: 19480321a7d66bb4ca6fe3a9ab70aabf, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: projectile_woosh_1
+    clip: {fileID: 8300000, guid: db76ea945b2f2d0458310d7cd5fefa43, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: fireball_ambience_1
+    clip: {fileID: 8300000, guid: cfee75755fab4444392a7b81c9ebb296, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: impact_1
+    clip: {fileID: 8300000, guid: fb6ab60ae1cc1884ab4cc0f15c056a40, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: impact_2
+    clip: {fileID: 8300000, guid: 3b276de583d048844a9208a700f2ba5e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: impact_3
+    clip: {fileID: 8300000, guid: 775c3ba6cfde51444835e0c3db9c7425, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: impact_4
+    clip: {fileID: 8300000, guid: 3d8535a20267baa418c956598dc8a8a9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: impact_5
+    clip: {fileID: 8300000, guid: d116bce01f5a09d4786192aae0cf1b43, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: impact_6
+    clip: {fileID: 8300000, guid: 1fdd826bfa1ee5a489b0a634489ced29, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: sword_1
+    clip: {fileID: 8300000, guid: 6aa919452e4daa94293011d82e44589d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: sword_2
+    clip: {fileID: 8300000, guid: 657956f742b9477459064976e36f0941, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: sword_3
+    clip: {fileID: 8300000, guid: 8b249e942fc617449b656b8ff3c1fd4e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+--- !u!1001 &259761078
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 2c6eb0d2437a9be46a4c75dd79bf82b1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.5081205
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2c6eb0d2437a9be46a4c75dd79bf82b1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2c6eb0d2437a9be46a4c75dd79bf82b1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 23.35326
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2c6eb0d2437a9be46a4c75dd79bf82b1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2c6eb0d2437a9be46a4c75dd79bf82b1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2c6eb0d2437a9be46a4c75dd79bf82b1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2c6eb0d2437a9be46a4c75dd79bf82b1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2c6eb0d2437a9be46a4c75dd79bf82b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2c6eb0d2437a9be46a4c75dd79bf82b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2c6eb0d2437a9be46a4c75dd79bf82b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2c6eb0d2437a9be46a4c75dd79bf82b1, type: 3}
+      propertyPath: m_Name
+      value: islandmountain
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 8164078558771037576, guid: 2c6eb0d2437a9be46a4c75dd79bf82b1, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2c6eb0d2437a9be46a4c75dd79bf82b1, type: 3}
+--- !u!1 &296541841 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6582013039348642663, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
+  m_PrefabInstance: {fileID: 545884085}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &296541856
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296541841}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f7222dd3424a5cc4fb2f6bcd18260231, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+>>>>>>> Stashed changes
 --- !u!4 &356468231 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6912295084122423493, guid: f9673eb62b476b843b977ecacfa910af, type: 3}
@@ -5369,7 +5609,14 @@ SceneRoots:
   - {fileID: 500105601}
   - {fileID: 1785060059}
   - {fileID: 1551131127}
+<<<<<<< Updated upstream
   - {fileID: 462654357}
   - {fileID: 1479697388}
   - {fileID: 871024966}
   - {fileID: 483175056}
+=======
+  - {fileID: 545884085}
+  - {fileID: 1278209875}
+  - {fileID: 79401290}
+  - {fileID: 259761078}
+>>>>>>> Stashed changes
