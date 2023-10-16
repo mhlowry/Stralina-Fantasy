@@ -37,7 +37,7 @@ public class TestDummy : Enemy
         if(curHealthPoints <= 0)
         {
             Debug.Log(gameObject.name + " Fucking Died");
-            base.Die();
+            Die();
         }
     }
 
@@ -51,5 +51,11 @@ public class TestDummy : Enemy
             material.color = Color.Lerp(hurtColor, regularColor, tick);
             yield return null;
         }
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+        GetComponent<Collider>().enabled = false;
     }
 }

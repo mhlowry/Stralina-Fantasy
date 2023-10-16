@@ -14,6 +14,7 @@ public class ProjectileProperties : MonoBehaviour
     private float initialTime;
 
     [SerializeField] protected LayerMask targetMask;
+    [SerializeField] protected string soundName;
 
     protected HashSet<Collider> loggedEnemies = new HashSet<Collider>();
 
@@ -31,6 +32,7 @@ public class ProjectileProperties : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        AudioManager.instance.Play(soundName);
     }
 
     protected virtual void Start()

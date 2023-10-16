@@ -18,6 +18,12 @@ public class PlayerAttack
     [SerializeField] private string attackName;
     [SerializeField] private string animTrigger;
 
+    //Sound effect stuff
+    [SerializeField] protected string audioName;
+    protected static string[] contactAudioNames;
+        public string[] combatSounds
+    {  get { return contactAudioNames; } set { contactAudioNames = value; } }
+
     //This is stuff that affects game states
     [SerializeField] private float duration;
     [SerializeField] private float impact;
@@ -49,6 +55,9 @@ public class PlayerAttack
         DisableAttackVFX();
         PlayAttackVFX(direction);
 
+        //play sound
+        AudioManager.instance.Play(audioName);
+
         List<Collider[]> hitEnemies = new List<Collider[]>();
 
         foreach (HitBox hitBox in hitBoxes)
@@ -73,6 +82,8 @@ public class PlayerAttack
             {
                 if (!loggedEnemies.Contains(enemy))
                 {
+                    AudioManager.instance.PlayRandom(contactAudioNames);
+
                     //Main meter per enemy hit
                     player.GainMeter(meterGain);
                     Enemy thisEnemy = enemy.GetComponent<Enemy>();
@@ -94,7 +105,7 @@ public class PlayerAttack
         vfxObj.SetActive(true);
     }
 
-    public void DisableAttackVFX()
+    public virtual void DisableAttackVFX()
     {
         vfxObj.SetActive(false);
     }

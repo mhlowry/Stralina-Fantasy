@@ -1,7 +1,10 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent(typeof(CinemachineImpulseSource))]
 [RequireComponent(typeof(Rigidbody))]
 public class Enemy : MonoBehaviour
 {
@@ -18,6 +21,8 @@ public class Enemy : MonoBehaviour
     private Player playerScript;
     private Rigidbody playerRb;
     protected GameObject playerObject;
+
+    private CinemachineImpulseSource impulseSource;
 
     protected virtual void Awake()
     {
@@ -42,10 +47,18 @@ public class Enemy : MonoBehaviour
             playerScript = playerObject.GetComponent<SwordMan>();
             //playerRb = playerObject.GetComponent<Rigidbody>();
         }
+
+        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     public virtual void TakeDamage(int damage, float knockBack, Vector3 direction)
     {
+        //add screenshake on impact
+        CameraShake.instance.ShakeCamera(impulseSource);
+
+        AudioManager.instance.PlayRandom(new string[] { "impact_1", "impact_2", "impact_3", "impact_4", "impact_5", "impact_6" });
+        HitStop.instance.Stop(0.04f); //0.03f
+
         curHealthPoints -= damage;
 
         //calculate vector of position relative from the player's position to the enemy's position
@@ -87,20 +100,26 @@ public class Enemy : MonoBehaviour
         // will maybe add knockback later
     }
 
-    //disables their collider and destroys the object after some time has passed
+
     protected virtual void Die()
     {
         isDead = true;
-        animator?.SetTrigger("isDead");
+        animator?.SetTrigger("died");
+        animator?.SetBool("isDead", true);
         Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
+
+        StartCoroutine(DestroyEnemy());
     }
 
     public bool GetIsDead() { return isDead; }
     public int GetExpWorth() { return expWorth; }
+
+    //destroys the object after some time has passed
     IEnumerator DestroyEnemy()
     {
         yield return new WaitForSeconds(2f);
         Destroy(gameObject);
+
     }
 
     public float playerDistance()
