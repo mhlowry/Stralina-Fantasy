@@ -327,7 +327,8 @@ public class PlayerCombat : MonoBehaviour
         return
             !playerIsLocked         //is not locked of continuing combo
             && !storedHeavy         //does not have a heavy stored
-            && player.CanInput()    //can input
+            &&  player.CanInput()    //can input
+            && !anim.GetBool("isRolling") //is not currently rolling
             && !player.IsStunned(); //is not stunned
     }
 
