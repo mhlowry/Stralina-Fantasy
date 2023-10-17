@@ -928,7 +928,7 @@ CharacterController:
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.5
-  m_SlopeLimit: 60
+  m_SlopeLimit: 10
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -1094,10 +1094,10 @@ MonoBehaviour:
     - center: {fileID: 1928467048834244430}
       size: 1.1
     vfxObj: {fileID: 1611586395570323958}
-  - attackName: RapidSpin_PLACEHOLDER
+  - attackName: Light Ground Slash 1
     animTrigger: groundSlashTrigger
-    audioName: 
-    duration: 0.3
+    audioName: swoosh_3
+    duration: 0.4
     impact: 7
     delay: 0.2
     damage: 4
@@ -1108,7 +1108,7 @@ MonoBehaviour:
       size: 0.7
     - center: {fileID: 6078648604307514009}
       size: 0.5
-    vfxObj: {fileID: 1611586395570323958}
+    vfxObj: {fileID: 1164418112988883396}
   heavyAttacks:
   - attackName: Heavy Stab
     animTrigger: stab1Trigger
@@ -1177,6 +1177,21 @@ MonoBehaviour:
     - center: {fileID: 5038256481009348328}
       size: 1.5
     vfxObj: {fileID: 1164418112988883396}
+  - attackName: RapidSpin_PLACEHOLDER
+    animTrigger: groundSlashTrigger
+    audioName: 
+    duration: 0.3
+    impact: 7
+    delay: 0.2
+    damage: 4
+    knockBack: 3
+    independentKnockback: 0
+    hitBoxes:
+    - center: {fileID: 1928467048834244430}
+      size: 0.7
+    - center: {fileID: 6078648604307514009}
+      size: 0.5
+    vfxObj: {fileID: 1611586395570323958}
   repeatingAttacks:
   - attackName: RepeatingStab
     animTrigger: rapidStabTrigger
@@ -1219,7 +1234,7 @@ MonoBehaviour:
     - center: {fileID: 5038256481009348328}
       size: 1.2
     vfxObj: {fileID: 5102160699276216628}
-    comboIndex: 7
+    comboIndex: 5
     numStrikes: 8
     delayStrikes: 0.09
     finalDamage: 3
@@ -1229,7 +1244,7 @@ MonoBehaviour:
       size: 1.6
     finalVfxObj: {fileID: 941930347331666932}
     finalAudioName: swoosh_2_deep
-    isHeavy: 0
+    isHeavy: 1
   projectileAttacks:
   - attackName: Projectile
     animTrigger: slash1Trigger
