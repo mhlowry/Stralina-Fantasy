@@ -19,9 +19,12 @@ public class Enemy : MonoBehaviour
     //Game components that will be generally needed
     [SerializeField] protected Rigidbody rb;
     private Player playerScript;
-    private Rigidbody playerRb;
     protected GameObject playerObject;
 
+    //dropping items and whatnot
+    [SerializeField] List<GameObject> itemDrops;
+
+    [SerializeField] GameObject gfxObject;
     private CinemachineImpulseSource impulseSource;
 
     protected virtual void Awake()
@@ -37,7 +40,8 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         //if animator exists, gets animator
-        animator = GetComponent<Animator>();
+        if(gfxObject != null )
+            animator = gfxObject.GetComponent<Animator>();
 
         //Find Player
         playerObject = GameObject.FindGameObjectWithTag("Player");
@@ -100,7 +104,6 @@ public class Enemy : MonoBehaviour
         // will maybe add knockback later
     }
 
-
     protected virtual void Die()
     {
         isDead = true;
@@ -109,7 +112,6 @@ public class Enemy : MonoBehaviour
         {
             animator.SetTrigger("died");
             animator.SetBool("isDead", true);
-            Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
         }
 
         StartCoroutine(DestroyEnemy());
@@ -118,12 +120,24 @@ public class Enemy : MonoBehaviour
     public bool GetIsDead() { return isDead; }
     public int GetExpWorth() { return expWorth; }
 
+    //Now with new spawn item feature!
     //destroys the object after some time has passed
     IEnumerator DestroyEnemy()
     {
-        yield return new WaitForSeconds(2f);
-        Destroy(gameObject);
+        //wait half a second before dropping item
+        foreach (GameObject item in itemDrops)
+        {
+            Item itemScript = item.GetComponent<Item>();
+            if ( 1 == Random.Range(1, itemScript.GetRarity()))
+            {
+                GameObject.Instantiate(item, gameObject.transform.position, gameObject.transform.rotation);
+                break;
+            }
+        }
 
+        //wait a second and a half before destorying the object
+        yield return new WaitForSeconds(1.5f);
+        Destroy(gameObject);
     }
 
     public float playerDistance()

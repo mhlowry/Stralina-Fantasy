@@ -162,33 +162,33 @@ public class PlayerCombat : MonoBehaviour
             {
                 case 1:
                     anim.SetBool("comboOver", false);
-                    PerformAttack(lightAttacks[0]);
+                    PerformAttack(lightAttacks[comboIndex - 1]);
                     break;
 
                 case 2:
-                    PerformAttack(lightAttacks[1]);
+                    PerformAttack(lightAttacks[comboIndex - 1]);
                     break;
 
                 case 3:
-                    PerformAttack(lightAttacks[2]);
+                    PerformAttack(lightAttacks[comboIndex - 1]);
                     break;
 
                 case 4:
                     if(LevelCheck(3))
-                        PerformAttack(lightAttacks[3]);
+                        PerformAttack(lightAttacks[comboIndex - 1]);
                     break;
 
                 case 5:
-                    PerformAttack(lightAttacks[4]);
+                    PerformAttack(lightAttacks[comboIndex - 1]);
                     break;
 
                 case 6:
                     if (LevelCheck(6))
-                        PerformAttack(lightAttacks[5]);
+                        PerformAttack(lightAttacks[comboIndex - 1]);
                     break;
 
                 case 7:
-                    PerformAttack(lightAttacks[6]);
+                    PerformAttack(lightAttacks[comboIndex - 1]);
                     break;
 
                 case 8:
@@ -243,9 +243,12 @@ public class PlayerCombat : MonoBehaviour
                     break;
 
                 case 6:
+                    if (LevelCheck(6))
+                        PerformAttack(heavyAttacks[4]);
+                    break;
                 case 7:
                     if (LevelCheck(7))
-                        PerformAttack(heavyAttacks[4]);
+                        PerformAttack(heavyAttacks[5]);
                     break;
 
                 default:

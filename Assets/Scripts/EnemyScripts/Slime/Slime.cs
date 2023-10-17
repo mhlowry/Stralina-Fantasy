@@ -171,9 +171,7 @@ public class Slime : Enemy
         base.TakeDamage(damage, knockback, direction);
         //if hit in midair, can no longer harm the player
         enableDamage = false;
-        Debug.Log(gameObject.name + ": \"Ouch!  My current Hp is only " + curHealthPoints + "!\"");
-
-        animator.SetTrigger("pain");
+        //Debug.Log(gameObject.name + ": \"Ouch!  My current Hp is only " + curHealthPoints + "!\"");
 
         //die if dead
         //make sure they're not already dying, prevent from calling "die" twice
@@ -184,7 +182,7 @@ public class Slime : Enemy
             base.Die();
             StopCoroutine(disableMoveCoroutine);
         }
-        else animator?.SetTrigger("isHit");
+        else animator?.SetTrigger("pain");
     }
 
     private IEnumerator DisableMovementForSeconds(float seconds)

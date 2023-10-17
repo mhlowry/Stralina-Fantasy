@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6582013039348642663
+--- !u!1 &999935390548170204
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,43 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8517126212548856716}
-  - component: {fileID: 4460878468879000516}
-  - component: {fileID: 3748759384311625483}
-  - component: {fileID: 2803015510727932998}
-  - component: {fileID: 5498052827701431619}
-  - component: {fileID: 5377970994857704979}
-  - component: {fileID: 258001531091277057}
-  - component: {fileID: 7334234861351288120}
+  - component: {fileID: 1896722037431843946}
+  - component: {fileID: 5612337176662085830}
+  - component: {fileID: 3999483467191007607}
+  - component: {fileID: 3790858451935321507}
   m_Layer: 7
-  m_Name: CustomSlime
+  m_Name: SlimeGFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8517126212548856716
+--- !u!4 &1896722037431843946
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6582013039348642663}
+  m_GameObject: {fileID: 999935390548170204}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.509, y: 0.638, z: 1.345}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 8517126212548856716}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4460878468879000516
+--- !u!212 &5612337176662085830
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6582013039348642663}
+  m_GameObject: {fileID: 999935390548170204}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -90,6 +86,76 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &3999483467191007607
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999935390548170204}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f7222dd3424a5cc4fb2f6bcd18260231, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3790858451935321507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999935390548170204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed94f8c6d6cbe864eb6ed9838248e187, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freezeXYAxis: 0
+--- !u!1 &6582013039348642663
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8517126212548856716}
+  - component: {fileID: 3748759384311625483}
+  - component: {fileID: 2803015510727932998}
+  - component: {fileID: 258001531091277057}
+  - component: {fileID: 7334234861351288120}
+  m_Layer: 7
+  m_Name: CustomSlime
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8517126212548856716
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6582013039348642663}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.509, y: 0.638, z: 1.345}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1896722037431843946}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &3748759384311625483
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -140,40 +206,6 @@ CapsuleCollider:
   m_Height: 2.623436
   m_Direction: 1
   m_Center: {x: 0, y: 0.811718, z: 0}
---- !u!95 &5498052827701431619
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6582013039348642663}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f7222dd3424a5cc4fb2f6bcd18260231, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5377970994857704979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6582013039348642663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed94f8c6d6cbe864eb6ed9838248e187, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  freezeXYAxis: 1
 --- !u!114 &258001531091277057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,10 +218,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d20e8d571b13394489c691374bd64b6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 10
+  maxHealthPoints: 16
   expWorth: 0
   knockbackMultiplier: 1
   rb: {fileID: 0}
+  itemDrops:
+  - {fileID: 7163418064556403771, guid: 52078488a7ed07545bb73ea856c7ef21, type: 3}
+  gfxObject: {fileID: 999935390548170204}
   moveSpeed: 2
   damageSpeed: 4
   aggroDistance: 12
@@ -197,11 +232,11 @@ MonoBehaviour:
   attackPower: 1
   knockback: 1
   damageInterval: 3
-  movementStartup: 1
+  moveStartup: 1
   damageStartup: 2.5
-  movementHeight: 4
+  moveHeight: 4
   damageHeight: 6
-  movementInterval: 1
+  moveInterval: 1
 --- !u!114 &7334234861351288120
 MonoBehaviour:
   m_ObjectHideFlags: 0
