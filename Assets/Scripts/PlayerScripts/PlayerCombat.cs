@@ -162,33 +162,33 @@ public class PlayerCombat : MonoBehaviour
             {
                 case 1:
                     anim.SetBool("comboOver", false);
-                    PerformAttack(lightAttacks[0]);
+                    PerformAttack(lightAttacks[comboIndex - 1]);
                     break;
 
                 case 2:
-                    PerformAttack(lightAttacks[1]);
+                    PerformAttack(lightAttacks[comboIndex - 1]);
                     break;
 
                 case 3:
-                    PerformAttack(lightAttacks[2]);
+                    PerformAttack(lightAttacks[comboIndex - 1]);
                     break;
 
                 case 4:
                     if(LevelCheck(3))
-                        PerformAttack(lightAttacks[3]);
+                        PerformAttack(lightAttacks[comboIndex - 1]);
                     break;
 
                 case 5:
-                    PerformAttack(lightAttacks[4]);
+                    PerformAttack(lightAttacks[comboIndex - 1]);
                     break;
 
                 case 6:
                     if (LevelCheck(6))
-                        PerformAttack(lightAttacks[5]);
+                        PerformAttack(lightAttacks[comboIndex - 1]);
                     break;
 
                 case 7:
-                    PerformAttack(lightAttacks[6]);
+                    PerformAttack(lightAttacks[comboIndex - 1]);
                     break;
 
                 case 8:
@@ -243,9 +243,12 @@ public class PlayerCombat : MonoBehaviour
                     break;
 
                 case 6:
+                    if (LevelCheck(6))
+                        PerformAttack(heavyAttacks[4]);
+                    break;
                 case 7:
                     if (LevelCheck(7))
-                        PerformAttack(heavyAttacks[4]);
+                        PerformAttack(heavyAttacks[5]);
                     break;
 
                 default:
@@ -325,11 +328,12 @@ public class PlayerCombat : MonoBehaviour
     private bool canAttack()
     {
         return
-            !playerIsLocked         //is not locked of continuing combo
-            && !storedHeavy         //does not have a heavy stored
-            &&  player.CanInput()    //can input
-            && !anim.GetBool("isRolling") //is not currently rolling
-            && !player.IsStunned(); //is not stunned
+            !playerIsLocked                 //is not locked out of continuing combo
+            && !storedHeavy                 //does not have a heavy stored
+            && player.CanInput()            //can input
+            && !anim.GetBool("isRolling")   //is not currently rolling
+            && !player.IsStunned()          //is not stunned
+            && !PauseMenu.isPaused;         //is not paused
     }
 
     //This lets us see the hitboxes in the editor
