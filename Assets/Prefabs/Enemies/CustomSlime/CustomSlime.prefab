@@ -137,9 +137,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1.9460385
+  m_Height: 2.623436
   m_Direction: 1
-  m_Center: {x: 0, y: 0.47301924, z: 0}
+  m_Center: {x: 0, y: 0.811718, z: 0}
 --- !u!95 &5498052827701431619
 Animator:
   serializedVersion: 5
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed94f8c6d6cbe864eb6ed9838248e187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  freezeXYAxis: 0
+  freezeXYAxis: 1
 --- !u!114 &258001531091277057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,12 +190,18 @@ MonoBehaviour:
   expWorth: 0
   knockbackMultiplier: 1
   rb: {fileID: 0}
-  moveSpeed: 5
-  colorSpeed: 0.5
-  aggroDistance: 10
-  attackDistance: 1
+  moveSpeed: 2
+  damageSpeed: 4
+  aggroDistance: 12
+  attackDistance: 4
   attackPower: 1
   knockback: 1
+  damageInterval: 3
+  movementStartup: 1
+  damageStartup: 2.5
+  movementHeight: 4
+  damageHeight: 6
+  movementInterval: 1
 --- !u!114 &7334234861351288120
 MonoBehaviour:
   m_ObjectHideFlags: 0

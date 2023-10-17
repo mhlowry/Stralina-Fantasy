@@ -2978,6 +2978,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5377970994857704979, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
+      propertyPath: freezeXYAxis
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884689298653195182, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
+      propertyPath: m_Radius
+      value: 1.5806868
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884689298653195182, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
+      propertyPath: m_Center.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6582013039348642663, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
       propertyPath: m_Name
       value: CustomSlime

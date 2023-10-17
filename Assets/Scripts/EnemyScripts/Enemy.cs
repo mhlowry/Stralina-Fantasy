@@ -79,7 +79,7 @@ public class Enemy : MonoBehaviour
     }
 
     // Deal damage to player
-    public void DealDamage(float damage, float knockback, Vector3 direction)
+    protected virtual void DealDamage(float damage, float knockback, Vector3 direction)
     {
         if (playerObject != null)
         {
