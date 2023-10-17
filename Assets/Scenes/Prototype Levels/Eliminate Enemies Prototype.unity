@@ -275,7 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShowDebugText: 0
   m_ShowCameraFrustum: 1
-  m_IgnoreTimeScale: 1
+  m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
   m_UpdateMethod: 2
   m_BlendUpdateMethod: 1
@@ -4679,6 +4679,10 @@ PrefabInstance:
     - target: {fileID: 518271759793297410, guid: df81c33304fb45d45b0e7dc3995a161e, type: 3}
       propertyPath: m_Name
       value: Virtual Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 850686924186904686, guid: df81c33304fb45d45b0e7dc3995a161e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.0539223
       objectReference: {fileID: 0}
     - target: {fileID: 1241931770788705406, guid: df81c33304fb45d45b0e7dc3995a161e, type: 3}
       propertyPath: m_LocalPosition.x
