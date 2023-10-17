@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -152,9 +153,14 @@ public class Player : MonoBehaviour
         isInvul = false;
     }
 
+    //function to know when player is dead
+    public static event Action OnPlayerDeath;
+
     void GameOver()
     {
         Debug.Log("You died lol");
+        Time.timeScale = 0.1f;
+        OnPlayerDeath?.Invoke();
     }
 
     //Level-related functions
