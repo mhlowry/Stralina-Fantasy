@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class SwordMan : Player
 {
     bool isBlocking = false;
     bool tryingToBlock = false;
+
+    [SerializeField] private LayerMask enemyLayers;
+
+    [SerializeField] ProjectileAttack superAttack;
 
     protected override void Update()
     {
@@ -52,6 +57,27 @@ public class SwordMan : Player
         }
         
         tryingToBlock = true;
+    }
+
+    public void CallSpecial(InputAction.CallbackContext context)
+    {
+        if (!context.started || !CanSpecial())
+            return;
+
+        //Use all the meter
+        UseMeter(GetMaxMeter());
+
+        StartCoroutine(superAttack.ActivateAttack(this, 1f, 0f, enemyLayers, transform.forward));
+    }
+
+    private bool CanSpecial()
+    {
+        return
+               CanInput()            //can input
+            && !animGFX.GetBool("isRolling")   //is not currently rolling
+            && !IsStunned()          //is not stunned
+            && !PauseMenu.isPaused         //is not paused
+            && GetCurMeter() >= GetMaxMeter(); //has full meter
     }
 
     private bool CanBlock()

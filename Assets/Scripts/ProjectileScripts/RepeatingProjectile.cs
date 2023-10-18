@@ -14,31 +14,42 @@ public class RepeatingProjectile : ProjectileProperties
         lastHitTime = Time.time;
     }
 
-    // Update is called once per frame
-    private void OnTriggerStay(Collider hitTarget)
+    private List<Enemy> enemiesInTrigger = new List<Enemy>();
+
+    private void OnTriggerEnter(Collider hitTarget)
     {
-        if (Time.time - lastHitTime < delayStrikes)
-            return;
-
-        lastHitTime = Time.time;
-
-        GameObject targetObject = hitTarget.gameObject;
-
-        int targetMaskInt = (int)Mathf.Log(targetMask.value, 2);
-
-        //Make sure we connected with the right target
-        if (targetObject.layer != targetMaskInt)
-            return;
-
-        //call takedamage for enemy if want to hit enemy
-        if (targetMaskInt == LayerMask.NameToLayer("Enemy"))
+        if (hitTarget.gameObject.CompareTag("Enemy"))
         {
-            Enemy thisEnemy = targetObject.GetComponent<Enemy>();
-            if (!loggedEnemies.Contains(hitTarget))
+            Enemy thisEnemy = hitTarget.GetComponent<Enemy>();
+            if (thisEnemy != null && !enemiesInTrigger.Contains(thisEnemy))
             {
-                //this is the main attack shit
-                thisEnemy.TakeDamage(damage, knockback, direction);
+                enemiesInTrigger.Add(thisEnemy);
             }
+        }
+    }
+
+    private void OnTriggerExit(Collider hitTarget)
+    {
+        if (hitTarget.gameObject.CompareTag("Enemy"))
+        {
+            Enemy thisEnemy = hitTarget.GetComponent<Enemy>();
+            if (thisEnemy != null && enemiesInTrigger.Contains(thisEnemy))
+            {
+                enemiesInTrigger.Remove(thisEnemy);
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (Time.time - lastHitTime >= delayStrikes)
+        {
+            foreach (Enemy enemy in enemiesInTrigger)
+            {
+                if(enemy != null)
+                    enemy.TakeDamage(damage, knockback, direction);
+            }
+            lastHitTime = Time.time;
         }
     }
 }

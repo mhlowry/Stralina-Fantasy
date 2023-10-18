@@ -50,6 +50,12 @@ public class Slime : Enemy
         animator?.SetFloat("vertVelocity", rb.velocity.y);
 
         animator?.SetBool("isLanded", Mathf.Abs(rb.velocity.y) <= 0.01f);
+        
+        //turns off damage on the collider when idle
+        if(enableDamage && animator.GetCurrentAnimatorStateInfo(0).IsName("SlimeIdle"))
+        {
+            enableDamage = false;
+        }
     }
 
     private void Update()
@@ -118,9 +124,8 @@ public class Slime : Enemy
         {
             //Debug.Log("CollisionEnter");
             base.DealDamage(attackPower, knockback, direction);
+            enableDamage = false;
         }
-
-        enableDamage = false;
     }
 
     private void OnCollisionExit(Collision hitTarget)

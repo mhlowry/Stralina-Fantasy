@@ -19,8 +19,8 @@ public class Player : MonoBehaviour
     [SerializeField] int maxHealth = 10;
     [SerializeField] int curHealth;
 
-    float maxAbilityMeter = 100f;
-    float curAbilityMeter = 0f;
+    const float maxAbilityMeter = 100f;
+    [SerializeField, Range(1, maxAbilityMeter)] float curAbilityMeter = 0f;
 
     //Stats that are adjustable, mostly through gear
     float attackScale = 1f;
