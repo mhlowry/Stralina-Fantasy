@@ -29,11 +29,12 @@ public class EliminateEnemiesObjective : ObjectiveManager
 
     public override void InitializeObjective()
     {
-        base.InitializeObjective();
         totalEnemies = FindObjectsOfType<Enemy>().Length;
         remainingEnemies = totalEnemies;
-        UpdateObjectiveDescription();
+        UpdateObjectiveDescription(); 
+        base.InitializeObjective(); 
     }
+
 
     private void UpdateObjectiveDescription()
     {
