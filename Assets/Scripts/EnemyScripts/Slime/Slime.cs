@@ -75,7 +75,6 @@ public class Slime : Enemy
             if (inAttackRange && canAttack)
             {
                 isAttacking = true;
-                enableDamage = true;
                 StartCoroutine(StartMove(damageStartup, moveInterval + 1f));
             }
             else
@@ -96,13 +95,15 @@ public class Slime : Enemy
         Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
 
         //more force behind jump when attacking
-        if(isAttacking)
+        if (isAttacking)
+        {
+            enableDamage = true;
             jumpForce = new Vector3(horizontalDirection.x * damageSpeed, damageHeight, horizontalDirection.z * damageSpeed);
+        }
         else
             jumpForce = new Vector3(horizontalDirection.x * moveSpeed, moveHeight, horizontalDirection.z * moveSpeed);
 
         rb.velocity = jumpForce;
-
         //if not grounded, do not update the ability to do shit (this doesn't work and crashes the editor)
         //while (Mathf.Abs(rb.velocity.y) >= 0.001) { }
 
@@ -115,6 +116,20 @@ public class Slime : Enemy
 
     //This is how the slime deals damage!
     private void OnCollisionEnter(Collision hitTarget)
+    {
+        //return if not even attacking
+        if (!enableDamage)
+            return;
+
+        if (hitTarget.gameObject.CompareTag("Player"))
+        {
+            //Debug.Log("CollisionEnter");
+            base.DealDamage(attackPower, knockback, direction);
+            enableDamage = false;
+        }
+    }
+
+    private void OnCollisionStay(Collision hitTarget)
     {
         //return if not even attacking
         if (!enableDamage)

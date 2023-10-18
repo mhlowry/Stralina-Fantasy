@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5910050659586952663}
   m_Layer: 7
   m_Name: Steve
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,6 +126,8 @@ MonoBehaviour:
   expWorth: 0
   knockbackMultiplier: 1
   rb: {fileID: 0}
+  itemDrops: []
+  gfxObject: {fileID: 0}
   colorSpeed: 0.5
   regularColor: {r: 1, g: 1, b: 1, a: 1}
   hurtColor: {r: 1, g: 0, b: 0, a: 1}

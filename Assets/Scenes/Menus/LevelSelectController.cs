@@ -7,6 +7,6 @@ public class LevelSelectController : MonoBehaviour
     public void OnLevel1Clicked()
     {
         Debug.Log("Level 1 Clicked!");
-        SceneManager.LoadScene("Courtney's Test Scene", LoadSceneMode.Single);
+        SceneManager.LoadScene("Eliminate Enemies Prototype", LoadSceneMode.Single);
     }
 }
