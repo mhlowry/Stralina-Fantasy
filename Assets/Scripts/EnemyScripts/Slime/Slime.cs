@@ -7,28 +7,28 @@ public class Slime : Enemy
     public float moveSpeed = 1f;
     public float damageSpeed = 2f;
     private Coroutine disableMoveCoroutine;
-    [SerializeField] private float aggroDistance = 10f;
-    [SerializeField] private float attackDistance = 1f;
-    [SerializeField] private float attackPower = 1f;
+    [SerializeField] protected float aggroDistance = 10f;
+    [SerializeField] protected float attackDistance = 1f;
+    [SerializeField] protected float attackPower = 1f;
     [SerializeField] private float knockback = 1f;
-    private bool canMove = true;
-    private float distanceFromPlayer = 999f;
-    private float nextDamageTime = 0;
-    [SerializeField] private float damageInterval = 1f; // in seconds
-    private bool canAttack = true;
-    private bool inAttackRange = false;
-    private bool inAggroRange = false;
+    protected bool canMove = true;
+    protected float distanceFromPlayer = 999f;
+    protected float nextDamageTime = 0;
+    [SerializeField] protected float damageInterval = 1f; // in seconds
+    protected bool canAttack = true;
+    protected bool inAttackRange = false;
+    protected bool inAggroRange = false;
 
-    private Vector3 direction;
+    protected Vector3 direction;
 
-    [SerializeField] private float moveStartup = 1f;
-    [SerializeField] private float damageStartup = 1f;
+    [SerializeField] protected float moveStartup = 1f;
+    [SerializeField] protected float damageStartup = 1f;
     [SerializeField] private float moveHeight = 4f;
     [SerializeField] private float damageHeight = 6f;
 
-    private bool isMoving = false;
-    private bool isAttacking = false;
-    [SerializeField] private float moveInterval = 1f;
+    protected bool isMoving = false;
+    protected bool isAttacking = false;
+    [SerializeField] protected float moveInterval = 1f;
 
     private bool enableDamage = false;
 
@@ -216,7 +216,7 @@ public class Slime : Enemy
         else animator?.SetTrigger("pain");
     }
 
-    private IEnumerator DisableMovementForSeconds(float seconds)
+    protected IEnumerator DisableMovementForSeconds(float seconds)
     {
         canMove = false;
         yield return new WaitForSeconds(seconds);
