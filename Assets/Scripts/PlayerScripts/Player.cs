@@ -159,7 +159,6 @@ public class Player : MonoBehaviour
     void GameOver()
     {
         Debug.Log("You died lol");
-        Time.timeScale = 0.1f;
         OnPlayerDeath?.Invoke();
     }
 

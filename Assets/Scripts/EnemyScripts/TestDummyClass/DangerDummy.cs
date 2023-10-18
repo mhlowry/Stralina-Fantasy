@@ -6,6 +6,8 @@ public class DangerDummy : TestDummy
 { 
     [SerializeField] private float attackSize = 3.0f;
     [SerializeField] private LayerMask playerLayer;
+    [SerializeField] protected int damageDeal = 1;
+
     protected override void Awake()
     {
         base.Awake();
@@ -22,7 +24,7 @@ public class DangerDummy : TestDummy
         hitPlayer = Physics.OverlapSphere(transform.position, attackSize, playerLayer);
 
         foreach (Collider collider in hitPlayer)
-            collider.GetComponent<Player>().TakeDamage(1);
+            collider.GetComponent<Player>().TakeDamage(damageDeal);
 
         Debug.Log("COUNTER!!!");
         base.TakeDamage(damage, knockback, direction);

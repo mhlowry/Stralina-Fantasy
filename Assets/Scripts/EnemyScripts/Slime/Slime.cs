@@ -115,9 +115,20 @@ public class Slime : Enemy
             return;
 
         if (hitTarget.gameObject.CompareTag("Player"))
+        {
+            //Debug.Log("CollisionEnter");
             base.DealDamage(attackPower, knockback, direction);
+        }
 
         enableDamage = false;
+    }
+
+    private void OnCollisionExit(Collision hitTarget)
+    {
+        if (hitTarget.gameObject.CompareTag("Player"))
+        {
+            //Debug.Log("CollisionExit");
+        }
     }
 
     /*

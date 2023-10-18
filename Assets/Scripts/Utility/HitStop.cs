@@ -25,7 +25,9 @@ public class HitStop : MonoBehaviour
     {
         waiting = true;
         yield return new WaitForSecondsRealtime(duration);
-        Time.timeScale = 1.0f;
+
+        if(!GameOverMenu.justDied && !PauseMenu.isPaused)
+            Time.timeScale = 1.0f;
         waiting = false;
     }
 }
