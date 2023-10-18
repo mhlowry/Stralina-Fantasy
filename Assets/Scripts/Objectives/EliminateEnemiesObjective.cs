@@ -2,27 +2,48 @@ using UnityEngine;
 
 public class EliminateEnemiesObjective : ObjectiveManager
 {
-    public int totalEnemies; // Total number of enemies at the start of the level
-    private int remainingEnemies; // How many enemies remain
+    public int totalEnemies;
+    private int remainingEnemies;
+
+    private void Awake()
+    {
+        Enemy.OnEnemyDestroyed += HandleEnemyDestroyed; // Subscribe to an event when an enemy is destroyed
+    }
 
     private void Start() 
     {
         InitializeObjective();
     }
-    
-    // Override the InitializeObjective method
+
+    private void OnDestroy()
+    {
+        Enemy.OnEnemyDestroyed -= HandleEnemyDestroyed; // Unsubscribe when this objective is destroyed
+    }
+
+    private void HandleEnemyDestroyed()
+    {
+        remainingEnemies--;
+        UpdateObjectiveDescription();
+        CheckObjectiveCompletion();
+    }
+
     public override void InitializeObjective()
     {
-        base.InitializeObjective(); // Call parent's initialization
-        remainingEnemies = FindObjectsOfType<Enemy>().Length; 
-        description = "Eliminate all " + totalEnemies + " enemies on the map";
+        base.InitializeObjective();
+        totalEnemies = FindObjectsOfType<Enemy>().Length;
+        remainingEnemies = totalEnemies;
+        UpdateObjectiveDescription();
+    }
+
+    private void UpdateObjectiveDescription()
+    {
+        description = "Urgent Quest!\n\n Eliminate all " + totalEnemies + " enemies on the map!\n\n (" + remainingEnemies + " remaining)";
+        base.UpdateObjectiveDescription();
         Debug.Log(description);
     }
 
-    // Override the CheckObjectiveCompletion method
     public override void CheckObjectiveCompletion()
     {
-        remainingEnemies = FindObjectsOfType<Enemy>().Length;
         if (remainingEnemies <= 0)
         {
             CompleteObjective();

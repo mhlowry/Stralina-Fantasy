@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] GameObject gfxObject;
     private CinemachineImpulseSource impulseSource;
+    public static event System.Action OnEnemyDestroyed;
 
     protected virtual void Awake()
     {
@@ -138,6 +139,7 @@ public class Enemy : MonoBehaviour
         //wait a second and a half before destorying the object
         yield return new WaitForSeconds(1.5f);
         Destroy(gameObject);
+        OnEnemyDestroyed?.Invoke();
     }
 
     public float playerDistance()
