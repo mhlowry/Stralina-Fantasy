@@ -26,11 +26,19 @@ public abstract class ObjectiveManager : MonoBehaviour
 
     public virtual void CheckObjectiveCompletion() { }
 
-    public virtual void CompleteObjective()
+    public virtual void CompleteObjective() 
     {
         isCompleted = true;
         Debug.Log("Objective completed: " + description);
+
+        if (objectiveDisplay != null)
+        {
+            description = "Objective Complete!";
+            objectiveDisplay.color = Color.green;
+        }
+        ShowObjectiveBriefly();
     }
+
 
     protected void UpdateObjectiveDescription()
     {
@@ -46,7 +54,18 @@ public abstract class ObjectiveManager : MonoBehaviour
             objectiveDisplay.text = description;
             objectiveDisplay.gameObject.SetActive(true); // Make it visible
             StartCoroutine(BlinkText());  // Start blinking
-            StartCoroutine(HideObjectiveAfterSeconds(5f)); // Hide after 5 seconds
+            StartCoroutine(HideObjectiveAfterSecondsAndReset(5f)); // Hide after 5 seconds
+        }
+    }
+
+    private System.Collections.IEnumerator HideObjectiveAfterSecondsAndReset(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        if (objectiveDisplay != null)
+        {
+            StopCoroutine(BlinkText());  // Stop blinking
+            objectiveDisplay.color = Color.white;  // Reset color to white
+            objectiveDisplay.gameObject.SetActive(false);
         }
     }
 
