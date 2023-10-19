@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerCombat))]
@@ -42,8 +43,11 @@ public class Player : MonoBehaviour
 
     //REMEMBERR TO DRAG GFX INTO ANIM
     [SerializeField] private GameObject gfxObj;
-    [SerializeField] private ResourceBar healthBar;
-    [SerializeField] private ResourceBar meterBar;
+    private ResourceBar healthBar;
+    private ResourceBar meterBar;
+    private ResourceBar expBar;
+
+    private TextMeshProUGUI levelText;
 
     private SpriteRenderer spriteRendererGFX;
     protected Animator animGFX;
@@ -56,16 +60,29 @@ public class Player : MonoBehaviour
 
         spriteRendererGFX = gfxObj.GetComponent<SpriteRenderer>();
         animGFX = gfxObj.GetComponent<Animator>();
+
+        try
+        {
+            healthBar = GameObject.Find("HealthBar").GetComponent<ResourceBar>();
+            meterBar = GameObject.Find("MeterBar").GetComponent<ResourceBar>();
+            expBar = GameObject.Find("ExpBar").GetComponent<ResourceBar>();
+            levelText = GameObject.Find("LevelText").GetComponent<TextMeshProUGUI>();
+        }
+        catch { }
     }
 
     private void Start()
     {
         meterBar.SetMaxResource((int)maxAbilityMeter);
-        curAbilityMeter = 0.0f;
         meterBar.SetResource((int)curAbilityMeter);
 
         healthBar.SetMaxResource(maxHealth);
         curHealth = maxHealth;
+
+        expBar.SetMaxResource(expToLevelUp[playerLevel - 1]);
+        expBar.SetResource(curExp);
+
+        levelText.text = playerLevel.ToString();
     }
 
     protected virtual void Update()
@@ -172,6 +189,7 @@ public class Player : MonoBehaviour
             return;
 
         curExp += expGain;
+        expBar.SetResource(curExp);
 
         if (curExp >= expToLevelUp[playerLevel - 1])
         {
@@ -186,6 +204,10 @@ public class Player : MonoBehaviour
 
         if (playerLevel == maxLevel)
             curExp = expToLevelUp[maxLevel - 1];
+
+        expBar.SetMaxResource(expToLevelUp[playerLevel - 1]);
+        expBar.SetResource(curExp);
+        levelText.text = playerLevel.ToString();
     }
 
     //Stats-related functions

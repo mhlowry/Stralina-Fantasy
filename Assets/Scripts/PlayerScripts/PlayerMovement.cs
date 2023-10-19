@@ -132,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
 
         curRollSpeed = rollSpeed;
 
-        if(usedRolls == 0)
+        if (usedRolls == 0)
             initialRollTime = Time.time;
 
         usedRolls++;
@@ -152,8 +152,8 @@ public class PlayerMovement : MonoBehaviour
             playerVisual.transform.localScale = new Vector3(-1.0f * playerOrientation, 1.0f, 1.0f);
         }
     }
-    
-    private void ApplyGravity()
+
+    public void ApplyGravity()
     {
         if (characterController.isGrounded && velocity < 0.0f)
         {
@@ -192,5 +192,29 @@ public class PlayerMovement : MonoBehaviour
         input = context.ReadValue<Vector2>();
         //UnityEngine.Debug.Log("input: " + input);
         direction = new Vector3(input.x, 0.0f, input.y);
+    }
+
+    //this function reduces the problem where enemies would just go like fucking flying
+    //if you tapped them a little too hard.  Haven't found a complete solution yet
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        float pushPower = 1.5f;
+        Rigidbody body = hit.collider.attachedRigidbody;
+
+        // no rigidbody
+        if (body == null || body.isKinematic)
+            return;
+
+        // We dont want to push objects below us
+        if (hit.moveDirection.y < -0.1)
+            return;
+
+        // Calculate push direction from move direction,
+        // we only push objects to the sides never up and down
+        Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+
+        // Apply the push
+        body.velocity = pushDir * pushPower;
+
     }
 }

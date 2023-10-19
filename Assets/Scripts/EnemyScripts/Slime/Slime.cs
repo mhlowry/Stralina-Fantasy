@@ -143,53 +143,6 @@ public class Slime : Enemy
         }
     }
 
-    private void OnCollisionExit(Collision hitTarget)
-    {
-        if (hitTarget.gameObject.CompareTag("Player"))
-        {
-            //Debug.Log("CollisionExit");
-        }
-    }
-
-    /*
-    private void SlideTowardsPlayer()
-    {
-        distanceFromPlayer = playerDistance();
-        inAggroRange = distanceFromPlayer <= aggroDistance;
-        inAttackRange = distanceFromPlayer <= attackDistance;
-        
-        // if player exists, is within aggro distance, and move isn't on cooldown
-        if (playerObject != null && inAggroRange && canMove)
-        {
-            animator?.SetBool("isAggro", true);
-            Vector3 direction = playerObject.transform.position - transform.position;
-            Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
-
-            // if within attack distance, attack
-            if (inAttackRange)
-            {
-                animator?.SetBool("isAttack", true);
-                if (canAttack)
-                {
-                    base.DealDamage(attackPower, knockback, direction);
-                    nextDamageTime = Time.time + damageInterval;
-                }
-            }
-            // else, move towards player
-            else
-            {
-                animator?.SetBool("isAttack", false);
-                rb.velocity = new Vector3(horizontalDirection.x * moveSpeed, rb.velocity.y, horizontalDirection.z * moveSpeed);
-            }
-        }
-        else
-        {
-            animator?.SetBool("isAggro", false);
-            animator?.SetBool("isAttack", false);
-        }
-    }
-    */
-
     public override void TakeDamage(int damage, float knockback, Vector3 direction)
     {
         //start the disablemove so it doesn't start mid combo

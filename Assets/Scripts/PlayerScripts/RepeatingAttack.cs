@@ -69,9 +69,6 @@ public class RepeatingAttack : PlayerAttack
 
                         //this is the main attack shit
                         thisEnemy.TakeDamage((int)(GetDamage() * player.GetAttackScale() * dmgMultiplier), GetKnockBack() * player.GetKnockBScale(), knockbackDirection);
-                        if (thisEnemy.GetIsDead())
-                            player.GainExp(thisEnemy.GetExpWorth());
-
                         loggedEnemies.Add(enemy);
                     }
                 }
