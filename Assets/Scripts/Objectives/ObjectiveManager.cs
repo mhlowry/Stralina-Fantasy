@@ -39,8 +39,7 @@ public abstract class ObjectiveManager : MonoBehaviour
         ShowObjectiveBriefly();
     }
 
-
-    protected void UpdateObjectiveDescription()
+    protected virtual void UpdateObjectiveDescription()
     {
         if (questInfoText != null)
             questInfoText.text = description;

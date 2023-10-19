@@ -17,7 +17,8 @@ public class Enemy : MonoBehaviour
     protected Animator animator;
 
     //Game components that will be generally needed
-    [SerializeField] protected Rigidbody rb;
+    protected Rigidbody rb;
+    protected Collider selfCollider;
     private Player playerScript;
     protected GameObject playerObject;
 
@@ -37,11 +38,12 @@ public class Enemy : MonoBehaviour
         //sets enemy's current health to max health on awake
         curHealthPoints = maxHealthPoints;
 
-        //Gets rigidbody
+        //Gets rigidbody && Collider
         rb = GetComponent<Rigidbody>();
+        selfCollider = GetComponent<Collider>();
 
         //if animator exists, gets animator
-        if(gfxObject != null )
+        if (gfxObject != null )
             animator = gfxObject.GetComponent<Animator>();
 
         //Find Player
@@ -49,7 +51,7 @@ public class Enemy : MonoBehaviour
 
         if (playerObject != null)
         {
-            playerScript = playerObject.GetComponent<SwordMan>();
+            playerScript = playerObject.GetComponent<Player>();
             //playerRb = playerObject.GetComponent<Rigidbody>();
         }
 
@@ -58,6 +60,10 @@ public class Enemy : MonoBehaviour
 
     public virtual void TakeDamage(int damage, float knockBack, Vector3 direction)
     {
+        //don't take damage if you're dead, duh
+        if (isDead)
+            return;
+
         //add screenshake on impact
         CameraShake.instance.ShakeCamera(impulseSource);
 
@@ -108,7 +114,7 @@ public class Enemy : MonoBehaviour
     protected virtual void Die()
     {
         isDead = true;
-
+        playerScript.GainExp(expWorth);
         if (animator != null)
         {
             animator.SetTrigger("died");

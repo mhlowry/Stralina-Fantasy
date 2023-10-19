@@ -69,5 +69,9 @@ public class ProjectileProperties : MonoBehaviour
                 thisEnemy.TakeDamage(damage, knockback, direction);
             }
         }
+        else if(targetMaskInt == LayerMask.NameToLayer("Player"))
+        {
+            //Attack the player
+        }
     }
 }

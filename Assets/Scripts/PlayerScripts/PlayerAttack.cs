@@ -90,9 +90,6 @@ public class PlayerAttack
 
                     //this is the main attack shit
                     thisEnemy.TakeDamage((int)(damage * player.GetAttackScale() * dmgMultiplier), knockBack * player.GetKnockBScale(), knockbackDirection);
-                    if (thisEnemy.GetIsDead())
-                        player.GainExp(thisEnemy.GetExpWorth());
-
                     loggedEnemies.Add(enemy);
                 }
             }

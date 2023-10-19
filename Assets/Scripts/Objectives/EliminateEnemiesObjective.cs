@@ -35,8 +35,7 @@ public class EliminateEnemiesObjective : ObjectiveManager
         base.InitializeObjective(); 
     }
 
-
-    private void UpdateObjectiveDescription()
+    protected override void UpdateObjectiveDescription()
     {
         description = "Urgent Quest!\n\n Eliminate all " + totalEnemies + " enemies on the map!\n\n (" + remainingEnemies + " remaining)";
         base.UpdateObjectiveDescription();
