@@ -363,7 +363,7 @@ public class PlayerCombat : MonoBehaviour
             }
         }
 
-        foreach (PlayerAttack projectile in projectileAttacks)
+/*        foreach (PlayerAttack projectile in projectileAttacks)
         {
             foreach (HitBox hitBox in projectile.GetHitBoxes())
             {
@@ -371,7 +371,7 @@ public class PlayerCombat : MonoBehaviour
                     continue;
                 Gizmos.DrawWireSphere(hitBox.GetPosition(), hitBox.GetSize());
             }
-        }
+        }*/
 
         //Look at the hitboxes for heavy attacks
         foreach (PlayerAttack rapidfire in repeatingAttacks)

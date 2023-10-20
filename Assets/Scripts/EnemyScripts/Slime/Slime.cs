@@ -4,18 +4,29 @@ using UnityEngine;
 
 public class Slime : Enemy
 {
+    private Coroutine disableMoveCoroutine;
+
     public float moveSpeed = 1f;
     public float damageSpeed = 2f;
-    private Coroutine disableMoveCoroutine;
+
     [SerializeField] protected float aggroDistance = 10f;
     [SerializeField] protected float attackDistance = 1f;
+
     [SerializeField] protected float attackPower = 1f;
     [SerializeField] private float knockback = 1f;
-    protected bool canMove = true;
+
     protected float distanceFromPlayer = 999f;
     protected float nextDamageTime = 0;
+
+    protected bool isMoving = false;
+    protected bool isAttacking = false;
+    //How long before can move again
+    [SerializeField] protected float moveInterval = 1f;
+    //How long before can attack again
     [SerializeField] protected float damageInterval = 1f; // in seconds
     protected bool canAttack = true;
+    protected bool canMove = true;
+
     protected bool inAttackRange = false;
     protected bool inAggroRange = false;
 
@@ -25,10 +36,6 @@ public class Slime : Enemy
     [SerializeField] protected float damageStartup = 1f;
     [SerializeField] private float moveHeight = 4f;
     [SerializeField] private float damageHeight = 6f;
-
-    protected bool isMoving = false;
-    protected bool isAttacking = false;
-    [SerializeField] protected float moveInterval = 1f;
 
     private bool enableDamage = false;
 
@@ -62,6 +69,7 @@ public class Slime : Enemy
     {
         animator?.SetBool("isJumping", isMoving);
         animator?.SetBool("isAttack", isAttacking);
+        direction = playerObject.transform.position - transform.position;
     }
 
     private void JumpTowardsPlayer()
@@ -91,7 +99,6 @@ public class Slime : Enemy
         yield return new WaitForSeconds(startup); //prep time before jump
 
         //I have to do this math and shit in the coroutine because otherwise it gets the player's direction wayyyyy too early
-        direction = playerObject.transform.position - transform.position;
         Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
 
         //more force behind jump when attacking
@@ -163,7 +170,7 @@ public class Slime : Enemy
         {
             Debug.Log(gameObject.name + " Fucking Died");
             canMove = false;
-            base.Die();
+            Die();
             StopCoroutine(disableMoveCoroutine);
         }
         else animator?.SetTrigger("pain");
