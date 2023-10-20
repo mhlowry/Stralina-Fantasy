@@ -32,6 +32,7 @@ public class MetalSlime : Slime
     {
         animator?.SetBool("isMoving", isMoving);
         animator?.SetBool("isAttack", isAttacking);
+        direction = playerObject.transform.position - transform.position;
     }
 
     private void SlideTowardsPlayer()
@@ -70,7 +71,12 @@ public class MetalSlime : Slime
         nextDamageTime = Time.time + damageInterval;
         canAttack = false;
         isAttacking = false;
+    }
 
+    private void OnDrawGizmosSelected()
+    {
+        //Draw the hitbox
+        Gizmos.DrawWireSphere(attackPoint.position, attackSize);
     }
 
     protected void PlayAttackVFX(Vector3 direction)

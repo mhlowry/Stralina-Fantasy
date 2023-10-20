@@ -7,8 +7,8 @@ public class ProjectileProperties : MonoBehaviour
 {
     private float speed = 20f;
     private float duration = 10f;
-    protected int damage;
-    protected float knockback;
+    protected int damage = 1;
+    protected float knockback = 3f;
     protected UnityEngine.Vector3 direction;
 
     private float initialTime;
@@ -26,19 +26,29 @@ public class ProjectileProperties : MonoBehaviour
         this.duration = duration;
         this.damage = damage;
         this.knockback = knockback;
+        this.direction = direction.normalized;
+    }
+
+    //If you just want to use vector value rather than adding speed to a normalized vector
+    public virtual void InitializeProjectile(float duration, int damage, float knockback, UnityEngine.Vector3 direction)
+    {
+        this.speed = 1f;
+        this.duration = duration;
+        this.damage = damage;
+        this.knockback = knockback;
         this.direction = direction;
     }
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        AudioManager.instance.Play(soundName);
     }
 
     protected virtual void Start()
     {
         initialTime = Time.time;
-        rb.velocity = transform.forward * speed;
+        rb.velocity = direction * speed;
+        AudioManager.instance.Play(soundName);
     }
 
     private void Update()
@@ -67,11 +77,15 @@ public class ProjectileProperties : MonoBehaviour
             {
                 //this is the main attack shit
                 thisEnemy.TakeDamage(damage, knockback, direction);
+                loggedEnemies.Add(hitTarget);
             }
         }
         else if(targetMaskInt == LayerMask.NameToLayer("Player"))
         {
             //Attack the player
+            Player thisPlayer = targetObject.GetComponent<Player>();
+            //this is the main attack shit
+            thisPlayer.TakeDamage(damage);
         }
     }
 }

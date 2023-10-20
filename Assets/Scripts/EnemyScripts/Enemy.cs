@@ -9,17 +9,17 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] protected int maxHealthPoints = 10;
-    [SerializeField] private int expWorth;
+    [SerializeField] protected int expWorth;
     [SerializeField] protected float knockbackMultiplier = 1f;
     protected int curHealthPoints;
     protected bool isChase = true;
-    bool isDead = false;
+    protected bool isDead = false;
     protected Animator animator;
 
     //Game components that will be generally needed
     protected Rigidbody rb;
     protected Collider selfCollider;
-    private Player playerScript;
+    protected Player playerScript;
     protected GameObject playerObject;
 
     //dropping items and whatnot
@@ -137,13 +137,13 @@ public class Enemy : MonoBehaviour
             Item itemScript = item.GetComponent<Item>();
             if ( 1 == Random.Range(1, itemScript.GetRarity()))
             {
-                GameObject.Instantiate(item, gameObject.transform.position, gameObject.transform.rotation);
+                Instantiate(item, gameObject.transform.position, gameObject.transform.rotation);
                 break;
             }
         }
 
-        //wait a second and a half before destorying the object
-        yield return new WaitForSeconds(1.5f);
+        //wait like 2ish seconds before destorying the object
+        yield return new WaitForSeconds(2.5f);
         Destroy(gameObject);
         OnEnemyDestroyed?.Invoke();
     }
