@@ -155,6 +155,7 @@ MonoBehaviour:
   explosionSize: 2
   explosionDelay: 1.65
   explosionDamage: 4
+  explosionKnockback: 7
   projectilePrefab: {fileID: 3859750705531175438, guid: c13a29bd10e664b44a2c1bfa93e10b17, type: 3}
   projectileSpeed: 4
   projectileDuration: 8

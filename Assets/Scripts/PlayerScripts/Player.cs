@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Cinemachine;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,6 +8,7 @@ using TMPro;
 
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerCombat))]
+[RequireComponent(typeof(CinemachineImpulseSource))]
 public class Player : MonoBehaviour
 {
     //STATS
@@ -41,6 +43,11 @@ public class Player : MonoBehaviour
     bool isInvul = false;
     bool invulOverride = false;
 
+    //fields for knockback
+    [SerializeField] private float decelerationRate = 1.0f;
+    protected float takenKnockback;
+    protected Vector3 currentKnockbackDir;
+
     //REMEMBERR TO DRAG GFX INTO ANIM
     [SerializeField] private GameObject gfxObj;
     private ResourceBar healthBar;
@@ -49,17 +56,23 @@ public class Player : MonoBehaviour
 
     private TextMeshProUGUI levelText;
 
+    private CharacterController characterController;
     private SpriteRenderer spriteRendererGFX;
+    private CinemachineImpulseSource impulseSource;
     protected Animator animGFX;
     protected PlayerCombat playerCombat;
+    protected PlayerMovement playerMovement;
 
     //Doing certain things in awake and some things in start is really important apparently
     private void Awake()
     {
         playerCombat = GetComponent<PlayerCombat>();
+        playerMovement = GetComponent<PlayerMovement>();
 
         spriteRendererGFX = gfxObj.GetComponent<SpriteRenderer>();
         animGFX = gfxObj.GetComponent<Animator>();
+        impulseSource = GetComponent<CinemachineImpulseSource>();
+        characterController = GetComponent<CharacterController>();
 
         try
         {
@@ -94,6 +107,17 @@ public class Player : MonoBehaviour
             animGFX.SetBool("inPain", false);
             isStunned = false;
         }
+        else
+        {
+            //adds deceleration to the knockback being taken
+            float deceleration = decelerationRate * Time.deltaTime;
+            takenKnockback = Mathf.Max(0.0f, takenKnockback - deceleration);
+
+            //uses the direction the player is imputting in playerMovement
+            characterController.Move(currentKnockbackDir * takenKnockback * Time.deltaTime);
+            //makes sure that gravity is still being applied while attacking
+            playerMovement.ApplyGravity();
+        }
 
         if (Time.time - timeofHit > hitInvulTime && !invulOverride)
         {
@@ -111,7 +135,7 @@ public class Player : MonoBehaviour
     public int GetCurHealth() {  return curHealth; }
     public bool IsStunned() {  return isStunned; }
 
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage, float knockBack, Vector3 enemyPosition)
     {
         //do not take damage if invulnerable
         if (isInvul)
@@ -125,6 +149,28 @@ public class Player : MonoBehaviour
 
         //play the take damage animation
         animGFX.SetBool("inPain", true);
+        //shake the camera
+        CameraShake.instance.ShakeCamera(impulseSource);
+        //hitstop on small hits if less than hitstop on big hits
+        if (damage < 4)
+        {
+            HitStop.instance.Stop(0.15f);
+            AudioManager.instance.PlayAll(new string[] {"damage_2", "damage_3"});
+        }
+        else
+        {
+            HitStop.instance.Stop(0.4f);
+            AudioManager.instance.PlayAll(new string[] {"heavydamage_1", "heavydamage_2", "heavydamage_3" });
+        }
+
+        //deal knockback to the player
+        Vector3 playerPosition = transform.position;
+        Vector3 relativePos = playerPosition - enemyPosition;
+        Vector3 knockbackDir = relativePos.normalized;
+
+        currentKnockbackDir = knockbackDir;
+        takenKnockback = knockBack;
+        //begin the blinking effect
         StartCoroutine(BlinkEffect());
 
         //update health bar
@@ -147,7 +193,9 @@ public class Player : MonoBehaviour
     {
         while (isInvul)
         {
-            spriteRendererGFX.enabled = false;
+            //do not set to false if timescale is zero
+            if(Time.timeScale > 0)
+                spriteRendererGFX.enabled = false;
 
             yield return new WaitForSeconds(0.1f);
 
@@ -175,7 +223,7 @@ public class Player : MonoBehaviour
 
     void GameOver()
     {
-        Debug.Log("You died lol");
+        AudioManager.instance.Play("player_death");
         OnPlayerDeath?.Invoke();
     }
 

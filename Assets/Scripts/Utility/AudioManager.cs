@@ -42,6 +42,21 @@ public class AudioManager : MonoBehaviour
         soundSelection[UnityEngine.Random.Range(0, soundSelection.Length)].source.Play();
     }
 
+    public void PlayAll(string[] names)
+    {
+        //So like I don't thiiiiiiiiink it'll delay each sound effect.
+        foreach (string name in names)
+        {
+            Sound s = Array.Find(sounds, sound => sound.name == name);
+            if (s == null)
+            {
+                Debug.LogWarning("Sound: " + name + " not found!");
+                return;
+            }
+            s.source.Play();
+        }
+    }
+
     public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);

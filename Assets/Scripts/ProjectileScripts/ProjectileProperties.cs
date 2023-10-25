@@ -85,7 +85,7 @@ public class ProjectileProperties : MonoBehaviour
             //Attack the player
             Player thisPlayer = targetObject.GetComponent<Player>();
             //this is the main attack shit
-            thisPlayer.TakeDamage(damage);
+            thisPlayer.TakeDamage(damage, knockback, transform.position);
         }
     }
 }

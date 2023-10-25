@@ -53,19 +53,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        //Prevents user from doing jack shit if they're not allowed to do jack shit
-        if (!player.CanInput())
-            return;
 
         ApplyGravity();
+
         ApplyRotation();
         FlipCheck();
-
-        //Do not move player if attacking or stunned
-        if (anim.GetBool("comboOver") && !anim.GetBool("isBlocking") && !player.IsStunned() && !isRolling)
-        {
-            ApplyMovement();
-        }
+        ApplyMovement();
 
         //STUFF TO DO WITH ROLLING VVVVVVVVVV I DONT KNOW WHY THERES SO MUCH BUT THERE IS
         //stop rolling if rolling
@@ -109,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
     public void CallRoll(InputAction.CallbackContext context)
     {
         //ensures that roll is only called once per button, and only if the player is actionable and can roll
-        if (!context.started || player.IsStunned() || !canRoll || !player.CanInput()) // || !anim.GetBool("comboOver")
+        if (!context.started || !CanCallRoll()) // || !anim.GetBool("comboOver")
             return;
 
         //When the player is still rolling but the roll button was just pressed.
@@ -120,6 +113,15 @@ public class PlayerMovement : MonoBehaviour
         }
 
         CharacterRoll();
+    }
+
+    /*This function is called by the "PlayerInput" Object to move the player
+    based on Unity's input system*/
+    public void Move(InputAction.CallbackContext context)
+    {
+        input = context.ReadValue<Vector2>();
+        //UnityEngine.Debug.Log("input: " + input);
+        direction = new Vector3(input.x, 0.0f, input.y);
     }
 
     private void CharacterRoll()
@@ -182,16 +184,27 @@ public class PlayerMovement : MonoBehaviour
     {
         //plays walking animation & moves player
         anim.SetFloat("direction", Mathf.Abs(direction.x) + Mathf.Abs(direction.z));
-        characterController.Move(direction * (speed * player.GetMoveSpeedScale()) * Time.deltaTime);
+        if (CanCallMove())
+            characterController.Move(direction * (speed * player.GetMoveSpeedScale()) * Time.deltaTime);
+        else
+            characterController.Move(new Vector3(0.0f, direction.y, 0.0f) * Time.deltaTime);
     }
 
-    /*This function is called by the "PlayerInput" Object to move the player
-    based on Unity's input system*/
-    public void Move(InputAction.CallbackContext context)
+    private bool CanCallMove()
     {
-        input = context.ReadValue<Vector2>();
-        //UnityEngine.Debug.Log("input: " + input);
-        direction = new Vector3(input.x, 0.0f, input.y);
+        return
+            !player.IsStunned()             //is not stunned
+            && !isRolling                   //is not rolling
+            && anim.GetBool("comboOver")    //is not attacking
+            && !anim.GetBool("isBlocking");  //is not blocking
+    }
+
+    private bool CanCallRoll()
+    {
+        return
+            !player.IsStunned()     //is not stunned
+            && canRoll              // can roll
+            && player.CanInput();   //can input
     }
 
     //this function reduces the problem where enemies would just go like fucking flying
