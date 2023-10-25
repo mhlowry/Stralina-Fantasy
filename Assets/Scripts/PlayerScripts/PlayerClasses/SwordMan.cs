@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class SwordMan : Player
 {
@@ -31,7 +30,7 @@ public class SwordMan : Player
         base.Update();
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(int damage, float knockBack, UnityEngine.Vector3 enemyPosition)
     {
         if (isBlocking)
         {
@@ -42,7 +41,7 @@ public class SwordMan : Player
         }
         else
         {
-            base.TakeDamage(damage);
+            base.TakeDamage(damage, knockBack, enemyPosition);
         }
     }
 

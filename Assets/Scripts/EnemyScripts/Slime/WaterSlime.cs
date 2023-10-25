@@ -9,6 +9,7 @@ public class WaterSlime : Slime
     [SerializeField] float explosionSize;
     [SerializeField] float explosionDelay;
     [SerializeField] int explosionDamage;
+    [SerializeField] float explosionKnockback;
     [SerializeField] private GameObject projectilePrefab;
     //[SerializeField] GameObject vfxObj;
 
@@ -95,7 +96,7 @@ public class WaterSlime : Slime
         {
             // Set the properties of the newly instantiated projectile
             //make projectile speed 1f because our force comes from the valuse in launchDirection.  Using gravity-based projectile is compllicated so this is good practice
-            projectile.InitializeProjectile(projectileDuration, (int)(attackPower), 1f, launchDirection);
+            projectile.InitializeProjectile(projectileDuration, attackPower, 1f, launchDirection);
         }
 
         nextDamageTime = Time.time + damageInterval;
@@ -119,7 +120,7 @@ public class WaterSlime : Slime
 
         Collider[] hitPlayer = Physics.OverlapSphere(explosionPoint.position, explosionSize, playerLayer);
         foreach (Collider collider in hitPlayer)
-            collider.GetComponent<Player>().TakeDamage(explosionDamage);
+            collider.GetComponent<Player>().TakeDamage(explosionDamage, explosionKnockback, transform.position);
     }
 
     private void OnDrawGizmosSelected()

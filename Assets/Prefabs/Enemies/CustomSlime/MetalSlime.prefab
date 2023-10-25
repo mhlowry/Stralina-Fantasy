@@ -110,13 +110,13 @@ MonoBehaviour:
   aggroDistance: 10
   attackDistance: 3
   attackPower: 1
-  knockback: 1
+  knockback: 4
+  moveInterval: 2
   damageInterval: 6
   moveStartup: 1.5
   damageStartup: 0.8
   moveHeight: 0
   damageHeight: 0
-  moveInterval: 2
   playerLayer:
     serializedVersion: 2
     m_Bits: 64

@@ -66,7 +66,7 @@ public class MetalSlime : Slime
 
         Collider[] hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, playerLayer);
         foreach (Collider collider in hitPlayer)
-            collider.GetComponent<Player>().TakeDamage((int)attackPower);
+            base.DealDamage(attackPower, knockback);
 
         nextDamageTime = Time.time + damageInterval;
         canAttack = false;

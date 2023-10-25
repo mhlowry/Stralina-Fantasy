@@ -90,13 +90,13 @@ public class Enemy : MonoBehaviour
     }
 
     // Deal damage to player
-    protected virtual void DealDamage(float damage, float knockback, Vector3 direction)
+    protected virtual void DealDamage(int damage, float knockback)
     {
         if (playerObject != null)
         {
             if (playerScript != null)
             {
-                playerScript.TakeDamage(1);
+                playerScript.TakeDamage(damage, knockback, transform.position);
             }
             else
             {

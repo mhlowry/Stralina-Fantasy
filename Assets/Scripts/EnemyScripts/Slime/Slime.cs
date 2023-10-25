@@ -12,8 +12,8 @@ public class Slime : Enemy
     [SerializeField] protected float aggroDistance = 10f;
     [SerializeField] protected float attackDistance = 1f;
 
-    [SerializeField] protected float attackPower = 1f;
-    [SerializeField] private float knockback = 1f;
+    [SerializeField, Range(0, 14)] protected int attackPower = 1;
+    [SerializeField] protected float knockback = 1f;
 
     protected float distanceFromPlayer = 999f;
     protected float nextDamageTime = 0;
@@ -131,7 +131,7 @@ public class Slime : Enemy
         if (hitTarget.gameObject.CompareTag("Player"))
         {
             //Debug.Log("CollisionEnter");
-            base.DealDamage(attackPower, knockback, direction);
+            base.DealDamage(attackPower, knockback);
             enableDamage = false;
         }
     }
@@ -145,7 +145,7 @@ public class Slime : Enemy
         if (hitTarget.gameObject.CompareTag("Player"))
         {
             //Debug.Log("CollisionEnter");
-            base.DealDamage(attackPower, knockback, direction);
+            base.DealDamage(attackPower, knockback);
             enableDamage = false;
         }
     }

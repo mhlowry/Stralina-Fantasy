@@ -24,7 +24,7 @@ public class DangerDummy : TestDummy
         hitPlayer = Physics.OverlapSphere(transform.position, attackSize, playerLayer);
 
         foreach (Collider collider in hitPlayer)
-            collider.GetComponent<Player>().TakeDamage(damageDeal);
+            collider.GetComponent<Player>().TakeDamage(damageDeal, knockback, direction);
 
         Debug.Log("COUNTER!!!");
         base.TakeDamage(damage, knockback, direction);

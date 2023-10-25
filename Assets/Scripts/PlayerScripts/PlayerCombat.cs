@@ -109,10 +109,10 @@ public class PlayerCombat : MonoBehaviour
             float deceleration = decelerationRate * Time.deltaTime;
             attackImpact = Mathf.Max(0.0f, attackImpact - deceleration);
 
-            //makes sure that gravity is still being applied while attacking
-            playerMovement.ApplyGravity();
             //uses the direction the player is imputting in playerMovement
             characterController.Move(attackDirection * attackImpact * Time.deltaTime);
+            //makes sure that gravity is still being applied while attacking
+            playerMovement.ApplyGravity();
         }
     }
 
