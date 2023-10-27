@@ -182,6 +182,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyMovement()
     {
+        if (player.isTeleporting)
+            return;
+
         //plays walking animation & moves player
         anim.SetFloat("direction", Mathf.Abs(direction.x) + Mathf.Abs(direction.z));
         if (CanCallMove())
