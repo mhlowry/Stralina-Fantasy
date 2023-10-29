@@ -26,7 +26,8 @@ public class AreaTransition : MonoBehaviour
 
         if (hitTarget.gameObject.layer == LayerMask.NameToLayer("Player") && !isDestination)
         {
-            areaSpawnPoint.GetComponent<AreaTransition>().isDestination = true;
+            if(areaSpawnPoint.GetComponent<AreaTransition>() != null)
+                areaSpawnPoint.GetComponent<AreaTransition>().isDestination = true;
             playerObject.GetComponent<Player>().isTeleporting = true;
 
             if (teleportingCoroutine != null)

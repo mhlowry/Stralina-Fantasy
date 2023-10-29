@@ -199,7 +199,8 @@ public class PlayerMovement : MonoBehaviour
             !player.IsStunned()             //is not stunned
             && !isRolling                   //is not rolling
             && anim.GetBool("comboOver")    //is not attacking
-            && !anim.GetBool("isBlocking");  //is not blocking
+            && !anim.GetBool("isBlocking")  //is not blocking
+            && player.CanInput();           //can input
     }
 
     private bool CanCallRoll()

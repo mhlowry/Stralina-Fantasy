@@ -30,6 +30,8 @@ public class Slime : Enemy
     protected bool inAttackRange = false;
     protected bool inAggroRange = false;
 
+    protected bool hitMidAttack = false;
+
     protected Vector3 direction;
 
     [SerializeField] protected float moveStartup = 1f;
@@ -156,6 +158,9 @@ public class Slime : Enemy
         if (disableMoveCoroutine != null)
             StopCoroutine(disableMoveCoroutine);
 
+        if (isAttacking)
+            hitMidAttack = true;
+
         disableMoveCoroutine = StartCoroutine(DisableMovementForSeconds(1f));
 
         //inflict damage
@@ -168,7 +173,7 @@ public class Slime : Enemy
         //make sure they're not already dying, prevent from calling "die" twice
         if(curHealthPoints <= 0 && !animator.GetBool("isDead"))
         {
-            Debug.Log(gameObject.name + " Fucking Died");
+            //Debug.Log(gameObject.name + " Fucking Died");
             canMove = false;
             Die();
             StopCoroutine(disableMoveCoroutine);

@@ -62,6 +62,16 @@ public class MetalSlime : Slime
     private IEnumerator MetalAttack()
     {
         yield return new WaitForSeconds(damageStartup);
+
+        if (hitMidAttack)
+        {
+            nextDamageTime = Time.time + damageInterval;
+            canAttack = false;
+            isAttacking = false;
+            hitMidAttack = false;
+            yield break;
+        }
+
         PlayAttackVFX(direction);
 
         Collider[] hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, playerLayer);

@@ -51,7 +51,7 @@ public class ProjectileProperties : MonoBehaviour
         AudioManager.instance.Play(soundName);
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if(Time.time - initialTime > duration)
         {

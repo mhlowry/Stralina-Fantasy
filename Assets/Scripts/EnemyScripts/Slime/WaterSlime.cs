@@ -73,6 +73,15 @@ public class WaterSlime : Slime
         yield return new WaitForSeconds(damageStartup);
         //PlayAttackVFX(direction);
 
+        if (hitMidAttack)
+        {
+            nextDamageTime = Time.time + damageInterval;
+            canAttack = false;
+            isAttacking = false;
+            hitMidAttack = false;
+            yield break;
+        }
+
         distanceFromPlayer = playerDistance();
         float duration = distanceFromPlayer / projectileSpeed;
 

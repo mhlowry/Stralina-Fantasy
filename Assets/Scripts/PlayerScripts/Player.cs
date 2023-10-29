@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
 
     private TextMeshProUGUI levelText;
 
-    public bool isTeleporting;
+    [HideInInspector] public bool isTeleporting;
 
     private CharacterController characterController;
     private SpriteRenderer spriteRendererGFX;
@@ -258,6 +258,8 @@ public class Player : MonoBehaviour
         expBar.SetMaxResource(expToLevelUp[playerLevel - 1]);
         expBar.SetResource(curExp);
         levelText.text = playerLevel.ToString();
+        if(playerLevel == maxLevel)
+            expBar.gameObject.SetActive(false);
     }
 
     //Stats-related functions
