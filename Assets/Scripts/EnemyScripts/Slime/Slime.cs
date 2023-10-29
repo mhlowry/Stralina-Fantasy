@@ -50,7 +50,7 @@ public class Slime : Enemy
     {
         //SlideTowardsPlayer();
 
-        if (!isMoving)
+        if (!isMoving && !isDead)
             JumpTowardsPlayer();
 
         if (nextDamageTime <= Time.time && !canAttack)
@@ -100,6 +100,9 @@ public class Slime : Enemy
         isMoving = true;
         yield return new WaitForSeconds(startup); //prep time before jump
 
+        if (isDead)
+            yield break;
+
         //I have to do this math and shit in the coroutine because otherwise it gets the player's direction wayyyyy too early
         Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
 
@@ -113,6 +116,7 @@ public class Slime : Enemy
             jumpForce = new Vector3(horizontalDirection.x * moveSpeed, moveHeight, horizontalDirection.z * moveSpeed);
 
         rb.velocity = jumpForce;
+        AudioManager.instance.Play("slime_jump");
         //if not grounded, do not update the ability to do shit (this doesn't work and crashes the editor)
         //while (Mathf.Abs(rb.velocity.y) >= 0.001) { }
 

@@ -63,7 +63,7 @@ public class MetalSlime : Slime
     {
         yield return new WaitForSeconds(damageStartup);
 
-        if (hitMidAttack)
+        if (hitMidAttack || isDead)
         {
             nextDamageTime = Time.time + damageInterval;
             canAttack = false;
@@ -73,7 +73,7 @@ public class MetalSlime : Slime
         }
 
         PlayAttackVFX(direction);
-
+        AudioManager.instance.Play("sword_1");
         Collider[] hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, playerLayer);
         foreach (Collider collider in hitPlayer)
             base.DealDamage(attackPower, knockback);

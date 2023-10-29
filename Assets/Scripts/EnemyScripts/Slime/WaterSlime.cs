@@ -57,6 +57,7 @@ public class WaterSlime : Slime
         {
             if (inAggroRange)
             {
+                AudioManager.instance.Play("water_dash");
                 StartCoroutine(StartMove(moveStartup, moveInterval));
             }
             else if(inAttackRange && canAttack && !isMoving)
@@ -73,7 +74,7 @@ public class WaterSlime : Slime
         yield return new WaitForSeconds(damageStartup);
         //PlayAttackVFX(direction);
 
-        if (hitMidAttack)
+        if (hitMidAttack || isDead)
         {
             nextDamageTime = Time.time + damageInterval;
             canAttack = false;
@@ -123,7 +124,7 @@ public class WaterSlime : Slime
     {
         Debug.Log("Was called");
         yield return new WaitForSeconds(explosionDelay);
-
+        AudioManager.instance.Play("water_splash");
         //eventually play a water explosion VFX
         //PlayAttackVFX(direction);
 

@@ -114,7 +114,7 @@ MonoBehaviour:
   moveInterval: 2
   damageInterval: 6
   moveStartup: 1.5
-  damageStartup: 0.8
+  damageStartup: 0.7
   moveHeight: 0
   damageHeight: 0
   playerLayer:

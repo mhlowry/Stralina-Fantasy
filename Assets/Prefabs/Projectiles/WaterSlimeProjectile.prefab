@@ -122,7 +122,7 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 64
-  soundName: projectile_woosh_1
+  soundName: water_spit
 --- !u!54 &6233174809506249330
 Rigidbody:
   m_ObjectHideFlags: 0
