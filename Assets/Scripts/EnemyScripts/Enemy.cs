@@ -8,6 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Enemy : MonoBehaviour
 {
+    private WaveSpawner waveSpawner;
     [SerializeField] protected int maxHealthPoints = 10;
     [SerializeField] protected int expWorth;
     [SerializeField] protected float knockbackMultiplier = 1f;
