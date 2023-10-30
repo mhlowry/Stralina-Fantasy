@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class WaveSpawner : MonoBehaviour
+public class WaveSpawner : ObjectiveManager
 {
     [SerializeField] private float countdown;
     [SerializeField] private GameObject spawnPoint;
@@ -13,6 +13,7 @@ public class WaveSpawner : MonoBehaviour
     private void Start()
     {
         readyToCountDown = true;
+        InitializeObjective();
 
         for (int i = 0; i < waves.Length; i++)
         {
@@ -21,28 +22,41 @@ public class WaveSpawner : MonoBehaviour
     }
 
     private void Update()
+{
+    if (currentWaveIndex >= waves.Length)
     {
-        if (currentWaveIndex >= waves.Length)
+        if (!isCompleted)
         {
             Debug.Log("You survived every wave!");
-            return;
+            CompleteObjective();
         }
-        
-        if (readyToCountDown == true) countdown -= Time.deltaTime;
+        return; // This ensures no further code in Update() runs after completion
+    }
 
+    if (readyToCountDown)
+    {
+        countdown -= Time.deltaTime;
         if (countdown <= 0)
         {
             readyToCountDown = false;
             countdown = waves[currentWaveIndex].timeToNextWave;
             StartCoroutine(SpawnWave());
         }
+    }
 
-        if (waves[currentWaveIndex].enemiesLeft == 0)
+    // Ensure that we're within the bounds of the array
+    if (currentWaveIndex < waves.Length && waves[currentWaveIndex].enemiesLeft == 0)
+    {
+        readyToCountDown = true;
+        currentWaveIndex++;
+        if (currentWaveIndex < waves.Length)
         {
-            readyToCountDown = true;
-            currentWaveIndex++;
+            UpdateObjectiveDescription();
+            ShowObjectiveBriefly();
         }
     }
+}
+
 
     private IEnumerator SpawnWave()
     {
@@ -56,6 +70,22 @@ public class WaveSpawner : MonoBehaviour
                 yield return new WaitForSeconds(waves[currentWaveIndex].timeToNextEnemy);
             }
         }
+    }
+
+    protected override void UpdateObjectiveDescription()
+    {
+        int wavesRemaining = waves.Length - currentWaveIndex;
+        string waveWord = wavesRemaining == 1 ? "wave" : "waves"; // Singular or plural
+
+        description = "Urgent Quest!\n\nEliminate all " + waves.Length + " waves!\n\n(" + wavesRemaining + " " + waveWord + " remaining)";
+        base.UpdateObjectiveDescription();
+        Debug.Log(description);
+    }
+
+    public override void InitializeObjective()
+    {
+        UpdateObjectiveDescription(); 
+        base.InitializeObjective(); 
     }
 
 }

@@ -2343,13 +2343,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ecda643117ca804884de72c751a9a06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  description: 
+  isCompleted: 0
+  questInfoText: {fileID: 9195752696326462886}
+  objectiveDisplay: {fileID: 6057490712072850183}
   countdown: 5
   spawnPoint: {fileID: 1349203445}
   waves:
   - enemies:
     - {fileID: 258001531091277057, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
-    - {fileID: 258001531091277057, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
-    - {fileID: 258001531091277057, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
+    timeToNextEnemy: 1
+    timeToNextWave: 5
+    enemiesLeft: 0
+  - enemies:
     - {fileID: 258001531091277057, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
     - {fileID: 258001531091277057, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
     timeToNextEnemy: 1
@@ -2359,32 +2365,6 @@ MonoBehaviour:
     - {fileID: 258001531091277057, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
     - {fileID: 258001531091277057, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
     - {fileID: 258001531091277057, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
-    - {fileID: 258001531091277057, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
-    - {fileID: 258001531091277057, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
-    - {fileID: 6867942190809259144, guid: 3dde385b689fdbd4cbfc8744cda276c4, type: 3}
-    - {fileID: 6867942190809259144, guid: 3dde385b689fdbd4cbfc8744cda276c4, type: 3}
-    - {fileID: 6867942190809259144, guid: 3dde385b689fdbd4cbfc8744cda276c4, type: 3}
-    - {fileID: 6665586691455015516, guid: a8533e30fddc16a40b5104ffc6d00f32, type: 3}
-    - {fileID: 6665586691455015516, guid: a8533e30fddc16a40b5104ffc6d00f32, type: 3}
-    timeToNextEnemy: 1
-    timeToNextWave: 5
-    enemiesLeft: 0
-  - enemies:
-    - {fileID: 258001531091277057, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
-    - {fileID: 258001531091277057, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
-    - {fileID: 258001531091277057, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
-    - {fileID: 6867942190809259144, guid: 3dde385b689fdbd4cbfc8744cda276c4, type: 3}
-    - {fileID: 6867942190809259144, guid: 3dde385b689fdbd4cbfc8744cda276c4, type: 3}
-    - {fileID: 6867942190809259144, guid: 3dde385b689fdbd4cbfc8744cda276c4, type: 3}
-    - {fileID: 6867942190809259144, guid: 3dde385b689fdbd4cbfc8744cda276c4, type: 3}
-    - {fileID: 6867942190809259144, guid: 3dde385b689fdbd4cbfc8744cda276c4, type: 3}
-    - {fileID: 6867942190809259144, guid: 3dde385b689fdbd4cbfc8744cda276c4, type: 3}
-    - {fileID: 6665586691455015516, guid: a8533e30fddc16a40b5104ffc6d00f32, type: 3}
-    - {fileID: 6665586691455015516, guid: a8533e30fddc16a40b5104ffc6d00f32, type: 3}
-    - {fileID: 6665586691455015516, guid: a8533e30fddc16a40b5104ffc6d00f32, type: 3}
-    - {fileID: 6665586691455015516, guid: a8533e30fddc16a40b5104ffc6d00f32, type: 3}
-    - {fileID: 6665586691455015516, guid: a8533e30fddc16a40b5104ffc6d00f32, type: 3}
-    - {fileID: 6665586691455015516, guid: a8533e30fddc16a40b5104ffc6d00f32, type: 3}
     timeToNextEnemy: 1
     timeToNextWave: 5
     enemiesLeft: 0
