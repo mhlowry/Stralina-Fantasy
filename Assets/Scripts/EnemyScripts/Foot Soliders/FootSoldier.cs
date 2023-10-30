@@ -16,9 +16,18 @@ public class FootSoldier : Enemy
     [SerializeField] private float strafeDistance = 3f;
     private float curStrafe;
 
+    [SerializeField, Range(0, 14)] protected int attackPower = 1;
+    [SerializeField] protected float knockback = 1f;
+
+    [SerializeField] protected float attackStartup = 1f;
+    protected float nextDamageTime = 0;
+
     [SerializeField] private float boidAwarenessRadius = 5f;
     [SerializeField] private LayerMask enemyLayer;
 
+    [SerializeField] protected float damageInterval = 1f; // in seconds
+    [SerializeField] protected float damageIntRandomMin = 0f;
+    [SerializeField] protected float damageIntRandomMax = 0f;
     [SerializeField] private float keepEnemiesForSeconds = 2f;
     private float timelastChecked;
 
@@ -28,13 +37,18 @@ public class FootSoldier : Enemy
     private List<Transform> nearbyEnemies = new List<Transform>();
 
     private Vector3 movementLine;
+    protected Vector3 direction;
 
     protected float distanceFromPlayer = 999f;
+
+    protected bool hitMidAttack = false;
 
     protected bool inAttackRange = false;
     protected bool inAggroRange = false;
 
-    protected bool canAttack = false;
+    protected bool isAttacking = false;
+
+    protected bool canAttack = true;
     protected bool canMove = true;
 
     protected override void Awake()
@@ -52,10 +66,15 @@ public class FootSoldier : Enemy
         inAggroRange = distanceFromPlayer <= aggroDistance;
         inAttackRange = distanceFromPlayer <= attackDistance;
 
+        direction = playerObject.transform.position - transform.position;
+
         animator.SetFloat("walkSpeed", Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.z));
 
+        //set this object to look at the player at any given point in time on the horizontal plane
+        transform.LookAt(new Vector3(playerObject.transform.position.x, transform.position.y, playerObject.transform.position.z));
+
         //refresh enemies in range for seconds
-        if(Time.time - timelastChecked > keepEnemiesForSeconds)
+        if (Time.time - timelastChecked > keepEnemiesForSeconds)
             FindNearbyEnemies();
 
         //change the strafe distance every so often just for kicks
@@ -65,10 +84,13 @@ public class FootSoldier : Enemy
             curStrafe = strafeDistance + Random.Range(-1.5f, 0.5f);
         }
 
-/*        if (playerObject != null && inAggroRange && canMove && !isDead)
-        {
-            NavigateCombat();
-        }*/
+        if (nextDamageTime <= Time.time && !canAttack)
+            canAttack = true;
+
+        /*        if (playerObject != null && inAggroRange && canMove && !isDead)
+                {
+                    NavigateCombat();
+                }*/
     }
 
     //The goal, right, is to have a basic "smart" foot soldier that will strafe at a distance if they can't attack
@@ -135,6 +157,9 @@ public class FootSoldier : Enemy
             StopCoroutine(disableMoveCoroutine);
 
         disableMoveCoroutine = StartCoroutine(DisableMovementForSeconds(2f));
+
+        if (isAttacking)
+            hitMidAttack = true;
 
         //inflict damage
         base.TakeDamage(damage, knockback, direction);

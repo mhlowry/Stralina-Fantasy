@@ -47,9 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7149bdf4c1bf5934094e415023b43ba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 384
+  targetMask: Enemy
   soundName: fireball_ambience_1
   delayStrikes: 0.3
 --- !u!54 &6923033701504239880

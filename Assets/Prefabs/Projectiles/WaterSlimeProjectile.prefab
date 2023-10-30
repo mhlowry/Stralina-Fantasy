@@ -119,9 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d00c47210422584fac9882d9fcb8019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 64
+  targetMask: Player
   soundName: water_spit
 --- !u!54 &6233174809506249330
 Rigidbody:
