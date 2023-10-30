@@ -56,6 +56,8 @@ public class Player : MonoBehaviour
 
     private TextMeshProUGUI levelText;
 
+    public bool isTeleporting;
+
     private CharacterController characterController;
     private SpriteRenderer spriteRendererGFX;
     private CinemachineImpulseSource impulseSource;
