@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 384
   soundName: fireball_ambience_1
   delayStrikes: 0.3
 --- !u!54 &6923033701504239880

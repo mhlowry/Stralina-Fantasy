@@ -48,8 +48,6 @@ public class Slime : Enemy
 
     void FixedUpdate()
     {
-        //SlideTowardsPlayer();
-
         if (!isMoving && !isDead)
             JumpTowardsPlayer();
 
@@ -67,7 +65,7 @@ public class Slime : Enemy
         }
     }
 
-    private void Update()
+    void Update()
     {
         animator?.SetBool("isJumping", isMoving);
         animator?.SetBool("isAttack", isAttacking);

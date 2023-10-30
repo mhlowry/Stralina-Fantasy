@@ -72,7 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 384
   soundName: projectile_woosh_1
 --- !u!54 &6923033701504239880
 Rigidbody:

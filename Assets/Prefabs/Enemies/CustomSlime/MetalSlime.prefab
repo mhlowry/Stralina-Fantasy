@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1533335532119811436}
   - component: {fileID: 9045411780471642262}
   - component: {fileID: 6867942190809259144}
+  - component: {fileID: -2419212263487313446}
   - component: {fileID: 2183790964025551096}
   m_Layer: 7
   m_Name: MetalSlime
@@ -123,6 +124,18 @@ MonoBehaviour:
   attackPoint: {fileID: 4437261193246188007}
   attackSize: 1.8
   vfxObj: {fileID: 4966345950676841903}
+--- !u!114 &-2419212263487313446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669684725048940646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09559e56a249c334b8360c619dbbc6da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2183790964025551096
 MonoBehaviour:
   m_ObjectHideFlags: 0
