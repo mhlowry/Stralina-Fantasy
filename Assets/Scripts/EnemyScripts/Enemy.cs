@@ -127,7 +127,8 @@ public class Enemy : MonoBehaviour
         }
 
         StartCoroutine(DestroyEnemy());
-        waveSpawner.waves[waveSpawner.currentWaveIndex].enemiesLeft--;
+        
+        if (waveSpawner != null) waveSpawner.waves[waveSpawner.currentWaveIndex].enemiesLeft--;
     }
 
     public bool GetIsDead() { return isDead; }
