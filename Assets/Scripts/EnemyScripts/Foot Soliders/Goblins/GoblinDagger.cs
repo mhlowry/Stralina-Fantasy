@@ -81,8 +81,10 @@ public class GoblinDagger : FootSoldier
         ResetAttack();
     }
 
-    private void OnDrawGizmosSelected()
+    protected override void OnDrawGizmosSelected()
     {
+        base.OnDrawGizmosSelected();
+
         //Draw the hitbox
         if (attackPoint == null)
             return;

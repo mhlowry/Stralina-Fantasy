@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealthPoints: 20
-  expWorth: 0
+  expWorth: 40
   knockbackMultiplier: 1
   itemDrops: []
   gfxObject: {fileID: 7347449900440986324}
@@ -193,7 +193,7 @@ MonoBehaviour:
   aggroDistance: 10
   attackDistance: 2
   strafeDistance: 3
-  attackPower: 1
+  attackPower: 2
   knockback: 1
   attackStartup: 0.5
   boidAwarenessRadius: 2

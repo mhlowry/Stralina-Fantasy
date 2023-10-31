@@ -55,7 +55,7 @@ public class FootSoldier : Enemy
     {
         base.Awake();
         gameObject.layer = LayerMask.NameToLayer("FootSoldier");
-        strafeDistance += Random.Range(-1f, 0f);
+        strafeDistance += Random.Range(-0.5f, 0.5f);
         curStrafe = strafeDistance;
         changeStrafeInterval = Random.Range(2f, 4f);
     }
@@ -183,7 +183,7 @@ public class FootSoldier : Enemy
         canMove = true;
     }
 
-    private void OnDrawGizmosSelected()
+    protected virtual void OnDrawGizmosSelected()
     {
         //Draw the hitbox
         Gizmos.color = Color.green;
