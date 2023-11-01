@@ -133,7 +133,6 @@ GameObject:
   - component: {fileID: 2803015510727932998}
   - component: {fileID: 258001531091277057}
   - component: {fileID: 7334234861351288120}
-  - component: {fileID: 8987352892693817634}
   m_Layer: 7
   m_Name: CustomSlime
   m_TagString: Enemy
@@ -290,15 +289,3 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0, y: -1, z: 0}
---- !u!114 &8987352892693817634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6582013039348642663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 942cd8b33355c0d49a3a4ddd58d414b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

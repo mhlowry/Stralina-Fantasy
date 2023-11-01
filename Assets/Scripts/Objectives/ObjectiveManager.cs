@@ -3,10 +3,11 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using TMPro;
 
-public abstract class ObjectiveManager : MonoBehaviour
+public abstract class ObjectiveManager : GameManager
 {
     public string description;
     public bool isCompleted = false;
+    public int levelIndex; // Set this in the Unity Inspector for each level's objective
 
     // Reference to the TextMeshProUGUI components
     [SerializeField] protected TextMeshProUGUI questInfoText;
@@ -39,6 +40,10 @@ public abstract class ObjectiveManager : MonoBehaviour
             objectiveDisplay.color = Color.green;
         }
         ShowObjectiveBriefly();
+
+        // Notify the GameManager that the level is completed
+        GameManager.instance.MarkLevelAsCompleted(levelIndex);
+        
         StartCoroutine(WaitAndReturnToLevelSelect(5f)); // Wait for the same duration as the blinking text
     }
 

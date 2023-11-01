@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 9045411780471642262}
   - component: {fileID: 6867942190809259144}
   - component: {fileID: 2183790964025551096}
-  - component: {fileID: 5396191468550590}
   m_Layer: 7
   m_Name: MetalSlime
   m_TagString: Enemy
@@ -177,23 +176,6 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0, y: -1, z: 0}
---- !u!114 &5396191468550590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 669684725048940646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0e08941ee615a845b429e51366904d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealthPoints: 10
-  expWorth: 0
-  knockbackMultiplier: 1
-  itemDrops: []
-  gfxObject: {fileID: 0}
 --- !u!1 &7148622369018489881
 GameObject:
   m_ObjectHideFlags: 0

@@ -2343,8 +2343,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ecda643117ca804884de72c751a9a06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelsCompleted: 
   description: 
   isCompleted: 0
+  levelIndex: 1
   questInfoText: {fileID: 9195752696326462886}
   objectiveDisplay: {fileID: 6057490712072850183}
   countdown: 5
