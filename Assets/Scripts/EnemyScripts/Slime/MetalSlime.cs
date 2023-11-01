@@ -91,7 +91,7 @@ public class MetalSlime : Slime
 
     protected void PlayAttackVFX(Vector3 direction)
     {
-        vfxObj.transform.rotation = Quaternion.LookRotation(direction);
+        vfxObj.transform.rotation = Quaternion.LookRotation(new Vector3(direction.x, 0.0f, direction.z));
         vfxObj.SetActive(true);
     }
 

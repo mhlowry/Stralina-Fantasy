@@ -123,6 +123,10 @@ public class FootSoldier : Enemy
         {
             foreach (Transform t in nearbyEnemies)
             {
+                if (t == null)
+                {
+                    continue;
+                }
                 Vector3 addToDirection = transform.position - t.position;
                 Vector3 addHorizDirection = new Vector3(addToDirection.x, 0, addToDirection.z).normalized;
                 combinedDirection += addHorizDirection;

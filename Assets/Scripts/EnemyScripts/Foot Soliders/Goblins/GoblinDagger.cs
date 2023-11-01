@@ -46,16 +46,16 @@ public class GoblinDagger : FootSoldier
         animator.SetTrigger("attackStart");
         yield return new WaitForSeconds(attackStartup);
 
+        //play audio and animation
+        animator.SetTrigger("slash_1");
+        yield return new WaitForSeconds(attackdelay1);
+
         if (hitMidAttack || isDead)
         {
             hitMidAttack = false;
             ResetAttack();
             yield break;
         }
-
-        //play audio and animation
-        animator.SetTrigger("slash_1");
-        yield return new WaitForSeconds(attackdelay1);
         AudioManager.instance.Play("sword_2");
 
         //do melee attack boilerplate
@@ -63,16 +63,16 @@ public class GoblinDagger : FootSoldier
 
         yield return new WaitForSeconds(secondAttackStartup);
 
+        //play audio and animation
+        animator.SetTrigger("slash_2");
+        yield return new WaitForSeconds(attackdelay2);
+
         if (hitMidAttack || isDead)
         {
             hitMidAttack = false;
             ResetAttack();
             yield break;
         }
-
-        //play audio and animation
-        animator.SetTrigger("slash_2");
-        yield return new WaitForSeconds(attackdelay2);
         AudioManager.instance.Play("sword_3");
 
         //do melee attack boilerplate
