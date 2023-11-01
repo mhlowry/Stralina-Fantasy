@@ -309,7 +309,8 @@ public class Player : MonoBehaviour, IDataPersistence
         if (Application.isPlaying)
         {
             // Save the game whenever the level or EXP is changed in the Inspector
-            DataPersistenceManager.instance.SaveGame();
+            if(DataPersistenceManager.instance != null)
+                DataPersistenceManager.instance.SaveGame();
         }
     }
 

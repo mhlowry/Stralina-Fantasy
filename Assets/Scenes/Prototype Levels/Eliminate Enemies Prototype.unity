@@ -994,6 +994,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prototype_Gate
       objectReference: {fileID: 0}
+    - target: {fileID: 1238892088176110218, guid: ab468845e460e8e4f81bd8adc99e9552, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 1238892088176110218, guid: ab468845e460e8e4f81bd8adc99e9552, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 1238892088176110218, guid: ab468845e460e8e4f81bd8adc99e9552, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.23
+      objectReference: {fileID: 0}
     - target: {fileID: 3176049013218377993, guid: ab468845e460e8e4f81bd8adc99e9552, type: 3}
       propertyPath: destinationGate
       value: 
@@ -1167,6 +1179,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1278973248}
     m_Modifications:
+    - target: {fileID: 8987352892693817634, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5354402700793687529, guid: 8d984118b7922b948a8eba24cef16818, type: 3}
       propertyPath: m_Name
       value: Goblin_Dagger (2)
@@ -1213,10 +1229,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6565869519782235609, guid: 8d984118b7922b948a8eba24cef16818, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8987352892693817634, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2128,6 +2140,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5992260547595376889, guid: ea17f78f57298b54d9ccbf125bfcfb1d, type: 3}
   m_PrefabInstance: {fileID: 601046954}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &616276501 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7125391433642022832, guid: a8533e30fddc16a40b5104ffc6d00f32, type: 3}
+  m_PrefabInstance: {fileID: 442376928}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &638761016
 PrefabInstance:
@@ -3866,9 +3883,9 @@ Transform:
   - {fileID: 821380868}
   - {fileID: 1079386634}
   - {fileID: 1768023721}
-  - {fileID: 442376929}
   - {fileID: 1606593532}
   - {fileID: 945292451}
+  - {fileID: 616276501}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1551131126
@@ -9808,8 +9825,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 331a806d7f63a7e4aa281df392608dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelsCompleted: 
   description: 
   isCompleted: 0
+  levelIndex: 0
   questInfoText: {fileID: 9195752696326462886}
   objectiveDisplay: {fileID: 6057490712072850183}
   totalEnemies: 0
@@ -11903,3 +11922,5 @@ SceneRoots:
   - {fileID: 3088640087770901773}
   - {fileID: 5666550562291894916}
   - {fileID: 483175056}
+  - {fileID: 1414574872}
+  - {fileID: 458568861}
