@@ -25,8 +25,8 @@ public class Enemy : MonoBehaviour
     //dropping items and whatnot
     [SerializeField] List<GameObject> itemDrops;
 
-    [SerializeField] GameObject gfxObject;
-    private CinemachineImpulseSource impulseSource;
+    [SerializeField] protected GameObject gfxObject;
+    protected CinemachineImpulseSource impulseSource;
     public static event System.Action OnEnemyDestroyed;
 
     protected virtual void Awake()

@@ -87,6 +87,7 @@ public class FootSoldier : Enemy
         if (nextDamageTime <= Time.time && !canAttack)
             canAttack = true;
 
+        //Do not navigate combat in here.  do it in the children scripts.  See GoblinDagger or GoblinSpear for examples
         /*        if (playerObject != null && inAggroRange && canMove && !isDead)
                 {
                     NavigateCombat();

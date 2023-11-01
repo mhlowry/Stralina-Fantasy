@@ -103,7 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealthPoints: 25
   expWorth: 50
-  knockbackMultiplier: 1
+  knockbackMultiplier: 0.8
   itemDrops: []
   gfxObject: {fileID: 7148622369018489881}
   moveSpeed: 5
