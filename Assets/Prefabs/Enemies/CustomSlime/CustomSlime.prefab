@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 3748759384311625483}
   - component: {fileID: 2803015510727932998}
   - component: {fileID: 258001531091277057}
+  - component: {fileID: -7886203224125195352}
   - component: {fileID: 7334234861351288120}
   m_Layer: 7
   m_Name: CustomSlime

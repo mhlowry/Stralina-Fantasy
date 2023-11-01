@@ -8,6 +8,10 @@ public class SwordMan : Player
 {
     bool isBlocking = false;
     bool tryingToBlock = false;
+    bool didUlt = false;
+
+    float timeOfUlt;
+    [SerializeField] float ultCooldown = 0.75f;
 
     [SerializeField] private LayerMask enemyLayers;
 
@@ -23,6 +27,14 @@ public class SwordMan : Player
         if(!CanBlock())
         {
             isBlocking = false;
+        }
+
+        if (Time.time - timeOfUlt >= ultCooldown && didUlt)
+        {
+            SetInvulFalse();
+            EnableInput();
+            didUlt = false;
+            animGFX.SetBool("ultFinish", true);
         }
 
         animGFX.SetBool("isBlocking", isBlocking);
@@ -66,6 +78,12 @@ public class SwordMan : Player
         //Use all the meter
         UseMeter(GetMaxMeter());
 
+        didUlt = true;
+        timeOfUlt = Time.time;
+        animGFX.SetBool("ultFinish", false);
+        SetInvulTrue();
+        DisableInput();
+        animGFX.SetTrigger(superAttack.GetAnim());
         StartCoroutine(superAttack.ActivateAttack(this, 1f, 0f, enemyLayers, transform.forward));
     }
 

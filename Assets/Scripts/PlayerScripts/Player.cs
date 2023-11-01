@@ -56,7 +56,7 @@ public class Player : MonoBehaviour, IDataPersistence
 
     private TextMeshProUGUI levelText;
 
-    public bool isTeleporting;
+    [HideInInspector] public bool isTeleporting;
 
     private CharacterController characterController;
     private SpriteRenderer spriteRendererGFX;
@@ -273,6 +273,8 @@ public class Player : MonoBehaviour, IDataPersistence
         expBar.SetMaxResource(expToLevelUp[playerLevel - 1]);
         expBar.SetResource(curExp);
         levelText.text = playerLevel.ToString();
+        if(playerLevel == maxLevel)
+            expBar.gameObject.SetActive(false);
         DataPersistenceManager.instance.SaveGame();
     }
 
@@ -307,7 +309,8 @@ public class Player : MonoBehaviour, IDataPersistence
         if (Application.isPlaying)
         {
             // Save the game whenever the level or EXP is changed in the Inspector
-            DataPersistenceManager.instance.SaveGame();
+            if(DataPersistenceManager.instance != null)
+                DataPersistenceManager.instance.SaveGame();
         }
     }
 

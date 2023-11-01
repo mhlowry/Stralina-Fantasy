@@ -62,8 +62,18 @@ public class MetalSlime : Slime
     private IEnumerator MetalAttack()
     {
         yield return new WaitForSeconds(damageStartup);
-        PlayAttackVFX(direction);
 
+        if (hitMidAttack || isDead)
+        {
+            nextDamageTime = Time.time + damageInterval;
+            canAttack = false;
+            isAttacking = false;
+            hitMidAttack = false;
+            yield break;
+        }
+
+        PlayAttackVFX(direction);
+        AudioManager.instance.Play("sword_1");
         Collider[] hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, playerLayer);
         foreach (Collider collider in hitPlayer)
             base.DealDamage(attackPower, knockback);
@@ -81,7 +91,7 @@ public class MetalSlime : Slime
 
     protected void PlayAttackVFX(Vector3 direction)
     {
-        vfxObj.transform.rotation = Quaternion.LookRotation(direction);
+        vfxObj.transform.rotation = Quaternion.LookRotation(new Vector3(direction.x, 0.0f, direction.z));
         vfxObj.SetActive(true);
     }
 

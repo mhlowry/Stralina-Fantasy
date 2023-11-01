@@ -40,7 +40,7 @@ public class RepeatingProjectile : ProjectileProperties
         }
     }
 
-    private void Update()
+    protected override void Update()
     {
         if (Time.time - lastHitTime >= delayStrikes)
         {
@@ -51,5 +51,6 @@ public class RepeatingProjectile : ProjectileProperties
             }
             lastHitTime = Time.time;
         }
+        base.Update();
     }
 }
