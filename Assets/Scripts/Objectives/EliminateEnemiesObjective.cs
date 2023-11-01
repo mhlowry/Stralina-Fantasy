@@ -8,6 +8,7 @@ public class EliminateEnemiesObjective : ObjectiveManager
     private void Awake()
     {
         Enemy.OnEnemyDestroyed += HandleEnemyDestroyed; // Subscribe to an event when an enemy is destroyed
+        Debug.Log("Subscribed to OnEnemyDestroyed event.");
     }
 
     private void Start() 
@@ -18,22 +19,33 @@ public class EliminateEnemiesObjective : ObjectiveManager
     private void OnDestroy()
     {
         Enemy.OnEnemyDestroyed -= HandleEnemyDestroyed; // Unsubscribe when this objective is destroyed
+        Debug.Log("Unsubscribed from OnEnemyDestroyed event.");
     }
 
     private void HandleEnemyDestroyed()
     {
         remainingEnemies--;
+        Debug.Log($"Enemy destroyed. Remaining enemies: {remainingEnemies}");
         UpdateObjectiveDescription();
         CheckObjectiveCompletion();
     }
 
     public override void InitializeObjective()
     {
-        totalEnemies = FindObjectsOfType<Enemy>().Length;
+        Enemy[] allEnemies = FindObjectsOfType<Enemy>();
+        totalEnemies = allEnemies.Length;
         remainingEnemies = totalEnemies;
+
+        Debug.Log($"Objective initialized. Total enemies: {totalEnemies}");
+        foreach (Enemy enemy in allEnemies)
+        {
+            Debug.Log($"Detected enemy: {enemy.name}");
+        }
+
         UpdateObjectiveDescription(); 
         base.InitializeObjective(); 
     }
+
 
     protected override void UpdateObjectiveDescription()
     {
@@ -44,8 +56,10 @@ public class EliminateEnemiesObjective : ObjectiveManager
 
     public override void CheckObjectiveCompletion()
     {
+        Debug.Log($"Checking objective completion. Remaining enemies: {remainingEnemies}");
         if (remainingEnemies <= 0)
         {
+            Debug.Log("Objective completed.");
             CompleteObjective();
         }
     }
