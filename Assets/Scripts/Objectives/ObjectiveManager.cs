@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using TMPro;
 
-public abstract class ObjectiveManager : MonoBehaviour
+public abstract class ObjectiveManager : GameManager
 {
     public string description;
     public bool isCompleted = false;
