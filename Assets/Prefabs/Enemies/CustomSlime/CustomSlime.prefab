@@ -237,18 +237,6 @@ MonoBehaviour:
   damageStartup: 2.5
   moveHeight: 4
   damageHeight: 6
---- !u!114 &-7886203224125195352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6582013039348642663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09559e56a249c334b8360c619dbbc6da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7334234861351288120
 MonoBehaviour:
   m_ObjectHideFlags: 0
