@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
-    public int deathCount;
+    //public int deathCount;
     //public Vector3 playerPosition;
     // public bool disableInput;
     public int playerLevel;
@@ -32,7 +32,7 @@ public class GameData
     public GameData()
     {
         // disableInput = false;
-        deathCount = 0;
+        //deathCount = 0;
         playerLevel = 1;
         curExp = 0;
         // expToLevelUp = new int[] 

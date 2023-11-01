@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [SerializeField] private bool[] levelsCompleted;
-
     private void Awake()
     {
         if (instance != null)

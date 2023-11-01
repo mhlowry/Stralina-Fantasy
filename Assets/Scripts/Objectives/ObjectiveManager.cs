@@ -7,6 +7,7 @@ public abstract class ObjectiveManager : GameManager
 {
     public string description;
     public bool isCompleted = false;
+    public int levelIndex; // Set this in the Unity Inspector for each level's objective
 
     // Reference to the TextMeshProUGUI components
     [SerializeField] protected TextMeshProUGUI questInfoText;
