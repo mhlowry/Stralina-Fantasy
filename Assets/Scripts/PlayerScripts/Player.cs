@@ -259,7 +259,8 @@ public class Player : MonoBehaviour, IDataPersistence
             LevelUp();
         }
 
-        DataPersistenceManager.instance.SaveGame();
+        if (DataPersistenceManager.instance != null)
+            DataPersistenceManager.instance.SaveGame();
     }
 
     void LevelUp()
@@ -275,7 +276,9 @@ public class Player : MonoBehaviour, IDataPersistence
         levelText.text = playerLevel.ToString();
         if(playerLevel == maxLevel)
             expBar.gameObject.SetActive(false);
-        DataPersistenceManager.instance.SaveGame();
+
+        if (DataPersistenceManager.instance != null)
+            DataPersistenceManager.instance.SaveGame();
     }
 
     //Stats-related functions
