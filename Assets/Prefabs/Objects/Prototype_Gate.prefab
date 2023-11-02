@@ -120,3 +120,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destinationGate: {fileID: 0}
   isDestination: 0
+  isActive: 1

@@ -109,7 +109,7 @@ MonoBehaviour:
   moveSpeed: 5
   damageSpeed: 0
   aggroDistance: 10
-  attackDistance: 3
+  attackDistance: 2
   attackPower: 1
   knockback: 4
   moveInterval: 2
