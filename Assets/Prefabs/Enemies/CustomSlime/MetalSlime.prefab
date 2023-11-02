@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1533335532119811436}
   - component: {fileID: 9045411780471642262}
   - component: {fileID: 6867942190809259144}
+  - component: {fileID: -2419212263487313446}
   - component: {fileID: 2183790964025551096}
   m_Layer: 7
   m_Name: MetalSlime
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 669684725048940646}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.1, y: 9.682596, z: -17.412558}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -102,19 +103,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealthPoints: 25
   expWorth: 50
-  knockbackMultiplier: 1
+  knockbackMultiplier: 0.8
   itemDrops: []
   gfxObject: {fileID: 7148622369018489881}
   moveSpeed: 5
   damageSpeed: 0
   aggroDistance: 10
-  attackDistance: 3
+  attackDistance: 2
   attackPower: 1
   knockback: 4
   moveInterval: 2
   damageInterval: 6
   moveStartup: 1.5
-  damageStartup: 0.8
+  damageStartup: 0.7
   moveHeight: 0
   damageHeight: 0
   playerLayer:
@@ -123,6 +124,18 @@ MonoBehaviour:
   attackPoint: {fileID: 4437261193246188007}
   attackSize: 1.8
   vfxObj: {fileID: 4966345950676841903}
+--- !u!114 &-2419212263487313446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669684725048940646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09559e56a249c334b8360c619dbbc6da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2183790964025551096
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,10 +11,10 @@ public class AreaTransition : MonoBehaviour
     private Coroutine teleportingCoroutine;
     Transform areaSpawnPoint;
 
+    public bool isActive = true;
+
     private void Start()
     {
-        //Ideally, gates have a child (transform) that any sibiling gate will transport the player to.
-        //However, if the gate does not have a complete sibiling- this allows for that tobject's transform to be a "one way gate"
         areaSpawnPoint = destinationGate.transform;
     }
 
@@ -24,9 +24,10 @@ public class AreaTransition : MonoBehaviour
     {
         GameObject playerObject = hitTarget.gameObject;
 
-        if (hitTarget.gameObject.layer == LayerMask.NameToLayer("Player") && !isDestination)
+        if (hitTarget.gameObject.layer == LayerMask.NameToLayer("Player") && !isDestination && isActive)
         {
-            areaSpawnPoint.GetComponent<AreaTransition>().isDestination = true;
+            if(areaSpawnPoint.GetComponent<AreaTransition>() != null)
+                areaSpawnPoint.GetComponent<AreaTransition>().isDestination = true;
             playerObject.GetComponent<Player>().isTeleporting = true;
 
             if (teleportingCoroutine != null)
@@ -55,5 +56,10 @@ public class AreaTransition : MonoBehaviour
         playerObj.transform.position = areaSpawnPoint.position;
         yield return new WaitForSeconds(0.1f);
         player.EnableInput(); player.GetComponent<Player>().isTeleporting = false;
+    }
+
+    public void ActivateGate()
+    {
+        isActive = true;
     }
 }

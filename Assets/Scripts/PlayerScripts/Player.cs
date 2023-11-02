@@ -9,7 +9,7 @@ using TMPro;
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerCombat))]
 [RequireComponent(typeof(CinemachineImpulseSource))]
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDataPersistence
 {
     //STATS
     bool disableInput = false;
@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
 
     private TextMeshProUGUI levelText;
 
-    public bool isTeleporting;
+    [HideInInspector] public bool isTeleporting;
 
     private CharacterController characterController;
     private SpriteRenderer spriteRendererGFX;
@@ -125,6 +125,19 @@ public class Player : MonoBehaviour
         {
             isInvul = false;
         }
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.playerLevel = data.playerLevel;
+        this.curExp = data.curExp;
+        // Update any UI or game elements that depend on these values
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.playerLevel = this.playerLevel;
+        data.curExp = this.curExp;
     }
 
     //Disable/Enable player's ability to do anything
@@ -245,6 +258,9 @@ public class Player : MonoBehaviour
         {
             LevelUp();
         }
+
+        if (DataPersistenceManager.instance != null)
+            DataPersistenceManager.instance.SaveGame();
     }
 
     void LevelUp()
@@ -258,6 +274,11 @@ public class Player : MonoBehaviour
         expBar.SetMaxResource(expToLevelUp[playerLevel - 1]);
         expBar.SetResource(curExp);
         levelText.text = playerLevel.ToString();
+        if(playerLevel == maxLevel)
+            expBar.gameObject.SetActive(false);
+
+        if (DataPersistenceManager.instance != null)
+            DataPersistenceManager.instance.SaveGame();
     }
 
     //Stats-related functions
@@ -284,4 +305,16 @@ public class Player : MonoBehaviour
         curAbilityMeter = Mathf.Clamp(curAbilityMeter - meterUsed, 0, maxAbilityMeter);
         meterBar.SetResource((int)curAbilityMeter);
     }
+
+    void OnValidate()
+    {
+        // Check if the game is currently running, as we don't want to save during edit mode
+        if (Application.isPlaying)
+        {
+            // Save the game whenever the level or EXP is changed in the Inspector
+            if(DataPersistenceManager.instance != null)
+                DataPersistenceManager.instance.SaveGame();
+        }
+    }
+
 }

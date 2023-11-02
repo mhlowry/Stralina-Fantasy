@@ -70,9 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d00c47210422584fac9882d9fcb8019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 128
+  targetMask: Enemy
   soundName: projectile_woosh_1
 --- !u!54 &6923033701504239880
 Rigidbody:

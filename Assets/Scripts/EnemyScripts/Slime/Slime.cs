@@ -30,6 +30,8 @@ public class Slime : Enemy
     protected bool inAttackRange = false;
     protected bool inAggroRange = false;
 
+    protected bool hitMidAttack = false;
+
     protected Vector3 direction;
 
     [SerializeField] protected float moveStartup = 1f;
@@ -46,9 +48,7 @@ public class Slime : Enemy
 
     void FixedUpdate()
     {
-        //SlideTowardsPlayer();
-
-        if (!isMoving)
+        if (!isMoving && !isDead)
             JumpTowardsPlayer();
 
         if (nextDamageTime <= Time.time && !canAttack)
@@ -65,7 +65,7 @@ public class Slime : Enemy
         }
     }
 
-    private void Update()
+    void Update()
     {
         animator?.SetBool("isJumping", isMoving);
         animator?.SetBool("isAttack", isAttacking);
@@ -98,6 +98,9 @@ public class Slime : Enemy
         isMoving = true;
         yield return new WaitForSeconds(startup); //prep time before jump
 
+        if (isDead)
+            yield break;
+
         //I have to do this math and shit in the coroutine because otherwise it gets the player's direction wayyyyy too early
         Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
 
@@ -111,6 +114,7 @@ public class Slime : Enemy
             jumpForce = new Vector3(horizontalDirection.x * moveSpeed, moveHeight, horizontalDirection.z * moveSpeed);
 
         rb.velocity = jumpForce;
+        AudioManager.instance.Play("slime_jump");
         //if not grounded, do not update the ability to do shit (this doesn't work and crashes the editor)
         //while (Mathf.Abs(rb.velocity.y) >= 0.001) { }
 
@@ -156,6 +160,9 @@ public class Slime : Enemy
         if (disableMoveCoroutine != null)
             StopCoroutine(disableMoveCoroutine);
 
+        if (isAttacking)
+            hitMidAttack = true;
+
         disableMoveCoroutine = StartCoroutine(DisableMovementForSeconds(1f));
 
         //inflict damage
@@ -168,7 +175,7 @@ public class Slime : Enemy
         //make sure they're not already dying, prevent from calling "die" twice
         if(curHealthPoints <= 0 && !animator.GetBool("isDead"))
         {
-            Debug.Log(gameObject.name + " Fucking Died");
+            //Debug.Log(gameObject.name + " Fucking Died");
             canMove = false;
             Die();
             StopCoroutine(disableMoveCoroutine);

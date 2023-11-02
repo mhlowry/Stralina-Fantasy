@@ -8,6 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Enemy : MonoBehaviour
 {
+    private WaveSpawner waveSpawner;
     [SerializeField] protected int maxHealthPoints = 10;
     [SerializeField] protected int expWorth;
     [SerializeField] protected float knockbackMultiplier = 1f;
@@ -25,10 +26,14 @@ public class Enemy : MonoBehaviour
     //dropping items and whatnot
     [SerializeField] List<GameObject> itemDrops;
 
-    [SerializeField] GameObject gfxObject;
-    private CinemachineImpulseSource impulseSource;
+    [SerializeField] protected GameObject gfxObject;
+    protected CinemachineImpulseSource impulseSource;
     public static event System.Action OnEnemyDestroyed;
 
+    private void Start()
+    {
+        waveSpawner = GetComponentInParent<WaveSpawner>();
+    }
     protected virtual void Awake()
     {
         //sets whatever object this is on to be put on the "enemy" layer, so the player can attack it.
@@ -122,6 +127,8 @@ public class Enemy : MonoBehaviour
         }
 
         StartCoroutine(DestroyEnemy());
+        
+        if (waveSpawner != null) waveSpawner.waves[waveSpawner.currentWaveIndex].enemiesLeft--;
     }
 
     public bool GetIsDead() { return isDead; }

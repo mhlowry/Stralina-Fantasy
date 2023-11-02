@@ -13,7 +13,7 @@ public class ProjectileProperties : MonoBehaviour
 
     private float initialTime;
 
-    [SerializeField] protected LayerMask targetMask;
+    [SerializeField] protected string targetMask;
     [SerializeField] protected string soundName;
 
     protected HashSet<Collider> loggedEnemies = new HashSet<Collider>();
@@ -51,7 +51,7 @@ public class ProjectileProperties : MonoBehaviour
         AudioManager.instance.Play(soundName);
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if(Time.time - initialTime > duration)
         {
@@ -63,14 +63,8 @@ public class ProjectileProperties : MonoBehaviour
     {
         GameObject targetObject = hitTarget.gameObject;
 
-        int targetMaskInt = (int)Mathf.Log(targetMask.value, 2);
-
-        //Make sure we connected with the right target
-        if (targetObject.layer != targetMaskInt)
-            return;
-
         //call takedamage for enemy if want to hit enemy
-        if (targetMaskInt == LayerMask.NameToLayer("Enemy"))
+        if (targetMask == "Enemy" && hitTarget.gameObject.CompareTag("Enemy"))
         {
             Enemy thisEnemy = targetObject.GetComponent<Enemy>();
             if (!loggedEnemies.Contains(hitTarget))
@@ -80,7 +74,7 @@ public class ProjectileProperties : MonoBehaviour
                 loggedEnemies.Add(hitTarget);
             }
         }
-        else if(targetMaskInt == LayerMask.NameToLayer("Player"))
+        else if(targetMask == "Player" && hitTarget.gameObject.CompareTag("Player"))
         {
             //Attack the player
             Player thisPlayer = targetObject.GetComponent<Player>();
