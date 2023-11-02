@@ -4,7 +4,7 @@ using UnityEngine;
 public class WaveSpawner : ObjectiveManager
 {
     [SerializeField] private float countdown;
-    [SerializeField] private GameObject spawnPoint;
+    [SerializeField] private Transform[] spawnPoints;
 
     public Wave[] waves;
     public int currentWaveIndex = 0;
@@ -22,41 +22,40 @@ public class WaveSpawner : ObjectiveManager
     }
 
     private void Update()
-{
-    if (currentWaveIndex >= waves.Length)
     {
-        if (!isCompleted)
+        if (currentWaveIndex >= waves.Length)
         {
-            Debug.Log("You survived every wave!");
-            CompleteObjective();
+            if (!isCompleted)
+            {
+                Debug.Log("You survived every wave!");
+                CompleteObjective();
+            }
+            return; // This ensures no further code in Update() runs after completion
         }
-        return; // This ensures no further code in Update() runs after completion
-    }
 
-    if (readyToCountDown)
-    {
-        countdown -= Time.deltaTime;
-        if (countdown <= 0)
+        if (readyToCountDown)
         {
-            readyToCountDown = false;
-            countdown = waves[currentWaveIndex].timeToNextWave;
-            StartCoroutine(SpawnWave());
+            countdown -= Time.deltaTime;
+            if (countdown <= 0)
+            {
+                readyToCountDown = false;
+                countdown = waves[currentWaveIndex].timeToNextWave;
+                StartCoroutine(SpawnWave());
+            }
         }
-    }
 
-    // Ensure that we're within the bounds of the array
-    if (currentWaveIndex < waves.Length && waves[currentWaveIndex].enemiesLeft == 0)
-    {
-        readyToCountDown = true;
-        currentWaveIndex++;
-        if (currentWaveIndex < waves.Length)
+        // Ensure that we're within the bounds of the array
+        if (currentWaveIndex < waves.Length && waves[currentWaveIndex].enemiesLeft == 0)
         {
-            UpdateObjectiveDescription();
-            ShowObjectiveBriefly();
+            readyToCountDown = true;
+            currentWaveIndex++;
+            if (currentWaveIndex < waves.Length)
+            {
+                UpdateObjectiveDescription();
+                ShowObjectiveBriefly();
+            }
         }
     }
-}
-
 
     private IEnumerator SpawnWave()
     {
@@ -64,8 +63,8 @@ public class WaveSpawner : ObjectiveManager
         {
             for (int i = 0; i < waves[currentWaveIndex].enemies.Length; i++)
             {
-                Enemy enemy = Instantiate(waves[currentWaveIndex].enemies[i], spawnPoint.transform);
-                enemy.transform.SetParent(spawnPoint.transform);
+                GameObject enemy = Instantiate(waves[currentWaveIndex].enemies[i], spawnPoints[i % spawnPoints.Length]);
+                enemy.transform.SetParent(spawnPoints[i % spawnPoints.Length]);
 
                 yield return new WaitForSeconds(waves[currentWaveIndex].timeToNextEnemy);
             }
@@ -93,7 +92,7 @@ public class WaveSpawner : ObjectiveManager
 [System.Serializable]
 public class Wave
 {
-    public Enemy[] enemies;
+    public GameObject[] enemies;
     public float timeToNextEnemy;
     public float timeToNextWave;
     [HideInInspector] public int enemiesLeft;
