@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1302035326584231551}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -55.762486, y: -21.85, z: 19.392036}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -130,7 +130,7 @@ MonoBehaviour:
   - {fileID: 4056703453475963409}
   - {fileID: 3290410217347998854}
   attackSizeHorz: 1
-  attackSizeVert: 0.46
+  attackSizeVert: 0.6
   vfxHorizObj: {fileID: 8116225771435504703}
   vfxVertObj: {fileID: 1330363422485374274}
 --- !u!114 &3488327980132840325
