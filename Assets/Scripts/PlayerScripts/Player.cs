@@ -15,9 +15,9 @@ public class Player : MonoBehaviour, IDataPersistence
     bool disableInput = false;
 
     const int maxLevel = 7;
-    [SerializeField, Range(1, maxLevel)] int playerLevel = 1;
-    [SerializeField] int[] expToLevelUp = { 100, 500, 1000, 2000, 3000, 5000, 10000 };
-    int curExp = 0;
+    [SerializeField, Range(1, maxLevel)]  int playerLevel = 1;
+    int[] expToLevelUp = { 100, 500, 1000, 2000, 3000, 5000, 10000 };
+    [SerializeField] int curExp = 0;
 
     [SerializeField] int maxHealth = 10;
     [SerializeField] int curHealth;
@@ -76,6 +76,10 @@ public class Player : MonoBehaviour, IDataPersistence
         impulseSource = GetComponent<CinemachineImpulseSource>();
         characterController = GetComponent<CharacterController>();
 
+        // should this be in awake or start? who knows
+        playerLevel = GameManager.instance.GetPlayerLevel();
+        curExp = GameManager.instance.GetPlayerExp();
+
         try
         {
             healthBar = GameObject.Find("HealthBar").GetComponent<ResourceBar>();
@@ -102,6 +106,9 @@ public class Player : MonoBehaviour, IDataPersistence
 
     protected virtual void Update()
     {
+        GameManager.instance.SetPlayerLevel(playerLevel);
+        GameManager.instance.SetPlayerExp(curExp);
+        
         //either un-stun the player or 
         if (Time.time - timeofHit > hitStunTime)
         {
