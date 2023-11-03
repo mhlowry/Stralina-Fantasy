@@ -11,11 +11,25 @@ public class AreaTransition : MonoBehaviour
     private Coroutine teleportingCoroutine;
     Transform areaSpawnPoint;
 
+    GameObject portalVisual;
+
     public bool isActive = true;
 
-    private void Start()
+    private void Awake()
     {
         areaSpawnPoint = destinationGate.transform;
+        try
+        {
+            if (transform.GetChild(0).gameObject)
+            {
+                portalVisual = transform.GetChild(0).gameObject;
+                portalVisual.SetActive(isActive);
+            }
+        }
+        catch
+        {
+            Debug.Log("Prototype Portal Warning");
+        }
     }
 
     //This is pretty much gonna be the whole code
@@ -61,5 +75,6 @@ public class AreaTransition : MonoBehaviour
     public void ActivateGate()
     {
         isActive = true;
+        portalVisual.SetActive(isActive);
     }
 }

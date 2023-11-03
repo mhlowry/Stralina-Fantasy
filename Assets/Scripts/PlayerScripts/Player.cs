@@ -23,7 +23,7 @@ public class Player : MonoBehaviour, IDataPersistence
     [SerializeField] int curHealth;
 
     const float maxAbilityMeter = 100f;
-    [SerializeField, Range(1, maxAbilityMeter)] float curAbilityMeter = 0f;
+    [SerializeField, Range(0, maxAbilityMeter)] float curAbilityMeter = 0f;
 
     //Stats that are adjustable, mostly through gear
     float attackScale = 1f;
