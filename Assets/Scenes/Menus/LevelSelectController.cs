@@ -30,7 +30,7 @@ public class LevelSelectController : ObjectiveManager
     {
         Debug.Log("Level 3 Clicked!");
         //levelIndex = 2;
-        //SceneManager.LoadScene("Level3SceneName", LoadSceneMode.Single);
+        SceneManager.LoadScene("Companion Prototype", LoadSceneMode.Single);
     }
 
     public void OnLevel4Clicked()

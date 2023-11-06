@@ -23,4 +23,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Courtney's Test Scene.unity
     guid: cc8b741a7a43de941b51eabc5d348b4e
+  - enabled: 1
+    path: Assets/Scenes/Prototype Levels/Enemy Waves Prototype.unity
+    guid: 7f596d3b4d3795e4cbdb739b602dbe18
+  - enabled: 1
+    path: Assets/Scenes/bootstrap.unity
+    guid: 867cb5033d7d1b04783c2b50d82b92bc
+  - enabled: 1
+    path: Assets/Scenes/Prototype Levels/Companion Prototype.unity
+    guid: 9fcd600d0d9b0e34481c067d86aa8598
   m_configObjects: {}
