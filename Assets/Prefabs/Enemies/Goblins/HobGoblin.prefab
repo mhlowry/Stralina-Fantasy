@@ -28,9 +28,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1302035326584231551}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3346003510805626572}
@@ -129,8 +129,8 @@ MonoBehaviour:
   attackPointsVert:
   - {fileID: 4056703453475963409}
   - {fileID: 3290410217347998854}
-  attackSizeHorz: 1
-  attackSizeVert: 0.6
+  attackSizeHorz: 1.5
+  attackSizeVert: 1.2
   vfxHorizObj: {fileID: 8116225771435504703}
   vfxVertObj: {fileID: 1330363422485374274}
 --- !u!114 &3488327980132840325
