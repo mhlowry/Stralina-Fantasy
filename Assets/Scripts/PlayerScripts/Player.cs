@@ -76,9 +76,13 @@ public class Player : MonoBehaviour, IDataPersistence
         impulseSource = GetComponent<CinemachineImpulseSource>();
         characterController = GetComponent<CharacterController>();
 
-        // should this be in awake or start? who knows
-        playerLevel = GameManager.instance.GetPlayerLevel();
-        curExp = GameManager.instance.GetPlayerExp();
+        // should be in awake!
+        try
+        {
+            playerLevel = GameManager.instance.GetPlayerLevel();
+            curExp = GameManager.instance.GetPlayerExp();
+        }
+        catch { }
 
         try
         {
@@ -106,9 +110,6 @@ public class Player : MonoBehaviour, IDataPersistence
 
     protected virtual void Update()
     {
-        GameManager.instance.SetPlayerLevel(playerLevel);
-        GameManager.instance.SetPlayerExp(curExp);
-        
         //either un-stun the player or 
         if (Time.time - timeofHit > hitStunTime)
         {
@@ -268,6 +269,11 @@ public class Player : MonoBehaviour, IDataPersistence
 
         if (DataPersistenceManager.instance != null)
             DataPersistenceManager.instance.SaveGame();
+
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.SetPlayerExp(curExp);
+        }
     }
 
     void LevelUp()
@@ -286,6 +292,12 @@ public class Player : MonoBehaviour, IDataPersistence
 
         if (DataPersistenceManager.instance != null)
             DataPersistenceManager.instance.SaveGame();
+
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.SetPlayerExp(curExp);
+            GameManager.instance.SetPlayerLevel(playerLevel);
+        }
     }
 
     //Stats-related functions

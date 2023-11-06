@@ -175,7 +175,7 @@ public class FootSoldier : Enemy
         {
             //Debug.Log(gameObject.name + " Fucking Died");
             canMove = false;
-            Die();
+            base.Die();
             StopCoroutine(disableMoveCoroutine);
         }
         else animator?.SetTrigger("pain");
@@ -191,14 +191,19 @@ public class FootSoldier : Enemy
     protected virtual void OnDrawGizmosSelected()
     {
         //Draw the hitbox
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, boidAwarenessRadius);
+        try
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, boidAwarenessRadius);
 
-        Gizmos.color = Color.blue;
-        foreach (Transform t in nearbyEnemies)
-            Gizmos.DrawLine(transform.position, t.position);
+            Gizmos.color = Color.blue;
+            foreach (Transform t in nearbyEnemies)
+                Gizmos.DrawLine(transform.position, t.position);
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + movementLine);
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, transform.position + movementLine);
+        }
+        catch 
+        { }
     }
 }

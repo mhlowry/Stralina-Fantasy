@@ -30,10 +30,6 @@ public class Enemy : MonoBehaviour
     protected CinemachineImpulseSource impulseSource;
     public static event System.Action OnEnemyDestroyed;
 
-    private void Start()
-    {
-        waveSpawner = GetComponentInParent<WaveSpawner>();
-    }
     protected virtual void Awake()
     {
         //sets whatever object this is on to be put on the "enemy" layer, so the player can attack it.
@@ -59,6 +55,8 @@ public class Enemy : MonoBehaviour
             playerScript = playerObject.GetComponent<Player>();
             //playerRb = playerObject.GetComponent<Rigidbody>();
         }
+
+        waveSpawner = GetComponentInParent<WaveSpawner>();
 
         impulseSource = GetComponent<CinemachineImpulseSource>();
     }
@@ -118,8 +116,11 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Die()
     {
+        if (waveSpawner != null) waveSpawner.waves[waveSpawner.currentWaveIndex].enemiesLeft--;
+
         isDead = true;
         playerScript.GainExp(expWorth);
+
         if (animator != null)
         {
             animator.SetTrigger("died");
@@ -127,8 +128,6 @@ public class Enemy : MonoBehaviour
         }
 
         StartCoroutine(DestroyEnemy());
-        
-        if (waveSpawner != null) waveSpawner.waves[waveSpawner.currentWaveIndex].enemiesLeft--;
     }
 
     public bool GetIsDead() { return isDead; }
