@@ -190,7 +190,7 @@ MonoBehaviour:
   itemDrops: []
   gfxObject: {fileID: 7347449900440986324}
   moveSpeed: 5
-  aggroDistance: 10
+  aggroDistance: 15
   attackDistance: 2
   strafeDistance: 3
   attackPower: 2
