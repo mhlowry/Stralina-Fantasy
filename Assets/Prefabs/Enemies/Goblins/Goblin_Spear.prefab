@@ -150,11 +150,13 @@ MonoBehaviour:
   boidAwarenessRadius: 2.86
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1280
   damageInterval: 10
   damageIntRandomMin: 0
   damageIntRandomMax: 0
   keepEnemiesForSeconds: 2
+  strafeRandomMin: -1.5
+  strafeRandomMax: 0.5
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -166,7 +168,7 @@ MonoBehaviour:
   runningVfxObj: {fileID: 1662424400507791647}
   dashStabVfxObj: {fileID: 8442826207291442755}
   chargingSpeedAdjustment: 4
-  chargingDamage: 3
+  chargingDamage: 2
   chargingDistance: 6
 --- !u!114 &2146143256653289659
 MonoBehaviour:
