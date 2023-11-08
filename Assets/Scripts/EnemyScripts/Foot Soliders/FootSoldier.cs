@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 //FootSoldier is an enemy class that has universally cool movement and coordination..ish?
 public class FootSoldier : Enemy
 {
-    private Coroutine disableMoveCoroutine;
+    protected Coroutine disableMoveCoroutine;
 
     [SerializeField] protected float moveSpeed = 5f;
     [SerializeField] public float aggroDistance = 10f;
@@ -33,6 +33,8 @@ public class FootSoldier : Enemy
 
     private float changeStrafeInterval;
     private float lastStrafeChange;
+    [SerializeField] private float strafeRandomMin = -1.5f;
+    [SerializeField] private float strafeRandomMax = 0.5f;
 
     private List<Transform> nearbyEnemies = new List<Transform>();
 
@@ -55,7 +57,6 @@ public class FootSoldier : Enemy
     {
         base.Awake();
         gameObject.layer = LayerMask.NameToLayer("FootSoldier");
-        strafeDistance += Random.Range(-0.5f, 0.5f);
         curStrafe = strafeDistance;
         changeStrafeInterval = Random.Range(2f, 4f);
     }
@@ -81,17 +82,17 @@ public class FootSoldier : Enemy
         if (Time.time - lastStrafeChange > changeStrafeInterval)
         {
             lastStrafeChange = Time.time;
-            curStrafe = strafeDistance + Random.Range(-1.5f, 0.5f);
+            curStrafe = strafeDistance + Random.Range(strafeRandomMin, strafeRandomMax);
         }
 
         if (nextDamageTime <= Time.time && !canAttack)
             canAttack = true;
 
         //Do not navigate combat in here.  do it in the children scripts.  See GoblinDagger or GoblinSpear for examples
-        /*        if (playerObject != null && inAggroRange && canMove && !isDead)
-                {
-                    NavigateCombat();
-                }*/
+        /*if (playerObject != null && inAggroRange && canMove && !isDead)
+        {
+            NavigateCombat();
+        }*/
     }
 
     //The goal, right, is to have a basic "smart" foot soldier that will strafe at a distance if they can't attack
@@ -153,32 +154,6 @@ public class FootSoldier : Enemy
                 nearbyEnemies.Add(collider.transform);
             }
         }
-    }
-
-    public override void TakeDamage(int damage, float knockback, Vector3 direction)
-    {
-        //start the disablemove so it doesn't start mid combo
-        if (disableMoveCoroutine != null)
-            StopCoroutine(disableMoveCoroutine);
-
-        disableMoveCoroutine = StartCoroutine(DisableMovementForSeconds(2f));
-
-        if (isAttacking)
-            hitMidAttack = true;
-
-        //inflict damage
-        base.TakeDamage(damage, knockback, direction);
-
-        //die if dead
-        //make sure they're not already dying, prevent from calling "die" twice
-        if (curHealthPoints <= 0 && !animator.GetBool("isDead"))
-        {
-            //Debug.Log(gameObject.name + " Fucking Died");
-            canMove = false;
-            base.Die();
-            StopCoroutine(disableMoveCoroutine);
-        }
-        else animator?.SetTrigger("pain");
     }
 
     protected IEnumerator DisableMovementForSeconds(float seconds)

@@ -48,6 +48,8 @@ public class SwordMan : Player
         {
             //animate the blocking
             animGFX.SetTrigger("blockHit");
+            //Play blocking sounds
+            AudioManager.instance.PlayAll(new string[] { "block_thud_2", "block_thud_4" });
             //drain the meter
             UseMeter(15f);
         }

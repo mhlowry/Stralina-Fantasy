@@ -193,17 +193,19 @@ MonoBehaviour:
   aggroDistance: 15
   attackDistance: 2
   strafeDistance: 3
-  attackPower: 2
+  attackPower: 1
   knockback: 1
   attackStartup: 0.5
   boidAwarenessRadius: 2
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1280
   damageInterval: 8
   damageIntRandomMin: -3
   damageIntRandomMax: 0.5
   keepEnemiesForSeconds: 0.6
+  strafeRandomMin: -1.5
+  strafeRandomMax: 0.5
   secondAttackStartup: 0.5
   attackdelay1: 0.35
   attackdelay2: 0.3
