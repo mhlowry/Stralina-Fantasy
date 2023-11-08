@@ -15,15 +15,15 @@ public class Player : MonoBehaviour, IDataPersistence
     bool disableInput = false;
 
     const int maxLevel = 7;
-    [SerializeField, Range(1, maxLevel)] int playerLevel = 1;
-    [SerializeField] int[] expToLevelUp = { 100, 500, 1000, 2000, 3000, 5000, 10000 };
-    int curExp = 0;
+    [SerializeField, Range(1, maxLevel)]  int playerLevel = 1;
+    int[] expToLevelUp = { 100, 500, 1000, 2000, 3000, 5000, 10000 };
+    [SerializeField] int curExp = 0;
 
     [SerializeField] int maxHealth = 10;
     [SerializeField] int curHealth;
 
     const float maxAbilityMeter = 100f;
-    [SerializeField, Range(1, maxAbilityMeter)] float curAbilityMeter = 0f;
+    [SerializeField, Range(0, maxAbilityMeter)] float curAbilityMeter = 0f;
 
     //Stats that are adjustable, mostly through gear
     float attackScale = 1f;
@@ -75,6 +75,14 @@ public class Player : MonoBehaviour, IDataPersistence
         animGFX = gfxObj.GetComponent<Animator>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
         characterController = GetComponent<CharacterController>();
+
+        // should be in awake!
+        try
+        {
+            playerLevel = GameManager.instance.GetPlayerLevel();
+            curExp = GameManager.instance.GetPlayerExp();
+        }
+        catch { }
 
         try
         {
@@ -261,6 +269,11 @@ public class Player : MonoBehaviour, IDataPersistence
 
         if (DataPersistenceManager.instance != null)
             DataPersistenceManager.instance.SaveGame();
+
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.SetPlayerExp(curExp);
+        }
     }
 
     void LevelUp()
@@ -279,6 +292,12 @@ public class Player : MonoBehaviour, IDataPersistence
 
         if (DataPersistenceManager.instance != null)
             DataPersistenceManager.instance.SaveGame();
+
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.SetPlayerExp(curExp);
+            GameManager.instance.SetPlayerLevel(playerLevel);
+        }
     }
 
     //Stats-related functions

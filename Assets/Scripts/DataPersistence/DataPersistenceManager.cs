@@ -56,7 +56,12 @@ public class DataPersistenceManager : MonoBehaviour
         {
             GameManager.instance.SetLevelsCompleted(gameData.levelsCompleted);
             Debug.Log("Loaded levels completed: " + gameData.levelsCompleted);
-            //GamaManager.instance.InitializeLevelButtons();
+            
+            GameManager.instance.SetPlayerLevel(gameData.playerLevel);
+            Debug.Log("Loaded current level: " + gameData.playerLevel);
+
+            GameManager.instance.SetPlayerExp(gameData.curExp);
+            Debug.Log("Loaded current exp: " + gameData.curExp);
         }
 
         // push the loaded data to all other scripts that need it.
@@ -69,6 +74,8 @@ public class DataPersistenceManager : MonoBehaviour
     public void SaveGame()
     {
         gameData.levelsCompleted = GameManager.instance.GetLevelsCompleted();
+        gameData.playerLevel = GameManager.instance.GetPlayerLevel();
+        gameData.curExp = GameManager.instance.GetPlayerExp();
 
         // pass the data to other scripts so they can update it
         foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)

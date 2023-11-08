@@ -150,7 +150,28 @@ public class GoblinSpear : FootSoldier
         if (isCharging)
             hitMidAttack = true;
 
+        //start the disablemove so it doesn't start mid combo
+        if (disableMoveCoroutine != null)
+            StopCoroutine(disableMoveCoroutine);
+
+        disableMoveCoroutine = StartCoroutine(DisableMovementForSeconds(2f));
+
+        if (isAttacking)
+            hitMidAttack = true;
+
+        //inflict damage
         base.TakeDamage(damage, knockback, direction);
+
+        //die if dead
+        //make sure they're not already dying, prevent from calling "die" twice
+        if (curHealthPoints <= 0 && !animator.GetBool("isDead"))
+        {
+            //Debug.Log(gameObject.name + " Fucking Died");
+            canMove = false;
+            Die();
+            StopCoroutine(disableMoveCoroutine);
+        }
+        else animator?.SetTrigger("pain");
     }
 
     private void ResetAttack()

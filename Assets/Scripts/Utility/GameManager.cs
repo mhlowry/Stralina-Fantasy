@@ -6,7 +6,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    [SerializeField] private bool[] levelsCompleted;
+    [SerializeField] public bool[] levelsCompleted;
+    private int playerLevel = 1;
+    private int curExp = 0;
+
+    const int maxLevel = 7;
     private void Awake()
     {
         if (instance != null)
@@ -85,6 +89,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SetPlayerLevel(int level)
+    {
+        playerLevel = level;
+    }
+
+    public void SetPlayerExp(int exp)
+    {
+        curExp = exp;
+    }
+
+    public int GetPlayerLevel()
+    {
+        return playerLevel;
+    }
+
+    public int GetPlayerExp()
+    {
+        return curExp;
+    }
 
     // This method will be called every time a scene is loaded
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)

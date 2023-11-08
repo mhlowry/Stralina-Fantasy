@@ -324,7 +324,7 @@ MonoBehaviour:
   expToLevelUp: 64000000f4010000e8030000d0070000b80b00008813000010270000
   maxHealth: 15
   curHealth: 0
-  curAbilityMeter: 100
+  curAbilityMeter: 0
   hitInvulTime: 1.2
   hitStunTime: 0.6
   decelerationRate: 10
