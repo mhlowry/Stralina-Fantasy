@@ -15,7 +15,7 @@ public class Companion : MonoBehaviour
     [SerializeField] private float teleportYThreshold = 1f; // The y-axis difference threshold for teleporting
     [SerializeField] private Vector2 teleportOffsetRange = new Vector2(0.5f, 1.5f); // Range for random offset when teleporting
     [SerializeField] private int maxHealth = 10;
-    private int curHealth;
+    [SerializeField] private int curHealth;
     float timeofHit;
     float defenseScale = 1f;
 

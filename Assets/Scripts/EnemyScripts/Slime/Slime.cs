@@ -95,7 +95,7 @@ public class Slime : Enemy
         // If the target has changed, print the new target
         if (previousTarget != currentTarget)
         {
-            Debug.Log("Target switched to: " + currentTarget.name);
+            Debug.Log("Slime switched to: " + currentTarget.name);
         }
 
         float distanceFromTarget = Vector3.Distance(transform.position, currentTarget.transform.position);
@@ -151,7 +151,7 @@ public class Slime : Enemy
     }
 
     //This is how the slime deals damage!
-    private void DealCollisionDamage(Collision hitTarget)
+    protected void DealCollisionDamage(Collision hitTarget)
     {
         // Check if the hit target is the current target
         if (enableDamage && hitTarget.gameObject == currentTarget)
