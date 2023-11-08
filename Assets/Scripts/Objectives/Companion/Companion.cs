@@ -1,5 +1,10 @@
-using UnityEngine;
+using System;
 using System.Collections;
+using Cinemachine;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using TMPro;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Companion : MonoBehaviour
@@ -9,15 +14,37 @@ public class Companion : MonoBehaviour
     [SerializeField] private float timeBetweenNewPosition = 2f;
     [SerializeField] private float teleportYThreshold = 1f; // The y-axis difference threshold for teleporting
     [SerializeField] private Vector2 teleportOffsetRange = new Vector2(0.5f, 1.5f); // Range for random offset when teleporting
+    [SerializeField] private int maxHealth = 10;
+    private int curHealth;
+    float timeofHit;
+    float defenseScale = 1f;
+
+    // For the blinking effect when taking damage
+    private MeshRenderer meshRenderer; // delete when we change to sprite
 
     private Rigidbody rb;
     private GameObject playerObject;
     private Vector3 targetPosition;
+    private ResourceBar healthBar;
 
-    private void Start()
+    private void Awake()
     {
         playerObject = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody>();
+
+        try
+        {
+            healthBar = GameObject.Find("Companion Health").GetComponent<ResourceBar>();
+        }
+        catch { }
+    }
+
+    private void Start()
+    {   
+        healthBar.SetMaxResource(maxHealth);
+        curHealth = maxHealth; // Initialize the companion's health
+        meshRenderer = GetComponentInChildren<MeshRenderer>(); // Get the meshRenderer component for the blinking effect
+
         StartCoroutine(UpdateTargetPositionCoroutine());
     }
 
@@ -25,6 +52,57 @@ public class Companion : MonoBehaviour
     {
         CheckTeleport();
         MoveWithPlayer();
+    }
+    
+    public virtual void TakeDamage(int damage, float knockBack, Vector3 enemyPosition)
+    {
+        //adjust numbers
+        timeofHit = Time.time;
+        curHealth -= (int)(damage * (2 - defenseScale));
+
+        //begin the blinking effect
+        StartCoroutine(BlinkEffect());
+
+        //update health bar
+        healthBar.SetResource(curHealth);
+
+        if (curHealth <= 0)
+            Die();
+    }
+
+    // When sprite is made for companion, either delete or change to sprite renderer
+    IEnumerator BlinkEffect()
+    {
+        if (meshRenderer == null)
+        {
+            Debug.LogError("MeshRenderer is not assigned.");
+            yield break; // Exit the coroutine if meshRenderer is null
+        }
+
+        // Blink the mesh renderer to indicate damage taken
+        for (int i = 0; i < 10; i++) // Blink for a set number of times
+        {
+            meshRenderer.enabled = !meshRenderer.enabled;
+            yield return new WaitForSeconds(0.1f);
+        }
+        meshRenderer.enabled = true; // Ensure the mesh is enabled after blinking
+    }
+
+
+    public static event Action OnPlayerDeath;
+    private void Die()
+    {
+      // Temporary: companion just becomes invisible
+      // But also game over happens anyway so it doesn't really matter what happens to the companion
+      // I'll just make him disappear since I am the dev which means I am God
+      if (meshRenderer != null)
+      {
+          meshRenderer.enabled = false; // be gone!
+          // This will probably change to spriteRenderer
+      }
+      // TODO: Add death animations or effects here
+      
+      OnPlayerDeath?.Invoke();
     }
 
     private IEnumerator UpdateTargetPositionCoroutine()
@@ -34,7 +112,7 @@ public class Companion : MonoBehaviour
             if (Vector3.Distance(transform.position, playerObject.transform.position) <= followRadius)
             {
                 // Update target position to a new random position within the follow radius
-                Vector3 randomDirection = Random.insideUnitSphere * followRadius;
+                Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * followRadius;
                 randomDirection += playerObject.transform.position;
                 randomDirection.y = transform.position.y; // Assuming you want the companion to stay at its current y position
 
@@ -72,8 +150,8 @@ public class Companion : MonoBehaviour
         if (Mathf.Abs(transform.position.y - playerObject.transform.position.y) > teleportYThreshold)
         {
             // Teleport to the player with a random offset in x and z, but set the y to the player's y
-            float offsetX = Random.Range(-teleportOffsetRange.x, teleportOffsetRange.x);
-            float offsetZ = Random.Range(-teleportOffsetRange.y, teleportOffsetRange.y);
+            float offsetX = UnityEngine.Random.Range(-teleportOffsetRange.x, teleportOffsetRange.x);
+            float offsetZ = UnityEngine.Random.Range(-teleportOffsetRange.y, teleportOffsetRange.y);
             Vector3 newPosition = new Vector3(
                 playerObject.transform.position.x + offsetX,
                 playerObject.transform.position.y, // Set the y position to the player's y
