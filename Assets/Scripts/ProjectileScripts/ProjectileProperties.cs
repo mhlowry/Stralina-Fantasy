@@ -81,9 +81,7 @@ public class ProjectileProperties : MonoBehaviour
             //Attack the player or companion
             Player thisPlayer = targetObject.GetComponent<Player>();
             Companion thisCompanion = targetObject.GetComponent<Companion>();
-
-            // If it can't find a player component, it must have hit a companion
-            // Or, if it hit something other than the companion, it shouldn't do anything
+            
             if (thisPlayer) 
             {
                 //this is the main attack shit
