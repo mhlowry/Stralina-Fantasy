@@ -4,6 +4,7 @@ public class EliminateEnemiesObjective : ObjectiveManager
 {
     public int totalEnemies;
     private int remainingEnemies;
+    
 
     private void Awake()
     {
@@ -49,9 +50,18 @@ public class EliminateEnemiesObjective : ObjectiveManager
 
     protected override void UpdateObjectiveDescription()
     {
-        description = "Urgent Quest!\n\n Eliminate all " + totalEnemies + " enemies on the map!\n\n (" + remainingEnemies + " remaining)";
-        base.UpdateObjectiveDescription();
-        Debug.Log(description);
+        if (companionObject == null)
+        {
+            description = "Urgent Quest!\n\n Eliminate all " + totalEnemies + " enemies on the map!\n\n (" + remainingEnemies + " remaining)";
+            base.UpdateObjectiveDescription();
+            Debug.Log(description);
+        }
+        else
+        {
+            description = "Urgent Quest!\n\nProtect your companion!\n\nEliminate all " + totalEnemies + " enemies on the map!\n\n (" + remainingEnemies + " remaining)";
+            base.UpdateObjectiveDescription();
+            Debug.Log(description);
+        }
     }
 
     public override void CheckObjectiveCompletion()

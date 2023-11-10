@@ -745,6 +745,7 @@ MonoBehaviour:
   teleportOffsetRange: {x: 0.5, y: 1.5}
   maxHealth: 10
   curHealth: 0
+  disableMovement: 0
 --- !u!54 &142965180
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2953,11 +2954,7 @@ MonoBehaviour:
   - {fileID: 813562270}
   waves:
   - enemies:
-    - {fileID: 6582013039348642663, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
-    - {fileID: 6582013039348642663, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
-    - {fileID: 6582013039348642663, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
-    - {fileID: 6582013039348642663, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
-    - {fileID: 6582013039348642663, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
+    - {fileID: 4958396321392310777, guid: a8533e30fddc16a40b5104ffc6d00f32, type: 3}
     timeToNextEnemy: 1
     timeToNextWave: 5
     enemiesLeft: 0
@@ -4534,6 +4531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOver: {fileID: 2145359968200083559}
+  gameOverText: {fileID: 3511591712003328062}
 --- !u!224 &1935098302699282949
 RectTransform:
   m_ObjectHideFlags: 0

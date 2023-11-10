@@ -73,12 +73,21 @@ public class WaveSpawner : ObjectiveManager
 
     protected override void UpdateObjectiveDescription()
     {
-        int wavesRemaining = waves.Length - currentWaveIndex;
-        string waveWord = wavesRemaining == 1 ? "wave" : "waves"; // Singular or plural
+            int wavesRemaining = waves.Length - currentWaveIndex;
+            string waveWord = wavesRemaining == 1 ? "wave" : "waves"; // Singular or plural
 
-        description = "Urgent Quest!\n\nEliminate all " + waves.Length + " waves!\n\n(" + wavesRemaining + " " + waveWord + " remaining)";
-        base.UpdateObjectiveDescription();
-        Debug.Log(description);
+        if (companionObject == null)
+        {
+            description = "Urgent Quest!\n\nEliminate all " + waves.Length + " waves!\n\n(" + wavesRemaining + " " + waveWord + " remaining)";
+            base.UpdateObjectiveDescription();
+            Debug.Log(description);
+        }
+       else
+       {
+            description = "Urgent Quest!\n\nProtect your companion!\n\nEliminate all " + waves.Length + " waves!\n\n(" + wavesRemaining + " " + waveWord + " remaining)";
+            base.UpdateObjectiveDescription();
+            Debug.Log(description);
+       }
     }
 
     public override void InitializeObjective()

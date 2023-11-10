@@ -17,6 +17,7 @@ public class Companion : MonoBehaviour
     [SerializeField] private int maxHealth = 10;
     [SerializeField] private int curHealth;
     [SerializeField] private bool disableMovement = false;
+    
     float timeofHit;
     float defenseScale = 1f;
 
@@ -24,14 +25,22 @@ public class Companion : MonoBehaviour
     private MeshRenderer meshRenderer; // delete when we change to sprite
 
     private Rigidbody rb;
-    private GameObject playerObject;
     private Vector3 targetPosition;
     private ResourceBar healthBar;
+    public static event Action OnCompanionDeath;
+    protected GameObject playerObject;
+    protected GameObject companionObject; 
+    protected Player playerScript;
+    protected Companion companionScript;
+    private GameOverMenu gameOverMenu;
+
 
     private void Awake()
     {
         playerObject = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody>();
+
+        gameOverMenu = FindObjectOfType<GameOverMenu>();
 
         try
         {
@@ -88,7 +97,6 @@ public class Companion : MonoBehaviour
         }
         meshRenderer.enabled = true; // Ensure the mesh is enabled after blinking
     }
-    public static event Action OnPlayerDeath;
     private void Die()
     {
       // Temporary: companion just becomes invisible
@@ -100,8 +108,13 @@ public class Companion : MonoBehaviour
           // This will probably change to spriteRenderer
       }
       // TODO: Add death animations or effects here
-      
-      OnPlayerDeath?.Invoke();
+
+      if (gameOverMenu != null)
+      {
+          gameOverMenu.SetGameOverText("Your companion died!");
+      }
+
+      OnCompanionDeath?.Invoke();
     }
 
     private IEnumerator UpdateTargetPositionCoroutine()
@@ -164,5 +177,8 @@ public class Companion : MonoBehaviour
             transform.position = newPosition;
         }
     }
-
+    public int getCompanionHealth()
+    {
+      return curHealth;
+    }
 }
