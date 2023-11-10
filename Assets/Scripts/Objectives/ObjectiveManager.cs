@@ -21,6 +21,8 @@ public abstract class ObjectiveManager : GameManager
 
     private void Awake()
     {
+        Debug.Log("Objective Manager entered.");
+        
         //Find Player
         playerObject = GameObject.FindGameObjectWithTag("Player");
 
@@ -35,8 +37,10 @@ public abstract class ObjectiveManager : GameManager
 
         if (companionObject != null)
         {
+            Debug.Log("Companion object successfully set!");
             companionScript = companionObject.GetComponent<Companion>();
         }
+        else Debug.Log("Not detecting companion in the scene.");
 
         if (objectiveDisplay != null)
         {

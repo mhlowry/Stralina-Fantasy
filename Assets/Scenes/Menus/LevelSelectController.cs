@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelSelectController : ObjectiveManager
+public class LevelSelectController : MonoBehaviour
 {
 
     private void Start()

@@ -84,7 +84,7 @@ public class WaveSpawner : ObjectiveManager
         }
        else
        {
-            description = "Urgent Quest!\n\nProtect your companion!\n\nEliminate all " + waves.Length + " waves!\n\n(" + wavesRemaining + " " + waveWord + " remaining)";
+            description = "Protect your companion!\n\nEliminate all " + waves.Length + " waves!\n\n(" + wavesRemaining + " " + waveWord + " remaining)";
             base.UpdateObjectiveDescription();
             Debug.Log(description);
        }
