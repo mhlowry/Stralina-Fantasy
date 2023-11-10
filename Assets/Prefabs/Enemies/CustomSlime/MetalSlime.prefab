@@ -120,10 +120,7 @@ MonoBehaviour:
   damageHeight: 0
   playerLayer:
     serializedVersion: 2
-    m_Bits: 64
-  companionLayer:
-    serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 2112
   attackPoint: {fileID: 4437261193246188007}
   attackSize: 1.8
   vfxObj: {fileID: 4966345950676841903}

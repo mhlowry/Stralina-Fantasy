@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 87986851}
   - component: {fileID: 87986850}
   - component: {fileID: 87986852}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Companion Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -632,7 +632,7 @@ GameObject:
   - component: {fileID: 142965175}
   - component: {fileID: 142965180}
   - component: {fileID: 142965179}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Companion Cube
   m_TagString: Companion
   m_Icon: {fileID: 0}
@@ -744,6 +744,7 @@ MonoBehaviour:
   teleportYThreshold: 1
   teleportOffsetRange: {x: 0.5, y: 1.5}
   maxHealth: 10
+  curHealth: 0
 --- !u!54 &142965180
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -769,7 +770,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!1 &205209654
 GameObject:
@@ -836,7 +837,7 @@ GameObject:
   - component: {fileID: 210027220}
   - component: {fileID: 210027219}
   - component: {fileID: 210027218}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Floating UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -937,7 +938,7 @@ GameObject:
   - component: {fileID: 242189528}
   - component: {fileID: 242189530}
   - component: {fileID: 242189529}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Filling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2953,6 +2954,10 @@ MonoBehaviour:
   waves:
   - enemies:
     - {fileID: 6582013039348642663, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
+    - {fileID: 6582013039348642663, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
+    - {fileID: 6582013039348642663, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
+    - {fileID: 6582013039348642663, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
+    - {fileID: 6582013039348642663, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
     timeToNextEnemy: 1
     timeToNextWave: 5
     enemiesLeft: 0
@@ -3073,7 +3078,7 @@ GameObject:
   - component: {fileID: 1722790655}
   - component: {fileID: 1722790657}
   - component: {fileID: 1722790656}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}

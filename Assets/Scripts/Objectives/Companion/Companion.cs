@@ -87,8 +87,6 @@ public class Companion : MonoBehaviour
         }
         meshRenderer.enabled = true; // Ensure the mesh is enabled after blinking
     }
-
-
     public static event Action OnPlayerDeath;
     private void Die()
     {
