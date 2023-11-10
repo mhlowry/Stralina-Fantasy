@@ -32,7 +32,7 @@ public class MetalSlime : Slime
     {
         animator?.SetBool("isMoving", isMoving);
         animator?.SetBool("isAttack", isAttacking);
-        direction = playerObject.transform.position - transform.position;
+        direction = currentTarget.transform.position - transform.position;
     }
 
     private void SlideTowardsPlayer()
@@ -44,8 +44,21 @@ public class MetalSlime : Slime
         inAggroRange = distanceFromPlayer <= aggroDistance;
         inAttackRange = distanceFromPlayer <= attackDistance;
 
-        if (playerObject != null && inAggroRange && canMove)
+        // Store the previous target before updating
+        previousTarget = currentTarget;
+
+        // Update the target based on proximity
+        UpdateTarget();
+
+        // If the target has changed, print the new target
+        if (previousTarget != currentTarget)
         {
+            Debug.Log("Metal slime switched to: " + currentTarget.name);
+        }
+
+        if (currentTarget != null && inAggroRange && canMove)
+        {
+
             if (inAttackRange && canAttack)
             {
                 isAttacking = true;

@@ -82,7 +82,7 @@ public class Slime : Enemy
     }
 
 
-    private GameObject previousTarget = null;
+    protected GameObject previousTarget = null;
 
     private void JumpTowardsPlayer()
     {
