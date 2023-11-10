@@ -16,6 +16,7 @@ public class Companion : MonoBehaviour
     [SerializeField] private Vector2 teleportOffsetRange = new Vector2(0.5f, 1.5f); // Range for random offset when teleporting
     [SerializeField] private int maxHealth = 10;
     [SerializeField] private int curHealth;
+    [SerializeField] private bool disableMovement = false;
     float timeofHit;
     float defenseScale = 1f;
 
@@ -124,21 +125,24 @@ public class Companion : MonoBehaviour
 
     private void MoveWithPlayer()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, playerObject.transform.position);
+        if (!disableMovement)
+        {
+          float distanceToPlayer = Vector3.Distance(transform.position, playerObject.transform.position);
 
-        // Move towards the target position if within the follow radius
-        if (distanceToPlayer <= followRadius)
-        {
-            Vector3 direction = (targetPosition - transform.position).normalized;
-            direction.y = 0; // Keep the y-axis movement to 0 to ensure sliding movement
-            rb.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
-        }
-        // If outside the follow radius, move directly towards the player's position
-        else
-        {
-            Vector3 direction = (playerObject.transform.position - transform.position).normalized;
-            direction.y = 0; // Keep the y-axis movement to 0 to ensure sliding movement
-            rb.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
+          // Move towards the target position if within the follow radius
+          if (distanceToPlayer <= followRadius)
+          {
+              Vector3 direction = (targetPosition - transform.position).normalized;
+              direction.y = 0; // Keep the y-axis movement to 0 to ensure sliding movement
+              rb.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
+          }
+          // If outside the follow radius, move directly towards the player's position
+          else
+          {
+              Vector3 direction = (playerObject.transform.position - transform.position).normalized;
+              direction.y = 0; // Keep the y-axis movement to 0 to ensure sliding movement
+              rb.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
+          }
         }
     }
 

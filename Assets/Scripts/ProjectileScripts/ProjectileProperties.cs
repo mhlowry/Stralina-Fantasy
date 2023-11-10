@@ -62,6 +62,7 @@ public class ProjectileProperties : MonoBehaviour
     private void OnTriggerEnter(Collider hitTarget)
     {
         GameObject targetObject = hitTarget.gameObject;
+        //if(targetObject) Debug.Log("Target hit by projectile!");
 
         //call takedamage for enemy if want to hit enemy
         if (targetMask == "Enemy" && hitTarget.gameObject.CompareTag("Enemy"))
@@ -74,12 +75,26 @@ public class ProjectileProperties : MonoBehaviour
                 loggedEnemies.Add(hitTarget);
             }
         }
-        else if(targetMask == "Player" && hitTarget.gameObject.CompareTag("Player"))
+        else if(targetMask == "Player" && 
+            (hitTarget.gameObject.CompareTag("Player") || hitTarget.gameObject.CompareTag("Companion")))
         {
-            //Attack the player
+            //Attack the player or companion
             Player thisPlayer = targetObject.GetComponent<Player>();
-            //this is the main attack shit
-            thisPlayer.TakeDamage(damage, knockback, transform.position);
+            Companion thisCompanion = targetObject.GetComponent<Companion>();
+
+            // If it can't find a player component, it must have hit a companion
+            // Or, if it hit something other than the companion, it shouldn't do anything
+            if (thisPlayer) 
+            {
+                //this is the main attack shit
+                thisPlayer.TakeDamage(damage, knockback, transform.position);
+            }
+            else if (thisCompanion)
+            {
+                //this is the main attack shit
+                thisCompanion.TakeDamage(damage, knockback, transform.position);
+            }
         }
+
     }
 }

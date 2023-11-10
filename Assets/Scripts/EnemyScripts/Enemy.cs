@@ -148,6 +148,11 @@ public class Enemy : MonoBehaviour
         lastDistanceToCurrentTarget = distanceToClosest;
     }
 
+    public GameObject getCurrentTarget()
+    {
+        return currentTarget;
+    }
+
     public virtual void TakeDamage(int damage, float knockBack, Vector3 direction)
     {
         // Don't take damage if you're dead
@@ -251,6 +256,10 @@ public class Enemy : MonoBehaviour
 
     public float playerDistance()
     {
-        return Vector3.Distance(playerObject.transform.position, transform.position);
+        // sneakily calculates the distance from the current target instead of always the player 
+        // mostly this is to not mess up the projectile calculations 
+        if (currentTarget == null)
+            return Vector3.Distance(playerObject.transform.position, transform.position);
+        else  return Vector3.Distance(currentTarget.transform.position, transform.position);
     }
 }
