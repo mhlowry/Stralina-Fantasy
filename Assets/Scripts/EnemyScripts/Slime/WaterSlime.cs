@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaterSlime : Slime
 {
-    [SerializeField] LayerMask playerLayer;
+    [SerializeField] LayerMask targetLayer;
     [SerializeField] Transform explosionPoint;
     [SerializeField] float explosionSize;
     [SerializeField] float explosionDelay;
@@ -23,7 +23,7 @@ public class WaterSlime : Slime
 
     void FixedUpdate()
     {
-        //SlideTowardsPlayer();
+        //SlideTowardsTarget();
 
         if (!isMoving)
             SlideAwayFromPlayer();
@@ -37,7 +37,7 @@ public class WaterSlime : Slime
 
     void Update()
     {
-        direction = (playerObject.transform.position - transform.position).normalized;
+        direction = (currentTarget.transform.position - transform.position).normalized;
 
         animator?.SetBool("isMoving", isMoving);
         animator?.SetBool("isAttack", isAttacking);
@@ -49,11 +49,23 @@ public class WaterSlime : Slime
         if (isAttacking || isDead)
             return;
 
-        distanceFromPlayer = playerDistance();
-        inAggroRange = distanceFromPlayer <= aggroDistance;
-        inAttackRange = distanceFromPlayer <= attackDistance;
+        distanceFromTarget = targetDistance();
+        inAggroRange = distanceFromTarget <= aggroDistance;
+        inAttackRange = distanceFromTarget <= attackDistance;
 
-        if (playerObject != null && canMove)
+        // Store the previous target before updating
+        previousTarget = currentTarget;
+
+        // Update the target based on proximity
+        UpdateTarget();
+
+        // If the target has changed, print the new target
+        if (previousTarget != currentTarget)
+        {
+            Debug.Log("Water slime switched to: " + currentTarget.name);
+        }
+
+        if (currentTarget != null && canMove)
         {
             if (inAggroRange)
             {
@@ -83,16 +95,16 @@ public class WaterSlime : Slime
             yield break;
         }
 
-        distanceFromPlayer = playerDistance();
-        float duration = distanceFromPlayer / projectileSpeed;
+        distanceFromTarget = targetDistance();
+        float duration = distanceFromTarget / projectileSpeed;
 
         // Create a new instance of the projectile using Instantiate
         GameObject newProjectile = GameObject.Instantiate(projectilePrefab, explosionPoint.position, Quaternion.LookRotation(direction));
 
         //jesus christ I can't beliieve this got turned into a physics assignment
-        float xVelVector = (playerObject.transform.position.x - transform.position.x) / duration;
+        float xVelVector = (currentTarget.transform.position.x - transform.position.x) / duration;
         float yVelVector = (0.5f * 9.8f * duration * duration) / duration;
-        float zVelVector = (playerObject.transform.position.z - transform.position.z) / duration;
+        float zVelVector = (currentTarget.transform.position.z - transform.position.z) / duration;
 
         //Debug.Log("Velx: " + xVelVector + "/ Vely: " + yVelVector + "/ Velz: " + zVelVector);
 
@@ -127,8 +139,8 @@ public class WaterSlime : Slime
         //eventually play a water explosion VFX
         //PlayAttackVFX(direction);
 
-        Collider[] hitPlayer = Physics.OverlapSphere(explosionPoint.position, explosionSize, playerLayer);
-        foreach (Collider collider in hitPlayer)
+        Collider[] hitTarget = Physics.OverlapSphere(explosionPoint.position, explosionSize, targetLayer);
+        foreach (Collider collider in hitTarget)
             collider.GetComponent<Player>().TakeDamage(explosionDamage, explosionKnockback, transform.position);
     }
 

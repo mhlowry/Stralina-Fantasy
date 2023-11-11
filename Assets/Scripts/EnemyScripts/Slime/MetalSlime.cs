@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MetalSlime : Slime
 {
-    [SerializeField] LayerMask playerLayer;
+    [SerializeField] LayerMask targetLayer;
     [SerializeField] Transform attackPoint;
     [SerializeField] float attackSize;
     [SerializeField] GameObject vfxObj;
@@ -16,10 +16,10 @@ public class MetalSlime : Slime
 
     void FixedUpdate()
     {
-        //SlideTowardsPlayer();
+        //SlideTowardsTarget();
 
         if (!isMoving)
-            SlideTowardsPlayer();
+            SlideTowardsTarget();
 
         if (nextDamageTime <= Time.time && !canAttack)
         {
@@ -32,20 +32,33 @@ public class MetalSlime : Slime
     {
         animator?.SetBool("isMoving", isMoving);
         animator?.SetBool("isAttack", isAttacking);
-        direction = playerObject.transform.position - transform.position;
+        direction = currentTarget.transform.position - transform.position;
     }
 
-    private void SlideTowardsPlayer()
+    private void SlideTowardsTarget()
     {
         if (isAttacking)
             return;
 
-        distanceFromPlayer = playerDistance();
-        inAggroRange = distanceFromPlayer <= aggroDistance;
-        inAttackRange = distanceFromPlayer <= attackDistance;
+        distanceFromTarget = targetDistance();
+        inAggroRange = distanceFromTarget <= aggroDistance;
+        inAttackRange = distanceFromTarget <= attackDistance;
 
-        if (playerObject != null && inAggroRange && canMove)
+        // Store the previous target before updating
+        previousTarget = currentTarget;
+
+        // Update the target based on proximity
+        UpdateTarget();
+
+        // If the target has changed, print the new target
+        if (previousTarget != currentTarget)
         {
+            Debug.Log("Metal slime switched to: " + currentTarget.name);
+        }
+
+        if (currentTarget != null && inAggroRange && canMove)
+        {
+
             if (inAttackRange && canAttack)
             {
                 isAttacking = true;
@@ -74,9 +87,9 @@ public class MetalSlime : Slime
 
         PlayAttackVFX(direction);
         AudioManager.instance.Play("sword_1");
-        Collider[] hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, playerLayer);
-        foreach (Collider collider in hitPlayer)
-            base.DealDamage(attackPower, knockback);
+        Collider[] hitTarget = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
+        foreach (Collider collider in hitTarget)
+            base.DealDamage(attackPower, knockback, collider.gameObject);
 
         nextDamageTime = Time.time + damageInterval;
         canAttack = false;

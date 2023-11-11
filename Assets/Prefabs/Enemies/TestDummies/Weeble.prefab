@@ -152,16 +152,15 @@ MonoBehaviour:
   maxHealthPoints: 10
   expWorth: 0
   knockbackMultiplier: 1
-  rb: {fileID: 0}
   itemDrops: []
   gfxObject: {fileID: 0}
   colorSpeed: 0.5
   regularColor: {r: 1, g: 1, b: 1, a: 1}
   hurtColor: {r: 0.55342007, g: 0, b: 1, a: 1}
   attackSize: 5.16
-  playerLayer:
+  targetLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 4160
   damageDeal: 1
 --- !u!114 &8214070607385117810
 MonoBehaviour:

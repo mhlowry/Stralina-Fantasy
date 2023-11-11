@@ -15,7 +15,7 @@ public class Slime : Enemy
     [SerializeField, Range(0, 14)] protected int attackPower = 1;
     [SerializeField] protected float knockback = 1f;
 
-    protected float distanceFromPlayer = 999f;
+    protected float distanceFromTarget = 999f;
     protected float nextDamageTime = 0;
 
     protected bool isMoving = false;
@@ -49,7 +49,7 @@ public class Slime : Enemy
     void FixedUpdate()
     {
         if (!isMoving && !isDead)
-            JumpTowardsPlayer();
+            JumpTowardsTarget();
 
         if (nextDamageTime <= Time.time && !canAttack)
             canAttack = true;
@@ -69,16 +69,40 @@ public class Slime : Enemy
     {
         animator?.SetBool("isJumping", isMoving);
         animator?.SetBool("isAttack", isAttacking);
-        direction = playerObject.transform.position - transform.position;
+
+        if (currentTarget != null)
+        {
+            direction = currentTarget.transform.position - transform.position;
+        }
+        else
+        {
+            // Fallback if currentTarget is somehow null; ideally, handle this more gracefully
+            direction = Vector3.zero;
+        }
     }
 
-    private void JumpTowardsPlayer()
-    {
-        distanceFromPlayer = playerDistance();
-        inAggroRange = distanceFromPlayer <= aggroDistance;
-        inAttackRange = distanceFromPlayer <= attackDistance;
 
-        if (playerObject != null && inAggroRange && canMove)
+    protected GameObject previousTarget = null;
+
+    private void JumpTowardsTarget()
+    {
+        // Store the previous target before updating
+        previousTarget = currentTarget;
+
+        // Update the target based on proximity
+        UpdateTarget();
+
+        // If the target has changed, print the new target
+        if (previousTarget != currentTarget)
+        {
+            Debug.Log("Slime switched to: " + currentTarget.name);
+        }
+
+        float distanceFromTarget = Vector3.Distance(transform.position, currentTarget.transform.position);
+        inAggroRange = distanceFromTarget <= aggroDistance;
+        inAttackRange = distanceFromTarget <= attackDistance;
+
+        if (currentTarget != null && inAggroRange && canMove)
         {
             if (inAttackRange && canAttack)
             {
@@ -91,6 +115,7 @@ public class Slime : Enemy
             }
         }
     }
+
 
     protected IEnumerator StartMove(float startup, float endlag)
     {
@@ -126,33 +151,34 @@ public class Slime : Enemy
     }
 
     //This is how the slime deals damage!
+    protected void DealCollisionDamage(Collision hitTarget)
+    {
+        // Check if the hit target is the current target
+        if (enableDamage && hitTarget.gameObject == currentTarget)
+        {
+            // Deal damage to the target
+            if (currentTarget.CompareTag("Player"))
+            {
+                playerScript.TakeDamage(attackPower, knockback, transform.position);
+            }
+            else if (currentTarget.CompareTag("Companion"))
+            {
+                companionScript.TakeDamage(attackPower, knockback, transform.position);
+            }
+            enableDamage = false; // Disable damage after dealing it
+        }
+    }
+
     private void OnCollisionEnter(Collision hitTarget)
     {
-        //return if not even attacking
-        if (!enableDamage)
-            return;
-
-        if (hitTarget.gameObject.CompareTag("Player"))
-        {
-            //Debug.Log("CollisionEnter");
-            base.DealDamage(attackPower, knockback);
-            enableDamage = false;
-        }
+        DealCollisionDamage(hitTarget);
     }
 
     private void OnCollisionStay(Collision hitTarget)
     {
-        //return if not even attacking
-        if (!enableDamage)
-            return;
-
-        if (hitTarget.gameObject.CompareTag("Player"))
-        {
-            //Debug.Log("CollisionEnter");
-            base.DealDamage(attackPower, knockback);
-            enableDamage = false;
-        }
+        DealCollisionDamage(hitTarget);
     }
+
 
     public override void TakeDamage(int damage, float knockback, Vector3 direction)
     {

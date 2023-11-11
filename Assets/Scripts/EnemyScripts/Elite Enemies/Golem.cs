@@ -6,7 +6,7 @@ public class Golem : Enemy
 {
     //This enemy has a fuckton going on
     //Honestly he's my boi
-    [SerializeField] LayerMask playerLayer;
+    [SerializeField] LayerMask targetLayer;
 
     [SerializeField] private float moveSpeed = 0.5f;
     [SerializeField] public float aggroDistance = 10f;
@@ -25,7 +25,7 @@ public class Golem : Enemy
 
     private Vector3 direction;
 
-    private float distanceFromPlayer = 999f;
+    private float distanceFromTarget = 999f;
 
     private bool inAttackRange = false;
     private bool inAggroRange = false;
@@ -65,6 +65,7 @@ public class Golem : Enemy
     [SerializeField] private float projectileDuration;
     bool inMeleeRange;
     [SerializeField] float meleeRange = 3f;
+    protected GameObject previousTarget = null;
 
     protected override void Awake()
     {
@@ -75,8 +76,8 @@ public class Golem : Enemy
     // Update is called once per frame
     void Update()
     {
-        distanceFromPlayer = playerDistance();
-        inActiveRange = distanceFromPlayer <= activationRange;
+        distanceFromTarget = targetDistance();
+        inActiveRange = distanceFromTarget <= activationRange;
 
         if(inActiveRange && !isActive)
             StartCoroutine(ActivateGolem());
@@ -84,19 +85,19 @@ public class Golem : Enemy
         if (isActiveAtStart)
             isActive = true;
 
-        direction = playerObject.transform.position - transform.position;
+        direction = currentTarget.transform.position - transform.position;
 
         //set this object to look at the player at any given point in time on the horizontal plane
-        transform.LookAt(new Vector3(playerObject.transform.position.x, transform.position.y, playerObject.transform.position.z));
+        transform.LookAt(new Vector3(currentTarget.transform.position.x, transform.position.y, currentTarget.transform.position.z));
 
         //don't do shit if mid-attack
         //The golem also does jack diddly fuckin squat if not active. He's eepy
         if (isAttacking || !isActive)
             return;
 
-        inAggroRange = distanceFromPlayer <= aggroDistance;
-        inAttackRange = distanceFromPlayer <= attackDistance;
-        inMeleeRange = distanceFromPlayer <= meleeRange;
+        inAggroRange = distanceFromTarget <= aggroDistance;
+        inAttackRange = distanceFromTarget <= attackDistance;
+        inMeleeRange = distanceFromTarget <= meleeRange;
 
         if(canMove)
             animator.SetFloat("walkSpeed", Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.z));
@@ -109,8 +110,20 @@ public class Golem : Enemy
         if (nextDamageTimeRanged <= Time.time && !canRangedAttack)
             canRangedAttack = true;
 
-        if (playerObject != null && !isDead)
+        if (currentTarget != null && !isDead)
         {
+            // Store the previous target before updating
+            previousTarget = currentTarget;
+
+            // Update the target based on proximity
+            UpdateTarget();
+
+            // If the target has changed, print the new target
+            if (previousTarget != currentTarget)
+            {
+                Debug.Log("Golem switched to: " + currentTarget.name);
+            }
+
             if (canMeleeAttack && inMeleeRange)
             {
                 isAttacking = true;
@@ -123,7 +136,7 @@ public class Golem : Enemy
             }
             else if (inAggroRange && canMove)
             {
-                MoveTowardsPlayer();
+                moveTowardsTarget();
             }
         }
     }
@@ -181,12 +194,12 @@ public class Golem : Enemy
 
     private void StompAttack()
     {
-        Collider[] hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, playerLayer);
+        Collider[] hitTarget = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
 
         rb.AddForce(attackImpact * direction.normalized, ForceMode.Impulse);
-        hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, playerLayer);
-        foreach (Collider collider in hitPlayer)
-            base.DealDamage(attackDmgStomp, knockbackStomp);
+        hitTarget = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
+        foreach (Collider collider in hitTarget)
+            base.DealDamage(attackDmgStomp, knockbackStomp, collider.gameObject);
     }
 
     private IEnumerator ActivateGolem()
@@ -201,10 +214,10 @@ public class Golem : Enemy
         canMove = true;
     }
 
-    private void MoveTowardsPlayer()
+    private void moveTowardsTarget()
     {
         // Change animator to walk01
-        Vector3 direction = playerObject.transform.position - transform.position;
+        Vector3 direction = currentTarget.transform.position - transform.position;
         Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
         rb.velocity = new Vector3(horizontalDirection.x * moveSpeed, rb.velocity.y, horizontalDirection.z * moveSpeed);
     }

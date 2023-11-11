@@ -315,9 +315,9 @@ MonoBehaviour:
   attackSize: 1.2
   attackImpact: 3
   vfxObj: {fileID: 4439378835155597813}
-  playerLayer:
+  targetLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 4160
 --- !u!1 &8763210970200014410
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,8 +13,35 @@ public abstract class ObjectiveManager : GameManager
     [SerializeField] protected TextMeshProUGUI questInfoText;
     [SerializeField] protected TextMeshProUGUI objectiveDisplay;
 
+    protected GameObject playerObject;
+    protected GameObject companionObject; 
+    protected Player playerScript;
+    protected Companion companionScript;
+
+
     private void Awake()
     {
+        Debug.Log("Objective Manager entered.");
+        
+        //Find Player
+        playerObject = GameObject.FindGameObjectWithTag("Player");
+
+        if (playerObject != null)
+        {
+            playerScript = playerObject.GetComponent<Player>();
+            //playerRb = playerObject.GetComponent<Rigidbody>();
+        }
+
+        // Attempt to find Companion in the scene
+        companionObject = GameObject.FindGameObjectWithTag("Companion");
+
+        if (companionObject != null)
+        {
+            Debug.Log("Companion object successfully set!");
+            companionScript = companionObject.GetComponent<Companion>();
+        }
+        else Debug.Log("Not detecting companion in the scene.");
+
         if (objectiveDisplay != null)
         {
             objectiveDisplay.enabled = true;  // Make sure the text starts as visible for the blinking effect
@@ -39,12 +66,12 @@ public abstract class ObjectiveManager : GameManager
             description = "Objective Complete!";
             objectiveDisplay.color = Color.green;
         }
-        ShowObjectiveBriefly();
 
         // Notify the GameManager that the level is completed
         GameManager.instance.MarkLevelAsCompleted(levelIndex);
-        
+            
         StartCoroutine(WaitAndReturnToLevelSelect(5f)); // Wait for the same duration as the blinking text
+        
     }
 
     private IEnumerator WaitAndReturnToLevelSelect(float waitTime)

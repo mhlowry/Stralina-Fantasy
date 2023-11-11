@@ -65,6 +65,8 @@ public class Player : MonoBehaviour, IDataPersistence
     protected PlayerCombat playerCombat;
     protected PlayerMovement playerMovement;
 
+    private GameOverMenu gameOverMenu;
+
     //Doing certain things in awake and some things in start is really important apparently
     private void Awake()
     {
@@ -83,6 +85,8 @@ public class Player : MonoBehaviour, IDataPersistence
             curExp = GameManager.instance.GetPlayerExp();
         }
         catch { }
+
+        gameOverMenu = FindObjectOfType<GameOverMenu>();
 
         try
         {
@@ -246,6 +250,11 @@ public class Player : MonoBehaviour, IDataPersistence
 
     void GameOver()
     {
+        if (gameOverMenu != null)
+        {
+            gameOverMenu.SetGameOverText("YOU DIED");
+        }
+
         AudioManager.instance.Play("player_death");
         OnPlayerDeath?.Invoke();
     }

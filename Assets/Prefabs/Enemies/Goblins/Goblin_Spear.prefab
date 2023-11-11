@@ -118,16 +118,16 @@ MonoBehaviour:
   boidAwarenessRadius: 2.86
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 1280
+    m_Bits: 256
   damageInterval: 10
   damageIntRandomMin: 0
   damageIntRandomMax: 0
   keepEnemiesForSeconds: 2
   strafeRandomMin: -1.5
   strafeRandomMax: 0.5
-  playerLayer:
+  targetLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 4160
   attackPoints:
   - {fileID: 7509881573552827653}
   - {fileID: 33145087151727177}

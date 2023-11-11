@@ -149,9 +149,9 @@ MonoBehaviour:
   damageStartup: 0.4
   moveHeight: 0
   damageHeight: 0
-  playerLayer:
+  targetLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 4160
   explosionPoint: {fileID: 8466757396195526792}
   explosionSize: 2
   explosionDelay: 1.65

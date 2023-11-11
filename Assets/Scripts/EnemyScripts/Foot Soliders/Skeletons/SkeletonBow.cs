@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SkeletonBow : SkeletonParent
 {
-    [SerializeField] LayerMask playerLayer;
+    [SerializeField] LayerMask targetLayer;
 
     [SerializeField] Transform attackPoint;
     [SerializeField] float attackSize;
@@ -23,7 +23,7 @@ public class SkeletonBow : SkeletonParent
     // Start is called before the first frame update
     protected override void Update()
     {
-        inMeleeRange = distanceFromPlayer <= meleeRange;
+        inMeleeRange = distanceFromTarget <= meleeRange;
         base.Update();
         BowChoice();
     }
@@ -36,6 +36,18 @@ public class SkeletonBow : SkeletonParent
 
         if (playerObject != null && canMove && !isDead)
         {
+            // Store the previous target before updating
+            previousTarget = currentTarget;
+
+            // Update the target based on proximity
+            UpdateTarget();
+
+            // If the target has changed, print the new target
+            if (previousTarget != currentTarget)
+            {
+                Debug.Log("Skeleton (bow) switched to: " + currentTarget.name);
+            }
+
             if(canAttack && inMeleeRange)
             {
                 isAttacking = true;
@@ -109,14 +121,14 @@ public class SkeletonBow : SkeletonParent
 
     private void BurstAttack()
     {
-        Collider[] hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, playerLayer);
+        Collider[] hitTarget = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
 
         DisableAttackVFX();
         PlayAttackVFX(direction.normalized);
         rb.AddForce(attackImpact * direction.normalized, ForceMode.Impulse);
-        hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, playerLayer);
-        foreach (Collider collider in hitPlayer)
-            base.DealDamage(attackPower, knockback);
+        hitTarget = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
+        foreach (Collider collider in hitTarget)
+            base.DealDamage(attackPower, knockback, collider.gameObject);
     }
 
     public virtual void DisableAttackVFX()

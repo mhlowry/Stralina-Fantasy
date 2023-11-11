@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GoblinSpear : FootSoldier
 {
-    [SerializeField] LayerMask playerLayer;
+    [SerializeField] LayerMask targetLayer;
 
     [SerializeField] List<Transform> attackPoints;
     [SerializeField] float attackSize;
@@ -30,7 +30,7 @@ public class GoblinSpear : FootSoldier
     {
         base.Update();
 
-        inChargingRange = distanceFromPlayer >= chargingDistance;
+        inChargingRange = distanceFromTarget >= chargingDistance;
         SpearChoice();
     }
 
@@ -41,8 +41,20 @@ public class GoblinSpear : FootSoldier
             return;
 
         //I know nested if statements are bad but honestly it's a student game I really don't think it's a big deal
-        if (playerObject != null && inAggroRange && canMove && !isDead)
+        if (currentTarget != null && inAggroRange && canMove && !isDead)
         {
+            // Store the previous target before updating
+            previousTarget = currentTarget;
+
+            // Update the target based on proximity
+            UpdateTarget();
+
+            // If the target has changed, print the new target
+            if (previousTarget != currentTarget)
+            {
+                Debug.Log("Goblin (dagger) switched to: " + currentTarget.name);
+            }
+
             if (canAttack && (inAttackRange || inChargingRange) && !isCharging)
             {
                 //Do a basic stab if the player is already wicked close
@@ -128,19 +140,19 @@ public class GoblinSpear : FootSoldier
 
     private void StabAttack(int damage)
     {
-        List<Collider[]> hitPlayer = new List<Collider[]>();
+        List<Collider[]> hitTarget = new List<Collider[]>();
 
         foreach (Transform hitBox in attackPoints)
         {
-            hitPlayer.Add(Physics.OverlapSphere(hitBox.position, attackSize, playerLayer));
+            hitTarget.Add(Physics.OverlapSphere(hitBox.position, attackSize, targetLayer));
         }
 
-        foreach (Collider[] playerList in hitPlayer)
+        foreach (Collider[] targetList in hitTarget)
         {
-            foreach (Collider c in playerList)
+            foreach (Collider c in targetList)
             {
-                base.DealDamage(damage, knockback);
-                return; //pnly damage player once
+                base.DealDamage(damage, knockback, c.gameObject);
+                //return; //pnly damage player once
             }
         }
     }
