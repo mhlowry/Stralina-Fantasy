@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MetalSlime : Slime
 {
-    [SerializeField] LayerMask playerLayer;
+    [SerializeField] LayerMask targetLayer;
     [SerializeField] Transform attackPoint;
     [SerializeField] float attackSize;
     [SerializeField] GameObject vfxObj;
@@ -40,9 +40,9 @@ public class MetalSlime : Slime
         if (isAttacking)
             return;
 
-        distanceFromPlayer = playerDistance();
-        inAggroRange = distanceFromPlayer <= aggroDistance;
-        inAttackRange = distanceFromPlayer <= attackDistance;
+        distanceFromTarget = targetDistance();
+        inAggroRange = distanceFromTarget <= aggroDistance;
+        inAttackRange = distanceFromTarget <= attackDistance;
 
         // Store the previous target before updating
         previousTarget = currentTarget;
@@ -87,7 +87,7 @@ public class MetalSlime : Slime
 
         PlayAttackVFX(direction);
         AudioManager.instance.Play("sword_1");
-        Collider[] hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, playerLayer);
+        Collider[] hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
         foreach (Collider collider in hitPlayer)
             base.DealDamage(attackPower, knockback);
 

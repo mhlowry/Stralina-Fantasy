@@ -41,7 +41,7 @@ public class FootSoldier : Enemy
     private Vector3 movementLine;
     protected Vector3 direction;
 
-    protected float distanceFromPlayer = 999f;
+    protected float distanceFromTarget = 999f;
 
     protected bool hitMidAttack = false;
 
@@ -63,16 +63,16 @@ public class FootSoldier : Enemy
 
     protected virtual void Update()
     {
-        distanceFromPlayer = playerDistance();
-        inAggroRange = distanceFromPlayer <= aggroDistance;
-        inAttackRange = distanceFromPlayer <= attackDistance;
+        distanceFromTarget = targetDistance();
+        inAggroRange = distanceFromTarget <= aggroDistance;
+        inAttackRange = distanceFromTarget <= attackDistance;
 
-        direction = playerObject.transform.position - transform.position;
+        direction = currentTarget.transform.position - transform.position;
 
         animator.SetFloat("walkSpeed", Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.z));
 
         //set this object to look at the player at any given point in time on the horizontal plane
-        transform.LookAt(new Vector3(playerObject.transform.position.x, transform.position.y, playerObject.transform.position.z));
+        transform.LookAt(new Vector3(currentTarget.transform.position.x, transform.position.y, currentTarget.transform.position.z));
 
         //refresh enemies in range for seconds
         if (Time.time - timelastChecked > keepEnemiesForSeconds)
@@ -98,24 +98,24 @@ public class FootSoldier : Enemy
     //The goal, right, is to have a basic "smart" foot soldier that will strafe at a distance if they can't attack
     protected virtual void NavigateCombat()
     {
-        Vector3 playerDirection = playerObject.transform.position - transform.position;
-        Vector3 horizontalDirection = new Vector3(playerDirection.x, 0, playerDirection.z).normalized;
+        Vector3 targetDirection = currentTarget.transform.position - transform.position;
+        Vector3 horizontalDirection = new Vector3(targetDirection.x, 0, targetDirection.z).normalized;
 
         // Calculate a combined vector for nearby enemies
         Vector3 combinedDirection = horizontalDirection;
 
         //strafing state when foot soldier can't attack
-        // If in strafe distance, avoid moving towards the player
-        if (distanceFromPlayer >= curStrafe - 0.5 && distanceFromPlayer <= curStrafe + 0.5 && !canAttack)
+        // If in strafe distance, avoid moving towards the target
+        if (distanceFromTarget >= curStrafe - 0.5 && distanceFromTarget <= curStrafe + 0.5 && !canAttack)
         {
-            // Do not move towards the player
-            combinedDirection -= new Vector3(playerDirection.x, 0, playerDirection.z).normalized;
+            // Do not move towards the target
+            combinedDirection -= new Vector3(targetDirection.x, 0, targetDirection.z).normalized;
         }
 
         // Normalize the combined direction vector
         combinedDirection = combinedDirection.normalized;
 
-        if (distanceFromPlayer < curStrafe && !canAttack)
+        if (distanceFromTarget < curStrafe && !canAttack)
         {
             // Reverse the direction when too close
             combinedDirection = -combinedDirection;

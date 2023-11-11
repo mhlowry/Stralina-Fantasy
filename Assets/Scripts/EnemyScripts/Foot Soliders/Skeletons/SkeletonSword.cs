@@ -8,7 +8,7 @@ public class SkeletonSword : SkeletonParent
     [SerializeField] float attackSize;
     [SerializeField] float attackImpact;
     [SerializeField] GameObject vfxObj;
-    [SerializeField] LayerMask playerLayer;
+    [SerializeField] LayerMask targetLayer;
 
     // Update is called once per frame
     protected override void Update()
@@ -64,12 +64,12 @@ public class SkeletonSword : SkeletonParent
 
     private void SwordAttack()
     {
-        Collider[] hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, playerLayer);
+        Collider[] hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
 
         DisableAttackVFX();
         PlayAttackVFX(direction.normalized);
         rb.AddForce(attackImpact * direction.normalized, ForceMode.Impulse);
-        hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, playerLayer);
+        hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
         foreach (Collider collider in hitPlayer)
             base.DealDamage(attackPower, knockback);
     }

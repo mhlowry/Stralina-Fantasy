@@ -14,7 +14,7 @@ public class GoblinDagger : FootSoldier
     [SerializeField] Transform attackPoint;
     [SerializeField] float attackSize;
     [SerializeField] GameObject vfxObj;
-    [SerializeField] LayerMask playerLayer;
+    [SerializeField] LayerMask targetLayer;
 
     // Update is called once per frame
     protected override void Update()
@@ -29,7 +29,7 @@ public class GoblinDagger : FootSoldier
         if (isAttacking)
             return;
 
-        if (playerObject != null && inAggroRange && canMove && !isDead)
+        if (currentTarget != null && inAggroRange && canMove && !isDead)
         {
             if (canAttack && inAttackRange)
             {
@@ -132,13 +132,13 @@ public class GoblinDagger : FootSoldier
 
     private void DaggerAttack()
     {
-        Collider[] hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, playerLayer);
+        Collider[] hitTarget = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
 
         DisableAttackVFX();
         PlayAttackVFX(direction.normalized);
         rb.AddForce(attackImpact * direction.normalized, ForceMode.Impulse);
-        hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, playerLayer);
-        foreach (Collider collider in hitPlayer)
+        hitTarget = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
+        foreach (Collider collider in hitTarget)
             base.DealDamage(attackPower, knockback);
     }
 

@@ -255,7 +255,7 @@ public class Enemy : MonoBehaviour
         OnEnemyDestroyed?.Invoke();
     }
 
-    public float playerDistance()
+    public float targetDistance()
     {
         // sneakily calculates the distance from the current target instead of always the player 
         // mostly this is to not mess up the projectile calculations 

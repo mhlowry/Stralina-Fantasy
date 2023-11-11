@@ -213,9 +213,9 @@ MonoBehaviour:
   attackSize: 1.2
   attackImpact: 0
   vfxObj: {fileID: 2287782156688509943}
-  playerLayer:
+  targetLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 4160
   maxShieldHP: 30
   curShieldHP: 0
   regularController: {fileID: 9100000, guid: 7163ff10ddc214242987072e6e0cf282, type: 2}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SkeletonBow : SkeletonParent
 {
-    [SerializeField] LayerMask playerLayer;
+    [SerializeField] LayerMask targetLayer;
 
     [SerializeField] Transform attackPoint;
     [SerializeField] float attackSize;
@@ -23,7 +23,7 @@ public class SkeletonBow : SkeletonParent
     // Start is called before the first frame update
     protected override void Update()
     {
-        inMeleeRange = distanceFromPlayer <= meleeRange;
+        inMeleeRange = distanceFromTarget <= meleeRange;
         base.Update();
         BowChoice();
     }
@@ -109,12 +109,12 @@ public class SkeletonBow : SkeletonParent
 
     private void BurstAttack()
     {
-        Collider[] hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, playerLayer);
+        Collider[] hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
 
         DisableAttackVFX();
         PlayAttackVFX(direction.normalized);
         rb.AddForce(attackImpact * direction.normalized, ForceMode.Impulse);
-        hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, playerLayer);
+        hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
         foreach (Collider collider in hitPlayer)
             base.DealDamage(attackPower, knockback);
     }

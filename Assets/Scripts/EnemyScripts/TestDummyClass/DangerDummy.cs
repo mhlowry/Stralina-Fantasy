@@ -5,7 +5,7 @@ using UnityEngine;
 public class DangerDummy : TestDummy
 { 
     [SerializeField] private float attackSize = 3.0f;
-    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private LayerMask targetLayer;
     [SerializeField] protected int damageDeal = 1;
 
     protected override void Awake()
@@ -21,7 +21,7 @@ public class DangerDummy : TestDummy
     {
         //there is most certainly a better way to do this but whatever it's a test dummy for a reason
         Collider[] hitPlayer;
-        hitPlayer = Physics.OverlapSphere(transform.position, attackSize, playerLayer);
+        hitPlayer = Physics.OverlapSphere(transform.position, attackSize, targetLayer);
 
         foreach (Collider collider in hitPlayer)
             collider.GetComponent<Player>().TakeDamage(damageDeal, knockback, direction);

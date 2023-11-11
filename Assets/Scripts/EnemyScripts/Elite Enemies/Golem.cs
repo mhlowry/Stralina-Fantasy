@@ -6,7 +6,7 @@ public class Golem : Enemy
 {
     //This enemy has a fuckton going on
     //Honestly he's my boi
-    [SerializeField] LayerMask playerLayer;
+    [SerializeField] LayerMask targetLayer;
 
     [SerializeField] private float moveSpeed = 0.5f;
     [SerializeField] public float aggroDistance = 10f;
@@ -25,7 +25,7 @@ public class Golem : Enemy
 
     private Vector3 direction;
 
-    private float distanceFromPlayer = 999f;
+    private float distanceFromTarget = 999f;
 
     private bool inAttackRange = false;
     private bool inAggroRange = false;
@@ -75,8 +75,8 @@ public class Golem : Enemy
     // Update is called once per frame
     void Update()
     {
-        distanceFromPlayer = playerDistance();
-        inActiveRange = distanceFromPlayer <= activationRange;
+        distanceFromTarget = targetDistance();
+        inActiveRange = distanceFromTarget <= activationRange;
 
         if(inActiveRange && !isActive)
             StartCoroutine(ActivateGolem());
@@ -94,9 +94,9 @@ public class Golem : Enemy
         if (isAttacking || !isActive)
             return;
 
-        inAggroRange = distanceFromPlayer <= aggroDistance;
-        inAttackRange = distanceFromPlayer <= attackDistance;
-        inMeleeRange = distanceFromPlayer <= meleeRange;
+        inAggroRange = distanceFromTarget <= aggroDistance;
+        inAttackRange = distanceFromTarget <= attackDistance;
+        inMeleeRange = distanceFromTarget <= meleeRange;
 
         if(canMove)
             animator.SetFloat("walkSpeed", Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.z));
@@ -181,10 +181,10 @@ public class Golem : Enemy
 
     private void StompAttack()
     {
-        Collider[] hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, playerLayer);
+        Collider[] hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
 
         rb.AddForce(attackImpact * direction.normalized, ForceMode.Impulse);
-        hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, playerLayer);
+        hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
         foreach (Collider collider in hitPlayer)
             base.DealDamage(attackDmgStomp, knockbackStomp);
     }

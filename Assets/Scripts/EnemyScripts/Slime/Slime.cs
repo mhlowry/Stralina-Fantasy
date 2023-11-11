@@ -15,7 +15,7 @@ public class Slime : Enemy
     [SerializeField, Range(0, 14)] protected int attackPower = 1;
     [SerializeField] protected float knockback = 1f;
 
-    protected float distanceFromPlayer = 999f;
+    protected float distanceFromTarget = 999f;
     protected float nextDamageTime = 0;
 
     protected bool isMoving = false;

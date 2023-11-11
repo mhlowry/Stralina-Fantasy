@@ -213,9 +213,9 @@ MonoBehaviour:
   attackPoint: {fileID: 8710550004323051412}
   attackSize: 0.61
   vfxObj: {fileID: 1632824303608625325}
-  playerLayer:
+  targetLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 4160
 --- !u!1 &7347449900440986324
 GameObject:
   m_ObjectHideFlags: 0

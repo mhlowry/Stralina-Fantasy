@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaterSlime : Slime
 {
-    [SerializeField] LayerMask playerLayer;
+    [SerializeField] LayerMask targetLayer;
     [SerializeField] Transform explosionPoint;
     [SerializeField] float explosionSize;
     [SerializeField] float explosionDelay;
@@ -49,9 +49,9 @@ public class WaterSlime : Slime
         if (isAttacking || isDead)
             return;
 
-        distanceFromPlayer = playerDistance();
-        inAggroRange = distanceFromPlayer <= aggroDistance;
-        inAttackRange = distanceFromPlayer <= attackDistance;
+        distanceFromTarget = targetDistance();
+        inAggroRange = distanceFromTarget <= aggroDistance;
+        inAttackRange = distanceFromTarget <= attackDistance;
 
         // Store the previous target before updating
         previousTarget = currentTarget;
@@ -95,8 +95,8 @@ public class WaterSlime : Slime
             yield break;
         }
 
-        distanceFromPlayer = playerDistance();
-        float duration = distanceFromPlayer / projectileSpeed;
+        distanceFromTarget = targetDistance();
+        float duration = distanceFromTarget / projectileSpeed;
 
         // Create a new instance of the projectile using Instantiate
         GameObject newProjectile = GameObject.Instantiate(projectilePrefab, explosionPoint.position, Quaternion.LookRotation(direction));
@@ -139,7 +139,7 @@ public class WaterSlime : Slime
         //eventually play a water explosion VFX
         //PlayAttackVFX(direction);
 
-        Collider[] hitPlayer = Physics.OverlapSphere(explosionPoint.position, explosionSize, playerLayer);
+        Collider[] hitPlayer = Physics.OverlapSphere(explosionPoint.position, explosionSize, targetLayer);
         foreach (Collider collider in hitPlayer)
             collider.GetComponent<Player>().TakeDamage(explosionDamage, explosionKnockback, transform.position);
     }

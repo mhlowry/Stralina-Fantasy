@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HobGoblin : Enemy
 {
-    [SerializeField] LayerMask playerLayer;
+    [SerializeField] LayerMask targetLayer;
 
     [SerializeField] protected float moveSpeed = 5f;
     [SerializeField] public float aggroDistance = 10f;
@@ -22,7 +22,7 @@ public class HobGoblin : Enemy
 
     protected Vector3 direction;
 
-    protected float distanceFromPlayer = 999f;
+    protected float distanceFromTarget = 999f;
 
     protected bool hitMidAttack = false;
 
@@ -75,9 +75,9 @@ public class HobGoblin : Enemy
         if (isAttacking)
             return;
 
-        distanceFromPlayer = playerDistance();
-        inAggroRange = distanceFromPlayer <= aggroDistance;
-        inAttackRange = distanceFromPlayer <= attackDistance;
+        distanceFromTarget = targetDistance();
+        inAggroRange = distanceFromTarget <= aggroDistance;
+        inAttackRange = distanceFromTarget <= attackDistance;
 
         animator.SetFloat("walkSpeed", Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.z));
 
@@ -153,7 +153,7 @@ public class HobGoblin : Enemy
 
         foreach (Transform hitBox in attackPointsHor)
         {
-            hitPlayer.Add(Physics.OverlapSphere(hitBox.position, attackSizeHorz, playerLayer));
+            hitPlayer.Add(Physics.OverlapSphere(hitBox.position, attackSizeHorz, targetLayer));
         }
 
         foreach (Collider[] playerList in hitPlayer)
@@ -172,7 +172,7 @@ public class HobGoblin : Enemy
 
         foreach (Transform hitBox in attackPointsVert)
         {
-            hitPlayer.Add(Physics.OverlapSphere(hitBox.position, attackSizeVert, playerLayer));
+            hitPlayer.Add(Physics.OverlapSphere(hitBox.position, attackSizeVert, targetLayer));
         }
 
         foreach (Collider[] playerList in hitPlayer)
