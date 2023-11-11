@@ -20,9 +20,9 @@ public class HealingDummy : TestDummy
     public override void TakeDamage(int damage, float knockback, Vector3 direction)
     {
         //there is most certainly a better way to do this but whatever it's a test dummy for a reason
-        Collider []hitPlayer = Physics.OverlapSphere(transform.position, attackSize, targetLayer);
+        Collider []hitTarget = Physics.OverlapSphere(transform.position, attackSize, targetLayer);
 
-        foreach (Collider collider in hitPlayer)
+        foreach (Collider collider in hitTarget)
             collider.GetComponent<Player>().HealPlayer(heal);
         Debug.Log("UwU");
         base.TakeDamage(damage, knockback, direction);

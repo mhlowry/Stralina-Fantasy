@@ -16,10 +16,10 @@ public class MetalSlime : Slime
 
     void FixedUpdate()
     {
-        //SlideTowardsPlayer();
+        //SlideTowardsTarget();
 
         if (!isMoving)
-            SlideTowardsPlayer();
+            SlideTowardsTarget();
 
         if (nextDamageTime <= Time.time && !canAttack)
         {
@@ -35,7 +35,7 @@ public class MetalSlime : Slime
         direction = currentTarget.transform.position - transform.position;
     }
 
-    private void SlideTowardsPlayer()
+    private void SlideTowardsTarget()
     {
         if (isAttacking)
             return;
@@ -87,8 +87,8 @@ public class MetalSlime : Slime
 
         PlayAttackVFX(direction);
         AudioManager.instance.Play("sword_1");
-        Collider[] hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
-        foreach (Collider collider in hitPlayer)
+        Collider[] hitTarget = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
+        foreach (Collider collider in hitTarget)
             base.DealDamage(attackPower, knockback);
 
         nextDamageTime = Time.time + damageInterval;

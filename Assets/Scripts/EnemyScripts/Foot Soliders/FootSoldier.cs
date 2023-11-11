@@ -89,7 +89,7 @@ public class FootSoldier : Enemy
             canAttack = true;
 
         //Do not navigate combat in here.  do it in the children scripts.  See GoblinDagger or GoblinSpear for examples
-        /*if (playerObject != null && inAggroRange && canMove && !isDead)
+        /*if (targetObject != null && inAggroRange && canMove && !isDead)
         {
             NavigateCombat();
         }*/

@@ -67,9 +67,9 @@ public class HobGoblin : Enemy
     // Update is called once per frame
     void Update()
     {
-        direction = playerObject.transform.position - transform.position;
+        direction = targetObject.transform.position - transform.position;
         //set this object to look at the player at any given point in time on the horizontal plane
-        transform.LookAt(new Vector3(playerObject.transform.position.x, transform.position.y, playerObject.transform.position.z));
+        transform.LookAt(new Vector3(targetObject.transform.position.x, transform.position.y, targetObject.transform.position.z));
 
         //don't do shit if mid-attack
         if (isAttacking)
@@ -84,7 +84,7 @@ public class HobGoblin : Enemy
         if (nextDamageTime <= Time.time && !canAttack)
             canAttack = true;
 
-        if (playerObject != null && inAggroRange && canMove && !isDead)
+        if (targetObject != null && inAggroRange && canMove && !isDead)
         {
             if (canAttack && inAttackRange)
             {
@@ -92,7 +92,7 @@ public class HobGoblin : Enemy
                 StartCoroutine(BigFuckingSwing());
             }
             else
-                MoveTowardsPlayer();
+                moveTowardsTarget();
         }
     }
 
@@ -149,16 +149,16 @@ public class HobGoblin : Enemy
 
     private void AttackHorz()
     {
-        List<Collider[]> hitPlayer = new List<Collider[]>();
+        List<Collider[]> hitTarget = new List<Collider[]>();
 
         foreach (Transform hitBox in attackPointsHor)
         {
-            hitPlayer.Add(Physics.OverlapSphere(hitBox.position, attackSizeHorz, targetLayer));
+            hitTarget.Add(Physics.OverlapSphere(hitBox.position, attackSizeHorz, targetLayer));
         }
 
-        foreach (Collider[] playerList in hitPlayer)
+        foreach (Collider[] targetList in hitTarget)
         {
-            foreach (Collider c in playerList)
+            foreach (Collider c in targetList)
             {
                 base.DealDamage(attackDmgSlash, knockbackHor);
                 return; //pnly damage player once
@@ -168,16 +168,16 @@ public class HobGoblin : Enemy
 
     private void AttackVert()
     {
-        List<Collider[]> hitPlayer = new List<Collider[]>();
+        List<Collider[]> hitTarget = new List<Collider[]>();
 
         foreach (Transform hitBox in attackPointsVert)
         {
-            hitPlayer.Add(Physics.OverlapSphere(hitBox.position, attackSizeVert, targetLayer));
+            hitTarget.Add(Physics.OverlapSphere(hitBox.position, attackSizeVert, targetLayer));
         }
 
-        foreach (Collider[] playerList in hitPlayer)
+        foreach (Collider[] targetList in hitTarget)
         {
-            foreach (Collider c in playerList)
+            foreach (Collider c in targetList)
             {
                 base.DealDamage(attackDmgOverhead, knockbackVert);
                 return; //pnly damage player once
@@ -185,10 +185,10 @@ public class HobGoblin : Enemy
         }
     }
 
-    private void MoveTowardsPlayer()
+    private void moveTowardsTarget()
     {
         // Change animator to walk01
-        Vector3 direction = playerObject.transform.position - transform.position;
+        Vector3 direction = targetObject.transform.position - transform.position;
         Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
         rb.velocity = new Vector3(horizontalDirection.x * moveSpeed, rb.velocity.y, horizontalDirection.z * moveSpeed);
     }

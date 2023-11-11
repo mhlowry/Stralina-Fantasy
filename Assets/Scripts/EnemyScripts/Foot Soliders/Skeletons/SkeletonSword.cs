@@ -64,13 +64,13 @@ public class SkeletonSword : SkeletonParent
 
     private void SwordAttack()
     {
-        Collider[] hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
+        Collider[] hitTarget = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
 
         DisableAttackVFX();
         PlayAttackVFX(direction.normalized);
         rb.AddForce(attackImpact * direction.normalized, ForceMode.Impulse);
-        hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
-        foreach (Collider collider in hitPlayer)
+        hitTarget = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
+        foreach (Collider collider in hitTarget)
             base.DealDamage(attackPower, knockback);
     }
 

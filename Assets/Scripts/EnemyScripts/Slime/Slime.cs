@@ -49,7 +49,7 @@ public class Slime : Enemy
     void FixedUpdate()
     {
         if (!isMoving && !isDead)
-            JumpTowardsPlayer();
+            JumpTowardsTarget();
 
         if (nextDamageTime <= Time.time && !canAttack)
             canAttack = true;
@@ -84,7 +84,7 @@ public class Slime : Enemy
 
     protected GameObject previousTarget = null;
 
-    private void JumpTowardsPlayer()
+    private void JumpTowardsTarget()
     {
         // Store the previous target before updating
         previousTarget = currentTarget;

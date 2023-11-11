@@ -84,10 +84,10 @@ public class Golem : Enemy
         if (isActiveAtStart)
             isActive = true;
 
-        direction = playerObject.transform.position - transform.position;
+        direction = targetObject.transform.position - transform.position;
 
         //set this object to look at the player at any given point in time on the horizontal plane
-        transform.LookAt(new Vector3(playerObject.transform.position.x, transform.position.y, playerObject.transform.position.z));
+        transform.LookAt(new Vector3(targetObject.transform.position.x, transform.position.y, targetObject.transform.position.z));
 
         //don't do shit if mid-attack
         //The golem also does jack diddly fuckin squat if not active. He's eepy
@@ -109,7 +109,7 @@ public class Golem : Enemy
         if (nextDamageTimeRanged <= Time.time && !canRangedAttack)
             canRangedAttack = true;
 
-        if (playerObject != null && !isDead)
+        if (targetObject != null && !isDead)
         {
             if (canMeleeAttack && inMeleeRange)
             {
@@ -123,7 +123,7 @@ public class Golem : Enemy
             }
             else if (inAggroRange && canMove)
             {
-                MoveTowardsPlayer();
+                moveTowardsTarget();
             }
         }
     }
@@ -181,11 +181,11 @@ public class Golem : Enemy
 
     private void StompAttack()
     {
-        Collider[] hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
+        Collider[] hitTarget = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
 
         rb.AddForce(attackImpact * direction.normalized, ForceMode.Impulse);
-        hitPlayer = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
-        foreach (Collider collider in hitPlayer)
+        hitTarget = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
+        foreach (Collider collider in hitTarget)
             base.DealDamage(attackDmgStomp, knockbackStomp);
     }
 
@@ -201,10 +201,10 @@ public class Golem : Enemy
         canMove = true;
     }
 
-    private void MoveTowardsPlayer()
+    private void moveTowardsTarget()
     {
         // Change animator to walk01
-        Vector3 direction = playerObject.transform.position - transform.position;
+        Vector3 direction = targetObject.transform.position - transform.position;
         Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
         rb.velocity = new Vector3(horizontalDirection.x * moveSpeed, rb.velocity.y, horizontalDirection.z * moveSpeed);
     }

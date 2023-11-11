@@ -23,7 +23,7 @@ public class WaterSlime : Slime
 
     void FixedUpdate()
     {
-        //SlideTowardsPlayer();
+        //SlideTowardsTarget();
 
         if (!isMoving)
             SlideAwayFromPlayer();
@@ -139,8 +139,8 @@ public class WaterSlime : Slime
         //eventually play a water explosion VFX
         //PlayAttackVFX(direction);
 
-        Collider[] hitPlayer = Physics.OverlapSphere(explosionPoint.position, explosionSize, targetLayer);
-        foreach (Collider collider in hitPlayer)
+        Collider[] hitTarget = Physics.OverlapSphere(explosionPoint.position, explosionSize, targetLayer);
+        foreach (Collider collider in hitTarget)
             collider.GetComponent<Player>().TakeDamage(explosionDamage, explosionKnockback, transform.position);
     }
 
