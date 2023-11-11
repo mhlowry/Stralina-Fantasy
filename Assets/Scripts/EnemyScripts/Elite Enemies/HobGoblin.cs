@@ -67,9 +67,9 @@ public class HobGoblin : Enemy
     // Update is called once per frame
     void Update()
     {
-        direction = targetObject.transform.position - transform.position;
+        direction = currentTarget.transform.position - transform.position;
         //set this object to look at the player at any given point in time on the horizontal plane
-        transform.LookAt(new Vector3(targetObject.transform.position.x, transform.position.y, targetObject.transform.position.z));
+        transform.LookAt(new Vector3(currentTarget.transform.position.x, transform.position.y, currentTarget.transform.position.z));
 
         //don't do shit if mid-attack
         if (isAttacking)
@@ -84,7 +84,7 @@ public class HobGoblin : Enemy
         if (nextDamageTime <= Time.time && !canAttack)
             canAttack = true;
 
-        if (targetObject != null && inAggroRange && canMove && !isDead)
+        if (currentTarget != null && inAggroRange && canMove && !isDead)
         {
             if (canAttack && inAttackRange)
             {
@@ -188,7 +188,7 @@ public class HobGoblin : Enemy
     private void moveTowardsTarget()
     {
         // Change animator to walk01
-        Vector3 direction = targetObject.transform.position - transform.position;
+        Vector3 direction = currentTarget.transform.position - transform.position;
         Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
         rb.velocity = new Vector3(horizontalDirection.x * moveSpeed, rb.velocity.y, horizontalDirection.z * moveSpeed);
     }

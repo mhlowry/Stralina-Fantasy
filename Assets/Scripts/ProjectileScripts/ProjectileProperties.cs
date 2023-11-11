@@ -61,13 +61,13 @@ public class ProjectileProperties : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider hitTarget)
     {
-        GameObject targetObject = hitTarget.gameObject;
-        //if(targetObject) Debug.Log("Target hit by projectile!");
+        GameObject currentTarget = hitTarget.gameObject;
+        //if(currentTarget) Debug.Log("Target hit by projectile!");
 
         //call takedamage for enemy if want to hit enemy
         if (targetMask == "Enemy" && hitTarget.gameObject.CompareTag("Enemy"))
         {
-            Enemy thisEnemy = targetObject.GetComponent<Enemy>();
+            Enemy thisEnemy = currentTarget.GetComponent<Enemy>();
             if (!loggedEnemies.Contains(hitTarget))
             {
                 //this is the main attack shit
@@ -79,8 +79,8 @@ public class ProjectileProperties : MonoBehaviour
             (hitTarget.gameObject.CompareTag("Player") || hitTarget.gameObject.CompareTag("Companion")))
         {
             //Attack the player or companion
-            Player thisPlayer = targetObject.GetComponent<Player>();
-            Companion thisCompanion = targetObject.GetComponent<Companion>();
+            Player thisPlayer = currentTarget.GetComponent<Player>();
+            Companion thisCompanion = currentTarget.GetComponent<Companion>();
 
             if (thisPlayer) 
             {

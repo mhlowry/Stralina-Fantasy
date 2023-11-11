@@ -84,10 +84,10 @@ public class Golem : Enemy
         if (isActiveAtStart)
             isActive = true;
 
-        direction = targetObject.transform.position - transform.position;
+        direction = currentTarget.transform.position - transform.position;
 
         //set this object to look at the player at any given point in time on the horizontal plane
-        transform.LookAt(new Vector3(targetObject.transform.position.x, transform.position.y, targetObject.transform.position.z));
+        transform.LookAt(new Vector3(currentTarget.transform.position.x, transform.position.y, currentTarget.transform.position.z));
 
         //don't do shit if mid-attack
         //The golem also does jack diddly fuckin squat if not active. He's eepy
@@ -109,7 +109,7 @@ public class Golem : Enemy
         if (nextDamageTimeRanged <= Time.time && !canRangedAttack)
             canRangedAttack = true;
 
-        if (targetObject != null && !isDead)
+        if (currentTarget != null && !isDead)
         {
             if (canMeleeAttack && inMeleeRange)
             {
@@ -204,7 +204,7 @@ public class Golem : Enemy
     private void moveTowardsTarget()
     {
         // Change animator to walk01
-        Vector3 direction = targetObject.transform.position - transform.position;
+        Vector3 direction = currentTarget.transform.position - transform.position;
         Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
         rb.velocity = new Vector3(horizontalDirection.x * moveSpeed, rb.velocity.y, horizontalDirection.z * moveSpeed);
     }

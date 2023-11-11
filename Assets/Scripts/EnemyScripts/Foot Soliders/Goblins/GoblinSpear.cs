@@ -43,6 +43,18 @@ public class GoblinSpear : FootSoldier
         //I know nested if statements are bad but honestly it's a student game I really don't think it's a big deal
         if (currentTarget != null && inAggroRange && canMove && !isDead)
         {
+             // Store the previous target before updating
+            previousTarget = currentTarget;
+
+            // Update the target based on proximity
+            UpdateTarget();
+
+            // If the target has changed, print the new target
+            if (previousTarget != currentTarget)
+            {
+                Debug.Log("Goblin (dagger) switched to: " + currentTarget.name);
+            }
+
             if (canAttack && (inAttackRange || inChargingRange) && !isCharging)
             {
                 //Do a basic stab if the player is already wicked close
@@ -140,7 +152,7 @@ public class GoblinSpear : FootSoldier
             foreach (Collider c in targetList)
             {
                 base.DealDamage(damage, knockback);
-                return; //pnly damage player once
+                //return; //pnly damage player once
             }
         }
     }

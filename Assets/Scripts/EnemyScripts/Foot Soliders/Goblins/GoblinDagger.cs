@@ -31,6 +31,18 @@ public class GoblinDagger : FootSoldier
 
         if (currentTarget != null && inAggroRange && canMove && !isDead)
         {
+            // Store the previous target before updating
+            previousTarget = currentTarget;
+
+            // Update the target based on proximity
+            UpdateTarget();
+
+            // If the target has changed, print the new target
+            if (previousTarget != currentTarget)
+            {
+                Debug.Log("Goblin (dagger) switched to: " + currentTarget.name);
+            }
+
             if (canAttack && inAttackRange)
             {
                 isAttacking = true;
