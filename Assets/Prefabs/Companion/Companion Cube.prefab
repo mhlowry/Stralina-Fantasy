@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5122118847825708834}
   - component: {fileID: 5202897088614872086}
   - component: {fileID: 7920482715600415384}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Filling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 730226817525018642}
   - component: {fileID: 5868653128035003249}
   - component: {fileID: 3923645568003238503}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Companion Cube
   m_TagString: Companion
   m_Icon: {fileID: 0}
@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 6240258767929574310}
   - component: {fileID: 2421236678623203}
   - component: {fileID: 69424524276461111}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Floating UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 858136054545261310}
   - component: {fileID: 5673573906835687351}
   - component: {fileID: 4992998590798388294}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -419,7 +419,7 @@ GameObject:
   - component: {fileID: 5669991178788312579}
   - component: {fileID: 3399141615959282578}
   - component: {fileID: 6974039321097647963}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Companion Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}

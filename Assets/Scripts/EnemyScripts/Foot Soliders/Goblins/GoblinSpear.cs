@@ -43,7 +43,7 @@ public class GoblinSpear : FootSoldier
         //I know nested if statements are bad but honestly it's a student game I really don't think it's a big deal
         if (currentTarget != null && inAggroRange && canMove && !isDead)
         {
-             // Store the previous target before updating
+            // Store the previous target before updating
             previousTarget = currentTarget;
 
             // Update the target based on proximity
@@ -151,7 +151,7 @@ public class GoblinSpear : FootSoldier
         {
             foreach (Collider c in targetList)
             {
-                base.DealDamage(damage, knockback);
+                base.DealDamage(damage, knockback, c.gameObject);
                 //return; //pnly damage player once
             }
         }

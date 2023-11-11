@@ -55,6 +55,7 @@ public class HobGoblin : Enemy
 
     [SerializeField] GameObject vfxHorizObj;
     [SerializeField] GameObject vfxVertObj;
+    protected GameObject previousTarget = null;
 
     // Start is called before the first frame update
     protected override void Awake()
@@ -86,6 +87,18 @@ public class HobGoblin : Enemy
 
         if (currentTarget != null && inAggroRange && canMove && !isDead)
         {
+            // Store the previous target before updating
+            previousTarget = currentTarget;
+
+            // Update the target based on proximity
+            UpdateTarget();
+
+            // If the target has changed, print the new target
+            if (previousTarget != currentTarget)
+            {
+                Debug.Log("Hobgoblin switched to: " + currentTarget.name);
+            }
+
             if (canAttack && inAttackRange)
             {
                 isAttacking = true;
@@ -160,8 +173,8 @@ public class HobGoblin : Enemy
         {
             foreach (Collider c in targetList)
             {
-                base.DealDamage(attackDmgSlash, knockbackHor);
-                return; //pnly damage player once
+                base.DealDamage(attackDmgSlash, knockbackHor, c.gameObject);
+                //return; //pnly damage player once
             }
         }
     }
@@ -179,8 +192,8 @@ public class HobGoblin : Enemy
         {
             foreach (Collider c in targetList)
             {
-                base.DealDamage(attackDmgOverhead, knockbackVert);
-                return; //pnly damage player once
+                base.DealDamage(attackDmgOverhead, knockbackVert, c.gameObject);
+                //return; //pnly damage player once
             }
         }
     }

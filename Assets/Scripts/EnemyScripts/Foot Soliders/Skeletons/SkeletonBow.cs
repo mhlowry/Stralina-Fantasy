@@ -36,6 +36,18 @@ public class SkeletonBow : SkeletonParent
 
         if (playerObject != null && canMove && !isDead)
         {
+            // Store the previous target before updating
+            previousTarget = currentTarget;
+
+            // Update the target based on proximity
+            UpdateTarget();
+
+            // If the target has changed, print the new target
+            if (previousTarget != currentTarget)
+            {
+                Debug.Log("Skeleton (bow) switched to: " + currentTarget.name);
+            }
+
             if(canAttack && inMeleeRange)
             {
                 isAttacking = true;
@@ -116,7 +128,7 @@ public class SkeletonBow : SkeletonParent
         rb.AddForce(attackImpact * direction.normalized, ForceMode.Impulse);
         hitTarget = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
         foreach (Collider collider in hitTarget)
-            base.DealDamage(attackPower, knockback);
+            base.DealDamage(attackPower, knockback, collider.gameObject);
     }
 
     public virtual void DisableAttackVFX()

@@ -196,15 +196,13 @@ public class Enemy : MonoBehaviour
 
 
    // Deal damage to player or companion
-    protected virtual void DealDamage(int damage, float knockback)
+    protected virtual void DealDamage(int damage, float knockback, GameObject collider)
     {
-        // Check if the current target is the player
-        if (currentTarget == playerObject && playerScript != null)
+        if (collider == playerObject && playerScript != null)
         {
             playerScript.TakeDamage(damage, knockback, transform.position);
         }
-        // Check if the current target is the companion
-        else if (companionObject && currentTarget == companionObject && companionScript != null)
+        else if (companionObject && collider == companionObject && companionScript != null)
         {
             companionScript.TakeDamage(damage, knockback, transform.position);
         }

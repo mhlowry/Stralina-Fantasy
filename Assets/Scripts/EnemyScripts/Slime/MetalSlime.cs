@@ -89,7 +89,7 @@ public class MetalSlime : Slime
         AudioManager.instance.Play("sword_1");
         Collider[] hitTarget = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
         foreach (Collider collider in hitTarget)
-            base.DealDamage(attackPower, knockback);
+            base.DealDamage(attackPower, knockback, collider.gameObject);
 
         nextDamageTime = Time.time + damageInterval;
         canAttack = false;

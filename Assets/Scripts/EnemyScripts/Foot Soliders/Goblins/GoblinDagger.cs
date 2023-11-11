@@ -151,7 +151,7 @@ public class GoblinDagger : FootSoldier
         rb.AddForce(attackImpact * direction.normalized, ForceMode.Impulse);
         hitTarget = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
         foreach (Collider collider in hitTarget)
-            base.DealDamage(attackPower, knockback);
+            base.DealDamage(attackPower, knockback, collider.gameObject);
     }
 
     private void ResetAttack()

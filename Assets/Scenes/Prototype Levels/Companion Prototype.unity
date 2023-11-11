@@ -2505,7 +2505,8 @@ MonoBehaviour:
   - {fileID: 813562270}
   waves:
   - enemies:
-    - {fileID: 2247303921529472725, guid: 94635a57c00e46f4882d30c8577fd0f4, type: 3}
+    - {fileID: 5575278984164947125, guid: 9ddde12c979449849a7b400bcc3718da, type: 3}
+    - {fileID: 3927531370990552841, guid: 42e90112d22fed443a26ecb804c29414, type: 3}
     timeToNextEnemy: 1
     timeToNextWave: 5
     enemiesLeft: 0

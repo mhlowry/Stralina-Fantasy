@@ -12,9 +12,9 @@ public class Companion : MonoBehaviour
     [SerializeField] private float followRadius = 10f;
     [SerializeField] private float moveSpeed = 4f;
     [SerializeField] private float timeBetweenNewPosition = 2f;
-    [SerializeField] private float teleportYThreshold = 1f; // The y-axis difference threshold for teleporting
+    [SerializeField] private float teleportYThreshold = 5f; // The y-axis difference threshold for teleporting
     [SerializeField] private Vector2 teleportOffsetRange = new Vector2(0.5f, 1.5f); // Range for random offset when teleporting
-    [SerializeField] private int maxHealth = 10;
+    [SerializeField] private int maxHealth = 25;
     [SerializeField] private int curHealth;
     [SerializeField] private bool disableMovement = false;
     

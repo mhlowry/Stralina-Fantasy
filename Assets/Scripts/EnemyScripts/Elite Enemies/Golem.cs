@@ -65,6 +65,7 @@ public class Golem : Enemy
     [SerializeField] private float projectileDuration;
     bool inMeleeRange;
     [SerializeField] float meleeRange = 3f;
+    protected GameObject previousTarget = null;
 
     protected override void Awake()
     {
@@ -111,6 +112,18 @@ public class Golem : Enemy
 
         if (currentTarget != null && !isDead)
         {
+            // Store the previous target before updating
+            previousTarget = currentTarget;
+
+            // Update the target based on proximity
+            UpdateTarget();
+
+            // If the target has changed, print the new target
+            if (previousTarget != currentTarget)
+            {
+                Debug.Log("Golem switched to: " + currentTarget.name);
+            }
+
             if (canMeleeAttack && inMeleeRange)
             {
                 isAttacking = true;
@@ -186,7 +199,7 @@ public class Golem : Enemy
         rb.AddForce(attackImpact * direction.normalized, ForceMode.Impulse);
         hitTarget = Physics.OverlapSphere(attackPoint.position, attackSize, targetLayer);
         foreach (Collider collider in hitTarget)
-            base.DealDamage(attackDmgStomp, knockbackStomp);
+            base.DealDamage(attackDmgStomp, knockbackStomp, collider.gameObject);
     }
 
     private IEnumerator ActivateGolem()
