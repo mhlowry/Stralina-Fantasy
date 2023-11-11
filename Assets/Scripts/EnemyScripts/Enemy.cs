@@ -217,8 +217,11 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Die()
     {
+        if (waveSpawner != null) waveSpawner.waves[waveSpawner.currentWaveIndex].enemiesLeft--;
+
         isDead = true;
         playerScript.GainExp(expWorth);
+
         if (animator != null)
         {
             animator.SetTrigger("died");
@@ -226,8 +229,6 @@ public class Enemy : MonoBehaviour
         }
 
         StartCoroutine(DestroyEnemy());
-        
-        if (waveSpawner != null) waveSpawner.waves[waveSpawner.currentWaveIndex].enemiesLeft--;
     }
 
     public bool GetIsDead() { return isDead; }

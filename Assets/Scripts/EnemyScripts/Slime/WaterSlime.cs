@@ -134,7 +134,6 @@ public class WaterSlime : Slime
 
     private IEnumerator ExplodeOnDeath()
     {
-        Debug.Log("Was called");
         yield return new WaitForSeconds(explosionDelay);
         AudioManager.instance.Play("water_splash");
         //eventually play a water explosion VFX

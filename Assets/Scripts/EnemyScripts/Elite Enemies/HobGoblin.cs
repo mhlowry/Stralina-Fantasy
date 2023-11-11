@@ -67,6 +67,10 @@ public class HobGoblin : Enemy
     // Update is called once per frame
     void Update()
     {
+        direction = playerObject.transform.position - transform.position;
+        //set this object to look at the player at any given point in time on the horizontal plane
+        transform.LookAt(new Vector3(playerObject.transform.position.x, transform.position.y, playerObject.transform.position.z));
+
         //don't do shit if mid-attack
         if (isAttacking)
             return;
@@ -75,11 +79,7 @@ public class HobGoblin : Enemy
         inAggroRange = distanceFromPlayer <= aggroDistance;
         inAttackRange = distanceFromPlayer <= attackDistance;
 
-        direction = playerObject.transform.position - transform.position;
-
         animator.SetFloat("walkSpeed", Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.z));
-        //set this object to look at the player at any given point in time on the horizontal plane
-        transform.LookAt(new Vector3(playerObject.transform.position.x, transform.position.y, playerObject.transform.position.z));
 
         if (nextDamageTime <= Time.time && !canAttack)
             canAttack = true;
@@ -264,7 +264,7 @@ public class HobGoblin : Enemy
     public virtual void DisableAttackVFX()
     {
         vfxHorizObj.SetActive(false);
-        //vfxVertObj.SetActive(false);
+        vfxVertObj.SetActive(false);
     }
 
     void OnDrawGizmosSelected()
