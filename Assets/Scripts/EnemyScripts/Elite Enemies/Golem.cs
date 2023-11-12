@@ -158,6 +158,7 @@ public class Golem : Enemy
             yield break;
         }
 
+        CameraShake.instance.ShakeCamera(impulseSource);
         PlayAttackVFX();
         StompAttack();
 
