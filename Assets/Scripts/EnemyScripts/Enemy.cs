@@ -186,12 +186,6 @@ public class Enemy : MonoBehaviour
 
         // Apply knockback force
         rb.AddForce(knockBack * knockbackMultiplier * knockbackDir.normalized, ForceMode.Impulse);
-
-        // Additional logic for when the enemy's health drops to 0 or below, if needed
-        if (curHealthPoints <= 0)
-        {
-            Die(); // Call the die function if health is depleted
-        }
     }
 
 

@@ -159,6 +159,8 @@ public class GoblinSpear : FootSoldier
 
     public override void TakeDamage(int damage, float knockback, Vector3 direction)
     {
+        DisableAttackVFX();
+
         if (isCharging)
             hitMidAttack = true;
 

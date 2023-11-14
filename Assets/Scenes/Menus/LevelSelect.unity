@@ -1880,10 +1880,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464a714bb298f4340bd312c6ce94c128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: 
-  isCompleted: 0
-  questInfoText: {fileID: 0}
-  objectiveDisplay: {fileID: 0}
+  levelNames:
+  - Level_1
+  - Level_2
+  - Level_3
+  - Level_4
+  - Level_5
 --- !u!4 &1295595637
 Transform:
   m_ObjectHideFlags: 0

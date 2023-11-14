@@ -225,9 +225,9 @@ MonoBehaviour:
   followRadius: 5
   moveSpeed: 2
   timeBetweenNewPosition: 2
-  teleportYThreshold: 1
+  teleportYThreshold: 5
   teleportOffsetRange: {x: 0.5, y: 1.5}
-  maxHealth: 10
+  maxHealth: 30
   curHealth: 0
   disableMovement: 0
 --- !u!1 &5572345190887473621

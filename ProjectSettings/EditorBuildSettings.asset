@@ -8,28 +8,43 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menus/Title menu.unity
     guid: c9dd9fd816ec25e449bcbc9f35c6c21c
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Menus/MainMenu.unity
-    guid: 7d7f87d067a3dda4b9b1604d1af94abe
+    guid: c1ec48db5d31c15418841446713778a2
   - enabled: 1
     path: Assets/Scenes/Menus/LevelSelect.unity
     guid: b288ce25e8f5c7d4ba0b2d3b80ffb728
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Prototype Levels/Eliminate Enemies Prototype.unity
     guid: fa98d4114c2c5a643b0453400faa5467
   - enabled: 1
     path: Assets/Scenes/Menus/MainMenu.unity
-    guid: 7d7f87d067a3dda4b9b1604d1af94abe
+    guid: c1ec48db5d31c15418841446713778a2
   - enabled: 1
     path: Assets/Scenes/Courtney's Test Scene.unity
     guid: cc8b741a7a43de941b51eabc5d348b4e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Prototype Levels/Enemy Waves Prototype.unity
     guid: 7f596d3b4d3795e4cbdb739b602dbe18
   - enabled: 1
     path: Assets/Scenes/bootstrap.unity
     guid: 867cb5033d7d1b04783c2b50d82b92bc
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Prototype Levels/Companion Prototype.unity
     guid: 9fcd600d0d9b0e34481c067d86aa8598
+  - enabled: 1
+    path: Assets/Scenes/Actual Levels/Level_1.unity
+    guid: 184ac99289de7864cbf3dc89bcf0cc5c
+  - enabled: 1
+    path: Assets/Scenes/Actual Levels/Level_2.unity
+    guid: c8f0164539556ba4392b137436a30084
+  - enabled: 1
+    path: Assets/Scenes/Actual Levels/Level_3.unity
+    guid: 8289857a4deee4b4fbe8c0fd313d204e
+  - enabled: 1
+    path: Assets/Scenes/Actual Levels/Level_4.unity
+    guid: a8681e1c04d66dc44aa891435ef52509
+  - enabled: 1
+    path: Assets/Scenes/Actual Levels/Level_5.unity
+    guid: 494f4af8bed51f44a986a7099bfb5abf
   m_configObjects: {}

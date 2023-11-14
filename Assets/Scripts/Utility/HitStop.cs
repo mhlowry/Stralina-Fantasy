@@ -13,6 +13,8 @@ public class HitStop : MonoBehaviour
     {
         if (instance == null)
             instance = this;
+
+        hitstopRoutine = StartCoroutine(Wait(0));
     }
 
     public void Stop(float duration)

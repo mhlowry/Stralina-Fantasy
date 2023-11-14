@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5463443301911851004}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 1438938400689749210}
   - component: {fileID: 3972569084845723742}
   - component: {fileID: 2977322506610641879}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: SkeletonGFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 1884549639815682158}
   - component: {fileID: 4918915147047761937}
   - component: {fileID: 7208525161552374070}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Skeleton-Bow
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -332,15 +332,15 @@ MonoBehaviour:
   boidAwarenessRadius: 3
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 1280
-  damageInterval: 2
+    m_Bits: 2304
+  damageInterval: 3.5
   damageIntRandomMin: 0
   damageIntRandomMax: 0
   keepEnemiesForSeconds: 2
   strafeRandomMin: -1.5
   strafeRandomMax: 0.5
   timeCoreExposed: 5
-  timeToRegenerate: 0.35
+  timeToRegenerate: 0.4
   maxCoreHealth: 50
   targetLayer:
     serializedVersion: 2
@@ -369,6 +369,10 @@ PrefabInstance:
     - target: {fileID: 2367134246407041584, guid: ea17f78f57298b54d9ccbf125bfcfb1d, type: 3}
       propertyPath: m_Name
       value: vfx_VertSlash
+      objectReference: {fileID: 0}
+    - target: {fileID: 2367134246407041584, guid: ea17f78f57298b54d9ccbf125bfcfb1d, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2367134246407041584, guid: ea17f78f57298b54d9ccbf125bfcfb1d, type: 3}
       propertyPath: m_IsActive
@@ -413,6 +417,10 @@ PrefabInstance:
     - target: {fileID: 5992260547595376889, guid: ea17f78f57298b54d9ccbf125bfcfb1d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6031998749555285971, guid: ea17f78f57298b54d9ccbf125bfcfb1d, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8476825599016378597, guid: ea17f78f57298b54d9ccbf125bfcfb1d, type: 3}
       propertyPath: m_LocalScale.y

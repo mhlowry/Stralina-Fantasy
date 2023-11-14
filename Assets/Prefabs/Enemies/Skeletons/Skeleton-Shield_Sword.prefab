@@ -199,7 +199,7 @@ MonoBehaviour:
   boidAwarenessRadius: 2
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 2048
   damageInterval: 6
   damageIntRandomMin: 0
   damageIntRandomMax: 0
