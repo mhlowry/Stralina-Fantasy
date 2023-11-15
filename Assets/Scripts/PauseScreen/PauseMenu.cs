@@ -57,4 +57,10 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene("LevelSelect");
         isPaused = false;
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+        Debug.Log("Game is exiting");
+    }
 }

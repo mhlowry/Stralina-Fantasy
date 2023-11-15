@@ -5656,14 +5656,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4310583107808812350, guid: ec6ff3d890b9b864cbb0901dc632b35e, type: 3}
+    - target: {fileID: 2760778490085428171, guid: ec6ff3d890b9b864cbb0901dc632b35e, type: 3}
+      propertyPath: m_text
+      value: Exit Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 3807320185360637662, guid: ec6ff3d890b9b864cbb0901dc632b35e, type: 3}
       propertyPath: m_Name
       value: ReturnToBaseButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4310583107808812350, guid: ec6ff3d890b9b864cbb0901dc632b35e, type: 3}
+      propertyPath: m_Name
+      value: ExitGameButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 6373803318808724790, guid: ec6ff3d890b9b864cbb0901dc632b35e, type: 3}
+      propertyPath: m_text
+      value: Return to Base
       objectReference: {fileID: 0}
     - target: {fileID: 7199409208234314333, guid: ec6ff3d890b9b864cbb0901dc632b35e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1303046278}
+    - target: {fileID: 7199409208234314333, guid: ec6ff3d890b9b864cbb0901dc632b35e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReturnToBase
+      objectReference: {fileID: 0}
     - target: {fileID: 7710727990843606484, guid: ec6ff3d890b9b864cbb0901dc632b35e, type: 3}
       propertyPath: m_Name
       value: PauseScreen
@@ -5674,7 +5690,7 @@ PrefabInstance:
       objectReference: {fileID: 1303046278}
     - target: {fileID: 9127681117167010460, guid: ec6ff3d890b9b864cbb0901dc632b35e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ReturnToBase
+      value: ExitGame
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
