@@ -102,14 +102,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fac495ecbf536c45a7e57c32d5da528, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 75
+  maxHealthPoints: 100
   expWorth: 120
-  knockbackMultiplier: 0.5
+  knockbackMultiplier: 0.1
   itemDrops: []
   gfxObject: {fileID: 9010498359063463612}
-  playerLayer:
+  targetLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 4160
   moveSpeed: 1.5
   aggroDistance: 25
   attackDistance: 2

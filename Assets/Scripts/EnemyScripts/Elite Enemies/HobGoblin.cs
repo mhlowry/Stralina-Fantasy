@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HobGoblin : Enemy
 {
-    [SerializeField] LayerMask playerLayer;
+    [SerializeField] LayerMask targetLayer;
 
     [SerializeField] protected float moveSpeed = 5f;
     [SerializeField] public float aggroDistance = 10f;
@@ -22,7 +22,7 @@ public class HobGoblin : Enemy
 
     protected Vector3 direction;
 
-    protected float distanceFromPlayer = 999f;
+    protected float distanceFromTarget = 999f;
 
     protected bool hitMidAttack = false;
 
@@ -55,6 +55,7 @@ public class HobGoblin : Enemy
 
     [SerializeField] GameObject vfxHorizObj;
     [SerializeField] GameObject vfxVertObj;
+    protected GameObject previousTarget = null;
 
     // Start is called before the first frame update
     protected override void Awake()
@@ -67,32 +68,44 @@ public class HobGoblin : Enemy
     // Update is called once per frame
     void Update()
     {
+        direction = currentTarget.transform.position - transform.position;
+        //set this object to look at the player at any given point in time on the horizontal plane
+        transform.LookAt(new Vector3(currentTarget.transform.position.x, transform.position.y, currentTarget.transform.position.z));
+
         //don't do shit if mid-attack
         if (isAttacking)
             return;
 
-        distanceFromPlayer = playerDistance();
-        inAggroRange = distanceFromPlayer <= aggroDistance;
-        inAttackRange = distanceFromPlayer <= attackDistance;
-
-        direction = playerObject.transform.position - transform.position;
+        distanceFromTarget = targetDistance();
+        inAggroRange = distanceFromTarget <= aggroDistance;
+        inAttackRange = distanceFromTarget <= attackDistance;
 
         animator.SetFloat("walkSpeed", Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.z));
-        //set this object to look at the player at any given point in time on the horizontal plane
-        transform.LookAt(new Vector3(playerObject.transform.position.x, transform.position.y, playerObject.transform.position.z));
 
         if (nextDamageTime <= Time.time && !canAttack)
             canAttack = true;
 
-        if (playerObject != null && inAggroRange && canMove && !isDead)
+        if (currentTarget != null && inAggroRange && canMove && !isDead)
         {
+            // Store the previous target before updating
+            previousTarget = currentTarget;
+
+            // Update the target based on proximity
+            UpdateTarget();
+
+            // If the target has changed, print the new target
+            if (previousTarget != currentTarget)
+            {
+                Debug.Log("Hobgoblin switched to: " + currentTarget.name);
+            }
+
             if (canAttack && inAttackRange)
             {
                 isAttacking = true;
                 StartCoroutine(BigFuckingSwing());
             }
             else
-                MoveTowardsPlayer();
+                moveTowardsTarget();
         }
     }
 
@@ -149,46 +162,46 @@ public class HobGoblin : Enemy
 
     private void AttackHorz()
     {
-        List<Collider[]> hitPlayer = new List<Collider[]>();
+        List<Collider[]> hitTarget = new List<Collider[]>();
 
         foreach (Transform hitBox in attackPointsHor)
         {
-            hitPlayer.Add(Physics.OverlapSphere(hitBox.position, attackSizeHorz, playerLayer));
+            hitTarget.Add(Physics.OverlapSphere(hitBox.position, attackSizeHorz, targetLayer));
         }
 
-        foreach (Collider[] playerList in hitPlayer)
+        foreach (Collider[] targetList in hitTarget)
         {
-            foreach (Collider c in playerList)
+            foreach (Collider c in targetList)
             {
-                base.DealDamage(attackDmgSlash, knockbackHor);
-                return; //pnly damage player once
+                base.DealDamage(attackDmgSlash, knockbackHor, c.gameObject);
+                //return; //pnly damage player once
             }
         }
     }
 
     private void AttackVert()
     {
-        List<Collider[]> hitPlayer = new List<Collider[]>();
+        List<Collider[]> hitTarget = new List<Collider[]>();
 
         foreach (Transform hitBox in attackPointsVert)
         {
-            hitPlayer.Add(Physics.OverlapSphere(hitBox.position, attackSizeVert, playerLayer));
+            hitTarget.Add(Physics.OverlapSphere(hitBox.position, attackSizeVert, targetLayer));
         }
 
-        foreach (Collider[] playerList in hitPlayer)
+        foreach (Collider[] targetList in hitTarget)
         {
-            foreach (Collider c in playerList)
+            foreach (Collider c in targetList)
             {
-                base.DealDamage(attackDmgOverhead, knockbackVert);
-                return; //pnly damage player once
+                base.DealDamage(attackDmgOverhead, knockbackVert, c.gameObject);
+                //return; //pnly damage player once
             }
         }
     }
 
-    private void MoveTowardsPlayer()
+    private void moveTowardsTarget()
     {
         // Change animator to walk01
-        Vector3 direction = playerObject.transform.position - transform.position;
+        Vector3 direction = currentTarget.transform.position - transform.position;
         Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
         rb.velocity = new Vector3(horizontalDirection.x * moveSpeed, rb.velocity.y, horizontalDirection.z * moveSpeed);
     }
@@ -264,7 +277,7 @@ public class HobGoblin : Enemy
     public virtual void DisableAttackVFX()
     {
         vfxHorizObj.SetActive(false);
-        //vfxVertObj.SetActive(false);
+        vfxVertObj.SetActive(false);
     }
 
     void OnDrawGizmosSelected()

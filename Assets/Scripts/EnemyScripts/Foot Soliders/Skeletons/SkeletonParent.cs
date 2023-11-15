@@ -87,6 +87,7 @@ public class SkeletonParent : FootSoldier
     private IEnumerator CoreTimer()
     {
         inCoreState = true;
+        canAttack = false;
         animator.SetTrigger("enterCore");
         yield return new WaitForSeconds(timeCoreExposed);
 
@@ -102,6 +103,7 @@ public class SkeletonParent : FootSoldier
         inCoreState = false;
         isRegenerating = false;
         canMove = true;
+        canAttack = true;
         curHealthPoints = maxHealthPoints;
     }
 }

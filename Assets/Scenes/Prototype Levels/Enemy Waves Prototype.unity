@@ -4007,6 +4007,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOver: {fileID: 2145359968200083559}
+  gameOverText: {fileID: 3511591712003328062}
 --- !u!224 &1935098302699282949
 RectTransform:
   m_ObjectHideFlags: 0

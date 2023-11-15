@@ -8,7 +8,7 @@ public class ProjectileProperties : MonoBehaviour
     private float speed = 20f;
     private float duration = 10f;
     protected int damage = 1;
-    protected float knockback = 3f;
+    [SerializeField] protected float knockback = 3f;
     protected UnityEngine.Vector3 direction;
 
     private float initialTime;
@@ -18,7 +18,7 @@ public class ProjectileProperties : MonoBehaviour
 
     protected HashSet<Collider> loggedEnemies = new HashSet<Collider>();
 
-    private Rigidbody rb;
+    protected Rigidbody rb;
 
     public virtual void InitializeProjectile(float speed, float duration, int damage, float knockback, UnityEngine.Vector3 direction)
     {
@@ -59,14 +59,15 @@ public class ProjectileProperties : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider hitTarget)
+    protected virtual void OnTriggerEnter(Collider hitTarget)
     {
-        GameObject targetObject = hitTarget.gameObject;
+        GameObject currentTarget = hitTarget.gameObject;
+        //if(currentTarget) Debug.Log("Target hit by projectile!");
 
         //call takedamage for enemy if want to hit enemy
         if (targetMask == "Enemy" && hitTarget.gameObject.CompareTag("Enemy"))
         {
-            Enemy thisEnemy = targetObject.GetComponent<Enemy>();
+            Enemy thisEnemy = currentTarget.GetComponent<Enemy>();
             if (!loggedEnemies.Contains(hitTarget))
             {
                 //this is the main attack shit
@@ -74,12 +75,24 @@ public class ProjectileProperties : MonoBehaviour
                 loggedEnemies.Add(hitTarget);
             }
         }
-        else if(targetMask == "Player" && hitTarget.gameObject.CompareTag("Player"))
+        else if(targetMask == "Player" && 
+            (hitTarget.gameObject.CompareTag("Player") || hitTarget.gameObject.CompareTag("Companion")))
         {
-            //Attack the player
-            Player thisPlayer = targetObject.GetComponent<Player>();
-            //this is the main attack shit
-            thisPlayer.TakeDamage(damage, knockback, transform.position);
+            //Attack the player or companion
+            Player thisPlayer = currentTarget.GetComponent<Player>();
+            Companion thisCompanion = currentTarget.GetComponent<Companion>();
+
+            if (thisPlayer) 
+            {
+                //this is the main attack shit
+                thisPlayer.TakeDamage(damage, knockback, transform.position);
+            }
+            else if (thisCompanion)
+            {
+                //this is the main attack shit
+                thisCompanion.TakeDamage(damage, knockback, transform.position);
+            }
         }
+
     }
 }

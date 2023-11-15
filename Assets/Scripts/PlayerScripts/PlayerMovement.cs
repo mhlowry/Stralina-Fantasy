@@ -40,7 +40,15 @@ public class PlayerMovement : MonoBehaviour
     private int storedRolls = 0;
     private float initialRollTime;
     private float lastRollTime;
-    private bool isRolling = false;
+
+    //Listen man, i'm new to C# okay?
+    private bool isRolling;
+    public bool IsRolling
+    {
+        get { return isRolling; }
+        private set { isRolling = value; }
+    }
+
     private bool canRoll = true;
 
     private Player player;
@@ -185,10 +193,12 @@ public class PlayerMovement : MonoBehaviour
         if (player.isTeleporting)
             return;
 
-        //plays walking animation & moves player
-        anim.SetFloat("direction", Mathf.Abs(direction.x) + Mathf.Abs(direction.z));
         if (CanCallMove())
+        {
+            //plays walking animation & moves player
+            anim.SetFloat("direction", Mathf.Abs(direction.x) + Mathf.Abs(direction.z));
             characterController.Move(direction * (speed * player.GetMoveSpeedScale()) * Time.deltaTime);
+        }
         else
             characterController.Move(new Vector3(0.0f, direction.y, 0.0f) * Time.deltaTime);
     }

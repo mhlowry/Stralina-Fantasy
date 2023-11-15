@@ -16,7 +16,7 @@ public class RepeatingProjectile : ProjectileProperties
 
     private List<Enemy> enemiesInTrigger = new List<Enemy>();
 
-    private void OnTriggerEnter(Collider hitTarget)
+    private new void OnTriggerEnter(Collider hitTarget)
     {
         if (hitTarget.gameObject.CompareTag("Enemy"))
         {

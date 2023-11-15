@@ -118,9 +118,9 @@ MonoBehaviour:
   damageStartup: 0.7
   moveHeight: 0
   damageHeight: 0
-  playerLayer:
+  targetLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 4160
   attackPoint: {fileID: 4437261193246188007}
   attackSize: 1.8
   vfxObj: {fileID: 4966345950676841903}
