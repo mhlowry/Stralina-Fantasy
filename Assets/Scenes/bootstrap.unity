@@ -433,31 +433,31 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Desert_Song
     clip: {fileID: 8300000, guid: 2d533dc1e301d9847b7b97bded49d04b, type: 3}
-    volume: 1
+    volume: 0.7
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Town_Island
     clip: {fileID: 8300000, guid: 0af4c0ffa64da2c4dbf72894e31a2401, type: 3}
-    volume: 1
+    volume: 0.7
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Overworld_Theme
     clip: {fileID: 8300000, guid: 54cbb712ea809e649a7dafb8a7244015, type: 3}
-    volume: 1
+    volume: 0.7
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Enter_Arena!
     clip: {fileID: 8300000, guid: 51fc5b2a1e9dca74fa66fcea4419b189, type: 3}
-    volume: 1
+    volume: 0.7
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Overworld_Theme?
     clip: {fileID: 8300000, guid: f535b05e6a8764c4a936e4f9dce2bf29, type: 3}
-    volume: 1
+    volume: 0.7
     pitch: 1
     loop: 1
     source: {fileID: 0}

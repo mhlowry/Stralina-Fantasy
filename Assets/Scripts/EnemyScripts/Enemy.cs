@@ -39,11 +39,6 @@ public class Enemy : MonoBehaviour
     private float currentInterestLevel = 1f; // The current interest level in the current target
     private float lastDistanceToCurrentTarget = Mathf.Infinity; // Last recorded distance to the current target
 
-    private void Start()
-    {
-        waveSpawner = GetComponentInParent<WaveSpawner>();
-    }
-
     private void Update()
     {
         // Check if the companion is still active/exists in the scene
@@ -66,6 +61,8 @@ public class Enemy : MonoBehaviour
         //sets whatever object this is on to be put on the "enemy" layer, so the player can attack it.
         int enemyLayer = LayerMask.NameToLayer("Enemy");
         gameObject.layer = enemyLayer;
+
+        waveSpawner = GetComponentInParent<WaveSpawner>();
 
         //sets enemy's current health to max health on awake
         curHealthPoints = maxHealthPoints;

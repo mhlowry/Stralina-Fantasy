@@ -104,5 +104,6 @@ public class Wave
     public GameObject[] enemies;
     public float timeToNextEnemy;
     public float timeToNextWave;
-    [HideInInspector] public int enemiesLeft;
+    //[HideInInspector] 
+    public int enemiesLeft;
 }
