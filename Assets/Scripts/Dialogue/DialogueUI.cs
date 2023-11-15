@@ -6,6 +6,6 @@ public class DialogueUI : MonoBehaviour
 
    private void Start()
    {
-        textLabel.text = "Hello!\nThis is my second line.";
+        GetComponent<TypewriterEffect>().Run("Welcome to the game!\nHello.", textLabel);
    }
 }
