@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
         levelsCompleted = new bool[10];
+
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -29,18 +30,25 @@ public class GameManager : MonoBehaviour
         // InitializeLevelButtons();
     }
 
-    // This function is called when the LevelSelect scene starts
-    public void InitializeLevelButtons()
+    // Called when base island is loaded
+    public void InitializeLevelPortals()
     {
         for (int i = 0; i < levelsCompleted.Length; i++)
         {
-            Button levelButton = GameObject.Find("Level " + (i + 1)).GetComponent<Button>();
-            if (levelButton)
+            GameObject portal = GameObject.Find("Gate_Level " + (i + 1));
+            if (portal)
             {
-                levelButton.interactable = i == 0 || levelsCompleted[i - 1];
+                // The first level's portal is always active.
+                // Other portals are active only if the previous level is completed.
+                portal.SetActive(i == 0 || levelsCompleted[i - 1]);
+            }
+            else
+            {
+                Debug.LogWarning("Portal for level " + (i + 1) + " not found!");
             }
         }
     }
+
 
     public void MarkLevelAsCompleted(int levelIndex)
     {
@@ -79,9 +87,6 @@ public class GameManager : MonoBehaviour
         {
             levelsCompleted = completedLevels;
             Debug.Log("Levels completion status updated.");
-            
-            // // Call InitializeLevelButtons after updating levelsCompleted
-            // InitializeLevelButtons();
         }
         else
         {
@@ -112,10 +117,10 @@ public class GameManager : MonoBehaviour
     // This method will be called every time a scene is loaded
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "LevelSelect")
+        if (scene.name == "Base_Scene")
         {
-            InitializeLevelButtons();
-            Debug.Log("LevelSelect buttons loaded");
+            InitializeLevelPortals();
+            Debug.Log("Level portals loaded");
         }
     }
 
