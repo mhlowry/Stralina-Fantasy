@@ -44,10 +44,10 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
     }
 
-    public void MainMenu()
+    public void ReturnToBase()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Base_Scene");
         isPaused = false;
     }
 
