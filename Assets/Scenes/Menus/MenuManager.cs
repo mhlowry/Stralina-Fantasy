@@ -33,8 +33,8 @@ public class MainMenuManager : MonoBehaviour
         usernamePanel.SetActive(false);
         Debug.Log("Username: " + username);
 
-        // Start coroutine to load the main menu scene
-        StartCoroutine(LoadSceneAndSetActive("MainMenu"));
+        // Start coroutine to load the base island scene
+        StartCoroutine(LoadSceneAndSetActive("Base_Scene"));
     }
 
     private IEnumerator LoadSceneAndSetActive(string sceneName)
