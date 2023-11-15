@@ -14,7 +14,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private Animator anim;
 
     [SerializeField] private float uniAttackDelay = 1f;
-    private float attackDuration = 0f;
+    [HideInInspector] public float attackDuration = 0f;
     private float lastAttackTime = 0f;
     private bool playerIsLocked = false;
 
