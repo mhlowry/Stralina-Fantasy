@@ -50,11 +50,11 @@ public class GameOverMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void MainMenu()
+    public void BaseIsland()
     {
         Time.timeScale = 1f;
         UnsubscribeEvents();
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Base_Scene");
     }
 
     private void UnsubscribeEvents()
