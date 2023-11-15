@@ -38,15 +38,24 @@ public class GameManager : MonoBehaviour
             GameObject portal = GameObject.Find("Gate_Level " + (i + 1));
             if (portal)
             {
-                // The first level's portal is always active.
-                if (i == 0)
+                Transform portalChild = FindPortalChild(portal);
+
+                if (portalChild != null)
                 {
-                    portal.SetActive(true);
+                    // The first level's portal child is always active.
+                    if (i == 0)
+                    {
+                        portalChild.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        // For subsequent levels, activate only if the previous level is completed
+                        portalChild.gameObject.SetActive(levelsCompleted[i - 1]);
+                    }
                 }
                 else
                 {
-                    // For subsequent levels, activate only if the previous level is completed
-                    portal.SetActive(levelsCompleted[i - 1]);
+                    Debug.LogWarning("Portal child object for level " + (i + 1) + " not found!");
                 }
             }
             else
@@ -56,7 +65,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
+    private Transform FindPortalChild(GameObject portal)
+    {
+        foreach (Transform child in portal.transform)
+        {
+            if (child.name.StartsWith("Portal"))
+            {
+                return child;
+            }
+        }
+        return null;
+    }
 
     public void MarkLevelAsCompleted(int levelIndex)
     {
