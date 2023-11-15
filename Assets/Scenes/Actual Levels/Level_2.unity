@@ -183,6 +183,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gate_2 > 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6776732438035613620, guid: dae26e987cb65534ab778071b09cf59a, type: 3}
+      propertyPath: destinationGate
+      value: 
+      objectReference: {fileID: 609053322}
     - target: {fileID: 7260712822398531902, guid: dae26e987cb65534ab778071b09cf59a, type: 3}
       propertyPath: destinationGate
       value: 
@@ -190,10 +194,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4659625087393875948, guid: dae26e987cb65534ab778071b09cf59a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 29796290}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dae26e987cb65534ab778071b09cf59a, type: 3}
 --- !u!4 &29796288 stripped
 Transform:
@@ -205,21 +206,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4659625087393875948, guid: dae26e987cb65534ab778071b09cf59a, type: 3}
   m_PrefabInstance: {fileID: 29796287}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &29796290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 29796289}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e25a8f9e7cf98145821578eeb61425e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destinationGate: {fileID: 609053322}
-  isDestination: 0
-  isActive: 1
 --- !u!1 &61555108
 GameObject:
   m_ObjectHideFlags: 0
@@ -3009,7 +2995,7 @@ MonoBehaviour:
   levelsCompleted: 
   description: 
   isCompleted: 0
-  levelIndex: 0
+  levelIndex: 1
   questInfoText: {fileID: 0}
   objectiveDisplay: {fileID: 547747435}
   totalEnemies: 0
