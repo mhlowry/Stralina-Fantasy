@@ -187,7 +187,8 @@ MonoBehaviour:
   maxHealthPoints: 20
   expWorth: 40
   knockbackMultiplier: 1
-  itemDrops: []
+  itemDrops:
+  - {fileID: 7163418064556403771, guid: 52078488a7ed07545bb73ea856c7ef21, type: 3}
   gfxObject: {fileID: 7347449900440986324}
   moveSpeed: 5
   aggroDistance: 15
