@@ -5,52 +5,57 @@ using UnityEngine.SceneManagement;
 public class PortalController : MonoBehaviour
 {
     [SerializeField] private string destinationScene; // Scene to load
-    public bool isActive = true;
-    GameObject portalVisual;
+    private GameObject portalVisual; // Child object representing the portal
 
     private void Awake()
     {
-        try
+        portalVisual = FindPortalVisual();
+        if (portalVisual == null)
         {
-            if (transform.GetChild(0).gameObject)
+            Debug.LogError("Portal visual not found!");
+        }
+    }
+
+    private GameObject FindPortalVisual()
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.name.StartsWith("Portal"))
             {
-                portalVisual = transform.GetChild(0).gameObject;
-                portalVisual.SetActive(isActive);
+                return child.gameObject;
             }
         }
-        catch
-        {
-            Debug.Log("Prototype Portal Warning");
-        }
+        return null;
     }
 
     private void OnTriggerEnter(Collider hitTarget)
     {
-        if (hitTarget.gameObject.layer == LayerMask.NameToLayer("Player") && isActive)
+        // Check if the collider that entered the trigger is the player
+        // and if the portal visual is active (visible)
+        if (hitTarget.gameObject.layer == LayerMask.NameToLayer("Player") && portalVisual.activeSelf)
         {
             StartCoroutine(TransitionToScene(hitTarget.gameObject));
         }
     }
 
     private IEnumerator TransitionToScene(GameObject playerObj)
-  {
-      Player player = playerObj.GetComponent<Player>();
-
-      // Disable input to prevent any further actions during scene loading
-      player.DisableInput();
-
-      // Load the destination scene immediately
-      SceneManager.LoadScene(destinationScene, LoadSceneMode.Single);
-
-      // This is just to keep the structure of a coroutine
-      // We should instead have a transition and do this: yield return new WaitForSeconds(transitionTime);
-      yield return null; 
-  }
-
-
-    public void ActivateGate()
     {
-        isActive = true;
-        portalVisual.SetActive(isActive);
+        Player player = playerObj.GetComponent<Player>();
+
+        // Disable input to prevent any further actions during scene loading
+        player.DisableInput();
+
+        // Load the destination scene immediately
+        SceneManager.LoadScene(destinationScene, LoadSceneMode.Single);
+
+        yield return null; 
+    }
+
+    public void ActivateGate(bool isActive)
+    {
+        if (portalVisual != null)
+        {
+            portalVisual.SetActive(isActive);
+        }
     }
 }
