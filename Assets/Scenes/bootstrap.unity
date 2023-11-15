@@ -425,6 +425,18 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: block_thud_4
+    clip: {fileID: 8300000, guid: c537a67af52320149ac5a3575f263e14, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Desert_Song
+    clip: {fileID: 8300000, guid: 2d533dc1e301d9847b7b97bded49d04b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
 --- !u!114 &6465505450997217940
 MonoBehaviour:
   m_ObjectHideFlags: 0
