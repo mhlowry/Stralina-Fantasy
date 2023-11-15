@@ -65,7 +65,9 @@ public abstract class ObjectiveManager : GameManager
         {
             description = "Objective Complete!";
             objectiveDisplay.color = Color.green;
+            ShowObjectiveBriefly();
         }
+        else Debug.Log("Objective display is null");
 
         // Notify the GameManager that the level is completed
         GameManager.instance.MarkLevelAsCompleted(levelIndex);
