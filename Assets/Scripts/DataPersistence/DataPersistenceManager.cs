@@ -42,6 +42,8 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void LoadGame()
     {
+        Debug.Log("Data saved in: " + Application.persistentDataPath);
+
         // Load any saved data from a file using the data handler
         this.gameData = dataHandler.Load();
         Debug.Log("Loaded game data: " + gameData);

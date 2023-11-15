@@ -183,6 +183,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gate_2 > 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6776732438035613620, guid: dae26e987cb65534ab778071b09cf59a, type: 3}
+      propertyPath: destinationGate
+      value: 
+      objectReference: {fileID: 609053322}
     - target: {fileID: 7260712822398531902, guid: dae26e987cb65534ab778071b09cf59a, type: 3}
       propertyPath: destinationGate
       value: 
@@ -2991,7 +2995,7 @@ MonoBehaviour:
   levelsCompleted: 
   description: 
   isCompleted: 0
-  levelIndex: 0
+  levelIndex: 1
   questInfoText: {fileID: 0}
   objectiveDisplay: {fileID: 547747435}
   totalEnemies: 0
@@ -4125,6 +4129,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gate_3 > 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6776732438035613620, guid: dae26e987cb65534ab778071b09cf59a, type: 3}
+      propertyPath: destinationGate
+      value: 
+      objectReference: {fileID: 943132750}
     - target: {fileID: 7260712822398531902, guid: dae26e987cb65534ab778071b09cf59a, type: 3}
       propertyPath: destinationGate
       value: 
