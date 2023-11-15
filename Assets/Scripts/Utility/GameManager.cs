@@ -39,8 +39,15 @@ public class GameManager : MonoBehaviour
             if (portal)
             {
                 // The first level's portal is always active.
-                // Other portals are active only if the previous level is completed.
-                portal.SetActive(i == 0 || levelsCompleted[i - 1]);
+                if (i == 0)
+                {
+                    portal.SetActive(true);
+                }
+                else
+                {
+                    // For subsequent levels, activate only if the previous level is completed
+                    portal.SetActive(levelsCompleted[i - 1]);
+                }
             }
             else
             {
@@ -48,6 +55,7 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
 
 
     public void MarkLevelAsCompleted(int levelIndex)

@@ -4720,7 +4720,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2336607583958363073, guid: 245f0bd8968d2354984509dab9b05458, type: 3}
       propertyPath: m_Name
-      value: Gate_ Level 2
+      value: Gate_Level 2
       objectReference: {fileID: 0}
     - target: {fileID: 2518062060870712322, guid: 245f0bd8968d2354984509dab9b05458, type: 3}
       propertyPath: m_LocalPosition.x
