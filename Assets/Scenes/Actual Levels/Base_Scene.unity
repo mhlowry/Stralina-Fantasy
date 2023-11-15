@@ -1206,7 +1206,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4659625087393875948, guid: dae26e987cb65534ab778071b09cf59a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1363372581}
   m_SourcePrefab: {fileID: 100100000, guid: dae26e987cb65534ab778071b09cf59a, type: 3}
 --- !u!1001 &543992111
 PrefabInstance:
@@ -1260,7 +1263,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1895436110243879631, guid: 647bf9ea8a71a6b45805388c8607f72c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3214,11 +3218,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gate_Level 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3242335430194145496, guid: a3fcc8f637a53bd468a3853ceb7364cf, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3fcc8f637a53bd468a3853ceb7364cf, type: 3}
+--- !u!1 &1363372577 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4659625087393875948, guid: dae26e987cb65534ab778071b09cf59a, type: 3}
+  m_PrefabInstance: {fileID: 524416034}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1363372581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363372577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b074426d869a04747b5064bbd3fb083d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destinationScene: Level_1
+  isActive: 1
 --- !u!1 &1367948047
 GameObject:
   m_ObjectHideFlags: 0
@@ -4353,7 +4377,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gate_Level 4
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6515448463833470159, guid: 4bebff6ebffde0d4ca5c9dbba256a166, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -4549,7 +4574,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3282797624808016020, guid: 245f0bd8968d2354984509dab9b05458, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
