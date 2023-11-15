@@ -1092,6 +1092,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 394815532}
   m_CullTransparentMesh: 1
+--- !u!1 &535943913
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 535943915}
+  - component: {fileID: 535943914}
+  m_Layer: 0
+  m_Name: HitStopManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &535943914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535943913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32c74645f1620ff449158c974c3dcc36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &535943915
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535943913}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.274231, y: 1.3358642, z: -0.8010766}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &545150187
 GameObject:
   m_ObjectHideFlags: 0
@@ -1210,6 +1254,65 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &553040247
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 553040250}
+  - component: {fileID: 553040249}
+  - component: {fileID: 553040248}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &553040248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553040247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad7623fdd04917541818b440558a70db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileName: data
+--- !u!114 &553040249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553040247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12baf6838217a6429c0adf7a4ca6155, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelsCompleted: 
+--- !u!4 &553040250
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553040247}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 18.57264, y: -18.73512, z: 41.29366}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &786978463
 GameObject:
   m_ObjectHideFlags: 0
@@ -1803,6 +1906,285 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1090808431}
   m_CullTransparentMesh: 1
+--- !u!1 &1285728410
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1285728412}
+  - component: {fileID: 1285728411}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1285728411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285728410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4371533e9a38c341b4549dec8b58f4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: swoosh_1
+    clip: {fileID: 8300000, guid: 3a9e96162f06b84419e523ff18c5ebac, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: swoosh_2
+    clip: {fileID: 8300000, guid: c113918200c401647b574b084f09a9b2, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: swoosh_2_deep
+    clip: {fileID: 8300000, guid: c113918200c401647b574b084f09a9b2, type: 3}
+    volume: 1
+    pitch: 0.55
+    loop: 0
+    source: {fileID: 0}
+  - name: swoosh_3
+    clip: {fileID: 8300000, guid: 9a4091cb106c1df4bb742405ab0689ef, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: swish_1
+    clip: {fileID: 8300000, guid: 3893c25dd030510489bfbd88dd72038f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: swish_1_deep
+    clip: {fileID: 8300000, guid: 3893c25dd030510489bfbd88dd72038f, type: 3}
+    volume: 1
+    pitch: 0.55
+    loop: 0
+    source: {fileID: 0}
+  - name: swishmulti_1
+    clip: {fileID: 8300000, guid: 19480321a7d66bb4ca6fe3a9ab70aabf, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: projectile_woosh_1
+    clip: {fileID: 8300000, guid: db76ea945b2f2d0458310d7cd5fefa43, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: fireball_ambience_1
+    clip: {fileID: 8300000, guid: cfee75755fab4444392a7b81c9ebb296, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: impact_1
+    clip: {fileID: 8300000, guid: fb6ab60ae1cc1884ab4cc0f15c056a40, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: impact_2
+    clip: {fileID: 8300000, guid: 3b276de583d048844a9208a700f2ba5e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: impact_3
+    clip: {fileID: 8300000, guid: 775c3ba6cfde51444835e0c3db9c7425, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: impact_4
+    clip: {fileID: 8300000, guid: 3d8535a20267baa418c956598dc8a8a9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: impact_5
+    clip: {fileID: 8300000, guid: d116bce01f5a09d4786192aae0cf1b43, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: impact_6
+    clip: {fileID: 8300000, guid: 1fdd826bfa1ee5a489b0a634489ced29, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: sword_1
+    clip: {fileID: 8300000, guid: 6aa919452e4daa94293011d82e44589d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: sword_2
+    clip: {fileID: 8300000, guid: 657956f742b9477459064976e36f0941, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: sword_3
+    clip: {fileID: 8300000, guid: 8b249e942fc617449b656b8ff3c1fd4e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: damage_1
+    clip: {fileID: 8300000, guid: be717e9a3e15bfa4495c473a5f201e01, type: 3}
+    volume: 0.416
+    pitch: 2.01
+    loop: 0
+    source: {fileID: 0}
+  - name: damage_2
+    clip: {fileID: 8300000, guid: 553bbb0daecd0714aa56717b9fbc0f9b, type: 3}
+    volume: 0.997
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: damage_3
+    clip: {fileID: 8300000, guid: 3bf864ab04780144d95537b3cb5f1c13, type: 3}
+    volume: 0.779
+    pitch: 0.3
+    loop: 0
+    source: {fileID: 0}
+  - name: heavydamage_1
+    clip: {fileID: 8300000, guid: be717e9a3e15bfa4495c473a5f201e01, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: heavydamage_2
+    clip: {fileID: 8300000, guid: 553bbb0daecd0714aa56717b9fbc0f9b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: heavydamage_3
+    clip: {fileID: 8300000, guid: 3bf864ab04780144d95537b3cb5f1c13, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: player_death
+    clip: {fileID: 8300000, guid: 67efccf1e336de74ea8c7f24dda62020, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: water_spit
+    clip: {fileID: 8300000, guid: 7218f21fb413d18418a7f0af6904b39e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: water_dash
+    clip: {fileID: 8300000, guid: 56847b349e15fa940905641c4564775a, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: water_splash
+    clip: {fileID: 8300000, guid: 334080d590a00c94793d3da8ffe74634, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: slime_jump
+    clip: {fileID: 8300000, guid: 262ae0df63259e74484ef486daea8c65, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: block_thud_1
+    clip: {fileID: 8300000, guid: d2f8c4c92be2d1e47be354b77b00ceb5, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: block_thud_2
+    clip: {fileID: 8300000, guid: 650d42db6822675469923baa8ac711d9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: block_thud_3
+    clip: {fileID: 8300000, guid: 58f3147aa42286e4680aeb0bb0dbf2d4, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: block_thud_4
+    clip: {fileID: 8300000, guid: c537a67af52320149ac5a3575f263e14, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: block_thud_4
+    clip: {fileID: 8300000, guid: c537a67af52320149ac5a3575f263e14, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Desert_Song
+    clip: {fileID: 8300000, guid: 2d533dc1e301d9847b7b97bded49d04b, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Town_Island
+    clip: {fileID: 8300000, guid: 0af4c0ffa64da2c4dbf72894e31a2401, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Overworld_Theme
+    clip: {fileID: 8300000, guid: 54cbb712ea809e649a7dafb8a7244015, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Enter_Arena!
+    clip: {fileID: 8300000, guid: 51fc5b2a1e9dca74fa66fcea4419b189, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Overworld_Theme?
+    clip: {fileID: 8300000, guid: f535b05e6a8764c4a936e4f9dce2bf29, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+--- !u!4 &1285728412
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285728410}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.02, y: 1.06, z: -1.5600002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1319909996
 GameObject:
   m_ObjectHideFlags: 0
@@ -2686,3 +3068,6 @@ SceneRoots:
   - {fileID: 386754336}
   - {fileID: 2147406786}
   - {fileID: 2132822451}
+  - {fileID: 1285728412}
+  - {fileID: 535943915}
+  - {fileID: 553040250}

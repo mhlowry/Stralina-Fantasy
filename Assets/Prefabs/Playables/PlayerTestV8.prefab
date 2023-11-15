@@ -813,6 +813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 6868929018565600063}
   uniAttackDelay: 0.5
+  attackDuration: 0
   decelerationRate: 32
   meterPerHit: 2
   enemyLayers:
@@ -971,7 +972,7 @@ MonoBehaviour:
     independentKnockback: 1
     hitBoxes:
     - center: {fileID: 775819154674499160}
-      size: 1.6
+      size: 1.8
     vfxObj: {fileID: 6876043889717374178}
   - attackName: Projectile_PLACEHOLDER
     animTrigger: spinSlashTrigger
