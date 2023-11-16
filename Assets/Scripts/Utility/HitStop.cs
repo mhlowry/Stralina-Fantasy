@@ -11,8 +11,15 @@ public class HitStop : MonoBehaviour
 
     void Awake()
     {
+        DontDestroyOnLoad(gameObject);
+
         if (instance == null)
             instance = this;
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         hitstopRoutine = StartCoroutine(Wait(0));
     }

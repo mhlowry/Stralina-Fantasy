@@ -11,6 +11,13 @@ public class GameOverMenu : MonoBehaviour
     public static bool justDied = false;
     [SerializeField] private TMPro.TextMeshProUGUI gameOverText; // set this in inspector pls
 
+    [SerializeField] GameObject DJ;
+
+    private void Awake()
+    {
+        DJ = GameObject.Find("DJObject");
+    }
+
     void Update()
     {
         // This is done for style points, waiting a couple seconds before completely stopping time and playing the music.
@@ -39,6 +46,7 @@ public class GameOverMenu : MonoBehaviour
     public void OnEnableGameOver()
     {
         gameOver.SetActive(true);
+        Destroy(DJ);
         timeOfDeath = Time.unscaledTime;
         justDied = true;
     }
@@ -50,11 +58,11 @@ public class GameOverMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void MainMenu()
+    public void BaseIsland()
     {
         Time.timeScale = 1f;
         UnsubscribeEvents();
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Base_Scene");
     }
 
     private void UnsubscribeEvents()

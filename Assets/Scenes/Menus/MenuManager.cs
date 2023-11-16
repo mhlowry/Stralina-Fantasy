@@ -21,6 +21,14 @@ public class MainMenuManager : MonoBehaviour
         usernamePanel.SetActive(true);
     }
 
+    // Temporary function before profiles are implemented
+    public void OnStartGameClicked()
+    {
+        Debug.Log("Start Game Clicked!");
+        // Start coroutine to load the base island scene
+        StartCoroutine(LoadSceneAndSetActive("Base_Scene"));
+    }
+
     public void OnUsernameConfirmClicked()
     {
         Debug.Log("Confirm Clicked!");
@@ -33,8 +41,8 @@ public class MainMenuManager : MonoBehaviour
         usernamePanel.SetActive(false);
         Debug.Log("Username: " + username);
 
-        // Start coroutine to load the main menu scene
-        StartCoroutine(LoadSceneAndSetActive("MainMenu"));
+        // Start coroutine to load the base island scene
+        StartCoroutine(LoadSceneAndSetActive("Base_Scene"));
     }
 
     private IEnumerator LoadSceneAndSetActive(string sceneName)

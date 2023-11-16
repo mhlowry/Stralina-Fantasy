@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public DataPersistenceManager dataPersistenceManager;
+
     public static bool isPaused;
 
     // Start is called before the first frame update
@@ -44,10 +46,10 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
     }
 
-    public void MainMenu()
+    public void ReturnToBase()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Base_Scene");
         isPaused = false;
     }
 
@@ -57,4 +59,25 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene("LevelSelect");
         isPaused = false;
     }
+
+    public void ExitGame()
+    {
+        SaveGame();
+        Application.Quit();
+        Debug.Log("Game is exiting");
+    }
+
+    public void SaveGame()
+    {
+        if (DataPersistenceManager.instance != null)
+        {
+            DataPersistenceManager.instance.SaveGame();
+            Debug.Log("Game Saved");
+        }
+        else
+        {
+            Debug.LogError("DataPersistenceManager instance not found");
+        }
+    }
+
 }

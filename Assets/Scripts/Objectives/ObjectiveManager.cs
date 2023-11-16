@@ -65,19 +65,21 @@ public abstract class ObjectiveManager : GameManager
         {
             description = "Objective Complete!";
             objectiveDisplay.color = Color.green;
+            ShowObjectiveBriefly();
         }
+        else Debug.Log("Objective display is null");
 
         // Notify the GameManager that the level is completed
         GameManager.instance.MarkLevelAsCompleted(levelIndex);
             
-        StartCoroutine(WaitAndReturnToLevelSelect(5f)); // Wait for the same duration as the blinking text
+        StartCoroutine(WaitAndReturnToBaseIsland(5f)); // Wait for the same duration as the blinking text
         
     }
 
-    private IEnumerator WaitAndReturnToLevelSelect(float waitTime)
+    private IEnumerator WaitAndReturnToBaseIsland(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        SceneManager.LoadScene("LevelSelect"); // Replace with your Level Select scene name
+        SceneManager.LoadScene("Base_Scene");
     }
 
 

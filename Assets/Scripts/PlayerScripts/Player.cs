@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerCombat))]
@@ -110,6 +111,20 @@ public class Player : MonoBehaviour, IDataPersistence
         expBar.SetResource(curExp);
 
         levelText.text = playerLevel.ToString();
+    }
+
+    //Set the spawnpoint of the player on scene load
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Transform spawnpoint = GameObject.Find("SPAWNPOINT").transform;
+        try
+        {
+            transform.position = spawnpoint.position;
+        }
+        catch 
+        {
+            Debug.Log("SPAWNPOINT object not found");
+        }
     }
 
     protected virtual void Update()

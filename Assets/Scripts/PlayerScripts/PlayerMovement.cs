@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(Player))]
+[RequireComponent(typeof(PlayerCombat))]
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -52,11 +53,13 @@ public class PlayerMovement : MonoBehaviour
     private bool canRoll = true;
 
     private Player player;
+    private PlayerCombat playerCombat;
 
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
         player = GetComponent<Player>();
+        playerCombat = GetComponent<PlayerCombat>();
     }
 
     private void Update()
@@ -137,6 +140,8 @@ public class PlayerMovement : MonoBehaviour
         //make player invulnerable
         player.SetInvulTrue();
         isRolling = true;
+
+        playerCombat.attackDuration = 0.0f;
 
         anim.SetTrigger("startRoll");
 
