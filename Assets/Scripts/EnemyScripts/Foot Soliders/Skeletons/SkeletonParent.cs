@@ -48,6 +48,7 @@ public class SkeletonParent : FootSoldier
             if (isAttacking)
                 hitMidAttack = true;
 
+            curCoreHealth -= (int)(damage * 0.25);
             base.TakeDamage(damage, knockback, direction);
 
             //Enter the core state if dead
