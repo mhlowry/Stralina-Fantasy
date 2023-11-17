@@ -110,7 +110,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 4160
-  moveSpeed: 1.5
+  moveSpeed: 2
   aggroDistance: 25
   attackDistance: 2
   attackDmgSlash: 3
@@ -122,8 +122,8 @@ MonoBehaviour:
   colorSpeed: 3
   regularColor: {r: 1, g: 1, b: 1, a: 1}
   hurtColor: {r: 1, g: 0, b: 0, a: 1}
-  attackdelay1: 0.3
-  attackdelay2: 0.2
+  attackdelay1: 0.25
+  attackdelay2: 0.15
   attackPointsHor:
   - {fileID: 4056703453475963409}
   attackPointsVert:

@@ -109,8 +109,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4160
   moveSpeed: 0.5
-  aggroDistance: 20
-  attackDistance: 16
+  aggroDistance: 30
+  attackDistance: 42
   attackDmgStomp: 3
   attackDmgRanged: 3
   knockbackStomp: 15
@@ -120,7 +120,7 @@ MonoBehaviour:
   colorSpeed: 1
   regularColor: {r: 1, g: 1, b: 1, a: 1}
   hurtColor: {r: 1, g: 0.5415094, b: 0.5415094, a: 1}
-  attackDelayStomp: 0
+  attackDelayStomp: 0.05
   attackPoint: {fileID: 6400243974159328593}
   attackSize: 3.28
   attackImpact: 0

@@ -1072,7 +1072,7 @@ MonoBehaviour:
   - attackName: Projectile
     animTrigger: slash1Trigger
     audioName: swoosh_2
-    duration: 0.5
+    duration: 0.3
     impact: 5
     delay: 0.1
     damage: 7
