@@ -16,6 +16,7 @@ public class GameOverMenu : MonoBehaviour
     private void Awake()
     {
         DJ = GameObject.Find("DJObject");
+        justDied = false;
     }
 
     void Update()

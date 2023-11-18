@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8405423189471896244}
   - component: {fileID: 7961070696090167534}
   - component: {fileID: 6923033701504239880}
-  - component: {fileID: 7817623368078038655}
+  - component: {fileID: 5250281477739758186}
   m_Layer: 0
   m_Name: SwdMan SlowProjectile
   m_TagString: Untagged
@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7149bdf4c1bf5934094e415023b43ba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockback: 3
   targetMask: Enemy
   soundName: fireball_ambience_1
   delayStrikes: 0.3
@@ -77,8 +78,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &7817623368078038655
-CapsuleCollider:
+--- !u!65 &5250281477739758186
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -95,11 +96,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.76893955
-  m_Height: 3.7025928
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0.7}
+  serializedVersion: 3
+  m_Size: {x: 1, y: 3.4625726, z: 3.0628395}
+  m_Center: {x: 0, y: 0.09019801, z: 0.06453106}
 --- !u!1 &3750497973631818894
 GameObject:
   m_ObjectHideFlags: 0
