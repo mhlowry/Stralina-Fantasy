@@ -209,7 +209,7 @@ MonoBehaviour:
   strafeRandomMax: 0
   timeCoreExposed: 5
   timeToRegenerate: 0.35
-  maxCoreHealth: 50
+  maxCoreHealth: 35
   attackPoint: {fileID: 8746929826652745877}
   attackSize: 1.2
   attackImpact: 0

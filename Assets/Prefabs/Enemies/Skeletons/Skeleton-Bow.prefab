@@ -342,7 +342,7 @@ MonoBehaviour:
   strafeRandomMax: 0.5
   timeCoreExposed: 5
   timeToRegenerate: 0.4
-  maxCoreHealth: 50
+  maxCoreHealth: 35
   targetLayer:
     serializedVersion: 2
     m_Bits: 4160

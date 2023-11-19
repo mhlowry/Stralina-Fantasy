@@ -46,7 +46,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5575278984164947125}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dadc70a205c1834e80699b8de577ebf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 110
+  maxHealthPoints: 100
   expWorth: 250
   knockbackMultiplier: 0
   itemDrops: []

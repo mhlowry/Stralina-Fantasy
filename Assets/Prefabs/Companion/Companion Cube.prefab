@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 1147880127776528468}
   - component: {fileID: 3945419740331340306}
   m_Layer: 0
-  m_Name: PlayerGFX
+  m_Name: CompanionGFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -277,6 +277,7 @@ MonoBehaviour:
   maxHealth: 30
   curHealth: 0
   disableMovement: 0
+  spriteRendererGFX: {fileID: 1147880127776528468}
 --- !u!1 &5572345190887473621
 GameObject:
   m_ObjectHideFlags: 0
