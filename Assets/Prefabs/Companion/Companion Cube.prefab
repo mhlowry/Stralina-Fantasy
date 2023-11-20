@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed94f8c6d6cbe864eb6ed9838248e187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  freezeXYAxis: 1
+  freezeXYAxis: 0
 --- !u!1 &5271418105617583186
 GameObject:
   m_ObjectHideFlags: 0

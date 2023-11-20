@@ -184,19 +184,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62f608e2bb3e6e246b8fefbe4a6f0a42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 9
+  maxHealthPoints: 12
   expWorth: 0
-  knockbackMultiplier: 1.5
+  knockbackMultiplier: 1.2
   itemDrops:
   - {fileID: 7163418064556403771, guid: 52078488a7ed07545bb73ea856c7ef21, type: 3}
   gfxObject: {fileID: 8308422541966344583}
   moveSpeed: 4
   aggroDistance: 20
-  attackDistance: 3
+  attackDistance: 2
   strafeDistance: 2.5
   attackPower: 2
   knockback: 1
-  attackStartup: 0.3
+  attackStartup: 0.1
   boidAwarenessRadius: 2
   enemyLayer:
     serializedVersion: 2
@@ -217,6 +217,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 4160
+  attackdelay: 0.6
   maxShieldHP: 30
   curShieldHP: 0
   regularController: {fileID: 9100000, guid: 7163ff10ddc214242987072e6e0cf282, type: 2}
