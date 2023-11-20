@@ -1384,7 +1384,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1daac976cb34868418e99e151d13a809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueBox: {fileID: 300877122}
   textLabel: {fileID: 1461353863}
+  testDialogue: {fileID: 11400000, guid: 36559ef81f4296b4299458a95f3b7a78, type: 2}
 --- !u!114 &643275221
 MonoBehaviour:
   m_ObjectHideFlags: 0
