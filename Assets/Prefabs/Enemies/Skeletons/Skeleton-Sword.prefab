@@ -299,7 +299,7 @@ MonoBehaviour:
   attackPower: 2
   knockback: 1
   attackStartup: 0.1
-  boidAwarenessRadius: 5
+  boidAwarenessRadius: 4
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2048

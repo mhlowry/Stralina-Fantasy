@@ -12,7 +12,8 @@ public class GoblinSpear : FootSoldier
     [SerializeField] GameObject runningVfxObj;
     [SerializeField] GameObject dashStabVfxObj;
 
-    [SerializeField] float chargingSpeedAdjustment;
+    [SerializeField] float chargingSpeedMax;
+    [SerializeField] float chargingSpeedAccel;
     [SerializeField] int chargingDamage;
     [SerializeField] float chargingDistance;
     bool inChargingRange;
@@ -82,10 +83,12 @@ public class GoblinSpear : FootSoldier
         animator.SetTrigger("attackStart");
 
         PlayAttackVFX(direction, runningVfxObj);
-        moveSpeed = defaultMoveSpeed + chargingSpeedAdjustment;
 
-        while(!inAttackRange)
+        while (!inAttackRange)
+        {
+            moveSpeed = Mathf.Clamp(moveSpeed + chargingSpeedAccel * Time.deltaTime, defaultMoveSpeed, chargingSpeedMax);
             yield return null;
+        }
 
         yield return new WaitForSeconds(attackStartup);
 
