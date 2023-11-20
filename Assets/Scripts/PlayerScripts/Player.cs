@@ -68,6 +68,11 @@ public class Player : MonoBehaviour, IDataPersistence
 
     private GameOverMenu gameOverMenu;
 
+    // dialogue stuff
+    [SerializeField] private DialogueUI dialogueUI;
+    public DialogueUI DialogueUI => dialogueUI;
+    public IInteractable Interactable { get; set; }
+
     //Doing certain things in awake and some things in start is really important apparently
     private void Awake()
     {
@@ -151,6 +156,11 @@ public class Player : MonoBehaviour, IDataPersistence
         if (Time.time - timeofHit > hitInvulTime && !invulOverride)
         {
             isInvul = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Interactable?.Interact(this);
         }
     }
 

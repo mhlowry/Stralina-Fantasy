@@ -19,3 +19,8 @@ MonoBehaviour:
   - 'This is my second dialogue!
 
     Hello again!'
+  responses:
+  - responseText: Yes
+    dialogueObject: {fileID: 11400000, guid: 0c5e182bb567d454693ff76a6003dec6, type: 2}
+  - responseText: No
+    dialogueObject: {fileID: 11400000, guid: 0639524dd72444f4982c8228e450f962, type: 2}
