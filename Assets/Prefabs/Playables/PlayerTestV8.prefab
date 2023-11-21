@@ -746,7 +746,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerLevel: 1
   curExp: 0
-  maxHealth: 20
+  maxHealth: 15
   curHealth: 0
   curAbilityMeter: 0
   hitInvulTime: 1.2
