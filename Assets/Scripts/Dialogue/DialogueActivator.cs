@@ -4,6 +4,7 @@ public class DialogueActivator : MonoBehaviour, IInteractable
 {
     [SerializeField] private DialogueObject dialogueObject;
     [SerializeField] private GameObject interactText;
+    [SerializeField] private DialogueObject nextDialogueObject;
 
     public void UpdateDialogueObject(DialogueObject dialogueObject)
     {
@@ -32,7 +33,7 @@ public class DialogueActivator : MonoBehaviour, IInteractable
     public void Interact(Player player)
     {
         interactText.SetActive(false);
-        
+
         foreach(DialogueResponseEvents responseEvents in GetComponents<DialogueResponseEvents>())
         {
             if (responseEvents.DialogueObject == dialogueObject)
@@ -43,5 +44,6 @@ public class DialogueActivator : MonoBehaviour, IInteractable
         }
 
         player.DialogueUI.ShowDialogue(dialogueObject);
+        dialogueObject = nextDialogueObject;
     }
 }

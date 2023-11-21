@@ -11,10 +11,10 @@ public class TypewriterEffect : MonoBehaviour
 
     private readonly List<Punctuation> punctuation = new List<Punctuation>()
     {
-        new Punctuation(new HashSet<char>() { '.', '!', '?' }, 0.5f ),
-        new Punctuation(new HashSet<char>() { ',' }, 0.25f ),
-        new Punctuation(new HashSet<char>() { ';' }, 0.1f ),
-        new Punctuation(new HashSet<char>() { ':' }, 0.1f )
+        new Punctuation(new HashSet<char>() { '.', '!', '?' }, 0.25f ),
+        new Punctuation(new HashSet<char>() { ',' }, 0.1f ),
+        new Punctuation(new HashSet<char>() { ';' }, 0.05f ),
+        new Punctuation(new HashSet<char>() { ':' }, 0.05f )
     };
 
     private Coroutine typingCoroutine;
