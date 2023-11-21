@@ -1849,6 +1849,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goblin_Spear
       objectReference: {fileID: 0}
+    - target: {fileID: 2247303921529472725, guid: 94635a57c00e46f4882d30c8577fd0f4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3088640089159149595, guid: 94635a57c00e46f4882d30c8577fd0f4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -55.8769
@@ -1895,7 +1899,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5833818076916759591, guid: 94635a57c00e46f4882d30c8577fd0f4, type: 3}
       propertyPath: chargingSpeedAccel
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2310,7 +2314,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4016569556082231340, guid: a5bf9f04a46d027459dd3e6d6f6aab04, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2481,7 +2485,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8887595387734633658, guid: c1a22721d77cf784da6a6eb1108d3b17, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3623,7 +3627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1302035326584231551, guid: 8cdd32dc538c0084fb36a32a4b2e3b27, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3778358093531413157, guid: 8cdd32dc538c0084fb36a32a4b2e3b27, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4067,7 +4071,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5826036036209435641, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4343,7 +4347,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 451341772300494436, guid: 6c80a3df91862d74a85dfee23d585e2e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1327259378173412275, guid: 6c80a3df91862d74a85dfee23d585e2e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4404,7 +4408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5354402700793687529, guid: 8d984118b7922b948a8eba24cef16818, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6565869519782235609, guid: 8d984118b7922b948a8eba24cef16818, type: 3}
       propertyPath: m_LocalPosition.x
