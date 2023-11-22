@@ -12,5 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30e5efdd41c623458a5b93db76db39a, type: 3}
   m_Name: Level 8-1
   m_EditorClassIdentifier: 
-  dialogue: []
-  responses: []
+  dialogue:
+  - Ah, Swordie!  I have news.
+  - "Do you remember my slight\u2026 disdain for the Mixenos?"
+  responses:
+  - responseText: Vaguely
+    dialogueObject: {fileID: 0}
+  - responseText: Clearly
+    dialogueObject: {fileID: 0}
