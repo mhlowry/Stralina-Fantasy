@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Level 5-3 (Option 2)
   m_EditorClassIdentifier: 
   dialogue:
-  - 'That''s a promising start! Remember, no pressure at all. '
-  - Just think about it, and hey, don't forget about our taco Tuesdays every other
-    week. They're a real treat!
+  - No worries, I respect your choice. Just so you know, you're always welcome to
+    change your mind.
+  - "And hey, if it sways you, we do have taco Tuesdays every other week \u2013 they're
+    quite popular!"
   - Run along now, May Berque be with you!
   responses: []

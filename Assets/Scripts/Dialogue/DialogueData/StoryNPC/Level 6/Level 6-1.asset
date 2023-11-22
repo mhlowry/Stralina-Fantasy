@@ -12,5 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30e5efdd41c623458a5b93db76db39a, type: 3}
   m_Name: Level 6-1
   m_EditorClassIdentifier: 
-  dialogue: []
-  responses: []
+  dialogue:
+  - "Good Morning, Mr. Mercenary, I trust you\u2019re well?  Ever since I hired you,
+    the contracts keep coming in!\r"
+  - "Clearly, we make a good team.\r"
+  responses:
+  - responseText: Definitely!
+    dialogueObject: {fileID: 11400000, guid: 882c9cb9b8f601d409dc4b2a04cfd07f, type: 2}
+  - responseText: Do we?
+    dialogueObject: {fileID: 11400000, guid: 5d0a61f8b069dd640b5aa5036da4c2d6, type: 2}

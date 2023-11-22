@@ -30,4 +30,4 @@ MonoBehaviour:
   - responseText: Maybe.
     dialogueObject: {fileID: 11400000, guid: 6b18d552cb1c0c342aa8f79a4838f63f, type: 2}
   - responseText: No thanks.
-    dialogueObject: {fileID: 0}
+    dialogueObject: {fileID: 11400000, guid: 9c2f7c2f94989984092f922560390346, type: 2}
