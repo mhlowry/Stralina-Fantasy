@@ -159,6 +159,10 @@ public class Player : MonoBehaviour, IDataPersistence
         this.playerLevel = data.playerLevel;
         this.curExp = data.curExp;
         // Update any UI or game elements that depend on these values
+        expBar.SetMaxResource(expToLevelUp[playerLevel - 1]);
+        expBar.SetResource(curExp);
+
+        levelText.text = playerLevel.ToString();
     }
 
     public void SaveData(ref GameData data)
@@ -342,11 +346,24 @@ public class Player : MonoBehaviour, IDataPersistence
     {
         curAbilityMeter = Mathf.Clamp(curAbilityMeter + meterGained, 0, maxAbilityMeter);
         meterBar.SetResource((int)curAbilityMeter);
+        ChangeMeterColor();
     }
     public void UseMeter(float meterUsed)
     {
         curAbilityMeter = Mathf.Clamp(curAbilityMeter - meterUsed, 0, maxAbilityMeter);
         meterBar.SetResource((int)curAbilityMeter);
+        ChangeMeterColor();
+    }
+
+    void ChangeMeterColor()
+    {
+        Color colorMeter;
+        if (curAbilityMeter >= 15)
+            colorMeter = Color.blue;
+        else
+            colorMeter = new Color(1.0f, 0.64f, 0.0f); //Orange
+
+        meterBar.SetColor(colorMeter);
     }
 
     void OnValidate()
