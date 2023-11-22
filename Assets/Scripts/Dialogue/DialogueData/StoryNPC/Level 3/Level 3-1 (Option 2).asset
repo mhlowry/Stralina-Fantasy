@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b30e5efdd41c623458a5b93db76db39a, type: 3}
+  m_Name: Level 3-1 (Option 2)
+  m_EditorClassIdentifier: 
+  dialogue:
+  - I mean, yeah, sort of!  Listen, your next mission involves protecting a very
+    valuable piece of equipment of theirs...
+  - '"The Stralina Traveling Eco Research Assistant."  Otherwise known as STERA.'
+  - "These clients are trying to learn more about the nature of Stralina\u2019s biolife
+    through this little machine."
+  - "They\u2019ve been very helpful in Great Tear reconstruction efforts over the
+    past few centuries.\r\n\r"
+  - 'Who knows?  If we work with these outsiders, we might see a whole Stralina again.  '
+  - "Though, we\u2019d also have to find the body of Ic, the land god, in order to
+    do that.\r\r"
+  - "Anyways, go on!  May Berque bless you.\r"
+  responses: []
