@@ -461,6 +461,30 @@ MonoBehaviour:
     pitch: 0.64
     loop: 0
     source: {fileID: 0}
+  - name: bowstring_1
+    clip: {fileID: 8300000, guid: 055a7362912366a4a92020a3e968a373, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: bowstring_2
+    clip: {fileID: 8300000, guid: 7ca88ba2c46046c40a53af945898bf7d, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: skelly_fall
+    clip: {fileID: 8300000, guid: 25d458ef1e9c7b743bd73be95740892a, type: 3}
+    volume: 1
+    pitch: 0.8
+    loop: 0
+    source: {fileID: 0}
+  - name: skelly_regen
+    clip: {fileID: 8300000, guid: ca80c93722d941c49b406ede70755649, type: 3}
+    volume: 1
+    pitch: 1.3
+    loop: 0
+    source: {fileID: 0}
   - name: Desert_Song
     clip: {fileID: 8300000, guid: 2d533dc1e301d9847b7b97bded49d04b, type: 3}
     volume: 0.7

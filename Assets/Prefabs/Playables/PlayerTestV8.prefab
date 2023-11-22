@@ -969,11 +969,11 @@ MonoBehaviour:
     impact: 8
     delay: 0.2
     damage: 6
-    knockBack: 10
+    knockBack: 8
     independentKnockback: 1
     hitBoxes:
     - center: {fileID: 775819154674499160}
-      size: 1.8
+      size: 2
     vfxObj: {fileID: 6876043889717374178}
   - attackName: Projectile_PLACEHOLDER
     animTrigger: spinSlashTrigger

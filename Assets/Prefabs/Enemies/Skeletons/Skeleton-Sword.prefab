@@ -294,7 +294,7 @@ MonoBehaviour:
   gfxObject: {fileID: 1668173548175293696}
   moveSpeed: 6
   aggroDistance: 18
-  attackDistance: 3
+  attackDistance: 2
   strafeDistance: 3.5
   attackPower: 2
   knockback: 1

@@ -54,6 +54,7 @@ public class SkeletonSword : SkeletonParent
             yield break;
         }
 
+        AudioManager.instance.PlayRandom(new string[] { "sword_1", "sword_2", "sword_3" });
         PlayAttackVFX(direction);
         SwordAttack();
 

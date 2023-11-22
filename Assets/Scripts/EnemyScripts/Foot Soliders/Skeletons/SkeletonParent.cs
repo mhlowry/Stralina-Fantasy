@@ -90,6 +90,7 @@ public class SkeletonParent : FootSoldier
         inCoreState = true;
         canAttack = false;
         animator.SetTrigger("enterCore");
+        AudioManager.instance.Play("skelly_fall");
         yield return new WaitForSeconds(timeCoreExposed);
 
         if (isDead)
@@ -99,6 +100,7 @@ public class SkeletonParent : FootSoldier
 
         animator.SetTrigger("enterRegen");
         isRegenerating = true;
+        AudioManager.instance.Play("skelly_regen");
         yield return new WaitForSeconds(timeToRegenerate);
 
         inCoreState = false;
