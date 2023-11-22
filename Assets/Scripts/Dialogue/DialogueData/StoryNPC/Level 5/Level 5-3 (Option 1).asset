@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b30e5efdd41c623458a5b93db76db39a, type: 3}
-  m_Name: Level 4-1 (Option 2)
+  m_Name: Level 5-3 (Option 1)
   m_EditorClassIdentifier: 
   dialogue:
-  - Ha, not a fan of the extraterrestrial idea, huh? No worries.
-  - Just concentrate on clearing the desert realm for now. Those archaeologists are
-    counting on us.
-  - May Berque protect you!
+  - 'That''s a promising start! Remember, no pressure at all. '
+  - Just think about it, and hey, don't forget about our taco Tuesdays every other
+    week. They're a real treat!
+  - Run along now, May Berque be with you!
   responses: []

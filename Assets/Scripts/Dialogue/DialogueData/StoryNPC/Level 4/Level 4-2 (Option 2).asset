@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b30e5efdd41c623458a5b93db76db39a, type: 3}
-  m_Name: Level 5-1
+  m_Name: Level 4-2 (Option 2)
   m_EditorClassIdentifier: 
   dialogue:
-  - "Journeyman!  You\u2019re making quite the name for yourself, aren\u2019t you?"
-  responses:
-  - responseText: '"Trying!"'
-    dialogueObject: {fileID: 11400000, guid: f8241fab2bfd5b24eb56a8371564aed4, type: 2}
-  - responseText: '"Am I?"'
-    dialogueObject: {fileID: 11400000, guid: 5d3c9c3953b2fa945b566a396fba9847, type: 2}
+  - Ha, not a fan of the extraterrestrial idea, huh? No worries.
+  - Just concentrate on clearing the desert realm for now. Those archaeologists are
+    counting on us.
+  - May Berque protect you!
+  responses: []
