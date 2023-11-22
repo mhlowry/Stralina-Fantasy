@@ -141,14 +141,102 @@ public class GameManager : MonoBehaviour
         return curExp;
     }
 
-    // This method will be called every time a scene is loaded
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "Base_Scene")
         {
             InitializeLevelPortals();
-            Debug.Log("Level portals loaded");
+            InitializeStorytellerDialogue();
+            Debug.Log("Base Scene setup complete");
         }
+    }
+
+    // This method will be called every time a scene is loaded
+    private void InitializeStorytellerDialogue()
+    {
+        GameObject storyteller = GameObject.Find("Storyteller");
+        if (storyteller != null)
+        {
+            DialogueActivator dialogueActivator = storyteller.GetComponent<DialogueActivator>();
+            if (dialogueActivator != null)
+            {
+                UpdateDialogue(dialogueActivator);
+            }
+            else
+            {
+                Debug.LogWarning("DialogueActivator component not found on Storyteller");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Storyteller object not found in the scene");
+        }
+    }
+
+    private void UpdateDialogue(DialogueActivator dialogueActivator)
+    {
+        int completedLevels = GetCompletedLevelsCount();
+
+        string currentDialogueName;
+        string nextDialogueName;
+
+        if (completedLevels > 0)
+        {
+            // Use first dialogue of the current level
+            currentDialogueName = $"Level {completedLevels}-1";
+            // Use default dialogue of the current level
+            nextDialogueName = $"Level {completedLevels}-default";
+        }
+        else
+        {
+            // If no levels have been completed, use Level 1 dialogues
+            currentDialogueName = "Level 1-default";
+            nextDialogueName = "Level 1-default";
+        }
+
+        DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
+        DialogueObject currentDialogue = dialogueManager.GetDialogueByName(currentDialogueName);
+        DialogueObject nextDialogue = dialogueManager.GetDialogueByName(nextDialogueName);
+
+
+        Debug.Log("Current Dialogue Name: " + currentDialogueName);
+        Debug.Log("Next Dialogue Name: " + nextDialogueName);
+
+        if (currentDialogue != null)
+        {
+            Debug.Log("Current Dialogue found: " + currentDialogue.name);
+        }
+        else
+        {
+            Debug.Log("Current Dialogue not found");
+        }
+
+        if (nextDialogue != null)
+        {
+            Debug.Log("Next Dialogue found: " + nextDialogue.name);
+        }
+        else
+        {
+            Debug.Log("Next Dialogue not found");
+        }
+
+        dialogueActivator.UpdateDialogueObject(currentDialogue);
+        dialogueActivator.SetNextDialogueObject(nextDialogue);
+    }
+
+
+    // Returns the count of completed levels
+    private int GetCompletedLevelsCount()
+    {
+        int count = 0;
+        foreach (bool levelCompleted in levelsCompleted)
+        {
+            if (levelCompleted)
+            {
+                count++;
+            }
+        }
+        return count;
     }
 
     private void OnDestroy()

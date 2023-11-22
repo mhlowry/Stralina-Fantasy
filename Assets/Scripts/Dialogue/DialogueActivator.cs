@@ -6,9 +6,14 @@ public class DialogueActivator : MonoBehaviour, IInteractable
     [SerializeField] private GameObject interactText;
     [SerializeField] private DialogueObject nextDialogueObject;
 
-    public void UpdateDialogueObject(DialogueObject dialogueObject)
+    public void UpdateDialogueObject(DialogueObject newDialogueObject)
     {
-        this.dialogueObject = dialogueObject;
+        dialogueObject = newDialogueObject;
+    }
+
+    public void SetNextDialogueObject(DialogueObject newNextDialogueObject)
+    {
+        nextDialogueObject = newNextDialogueObject;
     }
     
     private void OnTriggerEnter(Collider other) {
