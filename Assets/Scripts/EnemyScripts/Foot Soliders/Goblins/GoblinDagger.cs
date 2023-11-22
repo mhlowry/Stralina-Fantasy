@@ -55,6 +55,10 @@ public class GoblinDagger : FootSoldier
 
     private IEnumerator DaggerStrikes()
     {
+        var ran = Random.Range(0, 5);
+        if (ran == 1)
+            AudioManager.instance.PlayRandom(new string[] { "goblin_sound_1", "goblin_sound_2", "goblin_sound_3" });
+
         animator.SetTrigger("attackStart");
         yield return new WaitForSeconds(attackStartup);
 
@@ -156,6 +160,9 @@ public class GoblinDagger : FootSoldier
 
     private void ResetAttack()
     {
+        var ran = Random.Range(0, 5);
+        if (ran == 1)
+            AudioManager.instance.PlayRandom(new string[] { "goblin_sound_1", "goblin_sound_2", "goblin_sound_3" });
         //add some randomness to the next time he'll attack
         nextDamageTime = Time.time + damageInterval + Random.Range(damageIntRandomMin, damageIntRandomMax);
         canAttack = false;

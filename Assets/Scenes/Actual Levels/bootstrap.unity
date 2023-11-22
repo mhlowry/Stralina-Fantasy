@@ -485,6 +485,42 @@ MonoBehaviour:
     pitch: 1.3
     loop: 0
     source: {fileID: 0}
+  - name: goblin_sound_1
+    clip: {fileID: 8300000, guid: 9eca6a186755b324fb9c3a2389a5ba11, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: goblin_sound_2
+    clip: {fileID: 8300000, guid: 5d90d2372edf858419458a7fc2d79e72, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: goblin_sound_3
+    clip: {fileID: 8300000, guid: 45d7dfb98d4d6c143bdde9b365eb7b6d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: goblin_squeal_1
+    clip: {fileID: 8300000, guid: 880fe4549afaf904ba241e395b8f21bd, type: 3}
+    volume: 1
+    pitch: 2
+    loop: 0
+    source: {fileID: 0}
+  - name: goblin_squeal_2
+    clip: {fileID: 8300000, guid: 13b2e02db682b6c46a359f1b7ae245f8, type: 3}
+    volume: 1
+    pitch: 2
+    loop: 0
+    source: {fileID: 0}
+  - name: giggle
+    clip: {fileID: 8300000, guid: 5b96b9d5fb1427641a0e2a93c125e03f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   - name: Desert_Song
     clip: {fileID: 8300000, guid: 2d533dc1e301d9847b7b97bded49d04b, type: 3}
     volume: 0.7

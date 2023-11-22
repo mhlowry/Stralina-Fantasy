@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3059374228254867231}
   - component: {fileID: 6240640868374279445}
   - component: {fileID: 3488327980132840325}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: HobGoblin
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4056703453475963409}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3290410217347998854}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: AttackPoint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 3394984120180989951}
   - component: {fileID: 8491132359149872743}
   - component: {fileID: 4893806859172770253}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: HobGoblinGFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -398,6 +398,10 @@ PrefabInstance:
       value: vfx_VertSlash
       objectReference: {fileID: 0}
     - target: {fileID: 2367134246407041584, guid: ea17f78f57298b54d9ccbf125bfcfb1d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2367134246407041584, guid: ea17f78f57298b54d9ccbf125bfcfb1d, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -449,6 +453,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6031998749555285971, guid: ea17f78f57298b54d9ccbf125bfcfb1d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -477,8 +485,16 @@ PrefabInstance:
       value: vfx_Slash
       objectReference: {fileID: 0}
     - target: {fileID: 4064449633290094174, guid: 75d4244567da2ca4ca70ff58ffa193ed, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4064449633290094174, guid: 75d4244567da2ca4ca70ff58ffa193ed, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669295551856565793, guid: 75d4244567da2ca4ca70ff58ffa193ed, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6371866634520751030, guid: 75d4244567da2ca4ca70ff58ffa193ed, type: 3}
       propertyPath: m_Enabled

@@ -76,6 +76,8 @@ public class GoblinSpear : FootSoldier
 
     private IEnumerator ChargingStrike()
     {
+        AudioManager.instance.PlayRandom(new string[] { "goblin_squeal_1", "goblin_squeal_2"});
+
         isCharging = true;
         DisableAttackVFX();
 
@@ -143,6 +145,10 @@ public class GoblinSpear : FootSoldier
 
     private void StabAttack(int damage)
     {
+        var ran = Random.Range(0, 5);
+        if (ran == 1)
+            AudioManager.instance.PlayRandom(new string[] { "goblin_noise_1", "goblin_noise_2", "goblin_noise_3" });
+
         List<Collider[]> hitTarget = new List<Collider[]>();
 
         foreach (Transform hitBox in attackPoints)
