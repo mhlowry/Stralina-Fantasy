@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: Level 8-2 (Option 2)
   m_EditorClassIdentifier: 
   dialogue:
-  - I see, it's somewhat in your memory.
-  - 'Anyway, this might intrigue you: recent otherworld research indicates there''s
-    technically only one Mixenos. It''s quite a revelation, isn''t it?'
+  - 'Ah, you remember well. '
+  - ' This will interest you then: otherworld research has uncovered that there''s
+    actually, technically, just one Mixenos. Surprising, right?'
   - "They operate in a hive mind, and there\u2019s a source to their consciousness,
     down in another realm somewhere."
   - "I suspect that it\u2019s the original Mixenos, grown in power from each soul
     it\u2019s copied and drained.\r"
   - "I\u2019m going to work to find a point in time where you would be able to eliminate
     it!  I never actually expected to contract you for this..."
-  - but I see a real opportunity here. For now, I need you to take STERA out on another
+  - But I see a real opportunity here. For now, I need you to take STERA out on another
     research mission.
   - 'I know, I know, we had a contract from otherworld not too long ago.
 

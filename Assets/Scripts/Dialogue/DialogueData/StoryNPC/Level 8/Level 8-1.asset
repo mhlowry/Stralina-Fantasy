@@ -17,6 +17,6 @@ MonoBehaviour:
   - "Do you remember my slight\u2026 disdain for the Mixenos?"
   responses:
   - responseText: Vaguely
-    dialogueObject: {fileID: 0}
+    dialogueObject: {fileID: 11400000, guid: 2e819152fd91f2046a480dece2a5ef1a, type: 2}
   - responseText: Clearly
-    dialogueObject: {fileID: 0}
+    dialogueObject: {fileID: 11400000, guid: 1d90433dbb0299343a54f71327ee8f67, type: 2}
