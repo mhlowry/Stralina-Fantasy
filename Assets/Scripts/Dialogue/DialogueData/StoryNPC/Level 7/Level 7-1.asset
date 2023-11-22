@@ -12,5 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30e5efdd41c623458a5b93db76db39a, type: 3}
   m_Name: Level 7-1
   m_EditorClassIdentifier: 
-  dialogue: []
-  responses: []
+  dialogue:
+  - 'Hm?  My friend, you have questions written all over your face!  What seems to
+    be the problem?
+
+'
+  responses:
+  - responseText: Time travel?
+    dialogueObject: {fileID: 11400000, guid: c300d9cff1fa72943aaa9c3897dbdf33, type: 2}
+  - responseText: Great Tear?
+    dialogueObject: {fileID: 11400000, guid: f220899041667cd46af7c3a031848c0f, type: 2}
