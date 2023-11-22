@@ -12,5 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30e5efdd41c623458a5b93db76db39a, type: 3}
   m_Name: Level 10-1
   m_EditorClassIdentifier: 
-  dialogue: []
-  responses: []
+  dialogue:
+  - "Swordie!  You\u2019ve done fantastic work!!  Good riddance to the Mixenos, we
+    won\u2019t miss them."
+  responses:
+  - responseText: Thanks!
+    dialogueObject: {fileID: 11400000, guid: aa8b3ddd5afaa3643a3f94e80c08201e, type: 2}
+  - responseText: Finally!
+    dialogueObject: {fileID: 11400000, guid: 524350b909feed14493500eb271c4a05, type: 2}

@@ -3442,9 +3442,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae52a56472a461943b0007596e6cfec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueObject: {fileID: 11400000, guid: 972c50ee1725cfe44b6031fbc9be4060, type: 2}
+  dialogueObject: {fileID: 11400000, guid: 67715cd5506a7be4d8674dba37b9ac81, type: 2}
   interactText: {fileID: 1629475795}
-  nextDialogueObject: {fileID: 11400000, guid: c9f07cad5bfff704d8494286df975d52, type: 2}
+  nextDialogueObject: {fileID: 11400000, guid: 47508c4541d05184ab9b6494d414b06c, type: 2}
 --- !u!65 &1222464680
 BoxCollider:
   m_ObjectHideFlags: 0
