@@ -431,6 +431,36 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: rumble_impact
+    clip: {fileID: 8300000, guid: 931be79da32df03418d6f9e95ed98ed6, type: 3}
+    volume: 0.7
+    pitch: 0.8
+    loop: 0
+    source: {fileID: 0}
+  - name: hobgoblin_growl_1
+    clip: {fileID: 8300000, guid: 880fe4549afaf904ba241e395b8f21bd, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: hobgoblin_growl_2
+    clip: {fileID: 8300000, guid: 13b2e02db682b6c46a359f1b7ae245f8, type: 3}
+    volume: 0.7
+    pitch: 0.7
+    loop: 0
+    source: {fileID: 0}
+  - name: golem_bootup_1
+    clip: {fileID: 8300000, guid: d159c23e0ea227e4cb63e52702915391, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: golem_bootup_2
+    clip: {fileID: 8300000, guid: 9fc469cdf4292b74fbbac0f49a81234a, type: 3}
+    volume: 1
+    pitch: 0.64
+    loop: 0
+    source: {fileID: 0}
   - name: Desert_Song
     clip: {fileID: 8300000, guid: 2d533dc1e301d9847b7b97bded49d04b, type: 3}
     volume: 0.7
@@ -457,6 +487,12 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Overworld_Theme?
     clip: {fileID: 8300000, guid: f535b05e6a8764c4a936e4f9dce2bf29, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Enter_Mimexos!
+    clip: {fileID: 8300000, guid: 9fae13eb8238e9f46aec61281ca0a42c, type: 3}
     volume: 0.7
     pitch: 1
     loop: 1
