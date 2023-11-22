@@ -15,6 +15,7 @@ MonoBehaviour:
   dialogue:
   - 'Welcome back! Allow me to reintroduce you to the world of Stralina, and our
     humble little getaway for mercenaries like yourself. '
+  - "My name\u2019s Zonghazi, and I\u2019m the portal contractor in this little nook.."
   responses:
   - responseText: Portals...?
     dialogueObject: {fileID: 11400000, guid: 5593d919213c0bf4abc4028cd1a8848f, type: 2}

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b30e5efdd41c623458a5b93db76db39a, type: 3}
+  m_Name: Level 2-2 (Option 2)
+  m_EditorClassIdentifier: 
+  dialogue:
+  - The Great Tear! Some Millennium ago, in the age of Four Guardians...
+  - 'Stralina was actually a whole, complete world under the rule of one, powerful
+    guardian: King Cyren MacRutonk.'
+  - "He and the other three guardians were very efficient at keeping peace throughout
+    the world- until the death of Cyren\u2019s wife drove him mad.\r\n"
+  - 'To take revenge on the world that took her from him, he tore Stralina apart,
+    bit by bit- leaving us with the floating islands we know today.
+
+'
+  - "The other three guardians tried to stop him and keep the world together, but
+    in the end, it wasn\u2019t meant to be."
+  - 'Two guardians went into hiding, and Stralina lost the other two- one to death,
+    and the other to insanity.
+
+'
+  - "I think that\u2019s enough history lesson for now, why don\u2019t you take care
+    of our latest contract?  May Berque bless you.\r"
+  responses: []
