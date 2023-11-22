@@ -12,5 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30e5efdd41c623458a5b93db76db39a, type: 3}
   m_Name: Level 4-1
   m_EditorClassIdentifier: 
-  dialogue: []
-  responses: []
+  dialogue:
+  - "Good afternoon, adventurer.  I sent STERA back to the otherworld, thank you
+    for your contributions, as always.\r"
+  - "I saw that you encountered some Mixenos in the STERA data!  They\u2026 freak
+    me out, a little.\r"
+  - "When the Great Tear happened, a lot of organizations cropped up to try and seize
+    power.\r\n\r"
+  - "One of these organizations was known as \u201CThe Eight Legs,\u201D who tried
+    to take up the mantle of the Four Guardians in a sick, twisted sort of way.\r\n"
+  - "Some followers of Berque, the Church of Heaven\u2019s Embrace, ended up driving
+    the Eight Legs out of Stralina."
+  - 'Unfortunately, not before the first Mixenos was created...  '
+  - 'A soulless creature designed to manufacture counterfeits.  All in the name of
+    profit, power, and control.
+
+'
+  - "It\u2019s unnatural, and their presence is only growing\u2026"
+  - "Hah!  Maybe one day I\u2019ll contract you to exterminate them!  Wouldn\u2019t
+    that be something?\r\n"
+  responses:
+  - responseText: Absolutely!
+    dialogueObject: {fileID: 11400000, guid: 0b38e2179061d7d48ba1b5745f3943b0, type: 2}
+  - responseText: No way!
+    dialogueObject: {fileID: 11400000, guid: 201c4500c172f224a9acc5e1037344b5, type: 2}
