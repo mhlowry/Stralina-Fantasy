@@ -17,6 +17,6 @@ MonoBehaviour:
     ya?"
   responses:
   - responseText: Nope
-    dialogueObject: {fileID: 0}
+    dialogueObject: {fileID: 11400000, guid: ff1c1170b6e8f48438f4aa3c0cd1eac1, type: 2}
   - responseText: I've visited...
-    dialogueObject: {fileID: 0}
+    dialogueObject: {fileID: 11400000, guid: 7f8edd9a1fdcb224dabb29a456ba6a0f, type: 2}

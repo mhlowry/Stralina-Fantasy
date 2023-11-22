@@ -12,5 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30e5efdd41c623458a5b93db76db39a, type: 3}
   m_Name: Level 1-2 (Option 1)
   m_EditorClassIdentifier: 
-  dialogue: []
-  responses: []
+  dialogue:
+  - 'Allow me to be the first to introduce you to the world of Stralina, and our
+    humble little getaway for mercenaries like yourself. '
+  - "My name\u2019s Zonghazi, and I\u2019m the portal contractor in this little nook.."
+  responses:
+  - responseText: Portals...?
+    dialogueObject: {fileID: 11400000, guid: 5593d919213c0bf4abc4028cd1a8848f, type: 2}
+  - responseText: Are you ok?
+    dialogueObject: {fileID: 11400000, guid: 70a95b554a25f4149a86145b27466de6, type: 2}

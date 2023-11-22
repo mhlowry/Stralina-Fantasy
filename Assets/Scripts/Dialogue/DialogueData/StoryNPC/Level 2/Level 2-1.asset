@@ -10,12 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b30e5efdd41c623458a5b93db76db39a, type: 3}
-  m_Name: Level 1-4 (Option 2)
+  m_Name: Level 2-1
   m_EditorClassIdentifier: 
-  dialogue:
-  - "Don't sound too excited. If you need to hone your skills at all, this portal
-    on the left will take you to a training zone we\u2019ve set up."
-  - 'We also have a shoppe right over there if you need to take a moment to equip
-    yourself up. '
-  - May the sky god, Berque, keep you safe!
+  dialogue: []
   responses: []
