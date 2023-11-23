@@ -1116,9 +1116,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4790412003101550787, guid: e0a84bf623166be43b725bb80123f019, type: 3}
+      propertyPath: m_FirstSelected
+      value: 
+      objectReference: {fileID: 845613470}
     - target: {fileID: 6030284215744069770, guid: e0a84bf623166be43b725bb80123f019, type: 3}
       propertyPath: m_Name
       value: EventSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500291060248177068, guid: e0a84bf623166be43b725bb80123f019, type: 3}
+      propertyPath: m_DeselectOnBackgroundClick
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

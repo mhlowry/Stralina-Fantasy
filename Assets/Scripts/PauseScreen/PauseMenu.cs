@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public PlayerInput playerInput;
     public DataPersistenceManager dataPersistenceManager;
 
     public static bool isPaused;
@@ -32,9 +34,25 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    public void CallTogglePause(InputAction.CallbackContext context)
+    {
+        if (!context.started) // || !anim.GetBool("comboOver")
+            return;
+
+        if (isPaused)
+        {
+            ResumeGame();
+        }
+        else
+        {
+            PauseGame();
+        }
+    }
+
     public void PauseGame()
     {
         pauseMenu.SetActive(true);
+        playerInput.SwitchCurrentActionMap("UI");
         Time.timeScale = 0f;
         isPaused = true;
     }
@@ -42,6 +60,7 @@ public class PauseMenu : MonoBehaviour
     public void ResumeGame()
     {
         pauseMenu.SetActive(false);
+        playerInput.SwitchCurrentActionMap("Gameplay");
         Time.timeScale = 1f;
         isPaused = false;
     }
