@@ -1108,6 +1108,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 198682034}
+  - component: {fileID: 198682035}
   m_Layer: 5
   m_Name: GameOverMenu
   m_TagString: Untagged
@@ -1138,6 +1139,19 @@ RectTransform:
   m_AnchoredPosition: {x: 18.3909, y: -20.498436}
   m_SizeDelta: {x: 739.51697, y: 401.30176}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &198682035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198682033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c92e2e786e2f3d45b1a94662f7a9c90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectButton: {fileID: 1937015435}
 --- !u!1 &221937305
 GameObject:
   m_ObjectHideFlags: 0
@@ -2423,6 +2437,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 921705192}
   m_CullTransparentMesh: 1
+--- !u!1 &937554143 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8387073184824682016, guid: f5695aa0cb8d51a48bd6eae26b5f4957, type: 3}
+  m_PrefabInstance: {fileID: 19896754}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &941122885
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3760,8 +3779,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOver: {fileID: 198682033}
+  playerInput: {fileID: 1814758935}
   gameOverText: {fileID: 0}
-  DJ: {fileID: 0}
+  DJ: {fileID: 937554143}
 --- !u!114 &1303046278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4255,6 +4275,154 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionId
+      value: ac64b6d2-3e74-4394-a84d-98557942a0ba
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionId
+      value: 8dd769a7-71a1-43f1-94fc-ecbafb97636f
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionId
+      value: 85d183b6-e728-452e-9ea7-5e374335ed76
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_ActionId
+      value: f39862a3-c6d5-4ab3-9a0d-45a8a329d781
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_ActionId
+      value: b04bbbed-4033-486d-acd9-33aac7574c53
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_ActionId
+      value: f5588c30-083c-4d72-92b7-d69ec02f36d5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_ActionId
+      value: 011661d8-a855-406f-b49a-96e24b2556a2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_ActionId
+      value: c79361f2-fb15-46d3-aa9a-ee0b98f352c1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_ActionId
+      value: 50be9811-1652-4ea3-b0c0-7520da7c9808
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_ActionId
+      value: d0cc7f86-f0f2-4be6-88ab-b05cf25a7adf
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_ActionId
+      value: 733daa6a-2259-463d-b8db-d3b66e2a561d
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionName
+      value: Gameplay/Pause[/XInputControllerWindows/start,/SwitchProControllerHID/start]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionName
+      value: UI/Navigate[/XInputControllerWindows/leftStick/up,/SwitchProControllerHID/leftStick/up,/XInputControllerWindows/rightStick/up,/SwitchProControllerHID/rightStick/up,/XInputControllerWindows/leftStick/down,/SwitchProControllerHID/leftStick/down,/XInputControllerWindows/rightStick/down,/SwitchProControllerHID/rightStick/down,/XInputControllerWindows/leftStick/left,/SwitchProControllerHID/leftStick/left,/XInputControllerWindows/rightStick/left,/SwitchProControllerHID/rightStick/left,/XInputControllerWindows/leftStick/right,/SwitchProControllerHID/leftStick/right,/XInputControllerWindows/rightStick/right,/SwitchProControllerHID/rightStick/right,/XInputControllerWindows/dpad,/SwitchProControllerHID/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionName
+      value: UI/Submit[/Keyboard/enter,/XInputControllerWindows/buttonSouth,/XInputControllerWindows/buttonWest,/SwitchProControllerHID/buttonWest]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_ActionName
+      value: UI/Cancel[/Keyboard/escape,/XInputControllerWindows/buttonEast,/XInputControllerWindows/start,/SwitchProControllerHID/start]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_ActionName
+      value: UI/Point[/Mouse/position]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_ActionName
+      value: UI/Click[/Mouse/leftButton]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_ActionName
+      value: UI/ScrollWheel[/Mouse/scroll]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_ActionName
+      value: UI/MiddleClick[/Mouse/middleButton]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_ActionName
+      value: UI/RightClick[/Mouse/rightButton]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_ActionName
+      value: UI/TrackedDevicePosition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_ActionName
+      value: UI/TrackedDeviceOrientation
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1303046278}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1303046278}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CallTogglePause
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CallTogglePause
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4003244297286439754, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.1451926
@@ -4467,7 +4635,7 @@ MonoBehaviour:
     m_NormalColor: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 1, g: 0.23018867, b: 0.23018867, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -5104,7 +5272,7 @@ MonoBehaviour:
     m_NormalColor: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 1, g: 0.23018867, b: 0.23018867, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
