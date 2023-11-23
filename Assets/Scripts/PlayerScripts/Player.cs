@@ -127,6 +127,23 @@ public class Player : MonoBehaviour, IDataPersistence
         }
     }
 
+    public void CallTogglePause(InputAction.CallbackContext context)
+    {
+        if (!context.started || isStunned || curHealth <= 0) // || !anim.GetBool("comboOver")
+            return;
+
+        Debug.Log("called pause");
+
+        if (PauseMenu.isPaused)
+        {
+            PauseMenu.instance.ResumeGame();
+        }
+        else
+        {
+            PauseMenu.instance.PauseGame();
+        }
+    }
+
     protected virtual void Update()
     {
         //either un-stun the player or 
@@ -272,6 +289,11 @@ public class Player : MonoBehaviour, IDataPersistence
         if (gameOverMenu != null)
         {
             gameOverMenu.SetGameOverText("YOU DIED");
+        }
+
+        if (PauseMenu.isPaused)
+        {
+            PauseMenu.instance.ResumeGame();
         }
 
         AudioManager.instance.Play("player_death");
