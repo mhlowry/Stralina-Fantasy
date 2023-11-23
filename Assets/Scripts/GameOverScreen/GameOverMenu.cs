@@ -10,13 +10,14 @@ public class GameOverMenu : MonoBehaviour
     public GameObject gameOver;
     private float timeOfDeath;
     public static bool justDied = false;
-    public PlayerInput playerInput;
+    PlayerInput playerInput;
     [SerializeField] private TMPro.TextMeshProUGUI gameOverText; // set this in inspector pls
 
-    [SerializeField] GameObject DJ;
+    GameObject DJ;
 
     private void Awake()
     {
+        playerInput = GameObject.Find("PlayerInput").GetComponent<PlayerInput>();
         DJ = GameObject.Find("DJObject");
         justDied = false;
     }

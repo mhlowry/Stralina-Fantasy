@@ -2038,6 +2038,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 1984498302}
+  playerInput: {fileID: 1664995116}
   dataPersistenceManager: {fileID: 0}
 --- !u!4 &913688451
 Transform:
@@ -4172,6 +4173,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1658363383}
   m_CullTransparentMesh: 1
+--- !u!114 &1664995116 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1891773596620856399, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+  m_PrefabInstance: {fileID: 796446072}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1670267824
 GameObject:
   m_ObjectHideFlags: 0

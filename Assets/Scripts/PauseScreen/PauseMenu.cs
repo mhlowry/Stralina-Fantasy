@@ -7,30 +7,27 @@ using UnityEngine.InputSystem;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
-    public PlayerInput playerInput;
+    PlayerInput playerInput;
     public DataPersistenceManager dataPersistenceManager;
+
+    public static PauseMenu instance;
 
     public static bool isPaused;
 
     // Start is called before the first frame update
     void Start()
     {
-        pauseMenu.SetActive(false);
-    }
-
-    public void CallTogglePause(InputAction.CallbackContext context)
-    {
-        if (!context.started) // || !anim.GetBool("comboOver")
-            return;
-
-        if (isPaused)
-        {
-            ResumeGame();
-        }
+        if (instance == null)
+            instance = this;
         else
         {
-            PauseGame();
+            Destroy(gameObject);
+            return;
         }
+
+        playerInput = GameObject.Find("PlayerInput").GetComponent<PlayerInput>();
+
+        pauseMenu.SetActive(false);
     }
 
     public void PauseGame()
