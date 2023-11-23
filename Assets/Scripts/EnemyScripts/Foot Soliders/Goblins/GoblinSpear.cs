@@ -147,7 +147,7 @@ public class GoblinSpear : FootSoldier
     {
         var ran = Random.Range(0, 5);
         if (ran == 1)
-            AudioManager.instance.PlayRandom(new string[] { "goblin_noise_1", "goblin_noise_2", "goblin_noise_3" });
+            AudioManager.instance.PlayRandom(new string[] { "goblin_sound_1", "goblin_sound_2", "goblin_sound_3" });
 
         List<Collider[]> hitTarget = new List<Collider[]>();
 
