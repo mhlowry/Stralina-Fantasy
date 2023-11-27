@@ -758,6 +758,25 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 2432
+  reflectProjectile:
+    attackName: ReflectProjectile
+    animTrigger: blockHit
+    audioName: swoosh_2
+    duration: 0
+    impact: 0
+    delay: 0
+    damage: 2
+    knockBack: 7
+    independentKnockback: 0
+    hitBoxes:
+    - center: {fileID: 775819154674499160}
+      size: 0
+    vfxObj: {fileID: 9198684913911007348}
+    speed: 20
+    projectileDuration: 0.3
+    comboIndex: -1
+    projectilePrefab: {fileID: 1086736248379580968, guid: 63906884ca26e0541a10e7fb026f0e92, type: 3}
+    isHeavy: 1
   superAttack:
     attackName: SuperAttack
     animTrigger: ultTrigger

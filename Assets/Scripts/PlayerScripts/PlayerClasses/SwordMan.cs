@@ -15,6 +15,7 @@ public class SwordMan : Player
 
     [SerializeField] private LayerMask enemyLayers;
 
+    [SerializeField] ProjectileAttack reflectProjectile;
     [SerializeField] ProjectileAttack superAttack;
 
     protected override void Update()
@@ -50,6 +51,10 @@ public class SwordMan : Player
             animGFX.SetTrigger("blockHit");
             //Play blocking sounds
             AudioManager.instance.PlayAll(new string[] { "block_thud_2", "block_thud_4" });
+
+            //reflect projectile
+            StartCoroutine(reflectProjectile.ActivateAttack(this, damage, 0f, enemyLayers, new UnityEngine.Vector3(enemyPosition.x - transform.position.x, 0.0f, enemyPosition.z - transform.position.z)));
+
             //drain the meter
             UseMeter(15f);
         }
