@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfdf017e23a002045aaee980ece69fc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rarity: 10
+  rarity: 12
   healAmount: 2
 --- !u!65 &5867858255712640179
 BoxCollider:

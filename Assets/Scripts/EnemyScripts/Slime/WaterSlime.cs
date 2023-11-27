@@ -141,7 +141,7 @@ public class WaterSlime : Slime
 
         Collider[] hitTarget = Physics.OverlapSphere(explosionPoint.position, explosionSize, targetLayer);
         foreach (Collider collider in hitTarget)
-            base.DealDamage(attackPower, knockback, collider.gameObject);
+            collider.GetComponent<Player>().TakeDamage(explosionDamage, explosionKnockback, transform.position);
     }
 
     private void OnDrawGizmosSelected()

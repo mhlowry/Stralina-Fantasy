@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -113,6 +114,9 @@ public class FootSoldier : Enemy
             combinedDirection -= new Vector3(targetDirection.x, 0, targetDirection.z).normalized;
         }
 
+        // Normalize the combined direction vector
+        combinedDirection = combinedDirection.normalized;
+
         if (distanceFromTarget < curStrafe && !canAttack)
         {
             // Reverse the direction when too close
@@ -132,9 +136,6 @@ public class FootSoldier : Enemy
                 combinedDirection += addHorizDirection;
             }
         }
-
-        // Normalize the combined direction vector
-        combinedDirection = combinedDirection.normalized;
 
         // Apply the combined direction to the velocity
         rb.velocity = new Vector3(combinedDirection.x * moveSpeed, rb.velocity.y, combinedDirection.z * moveSpeed);

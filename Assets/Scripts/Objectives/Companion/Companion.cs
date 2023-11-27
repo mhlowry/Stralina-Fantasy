@@ -19,8 +19,6 @@ public class Companion : MonoBehaviour
     [SerializeField] private bool disableMovement = false;
     
     float timeofHit;
-    float hitInvulTime = 1.2f;
-    bool isInvul = false;
     float defenseScale = 1f;
 
     // For the blinking effect when taking damage
@@ -36,7 +34,6 @@ public class Companion : MonoBehaviour
     protected Companion companionScript;
     private GameOverMenu gameOverMenu;
 
-    [SerializeField] private SpriteRenderer spriteRendererGFX;
 
     private void Awake()
     {
@@ -65,11 +62,6 @@ public class Companion : MonoBehaviour
     {
         CheckTeleport();
         MoveWithPlayer();
-
-        if (Time.time - timeofHit > hitInvulTime)
-        {
-            isInvul = false;
-        }
     }
     
     public virtual void TakeDamage(int damage, float knockBack, Vector3 enemyPosition)
@@ -79,7 +71,6 @@ public class Companion : MonoBehaviour
         curHealth -= (int)(damage * (2 - defenseScale));
 
         //begin the blinking effect
-        isInvul = true;
         StartCoroutine(BlinkEffect());
 
         //update health bar
@@ -89,7 +80,7 @@ public class Companion : MonoBehaviour
             Die();
     }
 
-/*    // When sprite is made for companion, either delete or change to sprite renderer
+    // When sprite is made for companion, either delete or change to sprite renderer
     IEnumerator BlinkEffect()
     {
         if (meshRenderer == null)
@@ -105,24 +96,7 @@ public class Companion : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         meshRenderer.enabled = true; // Ensure the mesh is enabled after blinking
-    }*/
-
-    IEnumerator BlinkEffect()
-    {
-        while (isInvul)
-        {
-            //do not set to false if timescale is zero
-            if (Time.timeScale > 0)
-                spriteRendererGFX.enabled = false;
-
-            yield return new WaitForSeconds(0.1f);
-
-            spriteRendererGFX.enabled = true;
-
-            yield return new WaitForSeconds(0.1f);
-        }
     }
-
     private void Die()
     {
       // Temporary: companion just becomes invisible

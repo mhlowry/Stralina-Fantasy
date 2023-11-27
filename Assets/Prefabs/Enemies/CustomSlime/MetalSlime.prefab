@@ -101,11 +101,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b41133560f7143c48976e07627c643a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 15
+  maxHealthPoints: 25
   expWorth: 50
   knockbackMultiplier: 0.8
-  itemDrops:
-  - {fileID: 7163418064556403771, guid: 52078488a7ed07545bb73ea856c7ef21, type: 3}
+  itemDrops: []
   gfxObject: {fileID: 7148622369018489881}
   moveSpeed: 5
   damageSpeed: 0

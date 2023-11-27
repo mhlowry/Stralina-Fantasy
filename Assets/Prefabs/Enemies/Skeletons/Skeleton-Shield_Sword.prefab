@@ -60,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 451341772300494436}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -56.826675, y: -22.09, z: 15.3564415}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -184,19 +184,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62f608e2bb3e6e246b8fefbe4a6f0a42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 12
+  maxHealthPoints: 9
   expWorth: 0
-  knockbackMultiplier: 1.2
-  itemDrops:
-  - {fileID: 7163418064556403771, guid: 52078488a7ed07545bb73ea856c7ef21, type: 3}
+  knockbackMultiplier: 1.5
+  itemDrops: []
   gfxObject: {fileID: 8308422541966344583}
   moveSpeed: 4
   aggroDistance: 20
-  attackDistance: 2
+  attackDistance: 3
   strafeDistance: 2.5
   attackPower: 2
   knockback: 1
-  attackStartup: 0.1
+  attackStartup: 0.3
   boidAwarenessRadius: 2
   enemyLayer:
     serializedVersion: 2
@@ -209,7 +208,7 @@ MonoBehaviour:
   strafeRandomMax: 0
   timeCoreExposed: 5
   timeToRegenerate: 0.35
-  maxCoreHealth: 35
+  maxCoreHealth: 50
   attackPoint: {fileID: 8746929826652745877}
   attackSize: 1.2
   attackImpact: 0
@@ -217,7 +216,6 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 4160
-  attackdelay: 0.6
   maxShieldHP: 30
   curShieldHP: 0
   regularController: {fileID: 9100000, guid: 7163ff10ddc214242987072e6e0cf282, type: 2}

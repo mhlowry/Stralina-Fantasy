@@ -78,7 +78,6 @@ public class SkeletonBow : SkeletonParent
             yield break;
         }
 
-        AudioManager.instance.Play("swoosh_2");
         PlayAttackVFX(direction);
         BurstAttack();
 
@@ -97,9 +96,6 @@ public class SkeletonBow : SkeletonParent
             hitMidAttack = false;
             yield break;
         }
-
-        AudioManager.instance.Play("swoosh_2");
-        AudioManager.instance.PlayRandom(new string[] { "bowstring_1", "bowstring_1" });
 
         // Create a new instance of the projectile using Instantiate
         GameObject newProjectile = Instantiate(projectilePrefab, attackPoint.position, Quaternion.LookRotation(direction));

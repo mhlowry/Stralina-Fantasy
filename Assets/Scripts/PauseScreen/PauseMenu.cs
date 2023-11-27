@@ -2,38 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;
 
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
-    PlayerInput playerInput;
     public DataPersistenceManager dataPersistenceManager;
-
-    public static PauseMenu instance;
 
     public static bool isPaused;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (instance == null)
-            instance = this;
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        playerInput = GameObject.Find("PlayerInput").GetComponent<PlayerInput>();
-
         pauseMenu.SetActive(false);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(isPaused)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                PauseGame();
+            }
+        }
     }
 
     public void PauseGame()
     {
         pauseMenu.SetActive(true);
-        playerInput.SwitchCurrentActionMap("UI");
         Time.timeScale = 0f;
         isPaused = true;
     }
@@ -41,7 +42,6 @@ public class PauseMenu : MonoBehaviour
     public void ResumeGame()
     {
         pauseMenu.SetActive(false);
-        playerInput.SwitchCurrentActionMap("Gameplay");
         Time.timeScale = 1f;
         isPaused = false;
     }
