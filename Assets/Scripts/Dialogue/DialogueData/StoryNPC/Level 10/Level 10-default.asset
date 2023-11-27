@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b30e5efdd41c623458a5b93db76db39a, type: 3}
+  m_Name: Level 10-default
+  m_EditorClassIdentifier: 
+  dialogue:
+  - "You know, King Cyren was never confirmed dead.\r"
+  - "Part of me fears that, if Stralina ever were stitched back together, history
+    would simply repeat itself, and the world would fall apart again.\r\r"
+  - Cyren and Rylo were powerful enough to contend with Berque and Ic themselves. 
+    They might have even been stronger.
+  - He was actually a very benevolent king before the loss of his wife.  He lost
+    her to a hereditary illness to which there was no cure.
+  - Not even the blessings of Ic could save her.
+  - "Still, it\u2019s always been strange to me how much the event changed him. 
+    All of Stralina was taken aback."
+  - "No use crying over spilt milk and all, but I can\u2019t help but wonder if it
+    was entirely his own fault he lost his mind."
+  responses: []

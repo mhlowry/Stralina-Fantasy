@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b30e5efdd41c623458a5b93db76db39a, type: 3}
+  m_Name: Level 9-2 (Option 1)
+  m_EditorClassIdentifier: 
+  dialogue:
+  - Your enthusiasm is perfect! And guess what? I've located the original Mixenos.
+  - Just imagine, completing this contract could elevate your status in Stralina
+    from a 'reliable swordsman' to a legendary figure with a prestigious title!
+  - "Something like, ah, the Calamity Slayer!  Or the Mixenos Hater!  Or\u2026 something
+    along those lines.\r\n"
+  - "But above all that, you\u2019ll be doing myself, and Stralina, a favor."
+  - Your last STERA expedition brought some interesting results from otherworld,
+    and it has to do with the god, Ic.
+  - Ic is known to have a connection with the souls of our world, and the artificial
+    souls manufactured by Mixenos are something of a cancer for them.
+  - 'By attacking the disease at its core, it might make it easier for Ic to recover
+    from the Great Tear.
+
+'
+  - "I\u2019ve opened a gate that will take you to the safest period of time I could
+    find to eliminate the threat.\r\n"
+  - "May the gods protect you, my friend!  I\u2019ll see you soon.\r\n"
+  responses: []

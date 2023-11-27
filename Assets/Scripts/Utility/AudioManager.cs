@@ -36,17 +36,8 @@ public class AudioManager : MonoBehaviour
     {
         Sound[]soundSelection = new Sound[names.Length];
         int index = 0;
-        foreach (string name in names)
-        {
-            Sound s = Array.Find(sounds, sound => sound.name == name);
-
-            if (s == null)
-            {
-                Debug.LogWarning("Sound: " + name + " not found!");
-                return;
-            }
-            soundSelection[index++] = s;
-        }
+        foreach(string name in names)
+            soundSelection[index++] = Array.Find(sounds, sound => sound.name == name);
 
         soundSelection[UnityEngine.Random.Range(0, soundSelection.Length)].source.Play();
     }

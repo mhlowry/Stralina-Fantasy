@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;
 using TMPro;
 
 public class GameOverMenu : MonoBehaviour
@@ -10,16 +9,13 @@ public class GameOverMenu : MonoBehaviour
     public GameObject gameOver;
     private float timeOfDeath;
     public static bool justDied = false;
-    PlayerInput playerInput;
     [SerializeField] private TMPro.TextMeshProUGUI gameOverText; // set this in inspector pls
 
-    GameObject DJ;
+    [SerializeField] GameObject DJ;
 
     private void Awake()
     {
-        playerInput = GameObject.Find("PlayerInput").GetComponent<PlayerInput>();
         DJ = GameObject.Find("DJObject");
-        justDied = false;
     }
 
     void Update()
@@ -51,7 +47,6 @@ public class GameOverMenu : MonoBehaviour
     {
         gameOver.SetActive(true);
         Destroy(DJ);
-        playerInput.SwitchCurrentActionMap("UI");
         timeOfDeath = Time.unscaledTime;
         justDied = true;
     }
@@ -59,7 +54,6 @@ public class GameOverMenu : MonoBehaviour
     public void ResetLevel()
     {
         Time.timeScale = 1f;
-        playerInput.SwitchCurrentActionMap("Gameplay");
         UnsubscribeEvents();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

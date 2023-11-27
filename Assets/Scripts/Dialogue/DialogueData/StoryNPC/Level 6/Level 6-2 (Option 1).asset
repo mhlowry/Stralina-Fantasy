@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b30e5efdd41c623458a5b93db76db39a, type: 3}
+  m_Name: Level 6-2 (Option 1)
+  m_EditorClassIdentifier: 
+  dialogue:
+  - Your enthusiasm is great! And about payment, remember, the real reward is the
+    satisfaction of a job well done. Keep up the good work!
+  - 'Anyways, do you know how these gates work?  It might not actually be what you
+    think.  These gates use a form of time magik.
+
+'
+  - "The same guardian who founded the Church of Heaven\u2019s Embrace put a system
+    together where these gates use space-time to transport you.\r"
+  - "Going through a portal will, in an instant, travel you back to a time where
+    Stralina was not only whole...\r"
+  - "but rotated in such a way that you would be standing at your destination, instead
+    of your current position!\r\r"
+  - "These gates, in particular, send you back in time so that problems get solved
+    before they\u2019re even problems.\r\r\r"
+  - "Hence why going through these gates a second time will seem as though a given
+    contract never closed.\r\n\r\r\r"
+  - "I know that seems complicated, but trust me, it\u2019s very efficient.\r"
+  - "Speaking of, I have another STERA contract for you to close.  May Berque give
+    you his blessings!\r\r"
+  responses: []

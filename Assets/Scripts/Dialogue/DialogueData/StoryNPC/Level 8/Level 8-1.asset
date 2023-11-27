@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b30e5efdd41c623458a5b93db76db39a, type: 3}
+  m_Name: Level 8-1
+  m_EditorClassIdentifier: 
+  dialogue:
+  - Ah, Swordie!  I have news.
+  - "Do you remember my slight\u2026 disdain for the Mixenos?"
+  responses:
+  - responseText: Vaguely
+    dialogueObject: {fileID: 11400000, guid: 2e819152fd91f2046a480dece2a5ef1a, type: 2}
+  - responseText: Clearly
+    dialogueObject: {fileID: 11400000, guid: 1d90433dbb0299343a54f71327ee8f67, type: 2}

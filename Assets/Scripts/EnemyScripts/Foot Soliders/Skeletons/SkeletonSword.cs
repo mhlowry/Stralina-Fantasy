@@ -9,7 +9,6 @@ public class SkeletonSword : SkeletonParent
     [SerializeField] float attackImpact;
     [SerializeField] GameObject vfxObj;
     [SerializeField] LayerMask targetLayer;
-    [SerializeField] float attackdelay;
 
     // Update is called once per frame
     protected override void Update()
@@ -42,9 +41,6 @@ public class SkeletonSword : SkeletonParent
         DisableAttackVFX();
 
         animator.SetTrigger("attackStart");
-        yield return new WaitForSeconds(attackdelay);
-
-        animator.SetTrigger("slashAttack");
         yield return new WaitForSeconds(attackStartup);
 
         if (hitMidAttack || isDead)
@@ -54,7 +50,6 @@ public class SkeletonSword : SkeletonParent
             yield break;
         }
 
-        AudioManager.instance.PlayRandom(new string[] { "sword_1", "sword_2", "sword_3" });
         PlayAttackVFX(direction);
         SwordAttack();
 
@@ -86,9 +81,6 @@ public class SkeletonSword : SkeletonParent
 
     private void ResetAttack()
     {
-        animator.ResetTrigger("slashAttack");
-        animator.ResetTrigger("attackStart");
-
         //add some randomness to the next time he'll attack
         nextDamageTime = Time.time + damageInterval + Random.Range(damageIntRandomMin, damageIntRandomMax);
         canAttack = false;

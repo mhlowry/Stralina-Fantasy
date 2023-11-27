@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b30e5efdd41c623458a5b93db76db39a, type: 3}
+  m_Name: Level 7-1 (Option 2)
+  m_EditorClassIdentifier: 
+  dialogue:
+  - 'Ah, you''re pondering about the Great Tear. It''s a significant event in our
+    history. '
+  - You might think time travel could prevent it, but meddling with time can have
+    unforeseen consequences. It's a risky venture.
+  - "Well, I\u2019m sure the Guardians certainly tried.  But frankly, if they weren\u2019t
+    strong enough to defeat Cyren before, I doubt they\u2019re strong enough now.\r"
+  - "For instance, Cyren\u2019s right hand man, the guardian Rylo Mawcei, was arguably
+    stronger than the king himself.\r"
+  - "Unfortunately, it\u2019s much easier to break an egg than keep it together. 
+    Rylo himself was torn apart in a desperate attempt to keep Stralina whole.\r"
+  - "There was no convincing him to let go\u2026"
+  - "Point being,I don\u2019t think that it would help much at all to dwell on events
+    that happened thousands of years ago.\r\n"
+  - "We grow and adapt as time moves on, and I think the people of Stralina have
+    done a good job making omelets.\r"
+  - "Anyways, you know the drill. May Berque keep you safe!\r"
+  responses: []

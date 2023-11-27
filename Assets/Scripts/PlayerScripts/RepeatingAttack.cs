@@ -41,9 +41,8 @@ public class RepeatingAttack : PlayerAttack
         //Do the takeDamage scan multiple times
         for (int i = 0; i < numStrikes; ++i)
         {
-            if(player.IsStunned() || player.gameObject.GetComponent<PlayerMovement>().IsRolling)
+            if(player.IsStunned())
             {
-                DisableAttackVFX();
                 yield break;
             }
 
@@ -79,9 +78,8 @@ public class RepeatingAttack : PlayerAttack
         }
 
         //
-        if (player.IsStunned() || player.gameObject.GetComponent<PlayerMovement>().IsRolling)
+        if (player.IsStunned())
         {
-            DisableAttackVFX();
             yield break;
         }
 

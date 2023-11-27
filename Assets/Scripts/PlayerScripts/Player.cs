@@ -68,6 +68,11 @@ public class Player : MonoBehaviour, IDataPersistence
 
     private GameOverMenu gameOverMenu;
 
+    // dialogue stuff
+    [SerializeField] private DialogueUI dialogueUI;
+    public DialogueUI DialogueUI => dialogueUI;
+    public IInteractable Interactable { get; set; }
+
     //Doing certain things in awake and some things in start is really important apparently
     private void Awake()
     {
@@ -127,23 +132,6 @@ public class Player : MonoBehaviour, IDataPersistence
         }
     }
 
-    public void CallTogglePause(InputAction.CallbackContext context)
-    {
-        if (!context.started || isStunned || curHealth <= 0) // || !anim.GetBool("comboOver")
-            return;
-
-        Debug.Log("called pause");
-
-        if (PauseMenu.isPaused)
-        {
-            PauseMenu.instance.ResumeGame();
-        }
-        else
-        {
-            PauseMenu.instance.PauseGame();
-        }
-    }
-
     protected virtual void Update()
     {
         //either un-stun the player or 
@@ -169,6 +157,11 @@ public class Player : MonoBehaviour, IDataPersistence
         {
             isInvul = false;
         }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Interactable?.Interact(this);
+        }
     }
 
     public void LoadData(GameData data)
@@ -176,10 +169,6 @@ public class Player : MonoBehaviour, IDataPersistence
         this.playerLevel = data.playerLevel;
         this.curExp = data.curExp;
         // Update any UI or game elements that depend on these values
-        expBar.SetMaxResource(expToLevelUp[playerLevel - 1]);
-        expBar.SetResource(curExp);
-
-        levelText.text = playerLevel.ToString();
     }
 
     public void SaveData(ref GameData data)
@@ -291,11 +280,6 @@ public class Player : MonoBehaviour, IDataPersistence
             gameOverMenu.SetGameOverText("YOU DIED");
         }
 
-        if (PauseMenu.isPaused)
-        {
-            PauseMenu.instance.ResumeGame();
-        }
-
         AudioManager.instance.Play("player_death");
         OnPlayerDeath?.Invoke();
     }
@@ -368,24 +352,11 @@ public class Player : MonoBehaviour, IDataPersistence
     {
         curAbilityMeter = Mathf.Clamp(curAbilityMeter + meterGained, 0, maxAbilityMeter);
         meterBar.SetResource((int)curAbilityMeter);
-        ChangeMeterColor();
     }
     public void UseMeter(float meterUsed)
     {
         curAbilityMeter = Mathf.Clamp(curAbilityMeter - meterUsed, 0, maxAbilityMeter);
         meterBar.SetResource((int)curAbilityMeter);
-        ChangeMeterColor();
-    }
-
-    void ChangeMeterColor()
-    {
-        Color colorMeter;
-        if (curAbilityMeter >= 15)
-            colorMeter = Color.blue;
-        else
-            colorMeter = new Color(1.0f, 0.64f, 0.0f); //Orange
-
-        meterBar.SetColor(colorMeter);
     }
 
     void OnValidate()

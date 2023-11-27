@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b30e5efdd41c623458a5b93db76db39a, type: 3}
+  m_Name: Level 2-1
+  m_EditorClassIdentifier: 
+  dialogue:
+  - Welcome back, adventurer!
+  - "Seems you did a good job of clearing the area- extremely appreciated.  \r"
+  - "I put in a good word for you, so maybe you\u2019ll build up some reputation
+    around here.\r\r"
+  - "Tell me, are you familiar with the Great Tear?\r\r\r"
+  responses:
+  - responseText: No
+    dialogueObject: {fileID: 11400000, guid: a724e01ce2b2f2f4f9e9946792d69037, type: 2}
+  - responseText: The what?
+    dialogueObject: {fileID: 11400000, guid: 6bfbd7dee874e174da9e929cab69818b, type: 2}

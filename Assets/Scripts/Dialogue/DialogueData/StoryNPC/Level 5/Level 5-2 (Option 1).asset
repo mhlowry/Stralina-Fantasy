@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b30e5efdd41c623458a5b93db76db39a, type: 3}
+  m_Name: Level 5-2 (Option 1)
+  m_EditorClassIdentifier: 
+  dialogue:
+  - 'Your efforts are evident, Journeyman! '
+  - Speaking of legends, did you know about the two gods of Stralina? I realized
+    I haven't shared much about them yet.
+  - Berque, god of the sky, is a righteous being that- frankly, is the reason Stralina
+    is still here after the Great Tear.
+  - "It\u2019s through their will that these bits and pieces we call home don\u2019t
+    just go flying off into space.\r\n"
+  - "Ic, god of the land, was, for obvious reasons, deeply wounded by King Cyren\u2019s
+    rampage.  No one is even sure they\u2019re still alive.\r\n"
+  - "But, you know, I\u2019ve always suspected one of the Guardians to go into hiding-
+    Dokai Orochimiftu- did so in order to nurse Ic back to health.\r\n"
+  - "That\u2019s just speculation though.  Say, you wouldn\u2019t be interested in
+    joining the Church of Heaven\u2019s Embrace, would you?\r\n"
+  responses:
+  - responseText: Maybe.
+    dialogueObject: {fileID: 11400000, guid: 6b18d552cb1c0c342aa8f79a4838f63f, type: 2}
+  - responseText: No thanks.
+    dialogueObject: {fileID: 11400000, guid: 9c2f7c2f94989984092f922560390346, type: 2}

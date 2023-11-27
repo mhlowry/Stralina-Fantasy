@@ -62,15 +62,7 @@ public class Enemy : MonoBehaviour
         int enemyLayer = LayerMask.NameToLayer("Enemy");
         gameObject.layer = enemyLayer;
 
-        //waveSpawner = GetComponentInParent<WaveSpawner>();
-
-        //Had to change the way this works because otherwise mimics don't work in waves
-        try
-        {
-            waveSpawner = GameObject.Find("WaveSpawner").GetComponent<WaveSpawner>();
-        }
-        catch
-        { }
+        waveSpawner = GetComponentInParent<WaveSpawner>();
 
         //sets enemy's current health to max health on awake
         curHealthPoints = maxHealthPoints;

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b30e5efdd41c623458a5b93db76db39a, type: 3}
+  m_Name: Level 10-2 (Option 1)
+  m_EditorClassIdentifier: 
+  dialogue:
+  - Your gratitude is appreciated, Swordie! With the Mixenos gone, things should
+    ease up.
+  - And speaking of easing up, getting Ic back in action would greatly relieve Berque's
+    burden. Fingers crossed!
+  - "Not to mention, I might get to see my good pal Dokai again\u2026"
+  - "Ah, erm, anyways, thank you for all your services\u2014 my friend, it\u2019s
+    been a great pleasure working with you.\r\n"
+  - "I don\u2019t have any contracts left at the moment.  But please, feel free to
+    revisit any other contract you\u2019ve completed.  I won\u2019t take any of the
+    gates down yet.\r"
+  - "You\u2019ve definitely made a name for yourself\u2014 I feel like I can\u2019t
+    go two islands out without hearing about your deeds nowadays."
+  - "I\u2019m always here to chat if you\u2019re willing to listen."
+  responses: []

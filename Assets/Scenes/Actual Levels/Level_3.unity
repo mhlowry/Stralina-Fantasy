@@ -953,6 +953,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOver: {fileID: 935718659}
   gameOverText: {fileID: 0}
+  DJ: {fileID: 0}
 --- !u!114 &658387784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1285,7 +1286,7 @@ MonoBehaviour:
     m_NormalColor: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
-    m_SelectedColor: {r: 1, g: 0.75, b: 0, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1778,10 +1779,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4790412003101550787, guid: e0a84bf623166be43b725bb80123f019, type: 3}
-      propertyPath: m_FirstSelected
-      value: 
-      objectReference: {fileID: 1529881167}
     - target: {fileID: 6030284215744069770, guid: e0a84bf623166be43b725bb80123f019, type: 3}
       propertyPath: m_Name
       value: EventSystem
@@ -1877,7 +1874,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 935718660}
-  - component: {fileID: 935718661}
   m_Layer: 5
   m_Name: GameOverMenu
   m_TagString: Untagged
@@ -1908,19 +1904,6 @@ RectTransform:
   m_AnchoredPosition: {x: 18.3909, y: -20.498436}
   m_SizeDelta: {x: 739.51697, y: 401.30176}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &935718661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 935718659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c92e2e786e2f3d45b1a94662f7a9c90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectButton: {fileID: 1835013690}
 --- !u!1 &975515956
 GameObject:
   m_ObjectHideFlags: 0
@@ -3732,7 +3715,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1731800063
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3887,7 +3870,7 @@ MonoBehaviour:
     m_NormalColor: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
-    m_SelectedColor: {r: 1, g: 0.75, b: 0, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -5223,5 +5206,5 @@ SceneRoots:
   - {fileID: 1109349652}
   - {fileID: 887645571}
   - {fileID: 856888563}
-  - {fileID: 1679155005}
   - {fileID: 1468478927}
+  - {fileID: 1679155005}

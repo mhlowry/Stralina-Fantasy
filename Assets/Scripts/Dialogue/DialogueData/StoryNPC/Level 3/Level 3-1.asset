@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b30e5efdd41c623458a5b93db76db39a, type: 3}
+  m_Name: Level 3-1
+  m_EditorClassIdentifier: 
+  dialogue:
+  - "You!  I already have another contract for you to take care of.  This next one
+    is going to be a little different than your last few journeys.\r"
+  - "There\u2019s another world that I do business with from time to time.\r\r"
+  - "\u2026What\u2019s the shock on your face for?  I thought the discovery of extraterrestrial
+    life was well known in Stralina by now?\r\r\r"
+  responses:
+  - responseText: Unbelievable!
+    dialogueObject: {fileID: 11400000, guid: 356c06b9f54bf3d45afb042600047152, type: 2}
+  - responseText: ALIENS?!
+    dialogueObject: {fileID: 11400000, guid: f27c8a17c0e193c419db134f758381b0, type: 2}
