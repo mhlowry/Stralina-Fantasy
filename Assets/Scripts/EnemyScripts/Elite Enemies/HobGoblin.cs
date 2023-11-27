@@ -83,7 +83,12 @@ public class HobGoblin : Enemy
         animator.SetFloat("walkSpeed", Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.z));
 
         if (nextDamageTime <= Time.time && !canAttack)
+        {
+            var ran = Random.Range(0, 3);
+            if(ran == 1)
+                AudioManager.instance.PlayRandom(new string[] {"hobgoblin_growl_1", "hobgoblin_growl_2" });
             canAttack = true;
+        }
 
         if (currentTarget != null && inAggroRange && canMove && !isDead)
         {
@@ -131,9 +136,10 @@ public class HobGoblin : Enemy
                 ResetAttack();
                 yield break;
             }
-            //AudioManager.instance.Play("sword_2");
+
             //do attack
             PlayAttackVFX(direction, vfxHorizObj);
+            AudioManager.instance.Play("swoosh_2_deep");
             AttackHorz();
         }
         else
@@ -148,10 +154,10 @@ public class HobGoblin : Enemy
                 ResetAttack();
                 yield break;
             }
-            //AudioManager.instance.Play("sword_3");
 
             //do attack
             CameraShake.instance.ShakeCamera(impulseSource);
+            AudioManager.instance.PlayAll(new string[] { "swoosh_2_deep", "impact_4", "rumble_impact"});
             PlayAttackVFX(direction, vfxVertObj);
             AttackVert();
         }

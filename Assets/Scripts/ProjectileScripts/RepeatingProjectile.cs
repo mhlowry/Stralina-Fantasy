@@ -49,6 +49,7 @@ public class RepeatingProjectile : ProjectileProperties
                 if(enemy != null)
                     enemy.TakeDamage(damage, knockback, direction);
             }
+
             lastHitTime = Time.time;
         }
         base.Update();

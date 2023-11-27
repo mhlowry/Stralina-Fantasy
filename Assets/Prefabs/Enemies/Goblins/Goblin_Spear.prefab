@@ -106,7 +106,8 @@ MonoBehaviour:
   maxHealthPoints: 25
   expWorth: 45
   knockbackMultiplier: 1
-  itemDrops: []
+  itemDrops:
+  - {fileID: 7163418064556403771, guid: 52078488a7ed07545bb73ea856c7ef21, type: 3}
   gfxObject: {fileID: 3383409269146273840}
   moveSpeed: 5
   aggroDistance: 15
@@ -135,7 +136,8 @@ MonoBehaviour:
   regStabVfxObj: {fileID: 1112780487825297906}
   runningVfxObj: {fileID: 1662424400507791647}
   dashStabVfxObj: {fileID: 8442826207291442755}
-  chargingSpeedAdjustment: 4
+  chargingSpeedMax: 12
+  chargingSpeedAccel: 6.5
   chargingDamage: 2
   chargingDistance: 6
 --- !u!114 &2146143256653289659

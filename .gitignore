@@ -73,3 +73,5 @@ crashlytics-build.properties
 
 /.vs
 /.vscode
+QABuild/Stralina Fantasy.zip
+*.zip

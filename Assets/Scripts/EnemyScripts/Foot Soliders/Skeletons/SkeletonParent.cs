@@ -48,6 +48,7 @@ public class SkeletonParent : FootSoldier
             if (isAttacking)
                 hitMidAttack = true;
 
+            curCoreHealth -= (int)(damage * 0.25);
             base.TakeDamage(damage, knockback, direction);
 
             //Enter the core state if dead
@@ -89,6 +90,7 @@ public class SkeletonParent : FootSoldier
         inCoreState = true;
         canAttack = false;
         animator.SetTrigger("enterCore");
+        AudioManager.instance.Play("skelly_fall");
         yield return new WaitForSeconds(timeCoreExposed);
 
         if (isDead)
@@ -98,6 +100,7 @@ public class SkeletonParent : FootSoldier
 
         animator.SetTrigger("enterRegen");
         isRegenerating = true;
+        AudioManager.instance.Play("skelly_regen");
         yield return new WaitForSeconds(timeToRegenerate);
 
         inCoreState = false;
