@@ -193,7 +193,7 @@ Transform:
   m_GameObject: {fileID: 8887595387734633658}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -59.252758, y: -22.22, z: 19.163147}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -317,10 +317,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ead58598868df214cb9e933e4e54daf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 8
+  maxHealthPoints: 10
   expWorth: 0
-  knockbackMultiplier: 2
-  itemDrops: []
+  knockbackMultiplier: 1.2
+  itemDrops:
+  - {fileID: 7163418064556403771, guid: 52078488a7ed07545bb73ea856c7ef21, type: 3}
   gfxObject: {fileID: 8623744624956476831}
   moveSpeed: 3
   aggroDistance: 10
@@ -341,7 +342,7 @@ MonoBehaviour:
   strafeRandomMax: 0.5
   timeCoreExposed: 5
   timeToRegenerate: 0.4
-  maxCoreHealth: 50
+  maxCoreHealth: 35
   targetLayer:
     serializedVersion: 2
     m_Bits: 4160

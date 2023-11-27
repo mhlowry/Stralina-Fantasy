@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.6541902, g: 0.6807781, b: 0.718627, a: 1}
+  m_IndirectSpecularColor: {r: 0.65419054, g: 0.6807781, b: 0.7186273, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -663,6 +663,11 @@ PrefabInstance:
 --- !u!224 &150717785 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2426588481635892012, guid: ec6ff3d890b9b864cbb0901dc632b35e, type: 3}
+  m_PrefabInstance: {fileID: 150717784}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &150717786 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3807320185360637662, guid: ec6ff3d890b9b864cbb0901dc632b35e, type: 3}
   m_PrefabInstance: {fileID: 150717784}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &191939010 stripped
@@ -1615,7 +1620,7 @@ MonoBehaviour:
     m_NormalColor: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 1, g: 0.75, b: 0, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -2926,6 +2931,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1157190809}
+  - component: {fileID: 1157190810}
   m_Layer: 5
   m_Name: GameOverMenu
   m_TagString: Untagged
@@ -2956,6 +2962,19 @@ RectTransform:
   m_AnchoredPosition: {x: 18.3909, y: -20.498436}
   m_SizeDelta: {x: 739.51697, y: 401.30176}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1157190810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157190808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c92e2e786e2f3d45b1a94662f7a9c90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectButton: {fileID: 2132527435}
 --- !u!4 &1265457041 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8517126212548856716, guid: 27c1b10d3897ccf42a347ecb0667337a, type: 3}
@@ -3013,7 +3032,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOver: {fileID: 1157190808}
   gameOverText: {fileID: 0}
-  DJ: {fileID: 0}
 --- !u!114 &1268029127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3584,6 +3602,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4790412003101550787, guid: e0a84bf623166be43b725bb80123f019, type: 3}
+      propertyPath: m_FirstSelected
+      value: 
+      objectReference: {fileID: 150717786}
     - target: {fileID: 6030284215744069770, guid: e0a84bf623166be43b725bb80123f019, type: 3}
       propertyPath: m_Name
       value: EventSystem
@@ -4140,10 +4162,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4659625087393875948, guid: dae26e987cb65534ab778071b09cf59a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1752922398}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dae26e987cb65534ab778071b09cf59a, type: 3}
 --- !u!1 &1752922394 stripped
 GameObject:
@@ -4155,21 +4174,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1481236817978163883, guid: dae26e987cb65534ab778071b09cf59a, type: 3}
   m_PrefabInstance: {fileID: 1752922393}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1752922398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1752922394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e25a8f9e7cf98145821578eeb61425e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destinationGate: {fileID: 943132750}
-  isDestination: 0
-  isActive: 1
 --- !u!1001 &1762938703
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4959,7 +4963,7 @@ MonoBehaviour:
     m_NormalColor: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 1, g: 0.75, b: 0, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1

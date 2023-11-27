@@ -12,7 +12,8 @@ public class GoblinSpear : FootSoldier
     [SerializeField] GameObject runningVfxObj;
     [SerializeField] GameObject dashStabVfxObj;
 
-    [SerializeField] float chargingSpeedAdjustment;
+    [SerializeField] float chargingSpeedMax;
+    [SerializeField] float chargingSpeedAccel;
     [SerializeField] int chargingDamage;
     [SerializeField] float chargingDistance;
     bool inChargingRange;
@@ -75,6 +76,8 @@ public class GoblinSpear : FootSoldier
 
     private IEnumerator ChargingStrike()
     {
+        AudioManager.instance.PlayRandom(new string[] { "goblin_squeal_1", "goblin_squeal_2"});
+
         isCharging = true;
         DisableAttackVFX();
 
@@ -82,10 +85,12 @@ public class GoblinSpear : FootSoldier
         animator.SetTrigger("attackStart");
 
         PlayAttackVFX(direction, runningVfxObj);
-        moveSpeed = defaultMoveSpeed + chargingSpeedAdjustment;
 
-        while(!inAttackRange)
+        while (!inAttackRange)
+        {
+            moveSpeed = Mathf.Clamp(moveSpeed + chargingSpeedAccel * Time.deltaTime, defaultMoveSpeed, chargingSpeedMax);
             yield return null;
+        }
 
         yield return new WaitForSeconds(attackStartup);
 
@@ -140,6 +145,10 @@ public class GoblinSpear : FootSoldier
 
     private void StabAttack(int damage)
     {
+        var ran = Random.Range(0, 5);
+        if (ran == 1)
+            AudioManager.instance.PlayRandom(new string[] { "goblin_sound_1", "goblin_sound_2", "goblin_sound_3" });
+
         List<Collider[]> hitTarget = new List<Collider[]>();
 
         foreach (Transform hitBox in attackPoints)

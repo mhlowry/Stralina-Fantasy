@@ -160,6 +160,7 @@ public class Golem : Enemy
 
         CameraShake.instance.ShakeCamera(impulseSource);
         PlayAttackVFX();
+        AudioManager.instance.PlayAll(new string[] { "damage_2", "impact_4", "rumble_impact" });
         StompAttack();
 
         StartCoroutine(DisableMovementForSeconds(damageIntervalMelee));
@@ -205,6 +206,7 @@ public class Golem : Enemy
 
     private IEnumerator ActivateGolem()
     {
+        AudioManager.instance.PlayAll(new string[] { "golem_bootup_1", "golem_bootup_2" });
         animator.SetTrigger("activate");
         isActive = true;
         isAttacking = true;

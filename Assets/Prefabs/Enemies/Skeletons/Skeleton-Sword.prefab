@@ -162,7 +162,7 @@ Transform:
   m_GameObject: {fileID: 4016569556082231340}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -56.826675, y: -22.09, z: 15.3564415}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -286,19 +286,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3831fee0823276749850360b6c416f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 9
+  maxHealthPoints: 12
   expWorth: 0
-  knockbackMultiplier: 1.3
-  itemDrops: []
+  knockbackMultiplier: 1.2
+  itemDrops:
+  - {fileID: 7163418064556403771, guid: 52078488a7ed07545bb73ea856c7ef21, type: 3}
   gfxObject: {fileID: 1668173548175293696}
   moveSpeed: 6
   aggroDistance: 18
-  attackDistance: 3
+  attackDistance: 2
   strafeDistance: 3.5
   attackPower: 2
   knockback: 1
-  attackStartup: 0.3
-  boidAwarenessRadius: 5
+  attackStartup: 0.1
+  boidAwarenessRadius: 4
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2048
@@ -310,7 +311,7 @@ MonoBehaviour:
   strafeRandomMax: 0.5
   timeCoreExposed: 5
   timeToRegenerate: 0.35
-  maxCoreHealth: 50
+  maxCoreHealth: 35
   attackPoint: {fileID: 2941745847120976226}
   attackSize: 1.2
   attackImpact: 3
@@ -318,6 +319,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 4160
+  attackdelay: 0.6
 --- !u!1 &8763210970200014410
 GameObject:
   m_ObjectHideFlags: 0

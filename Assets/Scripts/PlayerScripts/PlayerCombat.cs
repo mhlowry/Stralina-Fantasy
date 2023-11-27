@@ -341,6 +341,7 @@ public class PlayerCombat : MonoBehaviour
     //This lets us see the hitboxes in the editor
     private void OnDrawGizmosSelected()
     {
+        Gizmos.color = Color.blue;
         //Look at the hitboxes for light attacks
         foreach (PlayerAttack lightAttack in lightAttacks)
         {
@@ -352,6 +353,7 @@ public class PlayerCombat : MonoBehaviour
             }
         }
 
+        Gizmos.color = Color.red;
         //Look at the hitboxes for heavy attacks
         foreach (PlayerAttack heavyAttack in heavyAttacks)
         {
@@ -363,16 +365,17 @@ public class PlayerCombat : MonoBehaviour
             }
         }
 
-/*        foreach (PlayerAttack projectile in projectileAttacks)
-        {
-            foreach (HitBox hitBox in projectile.GetHitBoxes())
-            {
-                if (hitBox.GetTransform() == null)
-                    continue;
-                Gizmos.DrawWireSphere(hitBox.GetPosition(), hitBox.GetSize());
-            }
-        }*/
+        /*        foreach (PlayerAttack projectile in projectileAttacks)
+                {
+                    foreach (HitBox hitBox in projectile.GetHitBoxes())
+                    {
+                        if (hitBox.GetTransform() == null)
+                            continue;
+                        Gizmos.DrawWireSphere(hitBox.GetPosition(), hitBox.GetSize());
+                    }
+                }*/
 
+        Gizmos.color = Color.green;
         //Look at the hitboxes for heavy attacks
         foreach (PlayerAttack rapidfire in repeatingAttacks)
         {

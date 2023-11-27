@@ -61,6 +61,8 @@ public class Mimic : Enemy
 
     private IEnumerator TranformToEnemy()
     {
+        AudioManager.instance.Play("giggle");
+
         isTransforming = true;
 
         List<GameObject> enemiesToTransform = new List<GameObject>();
