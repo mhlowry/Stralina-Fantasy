@@ -69,7 +69,7 @@ public class Player : MonoBehaviour, IDataPersistence
     private GameOverMenu gameOverMenu;
 
     // dialogue stuff
-    [SerializeField] private DialogueUI dialogueUI;
+    private DialogueUI dialogueUI;
     public DialogueUI DialogueUI => dialogueUI;
     public IInteractable Interactable { get; set; }
 
@@ -100,6 +100,7 @@ public class Player : MonoBehaviour, IDataPersistence
             meterBar = GameObject.Find("MeterBar").GetComponent<ResourceBar>();
             expBar = GameObject.Find("ExpBar").GetComponent<ResourceBar>();
             levelText = GameObject.Find("LevelText").GetComponent<TextMeshProUGUI>();
+            dialogueUI = GameObject.Find("Canvas").GetComponent<DialogueUI>();
         }
         catch { }
     }
