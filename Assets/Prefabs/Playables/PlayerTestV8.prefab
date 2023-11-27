@@ -784,8 +784,8 @@ MonoBehaviour:
     duration: 0.4
     impact: 1
     delay: 0.2
-    damage: 1
-    knockBack: 2
+    damage: 2
+    knockBack: 1
     independentKnockback: 0
     hitBoxes:
     - center: {fileID: 775819154674499160}
@@ -1113,14 +1113,14 @@ MonoBehaviour:
     duration: 0.7
     impact: 5
     delay: 0.1
-    damage: 2
+    damage: 3
     knockBack: 2
     independentKnockback: 0
     hitBoxes:
     - center: {fileID: 366689898789925761}
       size: 1
     vfxObj: {fileID: 9198684913911007348}
-    speed: 2.2
+    speed: 2
     projectileDuration: 6
     comboIndex: 4
     projectilePrefab: {fileID: 1086736248379580968, guid: 6c7768a8a9b6e964f9270428441805db, type: 3}
