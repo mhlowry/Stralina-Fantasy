@@ -58,7 +58,8 @@ public class DialogueUI : MonoBehaviour
             if (i == dialogueObject.Dialogue.Length - 1 && dialogueObject.HasResponses) break;
 
             yield return null;
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+            yield return new WaitUntil(() => Keyboard.current[Key.Space].wasPressedThisFrame || Gamepad.current[UnityEngine.InputSystem.LowLevel.GamepadButton.East].wasPressedThisFrame
+            || Gamepad.current[UnityEngine.InputSystem.LowLevel.GamepadButton.West].wasPressedThisFrame);
         }
 
         if (dialogueObject.HasResponses)
@@ -81,7 +82,8 @@ public class DialogueUI : MonoBehaviour
         {
             yield return null;
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Keyboard.current[Key.Space].wasPressedThisFrame || Gamepad.current[UnityEngine.InputSystem.LowLevel.GamepadButton.East].wasPressedThisFrame
+            || Gamepad.current[UnityEngine.InputSystem.LowLevel.GamepadButton.West].wasPressedThisFrame)
             {
                 typewriterEffect.Stop();
                 textLabel.text = dialogue;

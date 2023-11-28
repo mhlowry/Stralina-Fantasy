@@ -171,13 +171,18 @@ public class Player : MonoBehaviour, IDataPersistence
             isInvul = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Interactable?.Interact(this);
-        }
     }
 
-    public void LoadData(GameData data)
+    public void CallDialogue(InputAction.CallbackContext context)
+    {
+        //ensures that is only called once per button
+        if (!context.started)
+            return;
+
+        Interactable?.Interact(this);
+    }
+
+        public void LoadData(GameData data)
     {
         this.playerLevel = data.playerLevel;
         this.curExp = data.curExp;
