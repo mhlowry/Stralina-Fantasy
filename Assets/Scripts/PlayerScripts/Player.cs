@@ -55,8 +55,6 @@ public class Player : MonoBehaviour, IDataPersistence
     private ResourceBar meterBar;
     private ResourceBar expBar;
 
-    private TextMeshProUGUI levelText;
-
     [HideInInspector] public bool isTeleporting;
 
     private CharacterController characterController;
@@ -99,7 +97,6 @@ public class Player : MonoBehaviour, IDataPersistence
             healthBar = GameObject.Find("HealthBar").GetComponent<ResourceBar>();
             meterBar = GameObject.Find("MeterBar").GetComponent<ResourceBar>();
             expBar = GameObject.Find("ExpBar").GetComponent<ResourceBar>();
-            levelText = GameObject.Find("LevelText").GetComponent<TextMeshProUGUI>();
             dialogueUI = GameObject.Find("Canvas").GetComponent<DialogueUI>();
         }
         catch { }
@@ -115,8 +112,6 @@ public class Player : MonoBehaviour, IDataPersistence
 
         expBar.SetMaxResource(expToLevelUp[playerLevel - 1]);
         expBar.SetResource(curExp);
-
-        levelText.text = playerLevel.ToString();
     }
 
     //Set the spawnpoint of the player on scene load
@@ -189,8 +184,6 @@ public class Player : MonoBehaviour, IDataPersistence
         // Update any UI or game elements that depend on these values
         expBar.SetMaxResource(expToLevelUp[playerLevel - 1]);
         expBar.SetResource(curExp);
-
-        levelText.text = playerLevel.ToString();
     }
 
     public void SaveData(ref GameData data)
@@ -347,9 +340,6 @@ public class Player : MonoBehaviour, IDataPersistence
 
         expBar.SetMaxResource(expToLevelUp[playerLevel - 1]);
         expBar.SetResource(curExp);
-        levelText.text = playerLevel.ToString();
-        if(playerLevel == maxLevel)
-            expBar.gameObject.SetActive(false);
 
         if (DataPersistenceManager.instance != null)
             DataPersistenceManager.instance.SaveGame();

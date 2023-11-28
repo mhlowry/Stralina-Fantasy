@@ -39,7 +39,7 @@ public class DialogueActivator : MonoBehaviour, IInteractable
     {
         interactText.SetActive(false);
 
-        foreach(DialogueResponseEvents responseEvents in GetComponents<DialogueResponseEvents>())
+        foreach (DialogueResponseEvents responseEvents in GetComponents<DialogueResponseEvents>())
         {
             if (responseEvents.DialogueObject == dialogueObject)
             {
@@ -50,5 +50,7 @@ public class DialogueActivator : MonoBehaviour, IInteractable
 
         player.DialogueUI.ShowDialogue(dialogueObject);
         dialogueObject = nextDialogueObject;
+
+        Debug.Log("This is found here");
     }
 }

@@ -34,8 +34,8 @@ public class DialogueResponseEvents : MonoBehaviour
                 events[i].name = response.ResponseText;
                 continue;
             }
-            
-            events[i] = new ResponseEvent() {name = response.ResponseText};
+
+            events[i] = new ResponseEvent() { name = response.ResponseText };
         }
     }
 }

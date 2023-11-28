@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 public class DialogueUI : MonoBehaviour
 {
@@ -13,13 +14,20 @@ public class DialogueUI : MonoBehaviour
    private TypewriterEffect typewriterEffect;
    private Player player;
 
+   PlayerInput playerInput;
+
+   void Awake()
+   {
+       playerInput = GameObject.Find("PlayerInput").GetComponent<PlayerInput>();
+   }
+
+
    private void Start()
    {
        player = FindObjectOfType<Player>();
        typewriterEffect = GetComponent<TypewriterEffect>();
        responseHandler = GetComponent<ResponseHandler>();
        CloseDialogueBox();
-       
    }
 
    public void ShowDialogue(DialogueObject dialogueObject)
@@ -35,11 +43,12 @@ public class DialogueUI : MonoBehaviour
    }
 
    private IEnumerator StepThroughDialogue(DialogueObject dialogueObject)
-   {
-       player.DisableInput();
+    {
+        player.DisableInput();
+        playerInput.SwitchCurrentActionMap("UI");
 
-       for (int i = 0; i < dialogueObject.Dialogue.Length; i++)
-       {
+        for (int i = 0; i < dialogueObject.Dialogue.Length; i++)
+        {
             string dialogue = dialogueObject.Dialogue[i];
 
             yield return RunTypingEffect(dialogue);
@@ -50,17 +59,18 @@ public class DialogueUI : MonoBehaviour
 
             yield return null;
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
-       }
+        }
 
-       if (dialogueObject.HasResponses)
-       {
+        if (dialogueObject.HasResponses)
+        {
             responseHandler.ShowResponses(dialogueObject.Responses);
-       }
-       else
-       {
+        }
+        else
+        {
             CloseDialogueBox();
+            playerInput.SwitchCurrentActionMap("Gameplay");
             player.EnableInput();
-       }
+        }
    }
 
    private IEnumerator RunTypingEffect(string dialogue)
