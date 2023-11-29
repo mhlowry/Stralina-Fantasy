@@ -555,6 +555,18 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: king_roar
+    clip: {fileID: 8300000, guid: 13b2e02db682b6c46a359f1b7ae245f8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: king_fire_charge
+    clip: {fileID: 8300000, guid: 02c1d0ac6294cf948936f1303c686dd9, type: 3}
+    volume: 1
+    pitch: 2
+    loop: 0
+    source: {fileID: 0}
   - name: Desert_Song
     clip: {fileID: 8300000, guid: 2d533dc1e301d9847b7b97bded49d04b, type: 3}
     volume: 0.7
@@ -585,7 +597,7 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
-  - name: Enter_Mimexos!
+  - name: Enter_Minexos!
     clip: {fileID: 8300000, guid: 9fae13eb8238e9f46aec61281ca0a42c, type: 3}
     volume: 0.7
     pitch: 1

@@ -53,7 +53,7 @@ public class SwordMan : Player
             AudioManager.instance.PlayAll(new string[] { "block_thud_2", "block_thud_4" });
 
             //reflect projectile
-            StartCoroutine(reflectProjectile.ActivateAttack(this, damage, 0f, enemyLayers, new UnityEngine.Vector3(enemyPosition.x - transform.position.x, 0.0f, enemyPosition.z - transform.position.z)));
+            StartCoroutine(reflectProjectile.ActivateAttack(this, damage * GetHeavyDmgScale(), 0f, enemyLayers, new UnityEngine.Vector3(enemyPosition.x - transform.position.x, 0.0f, enemyPosition.z - transform.position.z)));
 
             //drain the meter
             UseMeter(15f);

@@ -782,7 +782,7 @@ MonoBehaviour:
     duration: 0.4
     impact: 1
     delay: 0.2
-    damage: 2
+    damage: 1
     knockBack: 1
     independentKnockback: 0
     hitBoxes:
