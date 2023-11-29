@@ -677,6 +677,7 @@ GameObject:
   - component: {fileID: 1613505381516250145}
   - component: {fileID: 6595800117764742772}
   - component: {fileID: 6961622627771529939}
+  - component: {fileID: 5746009660929419907}
   m_Layer: 6
   m_Name: PlayerTestV8
   m_TagString: Player
@@ -746,11 +747,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerLevel: 1
   curExp: 0
-  maxHealth: 15
   curHealth: 0
   curAbilityMeter: 0
-  hitInvulTime: 1.2
-  hitStunTime: 0.6
   decelerationRate: 10
   gfxObj: {fileID: 2446087475557226204}
   isTeleporting: 0
@@ -917,7 +915,7 @@ MonoBehaviour:
     duration: 0.2
     impact: 5
     delay: 0.05
-    damage: 3
+    damage: 2
     knockBack: 3
     independentKnockback: 0
     hitBoxes:
@@ -930,7 +928,7 @@ MonoBehaviour:
     duration: 0.25
     impact: 5
     delay: 0.1
-    damage: 3
+    damage: 2
     knockBack: 3
     independentKnockback: 0
     hitBoxes:
@@ -943,7 +941,7 @@ MonoBehaviour:
     duration: 0.2
     impact: 7
     delay: 0.2
-    damage: 3
+    damage: 2
     knockBack: 3
     independentKnockback: 0
     hitBoxes:
@@ -1113,7 +1111,7 @@ MonoBehaviour:
     duration: 0.7
     impact: 5
     delay: 0.1
-    damage: 3
+    damage: 2
     knockBack: 2
     independentKnockback: 0
     hitBoxes:
@@ -1178,6 +1176,23 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0, y: -1, z: 0}
+--- !u!114 &5746009660929419907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5552418140539763915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82e1c20dadf6a534eb5690190fb64b8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightAttackBoosts: 0
+  heavyAttackBoosts: 0
+  speedBoosts: 0
+  willpowerBoosts: 0
+  healthPointBoosts: 0
 --- !u!1 &5637934915373076959
 GameObject:
   m_ObjectHideFlags: 0

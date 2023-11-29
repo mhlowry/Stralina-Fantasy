@@ -8,11 +8,11 @@ public class MusicManager : MonoBehaviour
 
     void Start()
     {
-        AudioManager.instance.Play(songName);
+        AudioManager.instance?.Play(songName);
     }
 
     void OnDestroy()
     {
-        AudioManager.instance.Stop(songName);
+        AudioManager.instance?.Stop(songName);
     }
 }

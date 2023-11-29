@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerCombat))]
+[RequireComponent(typeof(BoostManager))]
 [RequireComponent(typeof(CinemachineImpulseSource))]
 public class Player : MonoBehaviour, IDataPersistence
 {
@@ -17,28 +18,31 @@ public class Player : MonoBehaviour, IDataPersistence
 
     const int maxLevel = 7;
     [SerializeField, Range(1, maxLevel)]  int playerLevel = 1;
-    int[] expToLevelUp = { 100, 500, 1000, 2000, 3000, 5000, 10000 };
+    int[] expToLevelUp = { 100, 500, 1000, 2000, 3000, 5000, 6000 };
     [SerializeField] int curExp = 0;
 
-    [SerializeField] int maxHealth = 10;
+    int maxHealth = 15;
     [SerializeField] int curHealth;
 
     const float maxAbilityMeter = 100f;
     [SerializeField, Range(0, maxAbilityMeter)] float curAbilityMeter = 0f;
 
-    //Stats that are adjustable, mostly through gear
+    //STATS SHIT
+    BoostManager boostManager;
+    
     float attackScale = 1f;
     float defenseScale = 1f;
+
     protected float moveSpeedScale = 1f;
-    
+
     float lightDmgScale = 1f;
     float heavyDmgScale = 1f;
     float atkSpeedScale = 1f;
     float atkKnockBScale = 1f;
     
     //fields for when the player takes damage
-    [SerializeField] float hitInvulTime = 1.2f;
-    [SerializeField] float hitStunTime = 0.6f;
+    float hitInvulTime = 1.2f;
+    float hitStunTime = 0.6f;
     float timeofHit;
     bool isStunned = false;
     bool isInvul = false;
@@ -49,7 +53,7 @@ public class Player : MonoBehaviour, IDataPersistence
     protected float takenKnockback;
     protected Vector3 currentKnockbackDir;
 
-    //REMEMBERR TO DRAG GFX INTO ANIM
+    //REMEMBER TO DRAG GFX INTO ANIM
     [SerializeField] private GameObject gfxObj;
     private ResourceBar healthBar;
     private ResourceBar meterBar;
@@ -81,6 +85,7 @@ public class Player : MonoBehaviour, IDataPersistence
         animGFX = gfxObj.GetComponent<Animator>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
         characterController = GetComponent<CharacterController>();
+        boostManager = GetComponent<BoostManager>();
 
         // should be in awake!
         try
@@ -107,6 +112,7 @@ public class Player : MonoBehaviour, IDataPersistence
         meterBar.SetMaxResource((int)maxAbilityMeter);
         meterBar.SetResource((int)curAbilityMeter);
 
+        maxHealth += boostManager.healthPointBoosts * 2;
         healthBar.SetMaxResource(maxHealth);
         curHealth = maxHealth;
 
@@ -148,7 +154,7 @@ public class Player : MonoBehaviour, IDataPersistence
     protected virtual void Update()
     {
         //either un-stun the player or 
-        if (Time.time - timeofHit > hitStunTime)
+        if (Time.time - timeofHit > (hitStunTime - boostManager.willpowerBoosts * 0.1f))
         {
             //take out of hitstun state
             animGFX.SetBool("inPain", false);
@@ -166,11 +172,10 @@ public class Player : MonoBehaviour, IDataPersistence
             playerMovement.ApplyGravity();
         }
 
-        if (Time.time - timeofHit > hitInvulTime && !invulOverride)
+        if (Time.time - timeofHit > (hitInvulTime + boostManager.willpowerBoosts * 0.2f) && !invulOverride)
         {
             isInvul = false;
         }
-
     }
 
     public void CallDialogue(InputAction.CallbackContext context)
@@ -182,7 +187,7 @@ public class Player : MonoBehaviour, IDataPersistence
         Interactable?.Interact(this);
     }
 
-        public void LoadData(GameData data)
+    public void LoadData(GameData data)
     {
         this.playerLevel = data.playerLevel;
         this.curExp = data.curExp;
@@ -358,11 +363,11 @@ public class Player : MonoBehaviour, IDataPersistence
 
     //Stats-related functions
     public float GetAttackScale() {  return attackScale; }
-    public float GetMoveSpeedScale() { return moveSpeedScale; }
+    public float GetMoveSpeedScale() { return moveSpeedScale + (boostManager.speedBoosts * 0.1f); }
 
     //Combo-related functions
-    public float GetLightDmgScale() { return lightDmgScale; }
-    public float GetHeavyDmgScale() { return heavyDmgScale; }
+    public float GetLightDmgScale() { return lightDmgScale + (boostManager.lightAttackBoosts * 0.5f); }
+    public float GetHeavyDmgScale() { return heavyDmgScale + (boostManager.heavyAttackBoosts * 0.5f); }
     public float GetAtkSpeedScale() { return atkSpeedScale; }
     public float GetKnockBScale() { return atkKnockBScale; }
 
