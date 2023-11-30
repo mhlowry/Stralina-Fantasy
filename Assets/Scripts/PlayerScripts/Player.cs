@@ -20,6 +20,7 @@ public class Player : MonoBehaviour, IDataPersistence
     [SerializeField, Range(1, maxLevel)]  int playerLevel = 1;
     int[] expToLevelUp = { 100, 500, 1000, 2000, 3000, 5000, 6000 };
     [SerializeField] int curExp = 0;
+    [SerializeField] int curGold = 0;
 
     int maxHealth = 15;
     [SerializeField] int curHealth;
@@ -324,7 +325,10 @@ public class Player : MonoBehaviour, IDataPersistence
             return;
 
         curExp += expGain;
+        curGold += expGain;  // Gain gold equal to the experience gained
         expBar.SetResource(curExp);
+
+        // TODO: Update any UI elements related to gold here
 
         if (curExp >= expToLevelUp[playerLevel - 1])
         {
@@ -337,6 +341,8 @@ public class Player : MonoBehaviour, IDataPersistence
         if (GameManager.instance != null)
         {
             GameManager.instance.SetPlayerExp(curExp);
+            // Update gold in GameManager if necessary
+            // GameManager.instance.SetPlayerGold(curGold);
         }
     }
 

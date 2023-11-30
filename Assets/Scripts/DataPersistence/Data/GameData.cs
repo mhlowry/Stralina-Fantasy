@@ -10,6 +10,7 @@ public class GameData
     // public bool disableInput;
     public int playerLevel;
     public int curExp;
+    public int curGold = 0;
     // public int[] expToLevelUp;
     // public int maxHealth;
     // public int curHealth;
@@ -35,6 +36,7 @@ public class GameData
         //deathCount = 0;
         playerLevel = 1;
         curExp = 0;
+        curGold = 0;
         // expToLevelUp = new int[] 
         //                 { 100, 500, 1000, 2000, 3000, 
         //                 5000, 10000 };

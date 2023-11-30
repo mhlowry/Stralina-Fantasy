@@ -64,6 +64,9 @@ public class DataPersistenceManager : MonoBehaviour
 
             GameManager.instance.SetPlayerExp(gameData.curExp);
             Debug.Log("Loaded current exp: " + gameData.curExp);
+
+            GameManager.instance.SetPlayerGold(gameData.curGold);
+            Debug.Log("Loaded current gold: " + gameData.curGold);
         }
 
         // push the loaded data to all other scripts that need it.
@@ -78,6 +81,7 @@ public class DataPersistenceManager : MonoBehaviour
         gameData.levelsCompleted = GameManager.instance.GetLevelsCompleted();
         gameData.playerLevel = GameManager.instance.GetPlayerLevel();
         gameData.curExp = GameManager.instance.GetPlayerExp();
+        gameData.curGold = GameManager.instance.GetPlayerGold();
 
         // pass the data to other scripts so they can update it
         foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)

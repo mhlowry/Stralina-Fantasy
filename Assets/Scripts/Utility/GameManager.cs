@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public bool[] levelsCompleted;
     private int playerLevel = 1;
     private int curExp = 0;
+    private int curGold = 0;
 
     const int maxLevel = 7;
     private void Awake()
@@ -139,6 +140,16 @@ public class GameManager : MonoBehaviour
     public int GetPlayerExp()
     {
         return curExp;
+    }
+
+    public void SetPlayerGold(int gold)
+    {
+        curGold = gold;
+    }
+
+    public int GetPlayerGold()
+    {
+        return curGold;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
