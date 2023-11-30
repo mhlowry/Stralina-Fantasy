@@ -289,7 +289,6 @@ MonoBehaviour:
   - {fileID: 2247303921529472725, guid: 94635a57c00e46f4882d30c8577fd0f4, type: 3}
   skeletons:
   - {fileID: 8887595387734633658, guid: c1a22721d77cf784da6a6eb1108d3b17, type: 3}
-  - {fileID: 451341772300494436, guid: 6c80a3df91862d74a85dfee23d585e2e, type: 3}
   - {fileID: 4016569556082231340, guid: a5bf9f04a46d027459dd3e6d6f6aab04, type: 3}
   timeToTransform: 2.2
   canSlime: 1
