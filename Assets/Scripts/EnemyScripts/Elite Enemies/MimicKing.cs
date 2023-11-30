@@ -14,6 +14,10 @@ public class MimicKing : Enemy
     [SerializeField] protected float moveSpeed = 5f;
     [SerializeField] public float aggroDistance = 10f;
 
+    private bool phase2 = false;
+    [SerializeField] int phase2Threshold;
+    private bool isInvul = false;
+
     //MELEE__________________________________________________________________________
     [SerializeField, Range(0, 14)] protected int attackDmgMelee = 3;
     [SerializeField] protected float knockbackVert = 7f;
@@ -53,6 +57,9 @@ public class MimicKing : Enemy
     [SerializeField] protected float spawnInterval = 1f; // in seconds
     float nextSpawnTime;
 
+    [SerializeField] GameObject hands;
+    [SerializeField] List<Transform> spawnpointsHands;
+
     //MISC__________________________________________________________________________
     protected Vector3 direction;
 
@@ -84,6 +91,7 @@ public class MimicKing : Enemy
         base.Awake();
         spriteRenderer = gfxObject.GetComponent<SpriteRenderer>();
         gameObject.layer = LayerMask.NameToLayer("Skeleton");
+        ResetSpawner();
     }
 
     private void Start()
@@ -108,6 +116,8 @@ public class MimicKing : Enemy
         inRangedAtkRange = distanceFromTarget <= rangedAttackRange;
         inMeleeRange = distanceFromTarget <= meleeRange;
 
+        animator.SetBool("isAttacking", isAttacking);
+
         if (canMove)
             animator.SetFloat("walkSpeed", Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.z));
         else
@@ -119,7 +129,11 @@ public class MimicKing : Enemy
         if (nextSpawnTime <= Time.time && !canSpawnMimics)
             canSpawnMimics = true;
 
-        if (currentTarget != null && inAggroRange && !isDead)
+        //Enter phase 2 when under certain hp conditions
+        if(!phase2 && curHealthPoints <= phase2Threshold)
+            StartCoroutine(EnterPhase2());
+
+        if (currentTarget != null && inAggroRange && !isDead && !isInvul)
         {
             // Store the previous target before updating
             previousTarget = currentTarget;
@@ -182,7 +196,10 @@ public class MimicKing : Enemy
         PlayAttackVFX();
         //AudioManager.instance.PlayAll(new string[] { "damage_2", "impact_4", "rumble_impact" });
         MeleeAttack();
-
+        if (phase2)
+        {
+            StartCoroutine(SpawnHands());
+        }
         StartCoroutine(DisableMovementForSeconds(2f));
         ResetAction();
 
@@ -196,7 +213,6 @@ public class MimicKing : Enemy
         AudioManager.instance.Play("fireball_ambience_1");
         yield return new WaitForSeconds(attackStartupRanged);
 
-        animator.SetTrigger("rangedAttackActivate");
         yield return new WaitForSeconds(attackDelayRanged);
 
         if (isDead)
@@ -207,30 +223,46 @@ public class MimicKing : Enemy
 
         AudioManager.instance.Stop("fireball_ambience_1");
 
-        distanceFromTarget = targetDistance();
-        float yDisplacement = (projectileSpawn.position.y - currentTarget.transform.position.y) - 1;
-        float duration = yDisplacement / projectileSpeed;
+        int numOfFireBalls;
 
-        // Create a new instance of the projectile using Instantiate
-        GameObject newProjectile = GameObject.Instantiate(projectilePrefab, projectileSpawn.position, Quaternion.LookRotation(direction));
+        if (phase2)
+            numOfFireBalls = 3;
+        else
+            numOfFireBalls = 1;
 
-        //jesus christ I can't beliieve this got turned into a physics assignment, AGAIN
-        float xVelVector = (currentTarget.transform.position.x - projectileSpawn.position.x) / duration;
-        float yVelVector = 0; //FUCK YEAH
-        float zVelVector = (currentTarget.transform.position.z - projectileSpawn.position.z) / duration;
-
-        Vector3 launchDirection = new Vector3(xVelVector, yVelVector, zVelVector);
-
-        // Get the Projectile component from the new projectile if it has one
-        ProjectileProperties projectile = newProjectile.GetComponent<ProjectileProperties>();
-
-        // Check if the projectile has a Projectile component
-        if (projectile != null)
+        while (numOfFireBalls > 0)
         {
-            // Set the properties of the newly instantiated projectile
-            //make projectile speed 1f because our force comes from the valuse in launchDirection.  Using gravity-based projectile is compllicated so this is good practice
-            projectile.InitializeProjectile(projectileDuration, attackDmgRanged, 1f, launchDirection);
+            distanceFromTarget = targetDistance();
+            float yDisplacement = (projectileSpawn.position.y - currentTarget.transform.position.y) - 1;
+            float duration = yDisplacement / projectileSpeed;
+
+            // Create a new instance of the projectile using Instantiate
+            GameObject newProjectile = GameObject.Instantiate(projectilePrefab, projectileSpawn.position, Quaternion.LookRotation(direction));
+
+            //jesus christ I can't beliieve this got turned into a physics assignment, AGAIN
+            float xVelVector = (currentTarget.transform.position.x - projectileSpawn.position.x) / duration;
+            float yVelVector = 0; //FUCK YEAH
+            float zVelVector = (currentTarget.transform.position.z - projectileSpawn.position.z) / duration;
+
+            Vector3 launchDirection = new Vector3(xVelVector, yVelVector, zVelVector);
+
+            // Get the Projectile component from the new projectile if it has one
+            ProjectileProperties projectile = newProjectile.GetComponent<ProjectileProperties>();
+
+            // Check if the projectile has a Projectile component
+            if (projectile != null)
+            {
+                // Set the properties of the newly instantiated projectile
+                //make projectile speed 1f because our force comes from the valuse in launchDirection.  Using gravity-based projectile is compllicated so this is good practice
+                projectile.InitializeProjectile(projectileDuration, attackDmgRanged, 1f, launchDirection);
+            }
+
+            numOfFireBalls--;
+            if(numOfFireBalls != 0)
+                yield return new WaitForSeconds(0.5f);
         }
+
+        animator.SetTrigger("rangedAttackActivate");
 
         StartCoroutine(DisableMovementForSeconds(2f));
         ResetAction();
@@ -276,9 +308,33 @@ public class MimicKing : Enemy
             StartCoroutine(RangedAttack());
     }
 
+    private IEnumerator SpawnHands()
+    {
+        foreach (Transform t in spawnpointsHands)
+        {
+            Instantiate(hands, t.position, Quaternion.LookRotation(Vector3.zero));
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
+    private IEnumerator EnterPhase2()
+    {
+        animator.SetTrigger("spawnStart");
+        AudioManager.instance.Play("king_roar");
+        isInvul = true;
+        meleeRange = 8f;
+
+        yield return new WaitForSeconds(3f);
+        phase2 = true;
+        isInvul = false;
+    }
+
     //MISC==============================================================================================
     public override void TakeDamage(int damage, float knockback, Vector3 direction)
     {
+        if (isInvul)
+            return;
+
         spriteRenderer.color = hurtColor;
 
         //start the color change so it doesn't start mid combo

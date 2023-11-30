@@ -50,6 +50,7 @@ public class Golem : Enemy
     [SerializeField] float attackSize;
     [SerializeField] float attackImpact;
     [SerializeField] GameObject vfxObj;
+
     //============================================================
     [SerializeField] bool isActiveAtStart = false;
 

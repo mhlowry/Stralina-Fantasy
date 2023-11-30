@@ -241,12 +241,16 @@ public class PlayerMovement : MonoBehaviour
         if (hit.moveDirection.y < -0.1)
             return;
 
+        if (body.velocity == Vector3.zero)
+        {
+            body.velocity = Vector3.zero;
+        }
+
         // Calculate push direction from move direction,
         // we only push objects to the sides never up and down
         Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
 
         // Apply the push
         body.velocity = pushDir * pushPower;
-
     }
 }
