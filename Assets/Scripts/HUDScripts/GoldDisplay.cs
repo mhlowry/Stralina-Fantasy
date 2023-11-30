@@ -19,9 +19,17 @@ public class GoldDisplay : MonoBehaviour
         {
             UpdateGoldDisplay();
         }
+        else
+        {
+            // Hide or clear the gold text if the conditions are not met
+            if (goldText != null)
+            {
+                goldText.text = "";
+            }
+        }
     }
 
-    private void UpdateGoldDisplay()
+    public void UpdateGoldDisplay()
     {
         int goldAmount = GameManager.instance.GetPlayerGold(); // Get the gold amount from GameManager
         goldText.text = "" + goldAmount; // Update the text with the current gold count

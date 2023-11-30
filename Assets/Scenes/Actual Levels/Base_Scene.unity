@@ -1028,6 +1028,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 196948021494314928, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
+      propertyPath: goldDisplay
+      value: 
+      objectReference: {fileID: 1113872471}
+    - target: {fileID: 196948021494314928, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
       propertyPath: atkSpeedScale
       value: 0.95
       objectReference: {fileID: 0}
@@ -1444,6 +1448,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4451792257561219813, guid: 647bf9ea8a71a6b45805388c8607f72c, type: 3}
   m_PrefabInstance: {fileID: 1060069564}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1113872471 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4801559166625229551, guid: 586c1284fc2fb984e80cdc4909b1d379, type: 3}
+  m_PrefabInstance: {fileID: 3172893132229416953}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc9791edf70ee6c4bb9d0ee70d2e097f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1225468762 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8240580037861283518, guid: ecc5e967bd0c37c46aa3550defdda432, type: 3}
