@@ -289,6 +289,8 @@ GameObject:
   - component: {fileID: 1910946285824394850}
   - component: {fileID: 1126586499281241632}
   - component: {fileID: 8107364208850449903}
+  - component: {fileID: 2263115486682140669}
+  - component: {fileID: 3373355719473024983}
   m_Layer: 5
   m_Name: Canvas (levels)
   m_TagString: Untagged
@@ -386,6 +388,34 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2263115486682140669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975099939659437243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 487a5092a8f51164b8cd0d0a660e00e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 5999850928847010299}
+  dataPersistenceManager: {fileID: 0}
+--- !u!114 &3373355719473024983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975099939659437243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e59c0628dc9371f4f824dc53cc874bfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOver: {fileID: 2691706115858978315}
+  gameOverText: {fileID: 0}
 --- !u!1 &1094798025548655942
 GameObject:
   m_ObjectHideFlags: 0
@@ -1595,7 +1625,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3373355719473024983}
         m_TargetAssemblyTypeName: GameOverMenu, Assembly-CSharp
         m_MethodName: BaseIsland
         m_Mode: 1
@@ -1728,7 +1758,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3373355719473024983}
         m_TargetAssemblyTypeName: GameOverMenu, Assembly-CSharp
         m_MethodName: ResetLevel
         m_Mode: 1
@@ -2530,6 +2560,10 @@ PrefabInstance:
       value: Return to Base
       objectReference: {fileID: 0}
     - target: {fileID: 7199409208234314333, guid: ec6ff3d890b9b864cbb0901dc632b35e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2263115486682140669}
+    - target: {fileID: 7199409208234314333, guid: ec6ff3d890b9b864cbb0901dc632b35e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ReturnToBase
       objectReference: {fileID: 0}
@@ -2544,7 +2578,7 @@ PrefabInstance:
     - target: {fileID: 9127681117167010460, guid: ec6ff3d890b9b864cbb0901dc632b35e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2263115486682140669}
     - target: {fileID: 9127681117167010460, guid: ec6ff3d890b9b864cbb0901dc632b35e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ExitGame
@@ -2557,5 +2591,10 @@ PrefabInstance:
 --- !u!224 &1868215110832097027 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2426588481635892012, guid: ec6ff3d890b9b864cbb0901dc632b35e, type: 3}
+  m_PrefabInstance: {fileID: 4053735409939397679}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5999850928847010299 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7710727990843606484, guid: ec6ff3d890b9b864cbb0901dc632b35e, type: 3}
   m_PrefabInstance: {fileID: 4053735409939397679}
   m_PrefabAsset: {fileID: 0}
