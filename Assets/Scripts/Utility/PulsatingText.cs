@@ -3,25 +3,63 @@ using TMPro;
 
 public class PulsatingText : MonoBehaviour
 {
-    public float minAlpha = 0.5f;
-    public float maxAlpha = 1.0f;
-    public float pulseSpeed = 1.5f;
+    public float minAlpha = 0f;
+    public float maxAlpha = 1f;
+    public float pulseSpeed = 1f;
+    public float startDelay = 2.0f; // Delay before starting to pulsate
+
+    public TypewriterEffect typewriterEffect;
+    public ResponseHandler responseHandler;
 
     private TMP_Text tmpText;
-    private Color originalColor;
+    private CanvasGroup canvasGroup;
+    private float timeSinceStarted;
+    private bool delayCompleted;
 
     void Start()
     {
         tmpText = GetComponent<TMP_Text>();
-        originalColor = tmpText.color; // Store the original color
+        canvasGroup = gameObject.GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            canvasGroup = gameObject.AddComponent<CanvasGroup>();
+        }
+
+        canvasGroup.alpha = 0;  // Start with transparent text
+        timeSinceStarted = 0;
+        delayCompleted = false;
     }
 
     void Update()
     {
-        // Calculate the alpha value
-        float alpha = (Mathf.Sin(Time.time * pulseSpeed) + 1) / 2 * (maxAlpha - minAlpha) + minAlpha;
+        // Check if the typewriter effect is done and there are no response events
+        if (!typewriterEffect.IsRunning && !responseHandler.HasActiveResponseEvents())
+        {
+            if (!delayCompleted)
+            {
+                timeSinceStarted += Time.deltaTime;
+                if (timeSinceStarted >= startDelay)
+                {
+                    delayCompleted = true;
+                    timeSinceStarted = -Mathf.PI / 2; // Set phase so alpha starts at 0
+                }
+            }
+            else
+            {
+                // Calculate the alpha value
+                float alpha = (Mathf.Sin(timeSinceStarted * pulseSpeed) + 1) / 2 * (maxAlpha - minAlpha) + minAlpha;
+                timeSinceStarted += Time.deltaTime;
 
-        // Apply the alpha value
-        tmpText.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+                // Apply the alpha value to the CanvasGroup
+                canvasGroup.alpha = alpha;
+            }
+        }
+        else
+        {
+            // Reset alpha to transparent when not pulsating and reset the timer
+            canvasGroup.alpha = 0;
+            timeSinceStarted = 0;
+            delayCompleted = false;
+        }
     }
 }

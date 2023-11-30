@@ -74,4 +74,10 @@ public class ResponseHandler : MonoBehaviour
         }
     }
 
+    public bool HasActiveResponseEvents()
+    {
+        //Debug.Log("HasActiveResponseEvents: " + responseEvents != null + " " + tempResponseButtons.Count);
+        return responseEvents != null;
+    }
+
 }
