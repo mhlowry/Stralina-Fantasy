@@ -16,4 +16,8 @@ MonoBehaviour:
   - "Ya ever feel like you find yerself in a pinch on the field of battle?  Like,
     ya can\u2019t move \u2018cus yer so focused on attackin?"
   - Try throwin a roll or two into yer onslaught!  Keep those critters on their toes!
-  responses: []
+  responses:
+  - responseText: Yes
+    dialogueObject: {fileID: 0}
+  - responseText: Maybe later
+    dialogueObject: {fileID: 0}

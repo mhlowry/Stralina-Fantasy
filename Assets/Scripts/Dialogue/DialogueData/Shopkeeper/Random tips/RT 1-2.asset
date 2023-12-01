@@ -15,4 +15,8 @@ MonoBehaviour:
   dialogue:
   - "Meet any Mixenos yet?  Them purple goop guys?  I love those critters!  They\u2019re
     wicked silly!  (and profitable!)\r"
-  responses: []
+  responses:
+  - responseText: Yes
+    dialogueObject: {fileID: 0}
+  - responseText: Maybe later
+    dialogueObject: {fileID: 0}

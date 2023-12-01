@@ -18,4 +18,8 @@ MonoBehaviour:
   - 'I reckon you could deflect those perjectiles right back at dem!
 
 '
-  responses: []
+  responses:
+  - responseText: Yes
+    dialogueObject: {fileID: 0}
+  - responseText: Maybe later
+    dialogueObject: {fileID: 0}

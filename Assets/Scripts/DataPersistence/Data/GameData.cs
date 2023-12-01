@@ -27,6 +27,13 @@ public class GameData
     // public bool isStunned;
     // public bool isInvul;
     // public bool invulOverride;
+
+    // stats
+    public int lightAttackBoosts = 0;
+    public int heavyAttackBoosts = 0;
+    public int speedBoosts = 0;
+    public int willpowerBoosts = 0;
+    public int healthPointBoosts = 0;
     public bool [] levelsCompleted;
 
     // The values defined in this constructor will be the default values
@@ -60,6 +67,11 @@ public class GameData
                             { false, false, false, false, false,
                             false, false, false, false, false };
         hasSpokenToShopkeeper = false;
+        lightAttackBoosts = 0;
+        heavyAttackBoosts = 0;
+        speedBoosts = 0;
+        willpowerBoosts = 0;
+        healthPointBoosts = 0;
         
     }
 }

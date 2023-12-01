@@ -17,4 +17,8 @@ MonoBehaviour:
     what keeps em goin!"
   - "Those big stone fellers, too!  A couple of souls from dem and I\u2019d be one
     happy clam!\r"
-  responses: []
+  responses:
+  - responseText: Yes
+    dialogueObject: {fileID: 0}
+  - responseText: Maybe later
+    dialogueObject: {fileID: 0}

@@ -9,7 +9,6 @@ using System.Linq;
 [RequireComponent(typeof(ShopUIManager))]
 public class ShopManager : MonoBehaviour
 {
-    private BoostManager playerBoostManager;
     private Player player;
     private int totalBoosts = 0;
 
@@ -43,13 +42,7 @@ public class ShopManager : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
-            playerBoostManager = player.GetComponent<BoostManager>();
             this.player = player.GetComponent<Player>();
-        }
-
-        if (playerBoostManager == null)
-        {
-            Debug.LogError("BoostManager component not found on the player");
         }
 
         InitializeItems();
@@ -68,7 +61,10 @@ public class ShopManager : MonoBehaviour
 
     private void OnDisable()
     {
-        playerInput.SwitchCurrentActionMap("Gameplay");
+        if (playerInput != null && playerInput.isActiveAndEnabled)
+        {
+            playerInput.SwitchCurrentActionMap("Gameplay");
+        }
     }
 
     public void enableShoppeMenu()
@@ -176,18 +172,18 @@ public class ShopManager : MonoBehaviour
 
     void UpdateTotalBoosts()
     {
-        totalBoosts = playerBoostManager.lightAttackBoosts +
-                      playerBoostManager.heavyAttackBoosts +
-                      playerBoostManager.speedBoosts +
-                      playerBoostManager.willpowerBoosts +
-                      playerBoostManager.healthPointBoosts;
+        totalBoosts = GameManager.instance.lightAttackBoosts +
+                      GameManager.instance.heavyAttackBoosts +
+                      GameManager.instance.speedBoosts +
+                      GameManager.instance.willpowerBoosts +
+                      GameManager.instance.healthPointBoosts;
 
         uiManager.UpdateTotalBoostedText("+" + totalBoosts);
     }
 
     void DisplayItems()
     {
-        int lightAttackIndex = playerBoostManager.lightAttackBoosts;
+        int lightAttackIndex = GameManager.instance.lightAttackBoosts;
         uiManager.UpdateLightAttackStatIncreaseText("+" + lightAttackIndex.ToString());
         // Display the next Light Attack Item based on the specific boost level
         if (lightAttackIndex < 3)
@@ -210,7 +206,7 @@ public class ShopManager : MonoBehaviour
         // Repeat for other categories using specific boost counters
         // Example for heavy attack:
         // Display the next Heavy Attack Item based on the specific boost level
-        int heavyAttackIndex = playerBoostManager.heavyAttackBoosts;
+        int heavyAttackIndex = GameManager.instance.heavyAttackBoosts;
         uiManager.UpdateHeavyAttackStatIncreaseText("+" + heavyAttackIndex.ToString());
         if (heavyAttackIndex < 3)
         {
@@ -232,9 +228,9 @@ public class ShopManager : MonoBehaviour
 
         // Apply similar logic for HP Points, Willpower, Speed
         // Display the next HP Points Item based on the specific boost level
-        int hpPointsIndex = playerBoostManager.healthPointBoosts;
+        int hpPointsIndex = GameManager.instance.healthPointBoosts;
         uiManager.UpdateHPPointsStatIncreaseText("+" + hpPointsIndex.ToString());
-        if (playerBoostManager.healthPointBoosts < 3)
+        if (GameManager.instance.healthPointBoosts < 3)
         {
             ShopItem hpPointsItem = hpPointsItems[hpPointsIndex];
             uiManager.UpdateHPPointsNameText(hpPointsItem.itemName);
@@ -252,9 +248,9 @@ public class ShopManager : MonoBehaviour
         }
 
         // Display the next Willpower Item based on the specific boost level
-        int willpowerIndex = playerBoostManager.willpowerBoosts;
+        int willpowerIndex = GameManager.instance.willpowerBoosts;
         uiManager.UpdateWillpowerStatIncreaseText("+" + willpowerIndex.ToString());
-        if (playerBoostManager.willpowerBoosts < 3)
+        if (GameManager.instance.willpowerBoosts < 3)
         {
             ShopItem willpowerItem = willpowerItems[willpowerIndex];
             uiManager.UpdateWillpowerNameText(willpowerItem.itemName);
@@ -272,9 +268,9 @@ public class ShopManager : MonoBehaviour
         }
 
         // Display the next Speed Item based on the specific boost level
-        int speedIndex = playerBoostManager.speedBoosts;
+        int speedIndex = GameManager.instance.speedBoosts;
         uiManager.UpdateMoveSpeedStatIncreaseText("+" + speedIndex.ToString());
-        if (playerBoostManager.speedBoosts < 3)
+        if (GameManager.instance.speedBoosts < 3)
         {
             ShopItem speedItem = speedItems[speedIndex];
             uiManager.UpdateMoveSpeedNameText(speedItem.itemName);
@@ -306,32 +302,32 @@ public class ShopManager : MonoBehaviour
 
     public void PurchaseLightAttack()
     {
-        if (playerBoostManager.lightAttackBoosts < 3)
-            PurchaseItem(lightAttackItems[playerBoostManager.lightAttackBoosts]);
+        if (GameManager.instance.lightAttackBoosts < 3)
+            PurchaseItem(lightAttackItems[GameManager.instance.lightAttackBoosts]);
     }
 
     public void PurchaseHeavyAttack()
     {
-        if (playerBoostManager.heavyAttackBoosts < 3)
-            PurchaseItem(heavyAttackItems[playerBoostManager.heavyAttackBoosts]);
+        if (GameManager.instance.heavyAttackBoosts < 3)
+            PurchaseItem(heavyAttackItems[GameManager.instance.heavyAttackBoosts]);
     }
 
     public void PurchaseHPPoints()
     {
-        if (playerBoostManager.healthPointBoosts < 3)
-            PurchaseItem(hpPointsItems[playerBoostManager.healthPointBoosts]);
+        if (GameManager.instance.healthPointBoosts < 3)
+            PurchaseItem(hpPointsItems[GameManager.instance.healthPointBoosts]);
     }
 
     public void PurchaseWillpower()
     {
-        if (playerBoostManager.willpowerBoosts < 3)
-            PurchaseItem(willpowerItems[playerBoostManager.willpowerBoosts]);
+        if (GameManager.instance.willpowerBoosts < 3)
+            PurchaseItem(willpowerItems[GameManager.instance.willpowerBoosts]);
     }
 
     public void PurchaseSpeed()
     {
-        if (playerBoostManager.speedBoosts < 3)
-            PurchaseItem(speedItems[playerBoostManager.speedBoosts]);
+        if (GameManager.instance.speedBoosts < 3)
+            PurchaseItem(speedItems[GameManager.instance.speedBoosts]);
     }
 
     public void PurchaseSpecial()
@@ -368,21 +364,21 @@ public class ShopManager : MonoBehaviour
 
             case 1: //Purity charm
                 player.GainGold(300 * totalBoosts);
-                playerBoostManager.lightAttackBoosts = 0;
-                playerBoostManager.heavyAttackBoosts = 0;
-                playerBoostManager.speedBoosts = 0;
-                playerBoostManager.willpowerBoosts = 0;
-                playerBoostManager.healthPointBoosts = 0;
+                GameManager.instance.lightAttackBoosts = 0;
+                GameManager.instance.heavyAttackBoosts = 0;
+                GameManager.instance.speedBoosts = 0;
+                GameManager.instance.willpowerBoosts = 0;
+                GameManager.instance.healthPointBoosts = 0;
                 break;
 
             case 2: //Aka's oni mask
                 //This uses a tuple to swap values!  Neat!
-                (playerBoostManager.healthPointBoosts, playerBoostManager.heavyAttackBoosts) = (playerBoostManager.heavyAttackBoosts, playerBoostManager.healthPointBoosts);
+                (GameManager.instance.healthPointBoosts, GameManager.instance.heavyAttackBoosts) = (GameManager.instance.heavyAttackBoosts, GameManager.instance.healthPointBoosts);
                 break;
 
             case 3: //Ao's oni mask
                 //This uses a tuple to swap values!  Neat!
-                (playerBoostManager.willpowerBoosts, playerBoostManager.lightAttackBoosts) = (playerBoostManager.lightAttackBoosts, playerBoostManager.willpowerBoosts);
+                (GameManager.instance.willpowerBoosts, GameManager.instance.lightAttackBoosts) = (GameManager.instance.lightAttackBoosts, GameManager.instance.willpowerBoosts);
                 break;
 
             case 4: //Ic's Divine Wine
@@ -404,11 +400,11 @@ public class ShopManager : MonoBehaviour
                 break;
 
             case 7: //Ness's Balanced Lunch
-                playerBoostManager.lightAttackBoosts = 1;
-                playerBoostManager.heavyAttackBoosts = 1;
-                playerBoostManager.speedBoosts = 1;
-                playerBoostManager.willpowerBoosts = 1;
-                playerBoostManager.healthPointBoosts = 1;
+                GameManager.instance.lightAttackBoosts = 1;
+                GameManager.instance.heavyAttackBoosts = 1;
+                GameManager.instance.speedBoosts = 1;
+                GameManager.instance.willpowerBoosts = 1;
+                GameManager.instance.healthPointBoosts = 1;
                 break;
 
             case 8: //Unknown's Eye
@@ -460,38 +456,38 @@ public class ShopManager : MonoBehaviour
         switch (itemType)
         {
             case ItemType.HeavyAttack:
-                if (playerBoostManager.heavyAttackBoosts >= 5)
+                if (GameManager.instance.heavyAttackBoosts >= 5)
                 { return false; }
                 Debug.Log("Boosted Heavy Attack");
-                playerBoostManager.heavyAttackBoosts = Mathf.Clamp(playerBoostManager.heavyAttackBoosts + 1, 0, 5);
+                GameManager.instance.SetHeavyAttackBoosts(Mathf.Clamp(GameManager.instance.heavyAttackBoosts + 1, 0, 5));
                 break;
 
             case ItemType.LightAttack:
-                if (playerBoostManager.lightAttackBoosts >= 5)
+                if (GameManager.instance.lightAttackBoosts >= 5)
                 { return false; }
                 Debug.Log("Boosted Light Attack");
-                playerBoostManager.lightAttackBoosts = Mathf.Clamp(playerBoostManager.lightAttackBoosts + 1, 0, 5);
+                GameManager.instance.lightAttackBoosts = Mathf.Clamp(GameManager.instance.lightAttackBoosts + 1, 0, 5);
                 break;
 
             case ItemType.HPPoints:
-                if (playerBoostManager.healthPointBoosts >= 5)
+                if (GameManager.instance.healthPointBoosts >= 5)
                 { return false; }
                 Debug.Log("Boosted HP");
-                playerBoostManager.healthPointBoosts = Mathf.Clamp(playerBoostManager.healthPointBoosts + 1, 0, 5);
+                GameManager.instance.healthPointBoosts = Mathf.Clamp(GameManager.instance.healthPointBoosts + 1, 0, 5);
                 break;
 
             case ItemType.Willpower:
-                if (playerBoostManager.willpowerBoosts >= 5)
+                if (GameManager.instance.willpowerBoosts >= 5)
                 { return false; }
                 Debug.Log("Boosted WillPower");
-                playerBoostManager.willpowerBoosts = Mathf.Clamp(playerBoostManager.willpowerBoosts + 1, 0, 5);
+                GameManager.instance.willpowerBoosts = Mathf.Clamp(GameManager.instance.willpowerBoosts + 1, 0, 5);
                 break;
 
             case ItemType.Speed:
-                if (playerBoostManager.speedBoosts >= 5)
+                if (GameManager.instance.speedBoosts >= 5)
                 { return false; }
                 Debug.Log("Boosted Movement Speed");
-                playerBoostManager.speedBoosts = Mathf.Clamp(playerBoostManager.speedBoosts + 1, 0, 5);
+                GameManager.instance.speedBoosts = Mathf.Clamp(GameManager.instance.speedBoosts + 1, 0, 5);
                 break;
 
             default:
@@ -516,38 +512,38 @@ public class ShopManager : MonoBehaviour
         switch (itemType)
         {
             case ItemType.HeavyAttack:
-                if (playerBoostManager.heavyAttackBoosts <= 0)
+                if (GameManager.instance.heavyAttackBoosts <= 0)
                 { return false; }
                 Debug.Log("DeBoosted Heavy Attack");
-                playerBoostManager.heavyAttackBoosts = Mathf.Clamp(playerBoostManager.heavyAttackBoosts - 1, 0, 5);
+                GameManager.instance.heavyAttackBoosts = Mathf.Clamp(GameManager.instance.heavyAttackBoosts - 1, 0, 5);
                 break;
 
             case ItemType.LightAttack:
-                if (playerBoostManager.lightAttackBoosts <= 0)
+                if (GameManager.instance.lightAttackBoosts <= 0)
                 { return false; }
                 Debug.Log("DeBoosted Light Attack");
-                playerBoostManager.lightAttackBoosts = Mathf.Clamp(playerBoostManager.lightAttackBoosts - 1, 0, 5);
+                GameManager.instance.lightAttackBoosts = Mathf.Clamp(GameManager.instance.lightAttackBoosts - 1, 0, 5);
                 break;
 
             case ItemType.HPPoints:
-                if (playerBoostManager.healthPointBoosts <= 0)
+                if (GameManager.instance.healthPointBoosts <= 0)
                 { return false; }
                 Debug.Log("DeBoosted HPPoints");
-                playerBoostManager.healthPointBoosts = Mathf.Clamp(playerBoostManager.healthPointBoosts - 1, 0, 5);
+                GameManager.instance.healthPointBoosts = Mathf.Clamp(GameManager.instance.healthPointBoosts - 1, 0, 5);
                 break;
 
             case ItemType.Willpower:
-                if (playerBoostManager.willpowerBoosts <= 0)
+                if (GameManager.instance.willpowerBoosts <= 0)
                 { return false; }
                 Debug.Log("DeBoosted Willpower");
-                playerBoostManager.willpowerBoosts = Mathf.Clamp(playerBoostManager.willpowerBoosts - 1, 0, 5);
+                GameManager.instance.willpowerBoosts = Mathf.Clamp(GameManager.instance.willpowerBoosts - 1, 0, 5);
                 break;
 
             case ItemType.Speed:
-                if (playerBoostManager.speedBoosts <= 0)
+                if (GameManager.instance.speedBoosts <= 0)
                 { return false; }
                 Debug.Log("DeBoosted Move Speed");
-                playerBoostManager.speedBoosts = Mathf.Clamp(playerBoostManager.speedBoosts - 1, 0, 5);
+                GameManager.instance.speedBoosts = Mathf.Clamp(GameManager.instance.speedBoosts - 1, 0, 5);
                 break;
 
             default:
@@ -668,23 +664,23 @@ public class ShopManager : MonoBehaviour
         switch (randomStat)
         {
             case ItemType.HeavyAttack:
-                playerBoostManager.heavyAttackBoosts = 4;
+                GameManager.instance.heavyAttackBoosts = 4;
                 break;
 
             case ItemType.LightAttack:
-                playerBoostManager.lightAttackBoosts = 4;
+                GameManager.instance.lightAttackBoosts = 4;
                 break;
 
             case ItemType.HPPoints:
-                playerBoostManager.healthPointBoosts = 4;
+                GameManager.instance.healthPointBoosts = 4;
                 break;
 
             case ItemType.Willpower:
-                playerBoostManager.willpowerBoosts = 4;
+                GameManager.instance.willpowerBoosts = 4;
                 break;
 
             case ItemType.Speed:
-                playerBoostManager.speedBoosts = 4;
+                GameManager.instance.speedBoosts = 4;
                 break;
 
             default:
@@ -700,23 +696,23 @@ public class ShopManager : MonoBehaviour
                 switch (stat)
                 {
                     case ItemType.HeavyAttack:
-                        playerBoostManager.heavyAttackBoosts = 0;
+                        GameManager.instance.heavyAttackBoosts = 0;
                         break;
 
                     case ItemType.LightAttack:
-                        playerBoostManager.lightAttackBoosts = 0;
+                        GameManager.instance.lightAttackBoosts = 0;
                         break;
 
                     case ItemType.HPPoints:
-                        playerBoostManager.healthPointBoosts = 0;
+                        GameManager.instance.healthPointBoosts = 0;
                         break;
 
                     case ItemType.Willpower:
-                        playerBoostManager.willpowerBoosts = 0;
+                        GameManager.instance.willpowerBoosts = 0;
                         break;
 
                     case ItemType.Speed:
-                        playerBoostManager.speedBoosts = 0;
+                        GameManager.instance.speedBoosts = 0;
                         break;
 
                     default:
@@ -758,23 +754,23 @@ public class ShopManager : MonoBehaviour
             switch (allStats[i])
             {
                 case ItemType.HeavyAttack:
-                    playerBoostManager.heavyAttackBoosts = Mathf.Clamp(boostsPerStat[i], 0, 5);
+                    GameManager.instance.heavyAttackBoosts = Mathf.Clamp(boostsPerStat[i], 0, 5);
                     break;
 
                 case ItemType.LightAttack:
-                    playerBoostManager.lightAttackBoosts = Mathf.Clamp(boostsPerStat[i], 0, 5);
+                    GameManager.instance.lightAttackBoosts = Mathf.Clamp(boostsPerStat[i], 0, 5);
                     break;
 
                 case ItemType.HPPoints:
-                    playerBoostManager.healthPointBoosts = Mathf.Clamp(boostsPerStat[i], 0, 5);
+                    GameManager.instance.healthPointBoosts = Mathf.Clamp(boostsPerStat[i], 0, 5);
                     break;
 
                 case ItemType.Willpower:
-                    playerBoostManager.willpowerBoosts = Mathf.Clamp(boostsPerStat[i], 0, 5);
+                    GameManager.instance.willpowerBoosts = Mathf.Clamp(boostsPerStat[i], 0, 5);
                     break;
 
                 case ItemType.Speed:
-                    playerBoostManager.speedBoosts = Mathf.Clamp(boostsPerStat[i], 0, 5);
+                    GameManager.instance.speedBoosts = Mathf.Clamp(boostsPerStat[i], 0, 5);
                     break;
 
                 default:

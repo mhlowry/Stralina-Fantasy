@@ -9,7 +9,6 @@ using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerCombat))]
-[RequireComponent(typeof(BoostManager))]
 [RequireComponent(typeof(CinemachineImpulseSource))]
 public class Player : MonoBehaviour, IDataPersistence
 {
@@ -30,7 +29,6 @@ public class Player : MonoBehaviour, IDataPersistence
     [SerializeField, Range(0, maxAbilityMeter)] float curAbilityMeter = 0f;
 
     //STATS SHIT
-    BoostManager boostManager;
     
     float attackScale = 1f;
     float defenseScale = 1f;
@@ -87,7 +85,6 @@ public class Player : MonoBehaviour, IDataPersistence
         animGFX = gfxObj.GetComponent<Animator>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
         characterController = GetComponent<CharacterController>();
-        boostManager = GetComponent<BoostManager>();
 
         // should be in awake!
         try
@@ -119,7 +116,7 @@ public class Player : MonoBehaviour, IDataPersistence
         meterBar.SetMaxResource((int)maxAbilityMeter);
         meterBar.SetResource((int)curAbilityMeter);
 
-        maxHealth += boostManager.healthPointBoosts * 2;
+        maxHealth += GameManager.instance.healthPointBoosts * 2;
         healthBar.SetMaxResource(maxHealth);
         curHealth = maxHealth;
 
@@ -163,7 +160,7 @@ public class Player : MonoBehaviour, IDataPersistence
     protected virtual void Update()
     {
         //either un-stun the player or 
-        if (Time.time - timeofHit > (hitStunTime - boostManager.willpowerBoosts * 0.1f))
+        if (Time.time - timeofHit > (hitStunTime - GameManager.instance.willpowerBoosts * 0.1f))
         {
             //take out of hitstun state
             animGFX.SetBool("inPain", false);
@@ -181,7 +178,7 @@ public class Player : MonoBehaviour, IDataPersistence
             playerMovement.ApplyGravity();
         }
 
-        if (Time.time - timeofHit > (hitInvulTime + boostManager.willpowerBoosts * 0.2f) && !invulOverride)
+        if (Time.time - timeofHit > (hitInvulTime + GameManager.instance.willpowerBoosts * 0.2f) && !invulOverride)
         {
             isInvul = false;
         }
@@ -380,11 +377,11 @@ public class Player : MonoBehaviour, IDataPersistence
 
     //Stats-related functions
     public float GetAttackScale() {  return attackScale; }
-    public float GetMoveSpeedScale() { return moveSpeedScale + (boostManager.speedBoosts * 0.1f); }
+    public float GetMoveSpeedScale() { return moveSpeedScale + (GameManager.instance.speedBoosts * 0.1f); }
 
     //Combo-related functions
-    public float GetLightDmgScale() { return lightDmgScale + (boostManager.lightAttackBoosts * 0.5f); }
-    public float GetHeavyDmgScale() { return heavyDmgScale + (boostManager.heavyAttackBoosts * 0.5f); }
+    public float GetLightDmgScale() { return lightDmgScale + (GameManager.instance.lightAttackBoosts * 0.5f); }
+    public float GetHeavyDmgScale() { return heavyDmgScale + (GameManager.instance.heavyAttackBoosts * 0.5f); }
     public float GetAtkSpeedScale() { return atkSpeedScale; }
     public float GetKnockBScale() { return atkKnockBScale; }
 

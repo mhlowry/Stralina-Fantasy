@@ -31,5 +31,9 @@ MonoBehaviour:
 '
   - "They won\u2019t hurtcha\u2026 if you use moderation.  I ain\u2019t keen on losing
     customers.\r"
-  - "Take a look at my stock!\r\r"
-  responses: []
+  - "Would ya like to take a look at my stock!\r\r"
+  responses:
+  - responseText: Yes
+    dialogueObject: {fileID: 0}
+  - responseText: Maybe later
+    dialogueObject: {fileID: 0}

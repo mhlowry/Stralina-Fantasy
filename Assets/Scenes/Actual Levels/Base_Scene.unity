@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.59304976, g: 0.6235363, b: 0.6788104, a: 1}
+  m_IndirectSpecularColor: {r: 0.5930504, g: 0.62353605, b: 0.67881054, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -604,6 +604,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 92fb84f368cd5514bab7cf3a99606a14, type: 3}
   - {fileID: 21300000, guid: d1bd9fb0b6d72a54081e973e14316383, type: 3}
   outOfStock: {fileID: 21300000, guid: 168bf895066f92c4fb7e9d25fd016898, type: 3}
+  dialogueUI: {fileID: 8001597585320870221}
 --- !u!1 &176386943
 GameObject:
   m_ObjectHideFlags: 0
@@ -1421,6 +1422,14 @@ GameObject:
   - component: {fileID: 419790255}
   - component: {fileID: 419790257}
   - component: {fileID: 419790256}
+  - component: {fileID: 419790265}
+  - component: {fileID: 419790264}
+  - component: {fileID: 419790263}
+  - component: {fileID: 419790262}
+  - component: {fileID: 419790261}
+  - component: {fileID: 419790260}
+  - component: {fileID: 419790259}
+  - component: {fileID: 419790258}
   m_Layer: 0
   m_Name: Shopkeeper
   m_TagString: Untagged
@@ -1563,7 +1572,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueObject: {fileID: 11400000, guid: 640db89ac73b6b640a6c67f937b1012b, type: 2}
-  events: []
+  events:
+  - name: Yes
+    onPickedResponse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 105844725}
+          m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+          m_MethodName: enableShoppeMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Maybe later
+    onPickedResponse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 105844725}
+          m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+          m_MethodName: disableShoppeMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &419790257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1579,7 +1620,375 @@ MonoBehaviour:
   dialogueObject: {fileID: 11400000, guid: 640db89ac73b6b640a6c67f937b1012b, type: 2}
   interactText: {fileID: 2090467261940714400}
   nextDialogueObject: {fileID: 11400000, guid: 8b56f591201c81444b816d40d216f24a, type: 2}
-  shopkeeper: {fileID: 0}
+  shopkeeper: {fileID: 419790249}
+--- !u!114 &419790258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419790249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7094356ef636aef4f869a8fa7cf72ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueObject: {fileID: 11400000, guid: b8f083d76da14eb47a81ca3d9fe52bb4, type: 2}
+  events:
+  - name: Yes
+    onPickedResponse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 105844725}
+          m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+          m_MethodName: enableShoppeMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Maybe later
+    onPickedResponse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 105844725}
+          m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+          m_MethodName: disableShoppeMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &419790259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419790249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7094356ef636aef4f869a8fa7cf72ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueObject: {fileID: 11400000, guid: c1dbff8e60067a541b3eeb433dc180c7, type: 2}
+  events:
+  - name: Yes
+    onPickedResponse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 105844725}
+          m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+          m_MethodName: enableShoppeMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Maybe later
+    onPickedResponse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 105844725}
+          m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+          m_MethodName: disableShoppeMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &419790260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419790249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7094356ef636aef4f869a8fa7cf72ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueObject: {fileID: 11400000, guid: 5047802734fd0a749bc69dc66a28943c, type: 2}
+  events:
+  - name: Yes
+    onPickedResponse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 105844725}
+          m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+          m_MethodName: enableShoppeMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Maybe later
+    onPickedResponse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 105844725}
+          m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+          m_MethodName: disableShoppeMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &419790261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419790249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7094356ef636aef4f869a8fa7cf72ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueObject: {fileID: 11400000, guid: 8f369c6e5a006ce4cac2771d79643f1c, type: 2}
+  events:
+  - name: Yes
+    onPickedResponse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 105844725}
+          m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+          m_MethodName: enableShoppeMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Maybe later
+    onPickedResponse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 105844725}
+          m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+          m_MethodName: disableShoppeMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &419790262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419790249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7094356ef636aef4f869a8fa7cf72ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueObject: {fileID: 11400000, guid: f357a30c3b7638348993eade7d538d8f, type: 2}
+  events:
+  - name: Yes
+    onPickedResponse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 105844725}
+          m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+          m_MethodName: enableShoppeMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Maybe later
+    onPickedResponse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 105844725}
+          m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+          m_MethodName: disableShoppeMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &419790263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419790249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7094356ef636aef4f869a8fa7cf72ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueObject: {fileID: 11400000, guid: 1746be945dc646f4eabb566ec524c3a4, type: 2}
+  events:
+  - name: Yes
+    onPickedResponse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 105844725}
+          m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+          m_MethodName: enableShoppeMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Maybe later
+    onPickedResponse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 105844725}
+          m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+          m_MethodName: disableShoppeMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &419790264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419790249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7094356ef636aef4f869a8fa7cf72ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueObject: {fileID: 11400000, guid: 7fb2e5db037ba2b47b31e067451c4e1d, type: 2}
+  events:
+  - name: Yes
+    onPickedResponse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 105844725}
+          m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+          m_MethodName: enableShoppeMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Maybe later
+    onPickedResponse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 105844725}
+          m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+          m_MethodName: disableShoppeMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &419790265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419790249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7094356ef636aef4f869a8fa7cf72ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueObject: {fileID: 11400000, guid: 8b56f591201c81444b816d40d216f24a, type: 2}
+  events:
+  - name: Yes
+    onPickedResponse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 105844725}
+          m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+          m_MethodName: enableShoppeMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Maybe later
+    onPickedResponse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 105844725}
+          m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+          m_MethodName: disableShoppeMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &469586880
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2058,7 +2467,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 105844725}
         m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
-        m_MethodName: ExitShop
+        m_MethodName: disableShoppeMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

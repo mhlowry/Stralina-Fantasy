@@ -15,4 +15,8 @@ MonoBehaviour:
   dialogue:
   - "Eh?  The church?  I never pay em much mind.  Not these days, anyways.\r"
   - "Hoo boy, that wizard fella showed me what for, back then!\r"
-  responses: []
+  responses:
+  - responseText: Yes
+    dialogueObject: {fileID: 0}
+  - responseText: Maybe later
+    dialogueObject: {fileID: 0}
