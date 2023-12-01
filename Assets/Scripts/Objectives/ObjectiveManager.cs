@@ -18,6 +18,7 @@ public abstract class ObjectiveManager : GameManager
     protected Player playerScript;
     protected Companion companionScript;
 
+    private GameObject canvas;
 
     private void Awake()
     {
@@ -46,10 +47,15 @@ public abstract class ObjectiveManager : GameManager
         {
             objectiveDisplay.enabled = true;  // Make sure the text starts as visible for the blinking effect
         }
+
+        canvas = GameObject.Find("Canvas (levels)");
     }
 
     public virtual void InitializeObjective()
     {
+        questInfoText = canvas.transform.Find("PauseScreen").transform.Find("PauseMenu").transform.Find("QuestBoard").
+                transform.Find("QuestInfo").transform.Find("QuestInfoText").GetComponent<TextMeshProUGUI>();
+        objectiveDisplay = canvas.transform.Find("ObjectiveText").GetComponent<TextMeshProUGUI>();
         UpdateObjectiveDescription();
         ShowObjectiveBriefly();
     }

@@ -747,6 +747,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerLevel: 1
   curExp: 0
+  curGold: 0
+  goldDisplay: {fileID: 0}
   curHealth: 0
   curAbilityMeter: 0
   decelerationRate: 10
@@ -764,7 +766,7 @@ MonoBehaviour:
     impact: 0
     delay: 0
     damage: 2
-    knockBack: 7
+    knockBack: 4
     independentKnockback: 0
     hitBoxes:
     - center: {fileID: 775819154674499160}

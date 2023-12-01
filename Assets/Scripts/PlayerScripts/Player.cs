@@ -329,23 +329,24 @@ public class Player : MonoBehaviour, IDataPersistence
 
     public void GainExp(int expGain)
     {
-        if (playerLevel == maxLevel)
-            return;
-
-        curExp += expGain;
-        curGold += expGain;  // Gain gold equal to the experience gained
-        expBar.SetResource(curExp);
-
+        //We want the player to be able to earn gold even at level 7
+        curGold += expGain;
         if (GameManager.instance != null)
-        {
-            GameManager.instance.SetPlayerExp(curExp);
             GameManager.instance.SetPlayerGold(curGold);
-        }
 
         if (goldDisplay != null)
         {
             goldDisplay.UpdateGoldDisplay();  // Directly update the gold display
         }
+
+        if (playerLevel == maxLevel)
+            return;
+
+        curExp += expGain;
+        expBar.SetResource(curExp);
+
+        if (GameManager.instance != null)
+            GameManager.instance.SetPlayerExp(curExp);
 
         if (curExp >= expToLevelUp[playerLevel - 1])
         {

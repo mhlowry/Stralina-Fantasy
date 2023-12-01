@@ -136,7 +136,7 @@ MonoBehaviour:
   regStabVfxObj: {fileID: 1112780487825297906}
   runningVfxObj: {fileID: 1662424400507791647}
   dashStabVfxObj: {fileID: 8442826207291442755}
-  chargingSpeedMax: 12
+  chargingSpeedMax: 10
   chargingSpeedAccel: 6.5
   chargingDamage: 2
   chargingDistance: 6
