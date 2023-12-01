@@ -33,6 +33,7 @@ public class ShopManager : MonoBehaviour
 
     PlayerInput playerInput;
     ShopUIManager uiManager;
+    public DialogueUI dialogueUI;
 
     void Awake()
     {
@@ -70,10 +71,35 @@ public class ShopManager : MonoBehaviour
         playerInput.SwitchCurrentActionMap("Gameplay");
     }
 
-    public void ExitShop()
+    public void enableShoppeMenu()
     {
-        gameObject.SetActive(false);
+        // Close the dialogue box
+        if (dialogueUI != null)
+        {
+            dialogueUI.CloseDialogueBox();
+        }
+
+        // Enable the Shoppe Menu
+        GameObject shoppeMenu = GameObject.Find("Canvas (base)").transform.Find("Shoppe menu").gameObject;
+        shoppeMenu.SetActive(true);
     }
+
+    public void disableShoppeMenu()
+    {
+        // Disable the Shoppe Menu
+        GameObject shoppeMenu = GameObject.Find("Canvas (base)").transform.Find("Shoppe menu").gameObject;
+        shoppeMenu.SetActive(false);
+
+        // // Close the dialogue box
+        // dialogueUI.CloseDialogueBox(); // I think the dialogue box will always be closed by this point
+
+        // Switch the current action map to "Gameplay"
+        playerInput.SwitchCurrentActionMap("Gameplay");
+
+        // Enable player input
+        player.EnableInput();
+    }
+
 
     void InitializeItems()
     {

@@ -90,6 +90,4 @@ public class DialogueActivator : MonoBehaviour, IInteractable
     {
         get { return dialogueObject; }
     }
-
-
 }
