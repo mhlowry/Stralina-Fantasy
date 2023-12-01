@@ -3004,7 +3004,8 @@ PrefabInstance:
       propertyPath: lightAttackBoosts
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5746009660929419907, guid: fec2c8f8344a8744dad15db08adccd75, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

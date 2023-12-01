@@ -253,7 +253,7 @@ public class Enemy : MonoBehaviour
                 break;
             }
         }
-
+        
         //wait like 2ish seconds before destorying the object
         yield return new WaitForSeconds(2.5f);
         Destroy(gameObject);
