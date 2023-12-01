@@ -16,6 +16,8 @@ MonoBehaviour:
   - "Some of my best friends were goblins, I\u2019ll tell ya what!  My crew back
     in the day employed a whole tons of them big ones to watch our backs!"
   - My favorite was one named Itor!
+  - So, would you like to enter the shop again and see what other mystical wares
+    I've got for ya today?
   responses:
   - responseText: Yes
     dialogueObject: {fileID: 0}

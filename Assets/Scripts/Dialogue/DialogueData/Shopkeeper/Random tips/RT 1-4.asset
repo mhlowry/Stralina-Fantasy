@@ -15,6 +15,8 @@ MonoBehaviour:
   dialogue:
   - "Eh?  The church?  I never pay em much mind.  Not these days, anyways.\r"
   - "Hoo boy, that wizard fella showed me what for, back then!\r"
+  - "So, would you like to enter the shop again and see what other mystical wares
+    I've got for ya today?\r"
   responses:
   - responseText: Yes
     dialogueObject: {fileID: 0}
