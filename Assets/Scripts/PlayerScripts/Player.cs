@@ -19,7 +19,6 @@ public class Player : MonoBehaviour, IDataPersistence
     [SerializeField, Range(1, maxLevel)]  int playerLevel = 1;
     int[] expToLevelUp = { 100, 500, 1000, 2000, 3000, 5000, 6000 };
     [SerializeField] int curExp = 0;
-    [SerializeField] int curGold = 0;
     [SerializeField] private GoldDisplay goldDisplay;
 
     int maxHealth = 15;
@@ -122,8 +121,6 @@ public class Player : MonoBehaviour, IDataPersistence
 
         expBar.SetMaxResource(expToLevelUp[playerLevel - 1]);
         expBar.SetResource(curExp);
-
-        GameManager.instance.SetPlayerGold(curGold);
     }
 
     //Set the spawnpoint of the player on scene load
@@ -327,9 +324,9 @@ public class Player : MonoBehaviour, IDataPersistence
     public void GainExp(int expGain)
     {
         //We want the player to be able to earn gold even at level 7
-        curGold += expGain;
+        GameManager.instance.SetPlayerGold(GameManager.instance.GetPlayerGold() + expGain);
         if (GameManager.instance != null)
-            GameManager.instance.SetPlayerGold(curGold);
+            GameManager.instance.SetPlayerGold(GameManager.instance.GetPlayerGold());
 
         if (goldDisplay != null)
         {
@@ -402,17 +399,15 @@ public class Player : MonoBehaviour, IDataPersistence
         ChangeMeterColor();
     }
 
-    public int GetCurGold() {  return curGold; }
+    public int GetCurGold() {  return GameManager.instance.GetPlayerGold(); } // ik this is weird im just trying not to break anything rn lol
     public void SpendGold(int spentGold)
     { 
-        curGold -= spentGold;
-        GameManager.instance.SetPlayerGold(curGold);
+        GameManager.instance.SetPlayerGold(GameManager.instance.GetPlayerGold() - spentGold);
     }
 
-    public void GainGold(int spentGold)
+    public void GainGold(int gainedGold)
     {
-        curGold += spentGold;
-        GameManager.instance.SetPlayerGold(curGold);
+        GameManager.instance.SetPlayerGold(GameManager.instance.GetPlayerGold() + gainedGold);
     }
 
     void ChangeMeterColor()

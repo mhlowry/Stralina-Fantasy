@@ -248,8 +248,8 @@ MonoBehaviour:
   description: 
   isCompleted: 0
   levelIndex: 9
-  questInfoText: {fileID: 1506869495}
-  objectiveDisplay: {fileID: 1464988468}
+  questInfoText: {fileID: 0}
+  objectiveDisplay: {fileID: 0}
 --- !u!4 &381054178
 Transform:
   m_ObjectHideFlags: 0
@@ -1043,28 +1043,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9a42462584e83e4f931c712cb3dcdc4, type: 3}
---- !u!114 &1464988468 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1839386610355098824, guid: 3f3ccee0067d18c4992436b5ffeee56d, type: 3}
-  m_PrefabInstance: {fileID: 1594300576}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1506869495 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 676160579681863413, guid: 3f3ccee0067d18c4992436b5ffeee56d, type: 3}
-  m_PrefabInstance: {fileID: 1594300576}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1594300576
 PrefabInstance:
   m_ObjectHideFlags: 0
