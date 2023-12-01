@@ -2,11 +2,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using static UnityEditor.Progress;
+using System;
+using System.Linq;
 
 [RequireComponent(typeof(ShopUIManager))]
 public class ShopManager : MonoBehaviour
 {
     private BoostManager playerBoostManager;
+    private Player player;
     private int totalBoosts = 0;
 
     private List<ShopItem> heavyAttackItems;
@@ -25,6 +29,8 @@ public class ShopManager : MonoBehaviour
 
     [SerializeField] Sprite outOfStock;
 
+    int curRandomItemIndex;
+
     PlayerInput playerInput;
     ShopUIManager uiManager;
 
@@ -37,6 +43,7 @@ public class ShopManager : MonoBehaviour
         if (player != null)
         {
             playerBoostManager = player.GetComponent<BoostManager>();
+            this.player = player.GetComponent<Player>();
         }
 
         if (playerBoostManager == null)
@@ -47,18 +54,25 @@ public class ShopManager : MonoBehaviour
         InitializeItems();
         DisplayItems();
         UpdateTotalBoosts();
-
-        //this.gameObject.SetActive(false);
+        RandomizeItem();
+        //gameObject.SetActive(false);
     }
 
     private void OnEnable()
     {
         playerInput.SwitchCurrentActionMap("UI");
+        DisplayItems();
+        UpdateTotalBoosts();
     }
 
     private void OnDisable()
     {
         playerInput.SwitchCurrentActionMap("Gameplay");
+    }
+
+    public void ExitShop()
+    {
+        gameObject.SetActive(false);
     }
 
     void InitializeItems()
@@ -110,16 +124,26 @@ public class ShopManager : MonoBehaviour
         // Fun Random Items
         funRandomItems = new List<ShopItem>
         {
-            new ShopItem("Potion of Whimsical", ItemType.FunRandom, 0, 150, funRandomImages[0]),
-            new ShopItem("Purity Charm", ItemType.FunRandom, 0, 200, funRandomImages[1]),
-            new ShopItem("Aka’s Oni Mask", ItemType.FunRandom, 0, 250, funRandomImages[2]),
-            new ShopItem("Ao’s Oni Mask", ItemType.FunRandom, 0, 250, funRandomImages[3]),
-            new ShopItem("Ic’s Divine Wine", ItemType.FunRandom, 0, 150, funRandomImages[4]),
-            new ShopItem("Knife of Memory", ItemType.FunRandom, 0, 300, funRandomImages[5]),
-            new ShopItem("Moolon Milk", ItemType.FunRandom, 0, 200, funRandomImages[6]),
-            new ShopItem("Ness’s Balanced Breakfast", ItemType.FunRandom, 0, 250, funRandomImages[7]),
-            new ShopItem("Unknown’s Eye", ItemType.FunRandom, 0, 350, funRandomImages[8]),
-            new ShopItem("Weird Machina", ItemType.FunRandom, 0, 300, funRandomImages[9])
+            new ShopItem("Potion of Whimsical", ItemType.FunRandom, 0, 1000, funRandomImages[0],
+                "This item gives 2 random stat boosts, but 2 random boost decreases"),
+            new ShopItem("Purity Charm", ItemType.FunRandom, 0, 200, funRandomImages[1],
+                "This item removes all stat boosts and gives currency equal to 300 times number of boosts removed"),
+            new ShopItem("Aka’s Oni Mask", ItemType.FunRandom, 0, 500, funRandomImages[2],
+                "This item swaps boosts in Heavy Attack and boosts in HP"),
+            new ShopItem("Ao’s Oni Mask", ItemType.FunRandom, 0, 500, funRandomImages[3],
+                "This item swaps boosts in Light Attack and boosts in Willpower"),
+            new ShopItem("Ic’s Divine Wine", ItemType.FunRandom, 0, 1000, funRandomImages[4],
+                "This item boosts Willpower by 2, but decreases Speed boosts by 1"),
+            new ShopItem("Knife of Memory", ItemType.FunRandom, 0, 1500, funRandomImages[5],
+                "This item boosts both attack stats by 1 but decreases HP boosts by 2"),
+            new ShopItem("Moolon Milk", ItemType.FunRandom, 0, 1000, funRandomImages[6],
+                "This item boosts HP by 2"),
+            new ShopItem("Ness’s Balanced Lunch", ItemType.FunRandom, 0, 1500, funRandomImages[7],
+                "This item puts all stats at 1 boost"),
+            new ShopItem("Unknown’s Eye", ItemType.FunRandom, 0, 1750, funRandomImages[8],
+                "This item boosts a random stat by 4, but reduces all other boosts to 0"),
+            new ShopItem("Weird Machina", ItemType.FunRandom, 0, 500, funRandomImages[9],
+                "This item shuffles all current stat boosts randomly across each stat")
         };
 
     }
@@ -132,7 +156,7 @@ public class ShopManager : MonoBehaviour
                       playerBoostManager.willpowerBoosts +
                       playerBoostManager.healthPointBoosts;
 
-        uiManager.UpdateTotalBoostedText("+"+totalBoosts);
+        uiManager.UpdateTotalBoostedText("+" + totalBoosts);
     }
 
     void DisplayItems()
@@ -240,59 +264,509 @@ public class ShopManager : MonoBehaviour
             uiManager.UpdateMoveSpeedImage(outOfStock);
             // Update UI to show that no more specific Speed items are available
         }
+    }
 
-
-
+    public void RandomizeItem()
+    {
         // Display a random Fun Random Item
-        int randomIndex = Random.Range(0, funRandomItems.Count);
-        ShopItem randomItem = funRandomItems[randomIndex];
+        curRandomItemIndex = UnityEngine.Random.Range(0, funRandomItems.Count);
+        ShopItem randomItem = funRandomItems[curRandomItemIndex];
         uiManager.UpdateRandomItemNameText(randomItem.itemName);
         uiManager.UpdateRandomItemPriceText(randomItem.purchaseCost.ToString());
-        uiManager.UpdateRandomItemImage(funRandomImages[randomIndex]);
+        uiManager.UpdateRandomItemImage(funRandomImages[curRandomItemIndex]);
+        uiManager.UpdateRandomItemShuffleText(randomItem.description);
         // Update UI for random item
     }
 
-    public void PurchaseItem(ShopItem item)
+    public void PurchaseLightAttack()
     {
-        if (totalBoosts >= 8)
+        if (playerBoostManager.lightAttackBoosts < 3)
+            PurchaseItem(lightAttackItems[playerBoostManager.lightAttackBoosts]);
+    }
+
+    public void PurchaseHeavyAttack()
+    {
+        if (playerBoostManager.heavyAttackBoosts < 3)
+            PurchaseItem(heavyAttackItems[playerBoostManager.heavyAttackBoosts]);
+    }
+
+    public void PurchaseHPPoints()
+    {
+        if (playerBoostManager.healthPointBoosts < 3)
+            PurchaseItem(hpPointsItems[playerBoostManager.healthPointBoosts]);
+    }
+
+    public void PurchaseWillpower()
+    {
+        if (playerBoostManager.willpowerBoosts < 3)
+            PurchaseItem(willpowerItems[playerBoostManager.willpowerBoosts]);
+    }
+
+    public void PurchaseSpeed()
+    {
+        if (playerBoostManager.speedBoosts < 3)
+            PurchaseItem(speedItems[playerBoostManager.speedBoosts]);
+    }
+
+    public void PurchaseSpecial()
+    {
+        PurchaseSpecialItem(funRandomItems[curRandomItemIndex]);
+    }
+
+    public void ShuffleItemButton()
+    {
+        if (200 > player.GetCurGold())
         {
-            // Handle the case where the total boost limit is reached
+            // Handle the case where the player can't afford item
+            return;
+        }
+        player.SpendGold(200);
+        RandomizeItem();
+    }
+
+    void PurchaseSpecialItem(ShopItem item)
+    {
+        if (item.purchaseCost > player.GetCurGold())
+        {
+            // Handle the case where the player can't afford item
             return;
         }
 
+        player.SpendGold(item.purchaseCost);
+
+        switch (curRandomItemIndex)
+        {
+            case 0: //Potion of Whimsical
+                PotionWhimsey();
+                break;
+
+            case 1: //Purity charm
+                player.GainGold(300 * totalBoosts);
+                playerBoostManager.lightAttackBoosts = 0;
+                playerBoostManager.heavyAttackBoosts = 0;
+                playerBoostManager.speedBoosts = 0;
+                playerBoostManager.willpowerBoosts = 0;
+                playerBoostManager.healthPointBoosts = 0;
+                break;
+
+            case 2: //Aka's oni mask
+                //This uses a tuple to swap values!  Neat!
+                (playerBoostManager.healthPointBoosts, playerBoostManager.heavyAttackBoosts) = (playerBoostManager.heavyAttackBoosts, playerBoostManager.healthPointBoosts);
+                break;
+
+            case 3: //Ao's oni mask
+                //This uses a tuple to swap values!  Neat!
+                (playerBoostManager.willpowerBoosts, playerBoostManager.lightAttackBoosts) = (playerBoostManager.lightAttackBoosts, playerBoostManager.willpowerBoosts);
+                break;
+
+            case 4: //Ic's Divine Wine
+                ApplyBoost(ItemType.Willpower);
+                ApplyBoost(ItemType.Willpower);
+                ApplyDeBoost(ItemType.Speed);
+                break;
+
+            case 5: //Knife of Memory
+                ApplyBoost(ItemType.HeavyAttack);
+                ApplyBoost(ItemType.LightAttack);
+                ApplyDeBoost(ItemType.HPPoints);
+                ApplyDeBoost(ItemType.HPPoints);
+                break;
+
+            case 6: //Moolon Milk
+                ApplyBoost(ItemType.HPPoints);
+                ApplyBoost(ItemType.HPPoints);
+                break;
+
+            case 7: //Ness's Balanced Lunch
+                playerBoostManager.lightAttackBoosts = 1;
+                playerBoostManager.heavyAttackBoosts = 1;
+                playerBoostManager.speedBoosts = 1;
+                playerBoostManager.willpowerBoosts = 1;
+                playerBoostManager.healthPointBoosts = 1;
+                break;
+
+            case 8: //Unknown's Eye
+                UnknownEye();
+                break;
+
+            case 9: //Weird Machina
+                WeirdMachina();
+                break;
+
+            default:
+                Debug.Log("Please I fucking beg of you if you somehow got this debug do not tell me just leave me in sweet, blissful ignorance");
+                break;
+        }
+
+        // Update the total boosts and refresh the displayed items
+        RandomizeItem();
+        UpdateTotalBoosts();
+        DisplayItems();
+    }
+
+    void PurchaseItem(ShopItem item)
+    {
+        if (item.purchaseCost > player.GetCurGold())
+        {
+            // Handle the case where the player can't afford item
+            return;
+        }
         // Apply the boost from the item to the player
-        //ApplyBoost(item);
+        if (ApplyBoost(item.itemType))
+            player.SpendGold(item.purchaseCost);
 
         // Update the total boosts and refresh the displayed items
         UpdateTotalBoosts();
         DisplayItems();
     }
 
-    public void ApplyBoost(ItemType itemType)
+    bool ApplyBoost(ItemType itemType)
     {
         // Logic to apply the boost from the item to the player's stats
         // Example:
+        // Handle the case where the total boost limit is reached
+        if (totalBoosts >= 8)
+        {
+            //return false if boost failed
+            return false;
+        }
+
         switch (itemType)
         {
+            case ItemType.HeavyAttack:
+                if (playerBoostManager.heavyAttackBoosts >= 5)
+                { return false; }
+                Debug.Log("Boosted Heavy Attack");
+                playerBoostManager.heavyAttackBoosts = Mathf.Clamp(playerBoostManager.heavyAttackBoosts + 1, 0, 5);
+                break;
+
             case ItemType.LightAttack:
+                if (playerBoostManager.lightAttackBoosts >= 5)
+                { return false; }
+                Debug.Log("Boosted Light Attack");
                 playerBoostManager.lightAttackBoosts = Mathf.Clamp(playerBoostManager.lightAttackBoosts + 1, 0, 5);
                 break;
-            // Handle other item types similarly
+
+            case ItemType.HPPoints:
+                if (playerBoostManager.healthPointBoosts >= 5)
+                { return false; }
+                Debug.Log("Boosted HP");
+                playerBoostManager.healthPointBoosts = Mathf.Clamp(playerBoostManager.healthPointBoosts + 1, 0, 5);
+                break;
+
+            case ItemType.Willpower:
+                if (playerBoostManager.willpowerBoosts >= 5)
+                { return false; }
+                Debug.Log("Boosted WillPower");
+                playerBoostManager.willpowerBoosts = Mathf.Clamp(playerBoostManager.willpowerBoosts + 1, 0, 5);
+                break;
+
+            case ItemType.Speed:
+                if (playerBoostManager.speedBoosts >= 5)
+                { return false; }
+                Debug.Log("Boosted Movement Speed");
+                playerBoostManager.speedBoosts = Mathf.Clamp(playerBoostManager.speedBoosts + 1, 0, 5);
+                break;
+
+            default:
+                { return false; }
         }
+
+        //return true if boost succeeded
+        return true;
+    }
+
+    bool ApplyDeBoost(ItemType itemType)
+    {
+        // Logic to apply the boost from the item to the player's stats
+        // Example:
+        // Handle the case where the total boost limit is reached
+        if (totalBoosts <= 0)
+        {
+            //return false if deboost failed
+            return false;
+        }
+
+        switch (itemType)
+        {
+            case ItemType.HeavyAttack:
+                if (playerBoostManager.heavyAttackBoosts <= 0)
+                { return false; }
+                Debug.Log("DeBoosted Heavy Attack");
+                playerBoostManager.heavyAttackBoosts = Mathf.Clamp(playerBoostManager.heavyAttackBoosts - 1, 0, 5);
+                break;
+
+            case ItemType.LightAttack:
+                if (playerBoostManager.lightAttackBoosts <= 0)
+                { return false; }
+                Debug.Log("DeBoosted Light Attack");
+                playerBoostManager.lightAttackBoosts = Mathf.Clamp(playerBoostManager.lightAttackBoosts - 1, 0, 5);
+                break;
+
+            case ItemType.HPPoints:
+                if (playerBoostManager.healthPointBoosts <= 0)
+                { return false; }
+                Debug.Log("DeBoosted HPPoints");
+                playerBoostManager.healthPointBoosts = Mathf.Clamp(playerBoostManager.healthPointBoosts - 1, 0, 5);
+                break;
+
+            case ItemType.Willpower:
+                if (playerBoostManager.willpowerBoosts <= 0)
+                { return false; }
+                Debug.Log("DeBoosted Willpower");
+                playerBoostManager.willpowerBoosts = Mathf.Clamp(playerBoostManager.willpowerBoosts - 1, 0, 5);
+                break;
+
+            case ItemType.Speed:
+                if (playerBoostManager.speedBoosts <= 0)
+                { return false; }
+                Debug.Log("DeBoosted Move Speed");
+                playerBoostManager.speedBoosts = Mathf.Clamp(playerBoostManager.speedBoosts - 1, 0, 5);
+                break;
+
+            default:
+                { return false; }
+        }
+
+        //return true if deboost succeeded
+        return true;
     }
 
     // Additional logic for Fun Random Items
     // ...
+    void PotionWhimsey()
+    {
+        int numOfAttempts = 0; HashSet<int> loggedTypes = new HashSet<int>();
+        int decreaseSuccess = 0; //This is probably wildly inefficient but I do not give a fuck rn (5:10 am)
+        while (numOfAttempts < 10 && decreaseSuccess < 2)
+        {
+            int rand = UnityEngine.Random.Range(1, 6);
+            ItemType type = ItemType.HeavyAttack;
+
+            if (!loggedTypes.Contains(rand))
+            {
+                switch (rand)
+                {
+                    case 1:
+                        type = ItemType.HeavyAttack;
+                        break;
+
+                    case 2:
+                        type = ItemType.LightAttack;
+                        break;
+
+                    case 3:
+                        type = ItemType.HPPoints;
+                        break;
+
+                    case 4:
+                        type = ItemType.Willpower;
+                        break;
+
+                    case 5:
+                        type = ItemType.Speed;
+                        break;
+
+                    default:
+                        Debug.LogError("Unhandled random value: " + rand);
+                        break;
+                }
+
+                if (ApplyDeBoost(type))
+                    decreaseSuccess++;
+                else
+                {
+                    loggedTypes.Add(rand);
+                }
+            }
+            numOfAttempts++;
+        }
+
+        numOfAttempts = 0; loggedTypes = new HashSet<int>();
+        int increaseSuccess = 0; //This is probably wildly inefficient but I do not give a fuck rn (5:10 am)
+        while (numOfAttempts < 10 && increaseSuccess < 2)
+        {
+            int rand = UnityEngine.Random.Range(1, 6);
+            ItemType type = ItemType.HeavyAttack;
+
+            if (!loggedTypes.Contains(rand))
+            {
+                switch (rand)
+                {
+                    case 1:
+                        type = ItemType.HeavyAttack;
+                        break;
+
+                    case 2:
+                        type = ItemType.LightAttack;
+                        break;
+
+                    case 3:
+                        type = ItemType.HPPoints;
+                        break;
+
+                    case 4:
+                        type = ItemType.Willpower;
+                        break;
+
+                    case 5:
+                        type = ItemType.Speed;
+                        break;
+
+                    default:
+                        Debug.LogError("Unhandled random value: " + rand);
+                        break;
+                }
+
+                if (ApplyBoost(type))
+                    increaseSuccess++;
+                else
+                {
+                    loggedTypes.Add(rand);
+                }
+            }
+            numOfAttempts++;
+        }
+    }
+
+    //Courtesy of ChatGPT
+    void UnknownEye()
+    {
+        // Create an array of all ItemType values
+        ItemType[] allStats = (ItemType[])Enum.GetValues(typeof(ItemType));
+
+        // Choose a random stat from the array
+        ItemType randomStat = allStats[UnityEngine.Random.Range(0, allStats.Length - 1)];
+
+        // Set the chosen stat to 4 boosts
+        switch (randomStat)
+        {
+            case ItemType.HeavyAttack:
+                playerBoostManager.heavyAttackBoosts = 4;
+                break;
+
+            case ItemType.LightAttack:
+                playerBoostManager.lightAttackBoosts = 4;
+                break;
+
+            case ItemType.HPPoints:
+                playerBoostManager.healthPointBoosts = 4;
+                break;
+
+            case ItemType.Willpower:
+                playerBoostManager.willpowerBoosts = 4;
+                break;
+
+            case ItemType.Speed:
+                playerBoostManager.speedBoosts = 4;
+                break;
+
+            default:
+                Debug.LogError("Unhandled ItemType: " + randomStat);
+                break;
+        }
+
+        // Set all other stats to 0 boosts
+        foreach (ItemType stat in allStats)
+        {
+            if (stat != randomStat)
+            {
+                switch (stat)
+                {
+                    case ItemType.HeavyAttack:
+                        playerBoostManager.heavyAttackBoosts = 0;
+                        break;
+
+                    case ItemType.LightAttack:
+                        playerBoostManager.lightAttackBoosts = 0;
+                        break;
+
+                    case ItemType.HPPoints:
+                        playerBoostManager.healthPointBoosts = 0;
+                        break;
+
+                    case ItemType.Willpower:
+                        playerBoostManager.willpowerBoosts = 0;
+                        break;
+
+                    case ItemType.Speed:
+                        playerBoostManager.speedBoosts = 0;
+                        break;
+
+                    default:
+                        Debug.LogError("Unhandled ItemType: " + stat);
+                        break;
+                }
+            }
+        }
+    }
+
+    //Also Courtesy of ChatGPT
+    void WeirdMachina()
+    {
+        // Create an array of all ItemType values
+        ItemType[] allStats = ((ItemType[])Enum.GetValues(typeof(ItemType))).Take(Enum.GetValues(typeof(ItemType)).Length - 1).ToArray();
+
+        // Create a list to store the number of boosts for each stat
+        List<int> boostsPerStat = new List<int>();
+
+        // Randomly distribute the total number of boosts among all stats
+        for (int i = 0; i < allStats.Length - 1; i++)
+        {
+            // Generate a random number of boosts for the current stat
+            int randomBoosts = UnityEngine.Random.Range(0, Mathf.Min(totalBoosts + 1, 6));
+
+            // Add the random number of boosts to the list
+            boostsPerStat.Add(randomBoosts);
+
+            // Subtract the allocated boosts from the total
+            totalBoosts -= randomBoosts;
+        }
+
+        // The last stat gets the remaining boosts to ensure the total is unchanged
+        boostsPerStat.Add(totalBoosts);
+
+        // Set the boosts for each stat based on the redistributed values
+        for (int i = 0; i < allStats.Length; i++)
+        {
+            switch (allStats[i])
+            {
+                case ItemType.HeavyAttack:
+                    playerBoostManager.heavyAttackBoosts = Mathf.Clamp(boostsPerStat[i], 0, 5);
+                    break;
+
+                case ItemType.LightAttack:
+                    playerBoostManager.lightAttackBoosts = Mathf.Clamp(boostsPerStat[i], 0, 5);
+                    break;
+
+                case ItemType.HPPoints:
+                    playerBoostManager.healthPointBoosts = Mathf.Clamp(boostsPerStat[i], 0, 5);
+                    break;
+
+                case ItemType.Willpower:
+                    playerBoostManager.willpowerBoosts = Mathf.Clamp(boostsPerStat[i], 0, 5);
+                    break;
+
+                case ItemType.Speed:
+                    playerBoostManager.speedBoosts = Mathf.Clamp(boostsPerStat[i], 0, 5);
+                    break;
+
+                default:
+                    Debug.LogError("Unhandled ItemType: " + allStats[i]);
+                    break;
+            }
+        }
+    }
 
     public enum ItemType
-  {
-      HeavyAttack,
-      LightAttack,
-      HPPoints,
-      Willpower,
-      Speed,
-      FunRandom // For special items
-  }
+    {
+        HeavyAttack,
+        LightAttack,
+        HPPoints,
+        Willpower,
+        Speed,
+        FunRandom // For special items
+    }
 
   [System.Serializable]
   public class ShopItem
@@ -303,6 +777,9 @@ public class ShopManager : MonoBehaviour
       public int purchaseCost;
       public Sprite itemImage;
 
+        //Only for use by FunRandom item types
+        public string description = "default";
+
       // Constructor
       public ShopItem(string name, ItemType type, int boost, int cost, Sprite image)
       {
@@ -312,6 +789,16 @@ public class ShopManager : MonoBehaviour
           purchaseCost = cost;
           itemImage = image;
       }
+
+      public ShopItem(string name, ItemType type, int boost, int cost, Sprite image, string description)
+        {
+            itemName = name;
+            itemType = type;
+            boostAmount = boost;
+            purchaseCost = cost;
+            itemImage = image;
+            this.description = description;
+        }
   }
 
 }

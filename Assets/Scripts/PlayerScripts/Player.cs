@@ -108,8 +108,9 @@ public class Player : MonoBehaviour, IDataPersistence
 
             if (dialogueUI == null)
             {
-                GameObject.Find("Canvas (levels)").GetComponent<DialogueUI>();            }
+                GameObject.Find("Canvas (levels)").GetComponent<DialogueUI>();            
             }
+        }
         catch { }
     }
 
@@ -124,6 +125,8 @@ public class Player : MonoBehaviour, IDataPersistence
 
         expBar.SetMaxResource(expToLevelUp[playerLevel - 1]);
         expBar.SetResource(curExp);
+
+        GameManager.instance.SetPlayerGold(curGold);
     }
 
     //Set the spawnpoint of the player on scene load
@@ -399,6 +402,19 @@ public class Player : MonoBehaviour, IDataPersistence
         curAbilityMeter = Mathf.Clamp(curAbilityMeter - meterUsed, 0, maxAbilityMeter);
         meterBar.SetResource((int)curAbilityMeter);
         ChangeMeterColor();
+    }
+
+    public int GetCurGold() {  return curGold; }
+    public void SpendGold(int spentGold)
+    { 
+        curGold -= spentGold;
+        GameManager.instance.SetPlayerGold(curGold);
+    }
+
+    public void GainGold(int spentGold)
+    {
+        curGold += spentGold;
+        GameManager.instance.SetPlayerGold(curGold);
     }
 
     void ChangeMeterColor()

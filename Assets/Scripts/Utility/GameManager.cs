@@ -146,7 +146,7 @@ public class GameManager : MonoBehaviour
 
     public void SetPlayerGold(int gold)
     {
-        curGold += gold;
+        curGold = gold;
     }
 
     public int GetPlayerGold()
