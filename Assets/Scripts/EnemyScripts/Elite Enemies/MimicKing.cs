@@ -70,6 +70,7 @@ public class MimicKing : Enemy
     protected bool inAggroRange = false;
 
     protected bool isAttacking = false;
+    [SerializeField] private bool killForTesting = false;
 
     [SerializeField] protected float actionInterval = 1f; // in seconds
     float nextActionTime;
@@ -102,6 +103,13 @@ public class MimicKing : Enemy
 
     void Update()
     {
+        if (killForTesting)
+        {
+            killForTesting = false; // Reset the flag
+            Die();
+            return;
+        }
+
         distanceFromTarget = targetDistance();
         direction = currentTarget.transform.position - transform.position;
 

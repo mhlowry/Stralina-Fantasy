@@ -9,7 +9,6 @@ using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerCombat))]
-[RequireComponent(typeof(BoostManager))]
 [RequireComponent(typeof(CinemachineImpulseSource))]
 public class Player : MonoBehaviour, IDataPersistence
 {
@@ -20,7 +19,6 @@ public class Player : MonoBehaviour, IDataPersistence
     [SerializeField, Range(1, maxLevel)]  int playerLevel = 1;
     int[] expToLevelUp = { 100, 500, 1000, 2000, 3000, 5000, 6000 };
     [SerializeField] int curExp = 0;
-    [SerializeField] int curGold = 0;
     [SerializeField] private GoldDisplay goldDisplay;
 
     int maxHealth = 15;
@@ -30,7 +28,6 @@ public class Player : MonoBehaviour, IDataPersistence
     [SerializeField, Range(0, maxAbilityMeter)] float curAbilityMeter = 0f;
 
     //STATS SHIT
-    BoostManager boostManager;
     
     float attackScale = 1f;
     float defenseScale = 1f;
@@ -87,7 +84,6 @@ public class Player : MonoBehaviour, IDataPersistence
         animGFX = gfxObj.GetComponent<Animator>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
         characterController = GetComponent<CharacterController>();
-        boostManager = GetComponent<BoostManager>();
 
         // should be in awake!
         try
@@ -108,8 +104,9 @@ public class Player : MonoBehaviour, IDataPersistence
 
             if (dialogueUI == null)
             {
-                GameObject.Find("Canvas (levels)").GetComponent<DialogueUI>();            }
+                GameObject.Find("Canvas (levels)").GetComponent<DialogueUI>();            
             }
+        }
         catch { }
     }
 
@@ -118,7 +115,7 @@ public class Player : MonoBehaviour, IDataPersistence
         meterBar.SetMaxResource((int)maxAbilityMeter);
         meterBar.SetResource((int)curAbilityMeter);
 
-        maxHealth += boostManager.healthPointBoosts * 2;
+        maxHealth += GameManager.instance.healthPointBoosts * 2;
         healthBar.SetMaxResource(maxHealth);
         curHealth = maxHealth;
 
@@ -160,7 +157,7 @@ public class Player : MonoBehaviour, IDataPersistence
     protected virtual void Update()
     {
         //either un-stun the player or 
-        if (Time.time - timeofHit > (hitStunTime - boostManager.willpowerBoosts * 0.1f))
+        if (Time.time - timeofHit > (hitStunTime - GameManager.instance.willpowerBoosts * 0.1f))
         {
             //take out of hitstun state
             animGFX.SetBool("inPain", false);
@@ -178,7 +175,7 @@ public class Player : MonoBehaviour, IDataPersistence
             playerMovement.ApplyGravity();
         }
 
-        if (Time.time - timeofHit > (hitInvulTime + boostManager.willpowerBoosts * 0.2f) && !invulOverride)
+        if (Time.time - timeofHit > (hitInvulTime + GameManager.instance.willpowerBoosts * 0.2f) && !invulOverride)
         {
             isInvul = false;
         }
@@ -326,23 +323,24 @@ public class Player : MonoBehaviour, IDataPersistence
 
     public void GainExp(int expGain)
     {
-        if (playerLevel == maxLevel)
-            return;
-
-        curExp += expGain;
-        curGold += expGain;  // Gain gold equal to the experience gained
-        expBar.SetResource(curExp);
-
+        //We want the player to be able to earn gold even at level 7
+        GameManager.instance.SetPlayerGold(GameManager.instance.GetPlayerGold() + expGain);
         if (GameManager.instance != null)
-        {
-            GameManager.instance.SetPlayerExp(curExp);
-            GameManager.instance.SetPlayerGold(curGold);
-        }
+            GameManager.instance.SetPlayerGold(GameManager.instance.GetPlayerGold());
 
         if (goldDisplay != null)
         {
             goldDisplay.UpdateGoldDisplay();  // Directly update the gold display
         }
+
+        if (playerLevel == maxLevel)
+            return;
+
+        curExp += expGain;
+        expBar.SetResource(curExp);
+
+        if (GameManager.instance != null)
+            GameManager.instance.SetPlayerExp(curExp);
 
         if (curExp >= expToLevelUp[playerLevel - 1])
         {
@@ -376,11 +374,11 @@ public class Player : MonoBehaviour, IDataPersistence
 
     //Stats-related functions
     public float GetAttackScale() {  return attackScale; }
-    public float GetMoveSpeedScale() { return moveSpeedScale + (boostManager.speedBoosts * 0.1f); }
+    public float GetMoveSpeedScale() { return moveSpeedScale + (GameManager.instance.speedBoosts * 0.1f); }
 
     //Combo-related functions
-    public float GetLightDmgScale() { return lightDmgScale + (boostManager.lightAttackBoosts * 0.5f); }
-    public float GetHeavyDmgScale() { return heavyDmgScale + (boostManager.heavyAttackBoosts * 0.5f); }
+    public float GetLightDmgScale() { return lightDmgScale + (GameManager.instance.lightAttackBoosts * 0.5f); }
+    public float GetHeavyDmgScale() { return heavyDmgScale + (GameManager.instance.heavyAttackBoosts * 0.5f); }
     public float GetAtkSpeedScale() { return atkSpeedScale; }
     public float GetKnockBScale() { return atkKnockBScale; }
 
@@ -399,6 +397,17 @@ public class Player : MonoBehaviour, IDataPersistence
         curAbilityMeter = Mathf.Clamp(curAbilityMeter - meterUsed, 0, maxAbilityMeter);
         meterBar.SetResource((int)curAbilityMeter);
         ChangeMeterColor();
+    }
+
+    public int GetCurGold() {  return GameManager.instance.GetPlayerGold(); } // ik this is weird im just trying not to break anything rn lol
+    public void SpendGold(int spentGold)
+    { 
+        GameManager.instance.SetPlayerGold(GameManager.instance.GetPlayerGold() - spentGold);
+    }
+
+    public void GainGold(int gainedGold)
+    {
+        GameManager.instance.SetPlayerGold(GameManager.instance.GetPlayerGold() + gainedGold);
     }
 
     void ChangeMeterColor()

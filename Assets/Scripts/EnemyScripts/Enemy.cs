@@ -39,23 +39,6 @@ public class Enemy : MonoBehaviour
     private float currentInterestLevel = 1f; // The current interest level in the current target
     private float lastDistanceToCurrentTarget = Mathf.Infinity; // Last recorded distance to the current target
 
-    private void Update()
-    {
-        // Check if the companion is still active/exists in the scene
-        if (companionObject == null || !companionObject.activeInHierarchy)
-        {
-            // Attempt to find Companion again or reset to player
-            companionObject = GameObject.FindGameObjectWithTag("Companion");
-            if (companionObject == null)
-            {
-                currentTarget = playerObject;
-            }
-        }
-
-        // Update the target selection
-        UpdateTarget();
-    }
-    
     protected virtual void Awake()
     {
         //sets whatever object this is on to be put on the "enemy" layer, so the player can attack it.
@@ -105,6 +88,31 @@ public class Enemy : MonoBehaviour
 
         impulseSource = GetComponent<CinemachineImpulseSource>();
     }
+
+    private void Update()
+    {
+        // Check if the companion is still active/exists in the scene
+        if (companionObject == null || !companionObject.activeInHierarchy)
+        {
+            // Attempt to find Companion again or reset to player
+            companionObject = GameObject.FindGameObjectWithTag("Companion");
+            if (companionObject == null)
+            {
+                currentTarget = playerObject;
+            }
+        }
+
+        // Update the target selection
+        UpdateTarget();
+    }
+
+/*    private void FixedUpdate()
+    {
+        if (rb.velocity.magnitude > 300)
+        {
+            rb.velocity = rb.velocity.normalized * 300;
+        }
+    }*/
 
     protected void UpdateTarget()
     {
@@ -245,7 +253,7 @@ public class Enemy : MonoBehaviour
                 break;
             }
         }
-
+        
         //wait like 2ish seconds before destorying the object
         yield return new WaitForSeconds(2.5f);
         Destroy(gameObject);

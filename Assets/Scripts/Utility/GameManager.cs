@@ -10,6 +10,18 @@ public class GameManager : MonoBehaviour
     private int playerLevel = 1;
     private int curExp = 0;
     private int curGold = 0;
+    private bool hasSpokenToShopkeeper = false;
+    private string dialogueName;    
+
+    [Range(0, 5)] public int lightAttackBoosts = 0;
+
+    [Range(0, 5)] public int heavyAttackBoosts = 0;
+
+    [Range(0, 5)] public int speedBoosts = 0;
+
+    [Range(0, 5)] public int willpowerBoosts = 0;
+
+    [Range(0, 5)] public int healthPointBoosts = 0;
 
     const int maxLevel = 7;
     private void Awake()
@@ -122,42 +134,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetPlayerLevel(int level)
-    {
-        playerLevel = level;
-    }
-
-    public void SetPlayerExp(int exp)
-    {
-        curExp = exp;
-    }
-
-    public int GetPlayerLevel()
-    {
-        return playerLevel;
-    }
-
-    public int GetPlayerExp()
-    {
-        return curExp;
-    }
-
-    public void SetPlayerGold(int gold)
-    {
-        curGold += gold;
-    }
-
-    public int GetPlayerGold()
-    {
-        return curGold;
-    }
-
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "Base_Scene")
         {
             InitializeLevelPortals();
             InitializeStorytellerDialogue();
+            InitializeShopkeeperDialogue();
+            
             Debug.Log("Base Scene setup complete");
         }
     }
@@ -171,7 +155,7 @@ public class GameManager : MonoBehaviour
             DialogueActivator dialogueActivator = storyteller.GetComponent<DialogueActivator>();
             if (dialogueActivator != null)
             {
-                UpdateDialogue(dialogueActivator);
+                UpdateStorytellerDialogue(dialogueActivator);
             }
             else
             {
@@ -184,8 +168,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void UpdateDialogue(DialogueActivator dialogueActivator)
+    private void UpdateStorytellerDialogue(DialogueActivator dialogueActivator)
     {
+        // Check if the dialogueActivator is for the Storyteller object
+        if (dialogueActivator.gameObject.name != "Storyteller")
+        {
+            return; // Exit the method if not the Storyteller
+        }
+
         int completedLevels = GetCompletedLevelsCount();
 
         string currentDialogueName;
@@ -208,7 +198,6 @@ public class GameManager : MonoBehaviour
         DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
         DialogueObject currentDialogue = dialogueManager.GetDialogueByName(currentDialogueName);
         DialogueObject nextDialogue = dialogueManager.GetDialogueByName(nextDialogueName);
-
 
         Debug.Log("Current Dialogue Name: " + currentDialogueName);
         Debug.Log("Next Dialogue Name: " + nextDialogueName);
@@ -236,6 +225,85 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void InitializeShopkeeperDialogue()
+    {
+        GameObject shopkeeper = GameObject.Find("Shopkeeper");
+        if (shopkeeper != null)
+        {
+            DialogueActivator dialogueActivator = shopkeeper.GetComponent<DialogueActivator>();
+            if (dialogueActivator != null)
+            {
+                UpdateShopkeeperDialogue(dialogueActivator);
+            }
+            else
+            {
+                Debug.LogWarning("DialogueActivator component not found on Shopkeeper");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Shopkeeper object not found in the scene");
+        }
+    }
+
+    public void UpdateShopkeeperDialogue(DialogueActivator shopkeeperActivator)
+    {
+        // Check if the shopkeeperActivator is null
+        if (shopkeeperActivator == null)
+        {
+            Debug.LogError("ShopkeeperActivator is null");
+            return;
+        }
+
+        // Find the DialogueManager in the scene
+        DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
+        if (dialogueManager == null)
+        {
+            Debug.LogError("DialogueManager not found in the scene");
+            return;
+        }
+
+        string dialogueName;
+
+        // Check if the shopkeeper has been spoken to and set the dialogue name accordingly
+        if (!hasSpokenToShopkeeper)
+        {
+            dialogueName = "FE 1-1"; // First encounter dialogue
+            hasSpokenToShopkeeper = true;
+
+            // Save the game state if DataPersistenceManager is available
+            if (DataPersistenceManager.instance != null)
+            {
+                DataPersistenceManager.instance.SaveGame();
+                Debug.Log("Game Saved");
+            }
+            else
+            {
+                Debug.LogError("DataPersistenceManager instance not found");
+            }
+
+            Debug.Log("First encounter dialogue set.");
+        }
+        else
+        {
+            int dialogueIndex = Random.Range(1, 9); // Randomly pick a number between 1 and 8
+            dialogueName = "RT 1-" + dialogueIndex;
+            Debug.Log("Random dialogue set: " + dialogueName);
+        }
+
+        // Get the dialogue object by name
+        DialogueObject newDialogue = dialogueManager.GetDialogueByName(dialogueName);
+        if (newDialogue == null)
+        {
+            Debug.LogError("DialogueObject not found for name: " + dialogueName);
+            return;
+        }
+
+        // Update the dialogue activator with the new dialogue
+        shopkeeperActivator.UpdateDialogueObject(newDialogue);
+    }
+
+
     // Returns the count of completed levels
     private int GetCompletedLevelsCount()
     {
@@ -255,4 +323,104 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    // setters and getters
+
+    public void SetPlayerLevel(int level)
+    {
+        playerLevel = level;
+    }
+
+    public void SetPlayerExp(int exp)
+    {
+        curExp = exp;
+    }
+
+    public int GetPlayerLevel()
+    {
+        return playerLevel;
+    }
+
+    public int GetPlayerExp()
+    {
+        return curExp;
+    }
+
+    public void SetPlayerGold(int gold)
+    {
+        curGold = gold;
+    }
+
+    public int GetPlayerGold()
+    {
+        return curGold;
+    }
+    public void SetHasSpokenToShopkeeper(bool hasSpoken)
+    {
+        hasSpokenToShopkeeper = hasSpoken;
+    }
+
+    public bool GetHasSpokenToShopkeeper()
+    {
+        return hasSpokenToShopkeeper;
+    }
+
+    public void SetLightAttackBoosts(int value)
+    {
+        lightAttackBoosts = value;
+    }
+
+    public int GetLightAttackBoosts()
+    {
+        return lightAttackBoosts;
+    }
+
+    public void SetHeavyAttackBoosts(int value)
+    {
+        heavyAttackBoosts = value;
+    }
+
+    public int GetHeavyAttackBoosts()
+    {
+        return heavyAttackBoosts;
+    }
+
+    public void SetSpeedBoosts(int value)
+    {
+        speedBoosts = value;
+    }
+
+    public int GetSpeedBoosts()
+    {
+        return speedBoosts;
+    }
+
+    public void SetWillpowerBoosts(int value)
+    {
+        willpowerBoosts = value;
+    }
+
+    public int GetWillpowerBoosts()
+    {
+        return willpowerBoosts;
+    }
+
+    public void SetHealthPointBoosts(int value)
+    {
+        healthPointBoosts = value;
+    }
+
+    public int GetHealthPointBoosts()
+    {
+        return healthPointBoosts;
+    }
+
+    public string GetDialogueName()
+    {
+        return dialogueName;
+    }
+
+    public void SetDialogueName(string name)
+    {
+        dialogueName = name;
+    }
 }

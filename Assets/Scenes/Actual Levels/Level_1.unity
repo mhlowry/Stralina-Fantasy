@@ -1231,6 +1231,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 823242482}
     m_Modifications:
     - target: {fileID: 2633501859462594746, guid: f69cd4602c2886541b73ed733662612c, type: 3}
+      propertyPath: expWorth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633501859462594746, guid: f69cd4602c2886541b73ed733662612c, type: 3}
       propertyPath: maxHealthPoints
       value: 15
       objectReference: {fileID: 0}
@@ -2407,7 +2411,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 331a806d7f63a7e4aa281df392608dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelsCompleted: 
   description: 
   isCompleted: 0
   levelIndex: 0

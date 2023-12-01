@@ -12,5 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30e5efdd41c623458a5b93db76db39a, type: 3}
   m_Name: FE 1-1
   m_EditorClassIdentifier: 
-  dialogue: []
-  responses: []
+  dialogue:
+  - 'Oi!  Welcome to the Last Leg!  The perfect shop for all yer vermin huntin needs. '
+  - Most of this magik item whatnot used to be outlawed back in the day.
+  - 'But ever since The Great Tear, no one gives a damn!  No government to hold us
+    back no more!
+
+'
+  - "Lemme explain.  Most of them critters out there have this essence that gets
+    condensed into what we call \u201Cgolden soul\u201D when they die.\r"
+  - The stronger the soul, the more valuable the gold!
+  - '(I bet yer soul would fetch a pretty penny, heheheh)
+
+'
+  - 'Anyways- If you bring me golden souls, I can tradeya for these magical doohickies
+    that will make you stronger!
+
+'
+  - "They won\u2019t hurtcha\u2026 if you use moderation.  I ain\u2019t keen on losing
+    customers.\r"
+  - "Would ya like to take a look at my stock!\r\r"
+  responses:
+  - responseText: Yes
+    dialogueObject: {fileID: 0}
+  - responseText: Maybe later
+    dialogueObject: {fileID: 0}
