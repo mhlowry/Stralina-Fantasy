@@ -16,8 +16,8 @@ MonoBehaviour:
   - I never trusted them lil slimes!  If you look at em fer too long you might be
     entranced by them big eyes they got.
   - "Dontchu let them pull one over on you!  Especially them blue ones\u2026 *shudder*"
-  - So, would you like to enter the shop again and see what other mystical wares
-    I've got for ya today?
+  - Fancy a return to me little shop of wonders? There's a slew of new enchantments
+    that I'm just dyin' to show ya.
   responses:
   - responseText: Yes
     dialogueObject: {fileID: 0}

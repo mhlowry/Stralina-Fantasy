@@ -18,8 +18,8 @@ MonoBehaviour:
   - 'I reckon you could deflect those perjectiles right back at dem!
 
 '
-  - So, would you like to enter the shop again and see what other mystical wares
-    I've got for ya today?
+  - Ye look like ye could use another trip to me shop. Got some new spellbinding
+    wares that are just callin' yer name.
   responses:
   - responseText: Yes
     dialogueObject: {fileID: 0}

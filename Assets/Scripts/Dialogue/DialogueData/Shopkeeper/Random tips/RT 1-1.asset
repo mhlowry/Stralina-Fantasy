@@ -16,8 +16,8 @@ MonoBehaviour:
   - "Ya ever feel like you find yerself in a pinch on the field of battle?  Like,
     ya can\u2019t move \u2018cus yer so focused on attackin?"
   - Try throwin a roll or two into yer onslaught!  Keep those critters on their toes!
-  - So, would you like to enter the shop again and see what other mystical wares
-    I've got for ya today?
+  - So, ye fancy another jaunt into me shop, eh? Got some more bewitched items that
+    might tickle yer fancy.
   responses:
   - responseText: Yes
     dialogueObject: {fileID: 0}

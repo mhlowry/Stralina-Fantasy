@@ -15,8 +15,8 @@ MonoBehaviour:
   dialogue:
   - "Meet any Mixenos yet?  Them purple goop guys?  I love those critters!  They\u2019re
     wicked silly!  (and profitable!)\r"
-  - "So, would you like to enter the shop again and see what other mystical wares
-    I've got for ya today?\r"
+  - "What say ye to another gander at me magical stock? I've conjured up some new
+    trinkets since yer last visit.\r"
   responses:
   - responseText: Yes
     dialogueObject: {fileID: 0}
