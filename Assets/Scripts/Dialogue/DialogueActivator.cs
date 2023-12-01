@@ -65,8 +65,19 @@ public class DialogueActivator : MonoBehaviour, IInteractable
             Debug.Log("Shopkeeper dialogue not initialized, dialogue name is: " + GameManager.instance.GetDialogueName());
         }
 
-        Debug.Log("This is found here");
+        // Check if the storyteller is on a default dialogue and remove newDialogue object
+        string currentDialogueName = dialogueObject ? dialogueObject.name : "";
+        if (currentDialogueName.EndsWith("-default"))
+        {
+            GameObject newDialogue = GameObject.Find("Storyteller/newDialogue");
+            if (newDialogue != null)
+            {
+                // Option 1: Deactivate the newDialogue object
+                newDialogue.SetActive(false);
+            }
+        }
     }
+
 
     void CheckAndUpdateShopkeeperDialogue()
     {

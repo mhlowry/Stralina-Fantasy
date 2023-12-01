@@ -35,6 +35,7 @@ public class GameData
     public int willpowerBoosts = 0;
     public int healthPointBoosts = 0;
     public bool [] levelsCompleted;
+    public bool [] heardDialogue;
 
     // The values defined in this constructor will be the default values
     // the game starts when there's no data to load
@@ -64,6 +65,9 @@ public class GameData
         // invulOverride = false;
         //playerPosition = new Vector3(-1.02f, 1.56f, -2.13f);
         levelsCompleted = new bool[] 
+                            { false, false, false, false, false,
+                            false, false, false, false, false };
+        heardDialogue = new bool[]
                             { false, false, false, false, false,
                             false, false, false, false, false };
         hasSpokenToShopkeeper = false;

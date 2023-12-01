@@ -59,6 +59,9 @@ public class DataPersistenceManager : MonoBehaviour
             GameManager.instance.SetLevelsCompleted(gameData.levelsCompleted);
             Debug.Log("Loaded levels completed: " + gameData.levelsCompleted);
 
+            GameManager.instance.SetHeardDialogue(gameData.heardDialogue);
+            Debug.Log("Loaded heardDialogue: " + gameData.heardDialogue);
+
             GameManager.instance.SetPlayerLevel(gameData.playerLevel);
             Debug.Log("Loaded current level: " + gameData.playerLevel);
 
@@ -97,6 +100,7 @@ public class DataPersistenceManager : MonoBehaviour
     public void SaveGame()
     {
         gameData.levelsCompleted = GameManager.instance.GetLevelsCompleted();
+        gameData.heardDialogue = GameManager.instance.GetHeardDialogue();
         gameData.playerLevel = GameManager.instance.GetPlayerLevel();
         gameData.curExp = GameManager.instance.GetPlayerExp();
         gameData.curGold = GameManager.instance.GetPlayerGold();

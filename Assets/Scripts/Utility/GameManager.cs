@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [SerializeField] public bool[] levelsCompleted;
+    [SerializeField] public bool[] heardDialogue;
     private int playerLevel = 1;
     private int curExp = 0;
     private int curGold = 0;
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
         levelsCompleted = new bool[10];
+        heardDialogue = new bool[10];
 
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -116,24 +118,6 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
-    public bool[] GetLevelsCompleted()
-    {
-        return levelsCompleted;
-    }
-
-    public void SetLevelsCompleted(bool[] completedLevels)
-    {
-        if (completedLevels.Length == levelsCompleted.Length)
-        {
-            levelsCompleted = completedLevels;
-            Debug.Log("Levels completion status updated.");
-        }
-        else
-        {
-            Debug.LogError("Mismatch in levelsCompleted length.");
-        }
-    }
-
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "Base_Scene")
@@ -181,18 +165,36 @@ public class GameManager : MonoBehaviour
         string currentDialogueName;
         string nextDialogueName;
 
+        // Find the newDialogue GameObject as a child of the Storyteller
+        GameObject newDialogue = dialogueActivator.gameObject.transform.Find("newDialogue").gameObject;
+
         if (completedLevels > 0)
         {
-            // Use first dialogue of the current level
-            currentDialogueName = $"Level {completedLevels}-1";
-            // Use default dialogue of the current level
-            nextDialogueName = $"Level {completedLevels}-default";
+            if (!heardDialogue[completedLevels - 1])
+            {
+                // Use first dialogue of the current level
+                currentDialogueName = $"Level {completedLevels}-1";
+                // Use default dialogue of the current level
+                nextDialogueName = $"Level {completedLevels}-default";
+                if (newDialogue != null) newDialogue.SetActive(true);
+                heardDialogue[completedLevels - 1] = true;
+            }
+            else
+            {
+                currentDialogueName = $"Level {completedLevels}-default";
+                nextDialogueName = $"Level {completedLevels}-default";
+                // Set newDialogue to active if on main story dialogue
+                if (newDialogue != null) newDialogue.SetActive(false);
+            }
         }
         else
         {
             // If no levels have been completed, use Level 1 dialogues
             currentDialogueName = "Level 1-default";
             nextDialogueName = "Level 1-default";
+
+            // Set newDialogue to inactive if on default dialogue
+            if (newDialogue != null) newDialogue.SetActive(false);
         }
 
         DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
@@ -202,27 +204,17 @@ public class GameManager : MonoBehaviour
         Debug.Log("Current Dialogue Name: " + currentDialogueName);
         Debug.Log("Next Dialogue Name: " + nextDialogueName);
 
-        if (currentDialogue != null)
-        {
-            Debug.Log("Current Dialogue found: " + currentDialogue.name);
-        }
-        else
-        {
-            Debug.Log("Current Dialogue not found");
-        }
+        // Additional logs for debugging
+        if (currentDialogue != null) Debug.Log("Current Dialogue found: " + currentDialogue.name);
+        else Debug.Log("Current Dialogue not found");
 
-        if (nextDialogue != null)
-        {
-            Debug.Log("Next Dialogue found: " + nextDialogue.name);
-        }
-        else
-        {
-            Debug.Log("Next Dialogue not found");
-        }
+        if (nextDialogue != null) Debug.Log("Next Dialogue found: " + nextDialogue.name);
+        else Debug.Log("Next Dialogue not found");
 
         dialogueActivator.UpdateDialogueObject(currentDialogue);
         dialogueActivator.SetNextDialogueObject(nextDialogue);
     }
+
 
 
     public void InitializeShopkeeperDialogue()
@@ -422,5 +414,54 @@ public class GameManager : MonoBehaviour
     public void SetDialogueName(string name)
     {
         dialogueName = name;
+    }
+
+    public bool[] GetLevelsCompleted()
+    {
+        return levelsCompleted;
+    }
+
+    public void SetLevelsCompleted(bool[] completedLevels)
+    {
+        if (completedLevels.Length == levelsCompleted.Length)
+        {
+            levelsCompleted = completedLevels;
+            Debug.Log("Levels completion status updated.");
+        }
+        else
+        {
+            Debug.LogError("Mismatch in levelsCompleted length.");
+        }
+    }
+
+    public int GetLevelsCompletedCount()
+    {
+        int count = 0;
+        foreach (bool levelCompleted in levelsCompleted)
+        {
+            if (levelCompleted)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public bool[] GetHeardDialogue()
+    {
+        return heardDialogue;
+    }
+
+    public void SetHeardDialogue(bool[] heard)
+    {
+        if (heard.Length == heardDialogue.Length)
+        {
+            heardDialogue = heard;
+            Debug.Log("Heard dialogue status updated.");
+        }
+        else
+        {
+            Debug.LogError("Mismatch in heardDialogue length.");
+        }
     }
 }
