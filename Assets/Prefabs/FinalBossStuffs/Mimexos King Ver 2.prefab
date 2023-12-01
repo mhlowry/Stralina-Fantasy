@@ -235,7 +235,7 @@ MonoBehaviour:
   - {fileID: 4673715333559236659}
   spawnEnemiesStartup: 1
   spawnDelay: 1
-  spawnInterval: 25
+  spawnInterval: 23
   hands: {fileID: 7033780279074347310, guid: b5a50de82ca575443b4a1cd287884901, type: 3}
   spawnpointsHands:
   - {fileID: 307306514652445886}

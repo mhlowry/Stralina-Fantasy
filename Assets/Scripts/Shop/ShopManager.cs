@@ -55,7 +55,7 @@ public class ShopManager : MonoBehaviour
         DisplayItems();
         UpdateTotalBoosts();
         RandomizeItem();
-        //gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     private void OnEnable()
