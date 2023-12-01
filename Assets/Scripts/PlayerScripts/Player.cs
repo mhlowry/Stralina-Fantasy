@@ -104,8 +104,12 @@ public class Player : MonoBehaviour, IDataPersistence
             healthBar = GameObject.Find("HealthBar").GetComponent<ResourceBar>();
             meterBar = GameObject.Find("MeterBar").GetComponent<ResourceBar>();
             expBar = GameObject.Find("ExpBar").GetComponent<ResourceBar>();
-            dialogueUI = GameObject.Find("Canvas").GetComponent<DialogueUI>();
-        }
+            dialogueUI = GameObject.Find("Canvas (base)").GetComponent<DialogueUI>();
+
+            if (dialogueUI == null)
+            {
+                GameObject.Find("Canvas (levels)").GetComponent<DialogueUI>();            }
+            }
         catch { }
     }
 

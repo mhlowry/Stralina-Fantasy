@@ -321,11 +321,15 @@ public class MimicKing : Enemy
     {
         animator.SetTrigger("spawnStart");
         AudioManager.instance.Play("king_roar");
+        phase2 = true;
+
+        for (int i = 0; i < 25; i++)
+            CameraShake.instance.ShakeCamera(impulseSource);
+
         isInvul = true;
         meleeRange = 8f;
 
         yield return new WaitForSeconds(3f);
-        phase2 = true;
         isInvul = false;
     }
 
