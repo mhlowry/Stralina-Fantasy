@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     private int playerLevel = 1;
     private int curExp = 0;
     private int curGold = 0;
+    private bool hasSpokenToShopkeeper = false;
+    private string dialogueName;
 
     const int maxLevel = 7;
     private void Awake()
@@ -151,6 +153,15 @@ public class GameManager : MonoBehaviour
     {
         return curGold;
     }
+    public void SetHasSpokenToShopkeeper(bool hasSpoken)
+    {
+        hasSpokenToShopkeeper = hasSpoken;
+    }
+
+    public bool GetHasSpokenToShopkeeper()
+    {
+        return hasSpokenToShopkeeper;
+    }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -158,6 +169,7 @@ public class GameManager : MonoBehaviour
         {
             InitializeLevelPortals();
             InitializeStorytellerDialogue();
+            InitializeShopkeeperDialogue();
             Debug.Log("Base Scene setup complete");
         }
     }
@@ -235,6 +247,71 @@ public class GameManager : MonoBehaviour
         dialogueActivator.SetNextDialogueObject(nextDialogue);
     }
 
+    public void InitializeShopkeeperDialogue()
+    {
+        GameObject shopkeeper = GameObject.Find("Shopkeeper");
+        if (shopkeeper != null)
+        {
+            DialogueActivator dialogueActivator = shopkeeper.GetComponent<DialogueActivator>();
+            if (dialogueActivator != null)
+            {
+                UpdateShopkeeperDialogue(dialogueActivator);
+            }
+            else
+            {
+                Debug.LogWarning("DialogueActivator component not found on Shopkeeper");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Shopkeeper object not found in the scene");
+        }
+    }
+
+    public void UpdateShopkeeperDialogue(DialogueActivator shopkeeperActivator)
+    {
+        DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
+
+        if (!hasSpokenToShopkeeper)
+        {
+            dialogueName = "FE 1-1"; // First encounter dialogue
+            hasSpokenToShopkeeper = true;
+           
+            if (DataPersistenceManager.instance != null)
+            {
+                DataPersistenceManager.instance.SaveGame();
+                Debug.Log("Game Saved");
+            }
+            else
+            {
+                Debug.LogError("DataPersistenceManager instance not found");
+            }
+
+            Debug.Log("First encounter dialogue set.");
+        }
+        else
+        {
+            int dialogueIndex = Random.Range(1, 9); // Randomly pick a number between 1 and 8
+            dialogueName = "RT 1-" + dialogueIndex;
+            Debug.Log("Random dialogue set: " + dialogueName);
+        }
+
+        DialogueObject newDialogue = dialogueManager.GetDialogueByName(dialogueName);
+        if (newDialogue != null)
+        {
+            shopkeeperActivator.UpdateDialogueObject(newDialogue);
+        }
+    }
+
+    public string GetDialogueName()
+    {
+        return dialogueName;
+    }
+
+    public void SetDialogueName(string name)
+    {
+        dialogueName = name;
+    }
 
     // Returns the count of completed levels
     private int GetCompletedLevelsCount()

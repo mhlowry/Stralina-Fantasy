@@ -11,6 +11,7 @@ public class GameData
     public int playerLevel;
     public int curExp;
     public int curGold = 0;
+    public bool hasSpokenToShopkeeper;
     // public int[] expToLevelUp;
     // public int maxHealth;
     // public int curHealth;
@@ -58,5 +59,7 @@ public class GameData
         levelsCompleted = new bool[] 
                             { false, false, false, false, false,
                             false, false, false, false, false };
+        hasSpokenToShopkeeper = false;
+        
     }
 }

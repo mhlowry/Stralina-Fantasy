@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30e5efdd41c623458a5b93db76db39a, type: 3}
   m_Name: RT 1-8
   m_EditorClassIdentifier: 
-  dialogue: []
+  dialogue:
+  - "You gots a penchant for magik, dontcha?  I can smell it in yer soul.\r"
+  - "That meteor spell you gots when yer at full power?  That\u2019s some potent
+    stuff!\r"
   responses: []

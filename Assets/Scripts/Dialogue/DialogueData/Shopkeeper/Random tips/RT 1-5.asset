@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30e5efdd41c623458a5b93db76db39a, type: 3}
   m_Name: RT 1-5
   m_EditorClassIdentifier: 
-  dialogue: []
+  dialogue:
+  - Them buggers that like to chuck stuff atcha?  I hate em!  Always have.  But that
+    sword o yours looks mighty sturdy.
+  - 'I reckon you could deflect those perjectiles right back at dem!
+
+'
   responses: []

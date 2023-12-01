@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30e5efdd41c623458a5b93db76db39a, type: 3}
   m_Name: RT 1-7
   m_EditorClassIdentifier: 
-  dialogue: []
+  dialogue:
+  - "Some of my best friends were goblins, I\u2019ll tell ya what!  My crew back
+    in the day employed a whole tons of them big ones to watch our backs!"
+  - My favorite was one named Itor!
   responses: []
