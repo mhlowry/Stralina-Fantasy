@@ -169,7 +169,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4690300232432889613, guid: 0a65f8cbc7195f94b917c9dc5163d0db, type: 3}
       propertyPath: m_Name
-      value: Mimexos King Ver 2
+      value: Mymders King Ver 2
       objectReference: {fileID: 0}
     - target: {fileID: 4697843513342332972, guid: 0a65f8cbc7195f94b917c9dc5163d0db, type: 3}
       propertyPath: m_LocalPosition.x
