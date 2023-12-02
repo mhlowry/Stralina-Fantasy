@@ -746,8 +746,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerLevel: 1
+  levelUpObject: {fileID: 818478210810184687, guid: 285beac13e1415243b2eff79deecc8ac, type: 3}
   curExp: 0
-  curGold: 0
   goldDisplay: {fileID: 0}
   curHealth: 0
   curAbilityMeter: 0
@@ -1190,11 +1190,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e1c20dadf6a534eb5690190fb64b8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightAttackBoosts: 0
-  heavyAttackBoosts: 0
-  speedBoosts: 0
-  willpowerBoosts: 0
-  healthPointBoosts: 0
 --- !u!1 &5637934915373076959
 GameObject:
   m_ObjectHideFlags: 0

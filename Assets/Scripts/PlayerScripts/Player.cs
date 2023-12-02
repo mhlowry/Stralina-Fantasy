@@ -18,6 +18,8 @@ public class Player : MonoBehaviour, IDataPersistence
     const int maxLevel = 7;
     [SerializeField, Range(1, maxLevel)]  int playerLevel = 1;
     int[] expToLevelUp = { 100, 500, 1000, 2000, 3000, 5000, 6000 };
+    [SerializeField] private GameObject levelUpObject;
+
     [SerializeField] int curExp = 0;
     [SerializeField] private GoldDisplay goldDisplay;
 
@@ -355,6 +357,9 @@ public class Player : MonoBehaviour, IDataPersistence
     {
         curExp -= expToLevelUp[playerLevel - 1];
         playerLevel += 1;
+
+        AudioManager.instance.Play("levelUp_sound");
+        Instantiate(levelUpObject, this.transform);
 
         if (playerLevel == maxLevel)
             curExp = expToLevelUp[maxLevel - 1];

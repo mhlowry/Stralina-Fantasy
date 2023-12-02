@@ -155,6 +155,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelsCompleted: 
+  heardDialogue: 
+  lightAttackBoosts: 0
+  heavyAttackBoosts: 0
+  speedBoosts: 0
+  willpowerBoosts: 0
+  healthPointBoosts: 0
 --- !u!4 &995008539
 Transform:
   m_ObjectHideFlags: 0
@@ -574,6 +580,12 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 02c1d0ac6294cf948936f1303c686dd9, type: 3}
     volume: 1
     pitch: 2
+    loop: 0
+    source: {fileID: 0}
+  - name: levelUp_sound
+    clip: {fileID: 8300000, guid: b87b0397c863d37498a2ee25c9f9365a, type: 3}
+    volume: 1
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Desert_Song
