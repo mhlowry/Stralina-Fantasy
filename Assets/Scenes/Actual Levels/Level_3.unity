@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3768994, g: 0.2781828, b: 0.2661612, a: 1}
+  m_IndirectSpecularColor: {r: 0.37689927, g: 0.2781825, b: 0.26616088, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -249,37 +249,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f3ccee0067d18c4992436b5ffeee56d, type: 3}
---- !u!1 &658387782
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 658387785}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &658387785
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658387782}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 734.5, y: 273, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &745404905
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,7 +462,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ecda643117ca804884de72c751a9a06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelsCompleted: 
   description: 
   isCompleted: 0
   levelIndex: 2
@@ -1311,7 +1279,6 @@ SceneRoots:
   - {fileID: 1405992746}
   - {fileID: 1835179090}
   - {fileID: 745404906}
-  - {fileID: 658387785}
   - {fileID: 1109349652}
   - {fileID: 887645571}
   - {fileID: 856888563}
