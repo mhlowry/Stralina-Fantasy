@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - Ah, Swordie!  I have news.
-  - "Do you remember my slight\u2026 disdain for the Mixenos?"
+  - "Do you remember my slight\u2026 disdain for the Mymders?"
   responses:
   - responseText: Vaguely
     dialogueObject: {fileID: 11400000, guid: 2e819152fd91f2046a480dece2a5ef1a, type: 2}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level 10-1
   m_EditorClassIdentifier: 
   dialogue:
-  - "Swordie!  You\u2019ve done fantastic work!!  Good riddance to the Mixenos, we
+  - "Swordie!  You\u2019ve done fantastic work!!  Good riddance to the Mymders, we
     won\u2019t miss them."
   responses:
   - responseText: Thanks!
