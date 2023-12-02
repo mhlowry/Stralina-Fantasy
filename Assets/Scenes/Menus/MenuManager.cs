@@ -26,7 +26,10 @@ public class MainMenuManager : MonoBehaviour
     {
         Debug.Log("Start Game Clicked!");
         // Start coroutine to load the base island scene
-        StartCoroutine(LoadSceneAndSetActive("Base_Scene"));
+        if(GameManager.instance.GetLevelsCompleted()[0])
+            StartCoroutine(LoadSceneAndSetActive("Base_Scene"));
+        else
+            StartCoroutine(LoadSceneAndSetActive("Level_1"));
     }
 
     public void OnUsernameConfirmClicked()
