@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: RT 1-6
   m_EditorClassIdentifier: 
   dialogue:
-  - I never trusted them lil slimes!  If you look at em fer too long you might be
+  - I never trusted them lil slimes! If you look at em fer too long you might be
     entranced by them big eyes they got.
-  - "Dontchu let them pull one over on you!  Especially them blue ones\u2026 *shudder*"
+  - "Dontchu let them pull one over on you! Especially them blue ones\u2026 *shudder*"
   - Fancy a return to me little shop of wonders? There's a slew of new enchantments
     that I'm just dyin' to show ya.
   responses:

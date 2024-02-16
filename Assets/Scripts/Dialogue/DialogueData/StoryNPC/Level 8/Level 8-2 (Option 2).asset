@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Level 8-2 (Option 2)
   m_EditorClassIdentifier: 
   dialogue:
-  - 'Ah, you remember well. '
-  - ' This will interest you then: otherworld research has uncovered that there''s
-    actually, technically, just one Mymders. Surprising, right?'
+  - Ah, you remember well.
+  - 'This will interest you then: otherworld research has uncovered that there''s
+    actually, technically, just one Mymder. Surprising, right?'
   - "They operate in a hive mind, and there\u2019s a source to their consciousness,
     down in another realm somewhere."
   - "I suspect that it\u2019s the original Mymders, grown in power from each soul

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level 5-2 (Option 1)
   m_EditorClassIdentifier: 
   dialogue:
-  - 'Your efforts are evident, Journeyman! '
+  - Your efforts are evident, Journeyman!
   - Speaking of legends, did you know about the two gods of Stralina? I realized
     I haven't shared much about them yet.
   - Berque, god of the sky, is a righteous being that- frankly, is the reason Stralina

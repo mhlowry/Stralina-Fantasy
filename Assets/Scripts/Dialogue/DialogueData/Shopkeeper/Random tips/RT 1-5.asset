@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: RT 1-5
   m_EditorClassIdentifier: 
   dialogue:
-  - Them buggers that like to chuck stuff atcha?  I hate em!  Always have.  But that
+  - Them buggers that like to chuck stuff atcha? I hate em! Always have. But that
     sword o yours looks mighty sturdy.
   - 'I reckon you could deflect those perjectiles right back at dem!
 
 '
-  - Ye look like ye could use another trip to me shop. Got some new spellbinding
-    wares that are just callin' yer name.
+  - Ye look like ye could use another trip to me shop.Got some new spellbinding wares
+    that are just callin' yer name.
   responses:
   - responseText: Yes
     dialogueObject: {fileID: 0}

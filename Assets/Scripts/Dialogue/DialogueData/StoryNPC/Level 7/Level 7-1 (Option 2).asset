@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Level 7-1 (Option 2)
   m_EditorClassIdentifier: 
   dialogue:
-  - 'Ah, you''re pondering about the Great Tear. It''s a significant event in our
-    history. '
+  - Ah, you're pondering about the Great Tear. It's a significant event in our history.
   - You might think time travel could prevent it, but meddling with time can have
     unforeseen consequences. It's a risky venture.
   - "Well, I\u2019m sure the Guardians certainly tried.  But frankly, if they weren\u2019t

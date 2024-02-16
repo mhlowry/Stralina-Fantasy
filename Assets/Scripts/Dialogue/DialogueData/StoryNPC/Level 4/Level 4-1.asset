@@ -23,13 +23,13 @@ MonoBehaviour:
     to take up the mantle of the Four Guardians in a sick, twisted sort of way.\r\n"
   - "Some followers of Berque, the Church of Heaven\u2019s Embrace, ended up driving
     the Eight Legs out of Stralina."
-  - 'Unfortunately, not before the first Mymders was created...  '
+  - Unfortunately, not before the first Mymders was created...
   - 'A soulless creature designed to manufacture counterfeits.  All in the name of
     profit, power, and control.
 
 '
   - "It\u2019s unnatural, and their presence is only growing\u2026"
-  - "Hah!  Maybe one day I\u2019ll contract you to exterminate them!  Wouldn\u2019t
+  - "Hah! Maybe one day I\u2019ll contract you to exterminate them!  Wouldn\u2019t
     that be something?\r\n"
   responses:
   - responseText: Absolutely!

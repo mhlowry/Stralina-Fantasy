@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - "Why, yes! You haven't used portals?  Well, if you're familiar with these \u201Cgates,\u201D
-    as we like to call em- you\u2019ll know they\u2019re how we get around in Stralina. "
+    as we like to call em- you\u2019ll know they\u2019re how we get around in Stralina."
   - "I\u2019m contracted to send you folks out to handle dangerous creatures taking
     up space in high-demand realms."
   - You can kind of think of yourself as an exterminator, of sorts.
-  - "I assume you\u2019re looking for work if you managed to find your way here. 
-    I just got a contract that demands some space for a new residential area.  \r\n"
+  - "I assume you\u2019re looking for work if you managed to find your way here.
+    I just got a contract that demands some space for a new residential area.\r\n"
   - "Why don\u2019t you make your way through this gate and take care of that for
     them?\r\n"
   responses:

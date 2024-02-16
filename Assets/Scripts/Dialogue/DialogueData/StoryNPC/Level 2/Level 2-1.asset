@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - Welcome back, adventurer!
-  - "Seems you did a good job of clearing the area- extremely appreciated.  \r"
+  - "Seems you did a good job of clearing the area- extremely appreciated.\r"
   - "I put in a good word for you, so maybe you\u2019ll build up some reputation
     around here.\r\r"
   - "Tell me, are you familiar with the Great Tear?\r\r\r"

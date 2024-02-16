@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: RT 1-8
   m_EditorClassIdentifier: 
   dialogue:
-  - "You gots a penchant for magik, dontcha?  I can smell it in yer soul.\r"
-  - "That meteor spell you gots when yer at full power?  That\u2019s some potent
-    stuff!\r"
+  - "You gots a penchant for magik, dontcha? I can smell it in yer soul.\r"
+  - "That meteor spell you gots when yer at full power? That\u2019s some potent stuff!\r"
   - "So, would you like to enter the shop again and see what other mystical wares
     I've got for ya today?\r"
   responses:

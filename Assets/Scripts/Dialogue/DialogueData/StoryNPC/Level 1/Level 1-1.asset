@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level 1-1
   m_EditorClassIdentifier: 
   dialogue:
-  - "Hey!  I haven\u2019t seen you before.  You\u2019re not from around here, are
+  - "Hey! I haven\u2019t seen you before.  You\u2019re not from around here, are
     ya?"
   responses:
   - responseText: Nope

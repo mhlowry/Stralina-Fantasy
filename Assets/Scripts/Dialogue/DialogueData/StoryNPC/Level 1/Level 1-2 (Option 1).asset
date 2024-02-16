@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Level 1-2 (Option 1)
   m_EditorClassIdentifier: 
   dialogue:
-  - 'Allow me to be the first to introduce you to the world of Stralina, and our
-    humble little getaway for mercenaries like yourself. '
+  - Allow me to be the first to introduce you to the world of Stralina, and our humble
+    little getaway for mercenaries like yourself.
   - "My name\u2019s Zonghazi, and I\u2019m the portal contractor in this little nook.."
   responses:
   - responseText: Portals...?
